@@ -5,7 +5,7 @@ use Project\Classes\Session;
 
 // paths & urls
 define("PATH", __DIR__ . "/");
-define("URL",  "http://localhost/graduation_project/");
+define("URL",  "http://localhost/grad_project/");
 
 // db credentials
 define("SERVER_NAME", "localhost");

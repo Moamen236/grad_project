@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2021 at 11:05 PM
+-- Generation Time: Jun 17, 2021 at 02:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -147,7 +147,6 @@ INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `user_id`) VAL
 CREATE TABLE `autism_checker_question` (
   `id` int(11) NOT NULL,
   `checker_qustions` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `checker_question_result` enum('yes','no') COLLATE utf8mb4_unicode_ci NOT NULL,
   `autism_checker_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -155,27 +154,39 @@ CREATE TABLE `autism_checker_question` (
 -- Dumping data for table `autism_checker_question`
 --
 
-INSERT INTO `autism_checker_question` (`id`, `checker_qustions`, `checker_question_result`, `autism_checker_id`) VALUES
-(1, 'If you point at something across the room, does your child look at it?(FOR EXAMPLE, if you point at a toy or an animal, does your child look at the toy or animal?)', 'yes', 1),
-(2, 'Have you ever wondered if your child might be deaf?', 'yes', 1),
-(3, 'Does your child play pretend or make-believe?(FOR EXAMPLE, pretend to drink from an empty cup, pretend to talk on a phone, or pretend to feed a doll or stuffed animal?)\r\n', 'no', 1),
-(4, 'Does your child like climbing on things? (FOR EXAMPLE, furniture, playground equipment, or stairs) ', 'yes', 1),
-(5, 'Does your child make unusual finger movements near his or her eyes? (FOR EXAMPLE, does your child wiggle his or her fingers close to his or her eyes?)', 'yes', 1),
-(6, 'Does your child point with one finger to ask for something or to get help? (FOR EXAMPLE, pointing to a snack or toy that is out of reach)', 'yes', 1),
-(7, 'Does your child point with one finger to show you something interesting? (FOR EXAMPLE, pointing to an airplane in the sky or a big truck in the road)', 'yes', 1),
-(8, 'Is your child interested in other children?  (FOR EXAMPLE, does your child watch other children, smile at them, or go to them?)', 'yes', 1),
-(9, 'Does your child show you things by bringing them to you or holding them up for you to see – not to get help, but just to share? (FOR EXAMPLE, showing you a flower, a stuffed animal, or a toy truck)', 'yes', 1),
-(10, 'Does your child respond when you call his or her name? (FOR EXAMPLE, does he or she look up, talk or babble, or stop what he or she is doing when you call his or her name?)\r\n', 'no', 1),
-(11, 'When you smile at your child, does he or she smile back at you?', 'no', 1),
-(12, 'Does your child get upset by everyday noises? (FOR EXAMPLE, does your.child scream or cry to noise such as a vacuum cleaner or loud music?)', 'no', 1),
-(13, 'Does your child walk?', 'no', 1),
-(14, 'Does your child look you in the eye when you are talking to him or her, playing with him or her, or dressing him or her?', 'yes', 1),
-(15, 'Does your child try to copy what you do? (FOR EXAMPLE, wave bye-bye, clap, or make a funny noise when you do)', 'yes', 1),
-(16, 'If you turn your head to look at something, does your child look around to see what you are looking at?', 'yes', 1),
-(17, 'Does your child try to get you to watch him or her? (FOR EXAMPLE, does your child look at you for praise, or say “look” or “watch me”?)\r\n', 'no', 1),
-(18, 'Does your child understand when you tell him or her to do something? (FOR EXAMPLE, if you don’t point, can your child understand “put the book on the chair” or “bring me the blanket”?)', 'yes', 1),
-(19, 'If something new happens, does your child look at your face to see how you feel about it? (FOR EXAMPLE, if he or she hears a strange or funny noise, or sees a new toy, will\r\nhe or she look at your face?)', 'yes', 1),
-(20, 'Does your child like movement activities? (FOR EXAMPLE, being swung or bounced on your knee)', 'no', 1);
+INSERT INTO `autism_checker_question` (`id`, `checker_qustions`, `autism_checker_id`) VALUES
+(1, 'If you point at something across the room, does your child look at it?(FOR EXAMPLE, if you point at a toy or an animal, does your child look at the toy or animal?)', 1),
+(2, 'Have you ever wondered if your child might be deaf?', 1),
+(3, 'Does your child play pretend or make-believe?(FOR EXAMPLE, pretend to drink from an empty cup, pretend to talk on a phone, or pretend to feed a doll or stuffed animal?)\r\n', 1),
+(4, 'Does your child like climbing on things? (FOR EXAMPLE, furniture, playground equipment, or stairs) ', 1),
+(5, 'Does your child make unusual finger movements near his or her eyes? (FOR EXAMPLE, does your child wiggle his or her fingers close to his or her eyes?)', 1),
+(6, 'Does your child point with one finger to ask for something or to get help? (FOR EXAMPLE, pointing to a snack or toy that is out of reach)', 1),
+(7, 'Does your child point with one finger to show you something interesting? (FOR EXAMPLE, pointing to an airplane in the sky or a big truck in the road)', 1),
+(8, 'Is your child interested in other children?  (FOR EXAMPLE, does your child watch other children, smile at them, or go to them?)', 1),
+(9, 'Does your child show you things by bringing them to you or holding them up for you to see – not to get help, but just to share? (FOR EXAMPLE, showing you a flower, a stuffed animal, or a toy truck)', 1),
+(10, 'Does your child respond when you call his or her name? (FOR EXAMPLE, does he or she look up, talk or babble, or stop what he or she is doing when you call his or her name?)\r\n', 1),
+(11, 'When you smile at your child, does he or she smile back at you?', 1),
+(12, 'Does your child get upset by everyday noises? (FOR EXAMPLE, does your.child scream or cry to noise such as a vacuum cleaner or loud music?)', 1),
+(13, 'Does your child walk?', 1),
+(14, 'Does your child look you in the eye when you are talking to him or her, playing with him or her, or dressing him or her?', 1),
+(15, 'Does your child try to copy what you do? (FOR EXAMPLE, wave bye-bye, clap, or make a funny noise when you do)', 1),
+(16, 'If you turn your head to look at something, does your child look around to see what you are looking at?', 1),
+(17, 'Does your child try to get you to watch him or her? (FOR EXAMPLE, does your child look at you for praise, or say “look” or “watch me”?)\r\n', 1),
+(18, 'Does your child understand when you tell him or her to do something? (FOR EXAMPLE, if you don’t point, can your child understand “put the book on the chair” or “bring me the blanket”?)', 1),
+(19, 'If something new happens, does your child look at your face to see how you feel about it? (FOR EXAMPLE, if he or she hears a strange or funny noise, or sees a new toy, will\r\nhe or she look at your face?)', 1),
+(20, 'Does your child like movement activities? (FOR EXAMPLE, being swung or bounced on your knee)', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `autism_checker_results`
+--
+
+CREATE TABLE `autism_checker_results` (
+  `id` int(11) NOT NULL,
+  `checker_question_result` enum('yes','no') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `checker_question_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -186,11 +197,11 @@ INSERT INTO `autism_checker_question` (`id`, `checker_qustions`, `checker_questi
 CREATE TABLE `caregiver` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sp_serial_no` int(11) NOT NULL
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sp_serial_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -198,15 +209,16 @@ CREATE TABLE `caregiver` (
 --
 
 INSERT INTO `caregiver` (`id`, `name`, `photo`, `email`, `password`, `phone`, `sp_serial_no`) VALUES
-(1, 'Loy', 'http://lorempixel.com/640/480/', 'reichel.treva@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '639.728.5038x9193', 64214504),
-(2, 'Sincere', 'http://lorempixel.com/640/480/', 'ahilll@example.com', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-342-390-6436x1066', 42619734),
-(3, 'Carolyne', 'http://lorempixel.com/640/480/', 'johnathon.hudson@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-586-654-9080', 16605077),
-(4, 'River', 'http://lorempixel.com/640/480/', 'eino.schulist@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '(690)021-5767x3524', 37733001),
-(5, 'Marlee', 'http://lorempixel.com/640/480/', 'zjakubowski@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '+91(7)5303688928', 44378271),
-(6, 'Lawrence', 'http://lorempixel.com/640/480/', 'ibogan@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '830.143.2849', 27129708),
-(7, 'Lurline', 'http://lorempixel.com/640/480/', 'eunice08@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-964-176-0506', 96900871),
-(8, 'Mustafa', 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '01066687285', 74823451),
-(9, 'Moamen Ali', '', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', '', 0);
+(1, 'Loy', 'http://lorempixel.com/640/480/', 'reichel.treva@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '639.728.5038x9193', '64214504'),
+(2, 'Sincere', 'http://lorempixel.com/640/480/', 'ahilll@example.com', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-342-390-6436x1066', '42619734'),
+(3, 'Carolyne', 'http://lorempixel.com/640/480/', 'johnathon.hudson@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-586-654-9080', '16605077'),
+(4, 'River', 'http://lorempixel.com/640/480/', 'eino.schulist@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '(690)021-5767x3524', '37733001'),
+(5, 'Marlee', 'http://lorempixel.com/640/480/', 'zjakubowski@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '+91(7)5303688928', '44378271'),
+(6, 'Lawrence', 'http://lorempixel.com/640/480/', 'ibogan@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '830.143.2849', '27129708'),
+(7, 'Lurline', 'http://lorempixel.com/640/480/', 'eunice08@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-964-176-0506', '96900871'),
+(8, 'Mustafa', 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '01066687285', '74823451'),
+(9, 'Moamen Ali', '', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', '', '60'),
+(23, 'Moamen Ali', NULL, 'moa@gmail.com', '$2y$10$4EtSOdPNDo0dSbarKpHvw.VIADGeAytNTs08qoHtRkRa9AvkG/jm2', NULL, '60ad13c0bf195');
 
 -- --------------------------------------------------------
 
@@ -320,22 +332,23 @@ CREATE TABLE `evaluation_history_result` (
 CREATE TABLE `long_term` (
   `id` int(11) NOT NULL,
   `long_term_discription` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `plan_id` int(11) NOT NULL
+  `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `long_term`
 --
 
-INSERT INTO `long_term` (`id`, `long_term_discription`, `plan_id`) VALUES
-(1, 'Vitae consequuntur labore quia minus molestiae reiciendis.', 1),
-(2, 'Aut qui et dicta.', 2),
-(3, 'Architecto quo autem porro ut in molestiae.', 3),
-(4, 'Neque voluptatem modi consectetur quia ex enim ullam.', 4),
-(5, 'Et et et cum vel.', 5),
-(6, 'Ut et odit animi cupiditate exercitationem aliquid tempore.', 6),
-(7, 'Nulla quod fuga ut dolores.', 7),
-(8, 'Qui qui officia doloribus in quo optio.', 8);
+INSERT INTO `long_term` (`id`, `long_term_discription`, `patient_id`) VALUES
+(1, 'Vitae consequuntur labore quia minus molestiae reiciendis.', 101),
+(2, 'Aut qui et dicta.', 102),
+(3, 'Architecto quo autem porro ut in molestiae.', 103),
+(4, 'Neque voluptatem modi consectetur quia ex enim ullam.', 104),
+(5, 'Et et et cum vel.', 105),
+(6, 'Ut et odit animi cupiditate exercitationem aliquid tempore.', 106),
+(7, 'Nulla quod fuga ut dolores.', 107),
+(8, 'Qui qui officia doloribus in quo optio.', 108),
+(9, 'long_term_discription', 105);
 
 -- --------------------------------------------------------
 
@@ -461,7 +474,7 @@ INSERT INTO `lovaas_questions` (`id`, `lovass_questions`, `lovaas_category_id`) 
 
 CREATE TABLE `lovaas_results` (
   `id` int(11) NOT NULL,
-  `lovaas_question_result` int(20) NOT NULL,
+  `lovaas_question_result` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `lovaas_question_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -471,31 +484,50 @@ CREATE TABLE `lovaas_results` (
 --
 
 INSERT INTO `lovaas_results` (`id`, `lovaas_question_result`, `lovaas_question_id`, `patient_id`) VALUES
-(1, 8, 1, 101),
-(2, 7, 1, 101),
-(3, 4, 1, 101),
-(4, 4, 1, 101),
-(5, 7, 1, 101),
-(6, 6, 1, 101),
-(7, 4, 1, 101),
-(8, 6, 1, 101),
-(9, 6, 1, 101),
-(10, 6, 1, 101),
-(11, 6, 1, 101),
-(12, 6, 1, 101),
-(13, 6, 1, 101),
-(14, 6, 1, 101),
-(15, 6, 1, 101),
-(16, 6, 1, 101),
-(17, 6, 1, 101),
-(18, 6, 1, 101),
-(19, 6, 1, 101),
-(20, 6, 1, 101),
-(21, 6, 1, 101),
-(22, 6, 1, 101),
-(23, 6, 1, 101),
-(24, 6, 1, 101),
-(25, 6, 1, 101);
+(1, 'good', 1, 101),
+(2, 'medium', 2, 101),
+(3, 'medium', 3, 101),
+(4, 'medium', 4, 101),
+(5, 'medium', 5, 101),
+(6, 'medium', 6, 101),
+(7, 'medium', 7, 101),
+(8, 'medium', 8, 101),
+(9, 'medium', 9, 101),
+(10, 'good', 24, 101),
+(11, 'medium', 25, 101),
+(12, 'good', 32, 101),
+(13, 'medium', 33, 101),
+(14, 'medium', 34, 101),
+(15, 'medium', 35, 101),
+(16, 'medium', 36, 101),
+(17, 'medium', 37, 101),
+(18, 'medium', 38, 101),
+(19, 'medium', 39, 101),
+(20, 'medium', 40, 101),
+(21, 'weak', 41, 101),
+(22, 'medium', 42, 101),
+(23, 'good', 43, 101),
+(24, 'medium', 44, 101),
+(25, 'good', 45, 101),
+(26, 'medium', 46, 101),
+(27, 'good', 47, 101),
+(28, 'weak', 48, 101),
+(29, 'medium', 49, 101),
+(30, 'good', 50, 101),
+(31, 'medium', 51, 101),
+(32, 'medium', 52, 101),
+(33, 'good', 53, 101),
+(34, 'medium', 54, 101),
+(35, 'medium', 55, 101),
+(36, 'weak', 56, 101),
+(37, 'medium', 57, 101),
+(38, 'good', 69, 102),
+(39, 'medium', 70, 102),
+(40, 'medium', 71, 102),
+(41, 'medium', 72, 102),
+(42, 'medium', 73, 102),
+(43, 'weak', 74, 102),
+(44, 'good', 75, 102);
 
 -- --------------------------------------------------------
 
@@ -555,14 +587,14 @@ CREATE TABLE `patient` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int(3) NOT NULL,
   `date_of_birth` date NOT NULL,
-  `school` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `school` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` enum('male','female') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `No_of_bro` int(11) NOT NULL,
-  `arr_btw_bro` int(11) NOT NULL,
+  `class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `No_of_bro` int(11) DEFAULT NULL,
+  `arr_btw_bro` int(11) DEFAULT NULL,
   `spcialist_id` int(11) NOT NULL,
-  `caregiver_id` int(11) NOT NULL,
+  `caregiver_id` int(11) DEFAULT NULL,
   `caregiver_name` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
   `caregiver_relationship` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
   `caregiver_phone` int(11) NOT NULL
@@ -573,22 +605,20 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`, `name`, `age`, `date_of_birth`, `school`, `gender`, `class`, `photo`, `No_of_bro`, `arr_btw_bro`, `spcialist_id`, `caregiver_id`, `caregiver_name`, `caregiver_relationship`, `caregiver_phone`) VALUES
-(101, 'Cora', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 3, 7, 11, 1, 'Stewart', 'mother', 1021212123),
-(102, 'Osvaldo', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 2, 'Antonette', 'mother', 152354953),
-(103, 'Jermaine', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 9, 4, 11, 3, 'Chaz', 'mother', 4452589),
-(104, 'Art', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 4, 'Delbert', 'mother', 12132122),
-(105, 'Harmon', 6, '1981-08-20', 'Quas in dolorem eveniet.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 2, 4, 11, 5, 'Frieda', 'mother', 381042555),
-(106, 'Eugenia', 11, '1981-08-30', 'Aut sed minus necessitatibus doloremque molestiae labore quis quidem.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 6, 'Doug', 'father', 15452375),
-(107, 'Marcelle', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 7, 7, 11, 7, 'Garland', 'father', 2455420),
-(108, 'Robert', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 8, 'Lillie', 'uncle', 718455754),
-(109, 'Cora', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 3, 7, 11, 1, 'Stewart', 'mother', 154545754),
-(110, 'Osvaldo', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 2, 'Antonette', 'mother', 352545754),
-(111, 'Jermaine', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 9, 4, 11, 3, 'Chaz', 'mother', 445545752),
-(112, 'Art', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 4, 'Delbert', 'mother', 1545754),
-(113, 'Harmon', 6, '1981-08-20', 'Quas in dolorem eveniet.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 2, 4, 11, 5, 'Frieda', 'mother', 38104254),
-(114, 'Eugenia', 11, '1981-08-30', 'Aut sed minus necessitatibus doloremque molestiae labore quis quidem.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 6, 'Doug', 'father', 14170457),
-(115, 'Marcelle', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 7, 7, 11, 7, 'Garland', 'father', 454445455),
-(116, 'Robert', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 8, 'Lillie', 'uncle', 718575757);
+(101, 'Yakub Shaimaa Shahid', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 3, 7, 11, 1, 'Stewart', 'mother', 1021212123),
+(102, 'Midhat Fathi Harith', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 2, 'Antonette', 'mother', 152354953),
+(103, 'Dawood Husniya Aisha', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 9, 4, 11, 3, 'Chaz', 'mother', 4452589),
+(104, 'Wahid Suhaila Medhat', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 4, 'Delbert', 'mother', 12132122),
+(105, 'Ilyas Husam Shahzad', 6, '1981-08-20', 'Quas in dolorem eveniet.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 2, 4, 11, 5, 'Frieda', 'mother', 381042555),
+(106, 'Sulayman Lutfi Lamis', 11, '1981-08-30', 'Aut sed minus necessitatibus doloremque molestiae labore quis quidem.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 6, 'Doug', 'father', 15452375),
+(107, 'Yasmina Lujayn Murtaza', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 7, 7, 11, 7, 'Garland', 'father', 2455420),
+(108, 'Ramlah Aida Harith', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 8, 'Lillie', 'uncle', 718455754),
+(109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 3, 7, 11, 1, 'Stewart', 'mother', 154545754),
+(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 2, 'Antonette', 'mother', 352545754),
+(111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 9, 4, 11, 3, 'Chaz', 'mother', 445545752),
+(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 4, 'Delbert', 'mother', 1545754),
+(122, 'mo', 8, '0000-00-00', 'ay 7aga tany', 'male', 'ay 7aga', '60bc0ddc6bc46.jpg', NULL, NULL, 11, NULL, 'ahmed', '2', 2313432),
+(123, 'mo', 8, '0000-00-00', 'ay 7aga tany', 'male', 'ay 7aga', '60bc0de999800.jpg', NULL, NULL, 11, NULL, 'ahmed', '2', 2313432);
 
 -- --------------------------------------------------------
 
@@ -743,7 +773,12 @@ INSERT INTO `schedule` (`id`, `schedule_time`, `schedule_date`, `specialist_id`,
 (5, '22:36:52', '1976-05-22', 11, 1, 104),
 (6, '08:16:38', '1995-07-03', 1, 1, 101),
 (7, '04:26:27', '2008-10-04', 1, 1, 103),
-(8, '15:07:05', '1988-06-15', 1, 1, 102);
+(8, '15:07:05', '1988-06-15', 1, 1, 102),
+(9, '20:33:00', '2021-06-16', 11, 4, 112),
+(10, '18:33:00', '2021-06-29', 11, 4, 112),
+(11, '18:33:00', '2021-07-02', 11, 4, 112),
+(12, '18:33:00', '2021-07-05', 11, 4, 112),
+(13, '18:33:00', '2021-07-05', 11, 4, 112);
 
 -- --------------------------------------------------------
 
@@ -754,22 +789,27 @@ INSERT INTO `schedule` (`id`, `schedule_time`, `schedule_date`, `specialist_id`,
 CREATE TABLE `short_term` (
   `id` int(11) NOT NULL,
   `short_term_description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `plan_id` int(11) NOT NULL
+  `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `short_term`
 --
 
-INSERT INTO `short_term` (`id`, `short_term_description`, `plan_id`) VALUES
-(101, 'Aut voluptas iure unde eum aut ad aspernatur. Reiciendis dolore maxime hic ipsam aperiam. Est nesciunt deserunt et consequatur est quaerat id. Ducimus non non ducimus molestiae. Dolor dolorum est ipsum ullam.', 1),
-(102, 'Est similique et deserunt. Non voluptatum unde quae quia debitis animi doloribus. Ut a earum optio libero quibusdam doloremque voluptatem.', 2),
-(103, 'Et eum totam officiis vel molestiae alias. Praesentium omnis nulla id expedita corporis molestiae dolorum non. Et voluptates qui consequuntur quia.', 3),
-(104, 'Est et distinctio pariatur sunt aliquam deleniti blanditiis. Possimus quisquam cumque quia at. Aut dicta minima voluptatem alias velit. Qui est iure quo ex dolores praesentium.', 4),
-(105, 'Harum aperiam maxime id debitis consectetur. Aperiam sit harum adipisci illo nam enim ut id. Distinctio quia repudiandae fugit nisi quo.', 5),
-(106, 'Eaque culpa ullam ut voluptates saepe laudantium. Non eum et harum mollitia voluptatibus nihil incidunt. Est dolore quo nihil est quo qui.', 6),
-(107, 'Qui repudiandae nulla vero dolore. Dolor vitae nesciunt est voluptatem impedit. Vitae dolor maxime non repudiandae. Perspiciatis ipsam ut rerum voluptatum quasi similique. Doloremque eos distinctio corrupti minus quidem.', 7),
-(108, 'Ratione dolores officia repudiandae et quisquam tenetur laboriosam. Est beatae nemo neque sed. Porro magnam unde odit nulla rem dicta voluptas ducimus. Recusandae ullam dignissimos delectus incidunt.', 8);
+INSERT INTO `short_term` (`id`, `short_term_description`, `patient_id`) VALUES
+(101, 'Aut voluptas iure unde eum aut ad aspernatur. Reiciendis dolore maxime hic ipsam aperiam. Est nesciunt deserunt et consequatur est quaerat id. Ducimus non non ducimus molestiae. Dolor dolorum est ipsum ullam.', 101),
+(102, 'Est similique et deserunt. Non voluptatum unde quae quia debitis animi doloribus. Ut a earum optio libero quibusdam doloremque voluptatem.', 102),
+(103, 'Et eum totam officiis vel molestiae alias. Praesentium omnis nulla id expedita corporis molestiae dolorum non. Et voluptates qui consequuntur quia.', 103),
+(104, 'Est et distinctio pariatur sunt aliquam deleniti blanditiis. Possimus quisquam cumque quia at. Aut dicta minima voluptatem alias velit. Qui est iure quo ex dolores praesentium.', 104),
+(105, 'Harum aperiam maxime id debitis consectetur. Aperiam sit harum adipisci illo nam enim ut id. Distinctio quia repudiandae fugit nisi quo.', 105),
+(106, 'Eaque culpa ullam ut voluptates saepe laudantium. Non eum et harum mollitia voluptatibus nihil incidunt. Est dolore quo nihil est quo qui.', 106),
+(107, 'Qui repudiandae nulla vero dolore. Dolor vitae nesciunt est voluptatem impedit. Vitae dolor maxime non repudiandae. Perspiciatis ipsam ut rerum voluptatum quasi similique. Doloremque eos distinctio corrupti minus quidem.', 107),
+(108, 'Ratione dolores officia repudiandae et quisquam tenetur laboriosam. Est beatae nemo neque sed. Porro magnam unde odit nulla rem dicta voluptas ducimus. Recusandae ullam dignissimos delectus incidunt.', 108),
+(109, 'add-short-termadd-short-termadd-short-term', 104),
+(110, 'add-short-termadd-short-termadd-short-term', 104),
+(111, 'add-short-term', 104),
+(112, 'add-short-term   add-short-term', 104),
+(113, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 105);
 
 -- --------------------------------------------------------
 
@@ -779,7 +819,7 @@ INSERT INTO `short_term` (`id`, `short_term_description`, `plan_id`) VALUES
 
 CREATE TABLE `specialist` (
   `id` int(11) NOT NULL,
-  `serial_no` int(11) NOT NULL,
+  `serial_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -792,17 +832,19 @@ CREATE TABLE `specialist` (
 --
 
 INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`, `phone`) VALUES
-(1, 64214504, 'Everardo Streich', 'cartwright.andreane@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 32, 0),
-(2, 42619734, 'Preston Thiel', 'gideon.sporer@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 21, 0),
-(3, 16605077, 'Dr. Solon Rempel II', 'adelia.quigley@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 33, 2147483647),
-(4, 37733001, 'Dawn Shields', 'gfay@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 28, 0),
-(5, 44378271, 'Miss Jayda Prosacco', 'bnienow@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 40, 76),
-(6, 27129708, 'Valentine Graham', 'rogahn.robert@example.org', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 45, 532),
-(7, 96900871, 'Josie Sporer', 'rowan49@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 4, 752017),
-(8, 74823451, 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1),
-(9, 70145045, 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1),
-(10, 63828023, 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786),
-(11, 0, 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, NULL);
+(1, '64214504', 'Everardo Streich', 'cartwright.andreane@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 32, 0),
+(2, '42619734', 'Preston Thiel', 'gideon.sporer@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 21, 0),
+(3, '16605077', 'Dr. Solon Rempel II', 'adelia.quigley@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 33, 2147483647),
+(4, '37733001', 'Dawn Shields', 'gfay@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 28, 0),
+(5, '44378271', 'Miss Jayda Prosacco', 'bnienow@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 40, 76),
+(6, '27129708', 'Valentine Graham', 'rogahn.robert@example.org', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 45, 532),
+(7, '96900871', 'Josie Sporer', 'rowan49@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 4, 752017),
+(8, '74823451', 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1),
+(9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1),
+(10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786),
+(11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, NULL),
+(19, '60ad1366320e9 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$735XeDXRbEleCVSf6qX/.efeCckA6sEndlhcfeSrDp75p0UR9SWWK', NULL, NULL),
+(20, '60ad13c0bf195', 'Moamen Ali', 'moa@gmail.com', '$2y$10$QLiD.2xSG64pjX9nulSjXuv4PapKFlIW5RQQ7f9MH880U/nRLsB0.', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -840,27 +882,33 @@ INSERT INTO `status` (`id`, `title`, `status_description`, `status_degree`, `pla
 CREATE TABLE `strength_point` (
   `id` int(11) NOT NULL,
   `strength_point_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `plan_id` int(11) NOT NULL
+  `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `strength_point`
 --
 
-INSERT INTO `strength_point` (`id`, `strength_point_description`, `plan_id`) VALUES
-(101, 'Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas.', 1),
-(102, 'Qui aliquid dolorum omnis. Hic debitis ipsam neque. Voluptas veritatis veniam est nihil voluptatem ipsa facilis. Rem rerum ducimus quasi dolor quam minima a.', 2),
-(103, 'Ut dolorum et eligendi et. Blanditiis dolor minima labore ut dolorem. Aliquid iure officiis deserunt mollitia sunt. Eum assumenda fugit suscipit recusandae quisquam aut eum.', 3),
-(104, 'Sunt animi aliquid nesciunt quia. Expedita facere vel vero nihil velit quia eum. Error iusto sint iure blanditiis blanditiis recusandae. Maiores dolor et facilis molestiae magni.', 1),
-(105, 'Accusamus nisi iste neque nemo. Quaerat dolorem unde quo temporibus vel ea. Vitae similique eligendi sed ea consequatur.', 4),
-(106, 'Officiis aut laborum possimus vel. Labore quo omnis nostrum. Vel dolor id rerum commodi amet voluptas. Dolorem voluptatem corporis amet ullam quis dolorum sint.', 6),
-(107, 'Eius consequatur ipsa nobis sit nesciunt. Voluptatem repellendus natus qui. Dolor blanditiis asperiores maxime dolore. Est atque quis aut. Ut eos non magni et facilis.', 5),
-(108, 'A ratione tempora ratione repudiandae itaque. Qui soluta esse aut molestiae culpa eos. Voluptatem aut magni voluptas fugiat.', 8),
-(110, 'Lorem Ipsum', 4),
-(111, 'Lorem Ipsum is simply dummy ', 4),
-(112, 'Lorem Ipsum is simply ', 4),
-(113, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', 4),
-(114, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been ', 4);
+INSERT INTO `strength_point` (`id`, `strength_point_description`, `patient_id`) VALUES
+(101, 'Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas.', 101),
+(102, 'Qui aliquid dolorum omnis. Hic debitis ipsam neque. Voluptas veritatis veniam est nihil voluptatem ipsa facilis. Rem rerum ducimus quasi dolor quam minima a.', 102),
+(103, 'Ut dolorum et eligendi et. Blanditiis dolor minima labore ut dolorem. Aliquid iure officiis deserunt mollitia sunt. Eum assumenda fugit suscipit recusandae quisquam aut eum.', 103),
+(104, 'Sunt animi aliquid nesciunt quia. Expedita facere vel vero nihil velit quia eum. Error iusto sint iure blanditiis blanditiis recusandae. Maiores dolor et facilis molestiae magni.', 101),
+(106, 'Officiis aut laborum possimus vel. Labore quo omnis nostrum. Vel dolor id rerum commodi amet voluptas. Dolorem voluptatem corporis amet ullam quis dolorum sint.', 106),
+(107, 'Eius consequatur ipsa nobis sit nesciunt. Voluptatem repellendus natus qui. Dolor blanditiis asperiores maxime dolore. Est atque quis aut. Ut eos non magni et facilis.', 105),
+(108, 'A ratione tempora ratione repudiandae itaque. Qui soluta esse aut molestiae culpa eos. Voluptatem aut magni voluptas fugiat.', 108),
+(111, 'Lorem Ipsum', 104),
+(113, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', 104),
+(114, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been ', 104),
+(115, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', 104),
+(116, 'Lorem Ipsum is simply dummy text of ', 104),
+(117, 'Lorem ', 104),
+(118, 'Tesla Tesla ', 104),
+(119, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 105),
+(120, 'Lorem Ipsum is simply dummy text ', 105),
+(122, 'Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas', 101),
+(123, 'Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas', 101),
+(124, 'Lorem Ipsum is simply ', 104);
 
 -- --------------------------------------------------------
 
@@ -873,22 +921,24 @@ CREATE TABLE `to_do` (
   `to_do_details` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `specialist_id` int(11) NOT NULL,
-  `caregiver_id` int(11) NOT NULL
+  `caregiver_id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `to_do`
 --
 
-INSERT INTO `to_do` (`id`, `to_do_details`, `title`, `specialist_id`, `caregiver_id`) VALUES
-(1, 'Quia autem rerum doloremque voluptatem non.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(2, 'Eum id perferendis quia aperiam consequuntur.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(3, 'Accusantium est quidem error earum voluptas veritatis beatae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(4, 'Hic odit excepturi voluptatem ratione iste et.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(5, 'Voluptas qui quis dicta sit voluptates quo.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(6, 'Voluptates aut ea nesciunt tempora sequi odio suscipit.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(7, 'Dolores suscipit amet nesciunt et recusandae voluptatibus est.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1),
-(8, 'Est consequatur dolorum enim est magnam placeat eligendi recusandae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1);
+INSERT INTO `to_do` (`id`, `to_do_details`, `title`, `specialist_id`, `caregiver_id`, `patient_id`) VALUES
+(1, 'Quia autem rerum doloremque voluptatem non.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(2, 'Eum id perferendis quia aperiam consequuntur.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(3, 'Accusantium est quidem error earum voluptas veritatis beatae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(4, 'Hic odit excepturi voluptatem ratione iste et.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(5, 'Voluptas qui quis dicta sit voluptates quo.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(6, 'Voluptates aut ea nesciunt tempora sequi odio suscipit.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(7, 'Dolores suscipit amet nesciunt et recusandae voluptatibus est.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(8, 'Est consequatur dolorum enim est magnam placeat eligendi recusandae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
+(14, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'test 1', 11, 4, 104);
 
 -- --------------------------------------------------------
 
@@ -918,8 +968,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 (8, 'Braxton Dietrich', 'doconner@example.net', '078b1915c5ef28a27418eea35adf07441761b212'),
 (9, 'Mr. Cary Bayer', 'claire83@example.org', '6a7e968c610c97e6b699f4250ff0df2ccd33f8ee'),
 (10, 'Miss Anita Kutch', 'elegros@example.com', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO'),
-(19, 'Moamen Ali', 'moa@gmail.com', '$2y$10$JH8yD0fWRvrZvgfzYCKxFeNuTNp8/XLnmtGHKdZ63K7GK83qoVvMG'),
-(20, 'Moamen Ali', 'mo@gmail.com', '$2y$10$8MsilFk4pM1BvLsC2povZuHErA4lVEdQxpaV5G9Zr.NDXOrdalxJ6');
+(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG');
 
 -- --------------------------------------------------------
 
@@ -930,22 +979,26 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 CREATE TABLE `weknees_point` (
   `id` int(11) NOT NULL,
   `weeknees_point_description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `plan_id` int(11) NOT NULL
+  `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `weknees_point`
 --
 
-INSERT INTO `weknees_point` (`id`, `weeknees_point_description`, `plan_id`) VALUES
-(1, 'Neque voluptate architecto autem tempore qui.', 1),
-(2, 'Earum aut nesciunt sunt esse ea officiis exercitationem.', 8),
-(3, 'Asperiores ex tenetur quia.', 1),
-(4, 'Eius voluptatum deserunt aut nulla dolore enim.', 4),
-(5, 'Quasi rerum commodi sunt quos.', 5),
-(6, 'Dolores eum iste quis at.', 7),
-(7, 'Magnam dolor ea placeat amet quidem ut quia.', 6),
-(8, 'Unde adipisci itaque rerum id culpa.', 3);
+INSERT INTO `weknees_point` (`id`, `weeknees_point_description`, `patient_id`) VALUES
+(1, 'Neque voluptate architecto autem tempore qui.', 101),
+(2, 'Earum aut nesciunt sunt esse ea officiis exercitationem.', 108),
+(3, 'Asperiores ex tenetur quia.', 101),
+(4, 'Eius voluptatum deserunt aut nulla dolore enim.', 104),
+(5, 'Quasi rerum commodi sunt quos.', 105),
+(6, 'Dolores eum iste quis at.', 107),
+(7, 'Magnam dolor ea placeat amet quidem ut quia.', 106),
+(8, 'Unde adipisci itaque rerum id culpa.', 103),
+(9, 'add-weaknees-point', 104),
+(11, 'Tesla Tesla Tesla Tesla ', 104),
+(12, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 105),
+(13, 'Lorem Ipsum is simply dummy', 105);
 
 --
 -- Indexes for dumped tables
@@ -994,12 +1047,19 @@ ALTER TABLE `autism_checker_question`
   ADD KEY `autism_checker_id` (`autism_checker_id`) USING BTREE;
 
 --
+-- Indexes for table `autism_checker_results`
+--
+ALTER TABLE `autism_checker_results`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `checker_question_id` (`checker_question_id`);
+
+--
 -- Indexes for table `caregiver`
 --
 ALTER TABLE `caregiver`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `sp_Serial_No` (`sp_serial_no`);
+  ADD KEY `sp_serial_no` (`sp_serial_no`) USING BTREE;
 
 --
 -- Indexes for table `dsm5`
@@ -1035,7 +1095,7 @@ ALTER TABLE `evaluation_history_result`
 --
 ALTER TABLE `long_term`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `plan_id` (`plan_id`) USING BTREE;
+  ADD KEY `plan_id` (`patient_id`) USING BTREE;
 
 --
 -- Indexes for table `lovaas_category`
@@ -1117,7 +1177,7 @@ ALTER TABLE `schedule`
 --
 ALTER TABLE `short_term`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `plan_id` (`plan_id`) USING BTREE;
+  ADD KEY `plan_id` (`patient_id`) USING BTREE;
 
 --
 -- Indexes for table `specialist`
@@ -1139,7 +1199,7 @@ ALTER TABLE `status`
 --
 ALTER TABLE `strength_point`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `plan_id` (`plan_id`) USING BTREE;
+  ADD KEY `plan_id` (`patient_id`) USING BTREE;
 
 --
 -- Indexes for table `to_do`
@@ -1161,7 +1221,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `weknees_point`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `plan_id` (`plan_id`) USING BTREE;
+  ADD KEY `plan_id` (`patient_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1195,7 +1255,7 @@ ALTER TABLE `attahced_reports_result`
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1204,10 +1264,16 @@ ALTER TABLE `autism_checker_question`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `autism_checker_results`
+--
+ALTER TABLE `autism_checker_results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `caregiver`
 --
 ALTER TABLE `caregiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `dsm5`
@@ -1237,7 +1303,7 @@ ALTER TABLE `evaluation_history_result`
 -- AUTO_INCREMENT for table `long_term`
 --
 ALTER TABLE `long_term`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `lovaas_questions`
@@ -1249,7 +1315,7 @@ ALTER TABLE `lovaas_questions`
 -- AUTO_INCREMENT for table `lovaas_results`
 --
 ALTER TABLE `lovaas_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `notic`
@@ -1267,7 +1333,7 @@ ALTER TABLE `notic_questions`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `plan`
@@ -1279,7 +1345,7 @@ ALTER TABLE `plan`
 -- AUTO_INCREMENT for table `scale`
 --
 ALTER TABLE `scale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `scale_questions`
@@ -1291,19 +1357,19 @@ ALTER TABLE `scale_questions`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `short_term`
 --
 ALTER TABLE `short_term`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT for table `specialist`
 --
 ALTER TABLE `specialist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -1315,25 +1381,25 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `strength_point`
 --
 ALTER TABLE `strength_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT for table `to_do`
 --
 ALTER TABLE `to_do`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `weknees_point`
 --
 ALTER TABLE `weknees_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -1366,10 +1432,16 @@ ALTER TABLE `autism_checker_question`
   ADD CONSTRAINT `autism_checker_question_ibfk_1` FOREIGN KEY (`autism_checker_id`) REFERENCES `autism_checker` (`id`);
 
 --
+-- Constraints for table `autism_checker_results`
+--
+ALTER TABLE `autism_checker_results`
+  ADD CONSTRAINT `autism_checker_results_ibfk_1` FOREIGN KEY (`checker_question_id`) REFERENCES `autism_checker_question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `caregiver`
 --
 ALTER TABLE `caregiver`
-  ADD CONSTRAINT `caregiver_ibfk_4` FOREIGN KEY (`sp_serial_no`) REFERENCES `specialist` (`serial_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `caregiver_ibfk_1` FOREIGN KEY (`sp_serial_no`) REFERENCES `specialist` (`serial_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `dsm5`
@@ -1395,7 +1467,7 @@ ALTER TABLE `evaluation_history_result`
 -- Constraints for table `long_term`
 --
 ALTER TABLE `long_term`
-  ADD CONSTRAINT `long_term_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `long_term_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `lovaas_questions`
@@ -1456,7 +1528,7 @@ ALTER TABLE `schedule`
 -- Constraints for table `short_term`
 --
 ALTER TABLE `short_term`
-  ADD CONSTRAINT `short_term_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `short_term_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `status`
@@ -1468,7 +1540,7 @@ ALTER TABLE `status`
 -- Constraints for table `strength_point`
 --
 ALTER TABLE `strength_point`
-  ADD CONSTRAINT `strength_point_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `strength_point_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `to_do`
@@ -1481,7 +1553,7 @@ ALTER TABLE `to_do`
 -- Constraints for table `weknees_point`
 --
 ALTER TABLE `weknees_point`
-  ADD CONSTRAINT `weknees_point_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `weknees_point_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
