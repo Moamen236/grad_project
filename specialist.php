@@ -12,8 +12,8 @@ $specialist = new specialist;
 $specialist_id = $session->get('specialist_id');
 $select_specialist = $specialist->selectId("*", $specialist_id);
 
-$patiants = new patient;
-$patiants_results = $patiants->selectWhere("id ,name , age , caregiver_phone", "spcialist_id = $specialist_id");
+$patients = new patient;
+$patients_results = $patients->selectWhere("id ,name , age , caregiver_phone", "spcialist_id = $specialist_id");
 
 $tablesSelect = new tables;
 $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient.id", "schedule left JOIN patient on schedule.patient_id = patient.id",  "schedule.specialist_id = $specialist_id");
