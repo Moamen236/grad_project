@@ -42,7 +42,10 @@ if ($request->postHas("create_patient")) {
     $uniq_pic_name = "$random.$extention";
     move_uploaded_file($pic_tmp_name, PATH . "assets/images/uploads/patients/$uniq_pic_name");
 
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
     // Insert in Database
-    $patients->insert(("name,age,date_of_birth,school,gender,class,photo,caregiver_name,caregiver_relationship,caregiver_phone,spcialist_id "), ("'$patient_name' , $patient_age , '$patient_date' , '$patient_school' , '$patient_gender' , '$patient_class' , '$uniq_pic_name' ,   '$caregiver_name' , '$caregiver_relationship' ,$caregiver_number , $specialist_id"));
-    $request->redirect("specialist.php");
+    $res = $patients->insert(("name,age,date_of_birth,school,gender,class,photo,caregiver_name,caregiver_relationship,caregiver_phone,spcialist_id "), ("'$patient_name' , $patient_age , '$patient_date' , '$patient_school' , '$patient_gender' , '$patient_class' , '$uniq_pic_name' ,   '$caregiver_name' , '$caregiver_relationship' ,$caregiver_number , $specialist_id"));
+    // $request->redirect("specialist.php");
 }

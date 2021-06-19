@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="<?= URL; ?>assets/css/slick-theme.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/style.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/responsive.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
 </head>
 

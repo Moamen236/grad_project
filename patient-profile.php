@@ -19,6 +19,8 @@ $schedule = new schedule;
 $query = "SELECT * FROM `schedule` WHERE schedule_date >= '$now_date' AND patient_id = $patient_id LIMIT 1";
 $run_query = $schedule->query($query);
 $next_schedule = mysqli_fetch_assoc($run_query);
+
+
 ?>
 
 <div class="patient-profile ">

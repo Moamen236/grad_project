@@ -560,7 +560,15 @@ $tables_select = new tables;
                     <!--Lovass-->
                     <div class="tab-pane fade bg-box rounded p-lg-5 p-2 mt-lg-0 mt-4" id="list-lovaas" role="tabpanel"
                         aria-labelledby="list-lovaas-list">
-                        <div class="report px-lg-5 px-3 py-4 mt-3">
+                        <div class="row">
+                            <div class="col-md-12 mt-3 rounded">
+                                <button type="button" id="cmd" class="secondary-btn float-end btn ml-4">Generate
+                                    PDF</button>
+                                <button type="button" class="secondary-btn float-end btn"
+                                    onclick='PrintElem("testprint")'>Print</button>
+                            </div>
+                        </div>
+                        <div class="report px-lg-5 px-3 py-4 mt-3" id="testprint">
                             <div class="row justify-content-between align-items-center head">
                                 <div class="col-md-8">
                                     <div class="row align-items-center">
@@ -650,8 +658,26 @@ $tables_select = new tables;
     </div>
 </div>
 <?php } else { ?>
-<div class="body_not_select text-center">
-    <h3>NO data yet</h3>
+<div class="body_not_select text-center" style="background-color: #FDFDFD;">
+
+    <div class="row justify-content-center pb-5">
+        <div class="col-lg-6">
+            <div class="not-found">
+                <img src="<?= URL ?>assets/images/not_data.jpg" alt="" class="img-fluid">
+                <h3>No data found!</h3>
+            </div>
+        </div>
+    </div>
 </div>
 <?php } ?>
+<script>
+function PrintElem(elem) {
+    var newstr = document.all.item(elem).innerHTML;
+    var oldstr = document.body.innerHTML;
+    document.body.innerHTML = newstr;
+    window.print();
+    document.body.innerHTML = oldstr;
+    return false;
+}
+</script>
 <?php require_once('include/footer.php'); ?>

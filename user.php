@@ -11,7 +11,7 @@ $user_id = $session->get('user_id');
 $selectUser = $user->selectId("*", $user_id);
 /*autism_checker_question table*/
 $autism_checker_question = new autism_checker_question;
-$select_question = $autism_checker_question->selectAll();
+$select_questions = $autism_checker_question->selectAll();
 
 ?>
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
@@ -36,13 +36,15 @@ $select_question = $autism_checker_question->selectAll();
                         <h2 class="p-0 mb-3 dark-title">Case Info</h2>
                         <div class="col-lg-4 ps-0">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name" placeholder="name@example.com">
+                                <input type="text" class="form-control" name="name" placeholder="Enter Case Name"
+                                    required>
                                 <label for="floatingInput">Enter Case Name</label>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-floating mb-3">
-                                <input type="number" class="form-control" name="age" placeholder="name@example.com">
+                                <input type="number" class="form-control" name="age" placeholder="Enter Case Age"
+                                    required>
                                 <label for="floatingInput">Enter Case Age</label>
                             </div>
                         </div>
@@ -58,40 +60,38 @@ $select_question = $autism_checker_question->selectAll();
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center rounded mt-4">
-                        <h2 class="p-0 mb-4 dark-title">Answer the Questions</h2>
-                        <?php foreach ($select_question as $question) : ?>
-                        <div class="col-lg-12">
+                        <h2 class="p-0 mb-4 dark-title">Answer the questions</h2>
+                        <div class="max-h" style="max-height: 700px;overflow: auto;">
+                            <?php foreach ($select_questions as $question) : ?>
                             <div class="row bg-white justify-content-between align-items-center p-3 mb-4">
                                 <div class="col-lg-8">
-                                    <h5 class="dark-text"><?= $question['checker_qustions'] ?></h5>
+                                    <?= $question['checker_qustions'] ?>
                                 </div>
                                 <div class="col-lg-1">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio"
+                                            name="question_<?= $question['id'] ?>" value="yes">
+                                        <label class="form-check-label" for="question_1">
                                             Yes
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio"
+                                            name="question_<?= $question['id'] ?>" value="no">
+                                        <label class="form-check-label" for="question_2">
                                             No
                                         </label>
                                     </div>
                                 </div>
                             </div>
+                            <?php endforeach ?>
                         </div>
-                        <?php endforeach ?>
                     </div>
-                    <input type="submit" value="Done" name="user-checker" class="btn secondary-btn float-end">
+                    <button type="submit" name="user-checker" class="btn secondary-btn float-end mt-3">Done</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<?php
-require_once('include/footer.php');
-?>
+<?php require_once('include/footer.php'); ?>

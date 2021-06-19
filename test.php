@@ -292,19 +292,36 @@ echo "<pre>";
 print_r($_SESSION);
 echo "</pre>";
 
-$now = new DateTime();
-$now_date = $now->format("Y-m-d");
+// $now = new DateTime();
+// $now_date = $now->format("Y-m-d");
+
+// $schedule = new schedule;
+// $query = "SELECT * FROM `schedule` WHERE schedule_date >= '$now_date' AND patient_id = 105 LIMIT 1";
+// $run_query = $schedule->query($query);
+// $next_schedule = mysqli_fetch_assoc($run_query);
+
+
+// if ($next_schedule !== null) {
+//     echo "<pre>";
+//     print_r($next_schedule);
+//     echo "</pre>";
+// } else {
+//     echo "no";
+// }
+
+
 
 $schedule = new schedule;
-$query = "SELECT * FROM `schedule` WHERE schedule_date >= '$now_date' AND patient_id = 105 LIMIT 1";
-$run_query = $schedule->query($query);
-$next_schedule = mysqli_fetch_assoc($run_query);
+$query = "SELECT schedule.id , schedule.schedule_time , schedule.schedule_date , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = 11";
+$run_query =  $schedule->query($query);
+$res = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
+echo "<pre>";
+print_r($res);
+echo "</pre>";
 
-if ($next_schedule !== null) {
-    echo "<pre>";
-    print_r($next_schedule);
-    echo "</pre>";
-} else {
-    echo "no";
-}
+// foreach ($res as $value) {
+//     echo $value['3'];
+//     echo "<br>";
+//     echo $value['4'];
+// }

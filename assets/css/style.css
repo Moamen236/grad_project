@@ -1200,3 +1200,19 @@ footer .social ul li a:hover {
 #show_serial .modal {
 	display: block;
 }
+
+/* == == */
+.toggle {
+	position: sticky;
+	top: 60px;
+	z-index: 9999;
+}
+/* #patient-info {
+	left: -100%;
+} */
+#toggle-info {
+	cursor: pointer;
+}
+.show-toggle {
+	left: 0;
+}

@@ -15,7 +15,6 @@ $patient_id = $request->get('patientid');
 $session->set('patient_id', $patient_id);
 
 // Lovaas
-
 $lovaas_category = new lovaas_category;
 $lovaas_cats = $lovaas_category->selectAll();
 $lovaas_questions = new lovaas_questions;
@@ -388,7 +387,7 @@ $lovaas_ques = $lovaas_questions->selectAll();
                                                 <?php foreach ($lovaas_questions_results as $key => $lovaas_result) : ?>
                                                 <div class="row bg-white rounded p-4 border-bottom">
                                                     <div class="row">
-                                                        <?= $lovaas_result['id']?> -
+                                                        <?= $lovaas_result['id'] ?> -
                                                         <?= $lovaas_result['lovass_questions'] ?>
                                                     </div>
                                                     <div

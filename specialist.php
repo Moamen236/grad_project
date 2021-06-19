@@ -1,7 +1,7 @@
 <?php
 
-use Project\Classes\Models\tables;
 use Project\Classes\Models\patient;
+use Project\Classes\Models\schedule;
 use Project\Classes\Models\specialist;
 
 require_once('include/header.php');
@@ -15,32 +15,13 @@ $select_specialist = $specialist->selectId("*", $specialist_id);
 $patients = new patient;
 $patients_results = $patients->selectWhere("id ,name , age , caregiver_phone", "spcialist_id = $specialist_id");
 
-$tablesSelect = new tables;
-$results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient.id", "schedule left JOIN patient on schedule.patient_id = patient.id",  "schedule.specialist_id = $specialist_id");
+$schedule = new schedule;
+$query = "SELECT schedule.id , schedule.schedule_time , schedule.schedule_date , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = $specialist_id";
+$run_query =  $schedule->query($query);
+$results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
+// require_once('forms/create-patient.php');
 ?>
-
-<div id="show_serial" style="visibility:hidden;">
-    <div class="container">
-        <div class="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
     <div class="container">
@@ -219,7 +200,8 @@ $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient
                                 Create Patient Account
                             </h2>
                             <div class="line bg-yellow"></div>
-                            <form action="forms/create-patient.php" method="POST" enctype="multipart/form-data">
+                            <form action="forms/create-patient.php" id="form" method="POST"
+                                enctype="multipart/form-data">
                                 <div class="row mt-40">
                                     <div class="col-lg-4">
                                         <div class="mb-3">
@@ -279,7 +261,8 @@ $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient
                                             <label for="exampleFormControlInput1" class="form-label dark-text">Caregiver
                                                 name
                                                 <span class="red">*</span></label>
-                                            <input type="text" name="caregiver_name" class="form-control bg-white">
+                                            <input type="text" name="caregiver_name" class="form-control bg-white"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -288,7 +271,7 @@ $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient
                                                 class="form-label dark-text">Relationship
                                                 with patient since <span class="red">*</span></label>
                                             <input type="number" name="caregiver_relationship"
-                                                class="form-control bg-white" required>
+                                                class="form-control bg-white">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -296,8 +279,7 @@ $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient
                                             <label for="exampleFormControlInput1" class="form-label dark-text">Phone
                                                 number
                                                 <span class="red">*</span></label>
-                                            <input type="number" name="caregiver_number" class="form-control bg-white"
-                                                required>
+                                            <input type="number" name="caregiver_number" class="form-control bg-white">
                                         </div>
                                     </div>
                                 </div>
@@ -384,9 +366,9 @@ $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient
                             <table class="table tableData table-striped table-hover">
                                 <thead class="bg-white">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Date</th>
-                                        <th>time</th>
+                                        <th>Patient Name</th>
+                                        <th>Session Date</th>
+                                        <th>Session Time</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -394,14 +376,16 @@ $results_schedule =  $tablesSelect->selectAs("schedule.*, patient.name , patient
                                     <?php foreach ($results_schedule as $schedule) : ?>
                                     <tr>
                                         <td>
-                                            <a href="patient-profile.php?patientid=<?= $schedule['id'] ?>"
-                                                class="dark-text" target="_blank">
+                                            <a href="patient-profile.php?patientid=<?= $schedule['p_id'] ?>"
+                                                class="dark-text" target="blank">
                                                 <?= $schedule['name'] ?>
                                             </a>
                                         </td>
-                                        <td><?= $schedule['schedule_date'] ?></td>
-                                        <td><?= $schedule['schedule_time'] ?></td>
-                                        <td><a href="#"><i class="far fa-trash-alt fa-lg red"></i></a></td>
+                                        <td><?= date('d/m/Y', strtotime($schedule['schedule_date'])); ?></td>
+                                        <td><?= date('h:i a', strtotime($schedule['schedule_time'])); ?></td>
+                                        <td><a href="forms/schedule.php?schedule_id=<?= $schedule['id'] ?>"><i
+                                                    class="far fa-trash-alt fa-lg red"></i></a>
+                                        </td>
                                     </tr>
                                     <?php endforeach ?>
                                 </tbody>

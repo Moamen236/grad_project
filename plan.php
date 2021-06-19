@@ -48,23 +48,32 @@ if ($session->has('add_error')) {
     </div>
 </section>
 <div class="plan py-5 rounded">
-    <div class="container">
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-10">
-                <div class="card" style="width: fit-content;">
-                    <div class="card-header">
-                        Your patient
+    <div class="toggle">
+        <div class="position-absolute d-flex main-box">
+            <div id="patient-info" class="card bg-box" style="max-width: 550px;">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="<?= URL; ?>assets/images/child-profile.jpg" alt="..." class="img-fluid">
                     </div>
-                    <div class="card-body">
-                        <img src="<?= URL; ?>assets/images/child-profile.jpg" alt="" class="img-fluid rounded-circle"
-                            width="60">
-                        <a href="patient-profile.php?patientid=<?= $patient_result['id'] ?>" class="dark-text">
-                            <h3 class="d-inline ms-2"><?= $patient_result['name'] ?></h3>
-                        </a>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <a href="patient-profile.php?patientid=<?= $patient_result['id'] ?>" class="dark-text">
+                                <h5 class="card-title mb-2"><?= $patient_result['name'] ?></h5>
+                            </a>
+                            <p class="card-text mb-0">Age : <?= $patient_result['age'] ?> years old</p>
+                            <p class="card-text">Caregiver : <?= $patient_result['caregiver_name'] ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id="toggle-info" class="button-show bg-dark text-white p-2"
+                style="height: fit-content; width:fit-content">
+                <i class="fas fa-info-circle"></i>
+                <span class="m-0">patient info</span>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="current-level shadow-sm rounded pb-5 pt-4 px-3">
@@ -120,8 +129,6 @@ if ($session->has('add_error')) {
                                                     <form action="forms/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="plan_id"
-                                                                    value="<?= $plan_id ?>">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
                                                                 <label class="form-label">Add Topic</label>
@@ -226,8 +233,6 @@ if ($session->has('add_error')) {
                                                     <form action="forms/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="plan_id"
-                                                                    value="<?= $plan_id ?>">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
                                                                 <label class="form-label">Add Topic</label>
@@ -356,8 +361,6 @@ if ($session->has('add_error')) {
                                                     <form action="forms/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="plan_id"
-                                                                    value="<?= $plan_id ?>">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
                                                                 <label class="form-label">Add Topic</label>
@@ -462,8 +465,6 @@ if ($session->has('add_error')) {
                                                     <form action="forms/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="plan_id"
-                                                                    value="<?= $plan_id ?>">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
                                                                 <label class="form-label">Add Topic</label>

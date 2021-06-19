@@ -15,55 +15,24 @@ $weknees_point = new weknees_point;
 
 if ($request->postHas('add-long-term')) {
     $topic = $request->post('topic');
-    $plan_id = (int)$request->post('plan_id');
     $patient_id = $request->post('patient_id');
-
-    $result = $long_term->insert(("long_term_discription , plan_id "), ("'$topic' , $plan_id"));
-    $request->redirect("plan.php?patientid=$patient_id");
-} else {
-    $request->redirect("plan.php?patientid=$patient_id");
-}
-
-
-if ($request->postHas('add-short-term')) {
+    $result = $long_term->insert(("long_term_discription , patient_id "), ("'$topic' , $patient_id"));
+    // $request->redirect("plan.php?patientid=$patient_id");
+} elseif ($request->postHas('add-short-term')) {
     $topic = $request->post('topic');
-    $plan_id = (int)$request->post('plan_id');
     $patient_id = $request->post('patient_id');
-
-    $result = $short_term->insert(("short_term_description , plan_id "), ("'$topic' , $plan_id"));
-    $request->redirect("plan.php?patientid=$patient_id");
-} else {
-    $request->redirect("plan.php?patientid=$patient_id");
-}
-
-
-if ($request->postHas('add-strength-point')) {
+    $result = $short_term->insert(("short_term_description , patient_id "), ("'$topic' , $patient_id"));
+    // $request->redirect("plan.php?patientid=$patient_id");
+} elseif ($request->postHas('add-strength-point')) {
     $topic = $request->post('topic');
-    $plan_id = (int)$request->post('plan_id');
     $patient_id = $request->post('patient_id');
-
-    $result = $strength_point->insert(("strength_point_description , plan_id "), ("'$topic' , $plan_id"));
-
-    if (var_dump($result) == false) {
-        $session->set('add_error', 'You have an error in insert data');
-    }
-    $request->redirect("plan.php?patientid=$patient_id");
-} else {
-    $request->redirect("plan.php?patientid=$patient_id");
-}
-
-
-if ($request->postHas('add-weaknees-point')) {
+    $result = $strength_point->insert(("strength_point_description , patient_id "), ("'$topic' , $patient_id"));
+    // $request->redirect("plan.php?patientid=$patient_id");
+} elseif ($request->postHas('add-weaknees-point')) {
     $topic = $request->post('topic');
-    $plan_id = (int)$request->post('plan_id');
     $patient_id = $request->post('patient_id');
-
-    $result = $weknees_point->insert(("weeknees_point_description , plan_id "), ("'$topic' , $plan_id"));
-
-    if (var_dump($result) == false) {
-        $session->set('add_error', 'You have an error in insert data');
-    }
-    $request->redirect("plan.php?patientid=$patient_id");
+    $result = $weknees_point->insert(("weeknees_point_description , patient_id "), ("'$topic' , $patient_id"));
+    // $request->redirect("plan.php?patientid=$patient_id");
 } else {
     $request->redirect("plan.php?patientid=$patient_id");
 }
