@@ -4,7 +4,6 @@ use Project\Classes\Models\autism_checker_question;
 use Project\Classes\Models\Users;
 
 require_once('include/header.php');
-require_once('include/navbar.php');
 
 $user = new Users;
 $user_id = $session->get('user_id');
@@ -13,7 +12,47 @@ $selectUser = $user->selectId("*", $user_id);
 $autism_checker_question = new autism_checker_question;
 $select_questions = $autism_checker_question->selectAll();
 
+require_once('include/navbar.php');
 ?>
+
+<nav class="navbar navbar-expand-lg bg-nav">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="<?= URL; ?>assets/images/autism.png" alt="logo" width="40">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="user.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="organizations.php">Orgnization</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="articales.php">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="dropdown pe-2">
+            <div class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/images/person(100x100).png" alt="" width="40px" class="rounded-circle">
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="forms/logout.php">log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
     <div class="container">
         <div class="row justify-content-center align-items-center">

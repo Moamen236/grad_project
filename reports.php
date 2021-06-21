@@ -4,11 +4,14 @@ use Project\Classes\Models\tables;
 use Project\Classes\Models\lovaas_results;
 use Project\Classes\Models\lovaas_category;
 use Project\Classes\Models\lovaas_questions;
+use Project\Classes\Models\patient;
 
 require_once('include/header.php');
-require_once('include/navbar.php');
+
 
 $patient_id = $request->get('patientid');
+$patients = new patient;
+$patient_result = $patients->selectId("*", "$patient_id");
 
 $lovaas_category = new lovaas_category;
 $lovaas_cats = $lovaas_category->selectAll();
@@ -20,6 +23,8 @@ $lovaas_results = new lovaas_results;
 $lovaas_results_arr = $lovaas_results->selectWhere("*", "patient_id = $patient_id");
 
 $tables_select = new tables;
+
+require_once('include/navbar.php');
 ?>
 
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
@@ -34,6 +39,26 @@ $tables_select = new tables;
         </div>
     </div>
 </section>
+
+<div class="toggle">
+    <div class="main-box">
+        <div id="patient-info" class="card bg-box" style="width: 18rem;">
+            <img src="<?= URL ?>assets/images/uploads/patients/<?= $patient_result['photo'] ?>" class="img-card"
+                alt="child">
+            <div class="card-body">
+                <a href="patient-profile.php?patientid=<?= $patient_result['id'] ?>" class="dark-text">
+                    <h5 class="text-center"><?= $patient_result['name'] ?></h5>
+                </a>
+                <p class="card-text mb-0">Age : <?= $patient_result['age'] ?></p>
+                <p class="card-text">Caregiver Name : <?= $patient_result['caregiver_name'] ?></p>
+            </div>
+        </div>
+        <div id="toggle-info" class="button-show text-white p-2">
+            <i class="fas fa-info-circle"></i>
+            <span class="m-0">Patient info</span>
+        </div>
+    </div>
+</div>
 
 <?php if (!empty($lovaas_results_arr)) { ?>
 <div class="list-arr reports py-5">
@@ -659,7 +684,6 @@ $tables_select = new tables;
 </div>
 <?php } else { ?>
 <div class="body_not_select text-center" style="background-color: #FDFDFD;">
-
     <div class="row justify-content-center pb-5">
         <div class="col-lg-6">
             <div class="not-found">

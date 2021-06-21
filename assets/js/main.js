@@ -8,6 +8,7 @@ $(document).ready( function () {
   // Datatables.js
   $('.tableData').DataTable();
 
+  // Slick for swiper
   $('.multiple-items').slick({
       infinite: true,
       slidesToShow: 3,
@@ -24,22 +25,20 @@ $(document).ready( function () {
       });
   });
 
+
   // patient info in plan 
   let info_width =  $("#patient-info").outerWidth();
-  $(".main-box").css("left" , -info_width)
+  $("#patient-info").css("right" , -info_width)
   $("#toggle-info").click(function(){
-    if($(".main-box").css("left") == "0px"){
-      $(".main-box").animate({"left" : -info_width},1000)
-      $("#toggle-info span").css('display' , 'inline');
+    if($("#patient-info").css("right") == -info_width+"px"){
+      $("#patient-info").animate({"right" : "40px"},500)
     }else{
-      $(".main-box").animate({"left" : 0},1000)
-      $("#toggle-info span").css('display' , 'none');
+      $("#patient-info").animate({"right" : -info_width},500)
     }
   })
 
-
   
-
+  // form reload
   function submissionDone(){
     console.log('success message');
   }
@@ -53,7 +52,7 @@ $(document).ready( function () {
 		var url = form.attr('action');
     console.log(url);
 
-    var form_data = $("form").serialize(); //new FormData();
+    var form_data = new FormData(form); //$("form").serialize();
     console.log(form_data);
 
 		$.ajax({
@@ -68,8 +67,6 @@ $(document).ready( function () {
       processData: false
 		})
 	})
-  // console.log(text(form.serialize()))
-
 });
 
 // $(function() {

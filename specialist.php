@@ -1,7 +1,6 @@
 <?php
 
-use Project\Classes\Models\patient;
-use Project\Classes\Models\schedule;
+
 use Project\Classes\Models\specialist;
 
 require_once('include/header.php');
@@ -12,16 +11,18 @@ $specialist = new specialist;
 $specialist_id = $session->get('specialist_id');
 $select_specialist = $specialist->selectId("*", $specialist_id);
 
-$patients = new patient;
+
 $patients_results = $patients->selectWhere("id ,name , age , caregiver_phone", "spcialist_id = $specialist_id");
 
-$schedule = new schedule;
-$query = "SELECT schedule.id , schedule.schedule_time , schedule.schedule_date , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = $specialist_id";
+
+$query = "SELECT schedule.id , schedule.schedule_date_time , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = $specialist_id";
 $run_query =  $schedule->query($query);
 $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
-// require_once('forms/create-patient.php');
+
 ?>
+
+
 
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
     <div class="container">
@@ -336,12 +337,14 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                         <td>
                                             <!-- <img src="assets/images/child.jpg" alt="patiant" width="40px" height="40px"
                                                 class="rounded-circle me-1"> -->
-                                            <?= $patient['name'] ?>
+                                            <a href="patient-profile.php?patientid=<?= $patient['id'] ?>" target="blank"
+                                                class="dark-text">
+                                                <?= $patient['name'] ?></a>
                                         </td>
                                         <td><?= $patient['age'] ?></td>
                                         <td><?= $patient['caregiver_phone'] ?></td>
                                         <td><a href="patient-profile.php?patientid=<?= $patient['id'] ?>"
-                                                target="_blank"><i class="fas fa-info-circle fa-lg dark-text"></i></a>
+                                                target="blank"><i class="fas fa-info-circle fa-lg dark-text"></i></a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
@@ -381,8 +384,8 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                                 <?= $schedule['name'] ?>
                                             </a>
                                         </td>
-                                        <td><?= date('d/m/Y', strtotime($schedule['schedule_date'])); ?></td>
-                                        <td><?= date('h:i a', strtotime($schedule['schedule_time'])); ?></td>
+                                        <td><?= date('d/m/Y', strtotime($schedule['schedule_date_time'])); ?></td>
+                                        <td><?= date('h:i a', strtotime($schedule['schedule_date_time'])); ?></td>
                                         <td><a href="forms/schedule.php?schedule_id=<?= $schedule['id'] ?>"><i
                                                     class="far fa-trash-alt fa-lg red"></i></a>
                                         </td>

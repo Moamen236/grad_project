@@ -1,4 +1,5 @@
 <?php
+
 require_once('include/header.php');
 require_once('include/navbar.php');
 ?>
@@ -23,5 +24,7 @@ require_once('include/navbar.php');
 
 <script src="<?= URL; ?>assets/js/scripts/display_organizations.js"></script>
 <?php
+
+
 require_once('include/footer.php');
 ?>

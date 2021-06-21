@@ -7,6 +7,7 @@ body {
 	font-family: "Heebo", sans-serif;
 	color: #161616;
 	overflow-x: hidden;
+	position: relative;
 }
 
 ul {
@@ -51,9 +52,30 @@ p {
 }
 
 /* navbar */
-
+.notification .dropdown-toggle::after {
+	display: none;
+}
+.notification .number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: red;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+.notification .number span {
+	font-size: 12px;
+	font-weight: bold;
+}
 /* main-banner in all pages */
-
 .main-banner {
 	background-image: url(../images/bg-users.jpg);
 	background-position: center;
@@ -852,7 +874,7 @@ footer .social ul li a:hover {
 
 /*--------------- patient-profile ----------------*/
 .patient-profile {
-	padding-top: 150px;
+	padding-top: 100px;
 	padding-bottom: 100px;
 }
 .patient-profile .next-session hr {
@@ -1203,16 +1225,46 @@ footer .social ul li a:hover {
 
 /* == == */
 .toggle {
-	position: sticky;
-	top: 60px;
-	z-index: 9999;
+	z-index: 99999;
 }
-/* #patient-info {
-	left: -100%;
-} */
-#toggle-info {
+.toggle .button-show {
+	position: fixed;
+	bottom: 20px;
+	right: 40px;
+	height: fit-content;
+	width: fit-content;
+	background-color: #00628b;
+	transition: 0.3s;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-ms-transition: 0.3s;
+	-o-transition: 0.3s;
 	cursor: pointer;
+	z-index: 9999999;
 }
-.show-toggle {
-	left: 0;
+.toggle .button-show:hover {
+	background-color: #368ba9;
+}
+
+.toggle .card {
+	position: fixed;
+	bottom: 80px;
+	right: 40px;
+	z-index: 9999999;
+}
+.toggle .img-card {
+	width: 170px;
+	margin: auto;
+	padding-top: 15px;
+}
+.dropdown-menu {
+	max-height: 500px;
+	overflow: auto;
+}
+.dropdown-item {
+	cursor: default;
+}
+.dropdown-item.active,
+.dropdown-item:active {
+	background-color: #e9ecef;
 }

@@ -8,7 +8,7 @@ use Project\Classes\Models\strength_point;
 use Project\Classes\Models\weknees_point;
 
 require_once('include/header.php');
-require_once('include/navbar.php');
+
 
 $patient_id = $request->get('patientid');
 $specialist_id = $session->get('specialist_id');
@@ -34,6 +34,8 @@ $select_short_term = $short_term->selectWhere("*", "patient_id = $patient_id");
 if ($session->has('add_error')) {
     $error = $session->get('add_error');
 }
+
+require_once('include/navbar.php');
 ?>
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
     <div class="container">
@@ -47,32 +49,26 @@ if ($session->has('add_error')) {
         </div>
     </div>
 </section>
-<div class="plan py-5 rounded">
-    <div class="toggle">
-        <div class="position-absolute d-flex main-box">
-            <div id="patient-info" class="card bg-box" style="max-width: 550px;">
-                <div class="row g-0 align-items-center">
-                    <div class="col-md-4">
-                        <img src="<?= URL; ?>assets/images/child-profile.jpg" alt="..." class="img-fluid">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <a href="patient-profile.php?patientid=<?= $patient_result['id'] ?>" class="dark-text">
-                                <h5 class="card-title mb-2"><?= $patient_result['name'] ?></h5>
-                            </a>
-                            <p class="card-text mb-0">Age : <?= $patient_result['age'] ?> years old</p>
-                            <p class="card-text">Caregiver : <?= $patient_result['caregiver_name'] ?></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="toggle-info" class="button-show bg-dark text-white p-2"
-                style="height: fit-content; width:fit-content">
-                <i class="fas fa-info-circle"></i>
-                <span class="m-0">patient info</span>
+<div class="toggle">
+    <div class="main-box">
+        <div id="patient-info" class="card bg-box" style="width: 18rem;">
+            <img src="<?= URL ?>assets/images/uploads/patients/<?= $patient_result['photo'] ?>" class="img-card"
+                alt="child">
+            <div class="card-body">
+                <a href="patient-profile.php?patientid=<?= $patient_result['id'] ?>" class="dark-text">
+                    <h5 class="text-center"><?= $patient_result['name'] ?></h5>
+                </a>
+                <p class="card-text mb-0">Age : <?= $patient_result['age'] ?></p>
+                <p class="card-text">Caregiver Name : <?= $patient_result['caregiver_name'] ?></p>
             </div>
         </div>
+        <div id="toggle-info" class="button-show text-white p-2">
+            <i class="fas fa-info-circle"></i>
+            <span class="m-0">Patient info</span>
+        </div>
     </div>
+</div>
+<div class="plan py-5 rounded">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -82,7 +78,7 @@ if ($session->has('add_error')) {
                             <h3>Current level</h3>
                         </div>
                     </div>
-                    <div class="content bg-box mt-5 mx-5 rounded shadow">
+                    <div class="content bg-box mt-5 mx-5 rounded shadow-sm">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="strength-tab" data-bs-toggle="tab"
@@ -100,14 +96,14 @@ if ($session->has('add_error')) {
                             <div class="tab-pane fade show active" id="strength" role="tabpanel"
                                 aria-labelledby="strength-tab">
                                 <div class="row justify-content-end align-items-center mb-3">
-                                    <!-- <div class="col-lg-6">
-                                                <?php if ($session->has('add_error')) : ?>
-                                                <div class="alert alert-danger" role="alert">
-                                                    <?= $session->get('add_error') ?>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php $session->remove('add_error') ?>
-                                            </div> -->
+                                    <div class="col-lg-6">
+                                        <?php if ($session->has('add_error')) : ?>
+                                        <div class="alert alert-danger" role="alert">
+                                            <?= $session->get('add_error') ?>
+                                        </div>
+                                        <?php endif ?>
+                                        <?php $session->remove('add_error') ?>
+                                    </div>
                                     <div class="col-lg-2 col-md-4">
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn secondary-btn float-end" data-bs-toggle="modal"
@@ -323,7 +319,7 @@ if ($session->has('add_error')) {
                             <h3>Objectives</h3>
                         </div>
                     </div>
-                    <div class="content bg-box mt-5 mx-5 rounded shadow">
+                    <div class="content bg-box mt-5 mx-5 rounded shadow-sm">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="long-tab" data-bs-toggle="tab"

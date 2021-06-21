@@ -106,7 +106,7 @@ if ($session->has("which_user")) {
                                             </div>
                                             <div class="form-floating mb-3 wow animated fadeInDown"
                                                 data-wow-delay="0.3s" data-wow-duration="2.2s">
-                                                <select id="choose" class="form-select bg-transparent" name="choose"
+                                                <select class="form-select bg-transparent" name="choose"
                                                     aria-label="Choose your account..." required>
                                                     <option selected>Open this select menu</option>
                                                     <option value="user">Default User</option>
@@ -150,7 +150,7 @@ if ($session->has("which_user")) {
                                 </div>
                                 <?php $session->remove('sucsses_reg');
                                 endif ?>
-                                <h3 class="my-4  fw-bold text-white">Create a new Account</h3>
+                                <h3 class="my-4 fw-bold text-white">Create a new Account</h3>
                                 <form method="POST" action="forms/handle-reg.php">
                                     <div class="row">
                                         <div class="col-md-6">

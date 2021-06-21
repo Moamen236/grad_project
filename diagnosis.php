@@ -5,7 +5,6 @@ use Project\Classes\Models\lovaas_questions;
 use Project\Classes\Models\specialist;
 
 require_once('include/header.php');
-require_once('include/navbar.php');
 $specialist_id = $session->get('specialist_id');
 $specialist = new specialist;
 $select_specialist = $specialist->selectId("*", $specialist_id);
@@ -20,6 +19,7 @@ $lovaas_cats = $lovaas_category->selectAll();
 $lovaas_questions = new lovaas_questions;
 $lovaas_ques = $lovaas_questions->selectAll();
 
+require_once('include/navbar.php');
 ?>
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
     <div class="container">
@@ -28,11 +28,30 @@ $lovaas_ques = $lovaas_questions->selectAll();
                 <h1>Welcome <?= $select_specialist['name'] ?> </h1>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit
                     illum odit doloremque sed distinctio cum sapiente reiciendis modi, soluta minima numquam consectetur
-                    iure enim hic..</p>
+                    iure enim hic.</p>
             </div>
         </div>
     </div>
 </section>
+<div class="toggle">
+    <div class="main-box">
+        <div id="patient-info" class="card bg-box" style="width: 18rem;">
+            <img src="<?= URL ?>assets/images/uploads/patients/<?= $patient_result['photo'] ?>" class="img-card"
+                alt="child">
+            <div class="card-body">
+                <a href="patient-profile.php?patientid=<?= $patient_result['id'] ?>" class="dark-text">
+                    <h5 class="text-center"><?= $patient_result['name'] ?></h5>
+                </a>
+                <p class="card-text mb-0">Age : <?= $patient_result['age'] ?></p>
+                <p class="card-text">Caregiver Name : <?= $patient_result['caregiver_name'] ?></p>
+            </div>
+        </div>
+        <div id="toggle-info" class="button-show text-white p-2">
+            <i class="fas fa-info-circle"></i>
+            <span class="m-0">Patient info</span>
+        </div>
+    </div>
+</div>
 <div class="list-arr diagnosis py-5">
     <div class="container">
         <div class="row">

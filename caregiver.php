@@ -3,30 +3,34 @@
 use Project\Classes\Models\caregiver;
 use Project\Classes\Models\to_do;
 use Project\Classes\Models\specialist;
-use Project\Classes\Models\tables;
 use Project\Classes\Models\schedule;
 
 require_once('include/header.php');
-require_once('include/navbar.php');
 
 $caregiver = new caregiver;
 $caregiver_id = $session->get('caregiver_id');
 $selectCaregiver = $caregiver->selectId("*", $caregiver_id);
 
-/* todo table */
+// todo table
 $todo = new to_do;
 $selecttodo = $todo->selectAll();
-/*doctor table*/
+// doctor table
 $specialist = new specialist;
 $selectspecialist = $specialist->selectAll();
-$tablesSelect = new tables;
-$todoResults =  $tablesSelect->selectAs("to_do.*, specialist.name ", "to_do left JOIN specialist on to_do.specialist_id = specialist.id ",  "to_do.specialist_id = 1");
-/*schedule table */
-$specialist = new specialist;
-$selectspecialist = $specialist->selectAll();
-$tablesSelect = new tables;
-$scheduleResults =   $tablesSelect->selectAs(" schedule.*, specialist.name ", "schedule left JOIN specialist on schedule.specialist_id = specialist.id ",  "schedule.specialist_id = 1");
+// to do
+$to_do = new to_do;
+$query = "SELECT to_do.* , specialist.name FROM `to_do` JOIN specialist on to_do.specialist_id = specialist.id WHERE to_do.caregiver_id = $caregiver_id";
+$run_to_do =  $to_do->query($query);
+$select_to_do = mysqli_fetch_all($run_to_do, MYSQLI_ASSOC);
 
+// schedule table
+$schedule = new schedule;
+$query = "SELECT schedule.* , specialist.name FROM `schedule` JOIN specialist on schedule.specialist_id = specialist.id WHERE schedule.caregiver_id = $caregiver_id";
+$run_schedule =  $schedule->query($query);
+$select_schedule = mysqli_fetch_all($run_schedule, MYSQLI_ASSOC);
+
+
+require_once('include/navbar.php');
 ?>
 
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
@@ -126,37 +130,54 @@ $scheduleResults =   $tablesSelect->selectAs(" schedule.*, specialist.name ", "s
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-12">
+                            <?php if (!empty($select_to_do)) { ?>
                             <div class="accordion" id="accordionExample">
-                                <?php foreach ($todoResults as $todo) : ?>
+                                <?php foreach ($select_to_do as $to_do) : ?>
                                 <div class="accordion-item">
                                     <div class="d-flex align-items-center accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse<?= $todo['id'] ?>"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse<?= $to_do['id'] ?>"
                                         aria-expanded="true" aria-controls="collapseOne">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="row align-items-center">
                                                 <div class="col-lg-2 pe-0">
                                                     <img src="<?= URL; ?>assets/images/person(100x100).png" alt=""
                                                         class="img-fluid rounded-circle">
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <span><?= $todo['name'] ?></span>
+                                                    <span><?= $to_do['name'] ?></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <p class="m-0"><?= $todo['title'] ?>.</p>
+                                            <p class="m-0"><?= $to_do['title'] ?>.</p>
                                         </div>
                                     </div>
-                                    <div id="collapse<?= $todo['id'] ?>" class="accordion-collapse collapse"
-                                        aria-labelledby="heading<?= $todo['id'] ?>" data-bs-parent="#accordionExample">
+                                    <div id="collapse<?= $to_do['id'] ?>" class="accordion-collapse collapse"
+                                        aria-labelledby="heading<?= $to_do['id'] ?>" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <?= $todo['to_do_details'] ?>
+                                            <?= $to_do['to_do_details'] ?>
                                         </div>
+                                        <div class="badge float-end mb-2">
+                                            <a href="forms/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&caregiver_id=<?= $to_do['caregiver_id'] ?>"
+                                                class="btn secondary-btn">Finish The Mission</a>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
                                 </div>
                                 <?php endforeach ?>
-
                             </div>
+                            <?php } else { ?>
+                            <div class="body_not_select text-center" style="background-color: #FDFDFD;">
+                                <div class="row justify-content-center pb-5">
+                                    <div class="col-lg-6">
+                                        <div class="not-found">
+                                            <img src="<?= URL ?>assets/images/not_data.jpg" alt="" class="img-fluid">
+                                            <h3>No data found!</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -172,17 +193,18 @@ $scheduleResults =   $tablesSelect->selectAs(" schedule.*, specialist.name ", "s
                         </div>
                     </div>
                     <div class="list row mt-5">
+                        <?php if (!empty($select_schedule)) { ?>
                         <div class="col-md-12">
                             <table class="table tableData table-striped table-hover">
                                 <thead class="bg-white">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
+                                        <th>Specialist Name</th>
+                                        <th>Session Date</th>
+                                        <th>Session Time</th>
                                     </tr>
                                 </thead>
                                 <tbody id="cSchedule">
-                                    <?php foreach ($scheduleResults as $schedule) : ?>
+                                    <?php foreach ($select_schedule as $schedule) : ?>
                                     <tr>
                                         <td><?= $schedule['name'] ?></td>
                                         <td><?= $schedule['schedule_date'] ?></td>
@@ -192,7 +214,19 @@ $scheduleResults =   $tablesSelect->selectAs(" schedule.*, specialist.name ", "s
                                 </tbody>
                             </table>
                         </div>
+                        <?php } else { ?>
+                        <div class="body_not_select text-center" style="background-color: #FDFDFD;">
+                            <div class="row justify-content-center pb-5">
+                                <div class="col-lg-6">
+                                    <div class="not-found">
+                                        <img src="<?= URL ?>assets/images/not_data.jpg" alt="" class="img-fluid">
+                                        <h3>No data found!</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

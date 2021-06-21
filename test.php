@@ -85,6 +85,7 @@ use Project\Classes\Models\lovaas_results;
 use Project\Classes\Models\strength_point;
 use Project\Classes\Models\lovaas_category;
 use Project\Classes\Models\lovaas_questions;
+use Project\Classes\Models\to_do;
 
 // $db = new adir;
 // $result = $db->selectAll();
@@ -288,9 +289,7 @@ use Project\Classes\Models\lovaas_questions;
 // print_r($_COOKIE);
 // echo "</pre>";
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+
 
 // $now = new DateTime();
 // $now_date = $now->format("Y-m-d");
@@ -309,19 +308,76 @@ echo "</pre>";
 //     echo "no";
 // }
 
+// $schedule = new schedule;
+// $query = "SELECT schedule.id , schedule.schedule_time , schedule.schedule_date , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = 11";
+// $run_query =  $schedule->query($query);
+// $res = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
-
-$schedule = new schedule;
-$query = "SELECT schedule.id , schedule.schedule_time , schedule.schedule_date , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = 11";
-$run_query =  $schedule->query($query);
-$res = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
-
-echo "<pre>";
-print_r($res);
-echo "</pre>";
+// echo "<pre>";
+// print_r($res);
+// echo "</pre>";
 
 // foreach ($res as $value) {
 //     echo $value['3'];
 //     echo "<br>";
 //     echo $value['4'];
 // }
+// $schedule = new schedule;
+// $today = date("Y-m-d");
+
+// $notif_schedule = $schedule->selectWhere("*", "schedule_date = '$today'");
+
+// foreach ($notif_schedule as $notif) {
+//     $patient_id = $notif['patient_id'];
+//     $notif_patients = $patients->selectWhere("*", "id = $patient_id");
+//     foreach ($notif_patients as $patient) {
+//         if ($notif['patient_id'] == $patient['id']) {
+//             echo $notif['schedule_time'];
+//             echo "<br>";
+//         }
+//         echo $patient['name'];
+//         echo "<br>";
+//     }
+// }
+
+// echo "<pre>";
+// print_r($notif_schedule);
+// echo "</pre>";
+// echo count($notif_schedule);
+
+
+// $patients = new patient;
+// $to_do = new to_do;
+
+// $res = $to_do->selectAll();
+
+// unset($_SESSION['to_do']);
+
+// if ($session->has('to_do')) {
+//     $to_do_arr = $session->get('to_do');
+//     foreach ($to_do_arr as $value) {
+//         echo $value['title'] . "<br>";
+//     }
+//     echo count($to_do_arr);
+// } else {
+//     echo "no";
+// }
+
+
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+
+// unset($_SESSION['to_do']);
+$schedule = new schedule;
+$query = "SELECT schedule.id , schedule.schedule_date_time , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = 11";
+$run_query =  $schedule->query($query);
+$results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
+
+echo "<pre>";
+print_r($results_schedule);
+echo "</pre>";

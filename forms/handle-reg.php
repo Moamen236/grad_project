@@ -35,10 +35,6 @@ if ($request->postHas('reg')) {
                     $request->redirect('index.php');
                 } else {
                     $serial_no = uniqid();
-                    // echo gettype($serial_no);
-                    // echo "<pre>";
-                    // print_r($_POST);
-                    // echo "</pre>";
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $specialist->insert(("serial_no ,name , email , password"), (" '$serial_no ', '$name' , '$email' , '$password'"));
                     $session->set('sucsses_reg', 'You are now logged in');
@@ -79,30 +75,14 @@ if ($request->postHas('reg')) {
                     $session->set('reg_errors', 'The name not found');
                     $request->redirect('index.php');
                 } else {
-
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $caregiver->insert(("sp_serial_no , name , email , password"), ("'$sp_serial_no','$name' , '$email' , '$password'"));
-                    // $select_caregiver =  $caregiver->select("*", "sp_serial_no = '$sp_serial_no' AND name = '$name' AND email = '$email' AND password = '$password'");
-                    // $select_caregiver_row = mysqli_fetch_assoc($select_caregiver);
-                    // $caregiver_id = $select_caregiver_row['id'];
-                    // $select_patient = $patients->select("*", "name = '$patient_name'");
-                    // $select_patient_row = mysqli_fetch_assoc($select_caregiver);
-                    // // patients
-                    // if ($select_patient_row['name'] === $patient_name) {
-                    //     $result = $patients->insert("(caregiver_id )", "($caregiver_id)");
-                    //     var_dump($result);
-                    // }
-
-                    echo "<pre>";
-                    print_r($select_patient_row);
-                    echo "</pre>";
-                    // $session->set('sucsses_reg', 'You are now logged in');
-                    // $request->redirect('index.php');
                 }
                 break;
 
             default:
                 $request->redirect('index.php');
+
                 break;
         }
     }
