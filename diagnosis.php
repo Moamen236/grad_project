@@ -18,7 +18,22 @@ $lovaas_category = new lovaas_category;
 $lovaas_cats = $lovaas_category->selectAll();
 $lovaas_questions = new lovaas_questions;
 $lovaas_ques = $lovaas_questions->selectAll();
-
+// dsm5
+use Project\Classes\Models\dsm5_question;
+use Project\Classes\Models\dsm5_category;
+// scale
+use Project\Classes\Models\scale_questions;
+use Project\Classes\Models\scale_category;
+// Dsm5
+$dsm5_question = new dsm5_question;
+$dsm_ques = $dsm5_question->selectAll();
+$dsm5_category = new dsm5_category;
+$dsm_cats = $dsm5_category->selectAll();
+// // Scale
+$scale_questions = new scale_questions;
+$scale_ques = $scale_questions->selectAll();
+$scale_category = new scale_category;
+$scale_cats = $scale_category->selectAll();
 require_once('include/navbar.php');
 ?>
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
@@ -260,23 +275,23 @@ require_once('include/navbar.php');
                     <!-- DSM 5 -->
                     <div class="tab-pane fade bg-box p-5" id="list-dsm" role="tabpanel" aria-labelledby="list-dsm-list">
                         <div class="accordion" id="accordionExample">
-                            <?php for ($i = 0; $i < 5; $i++) : ?>
+                        <?php foreach ($dsm_cats as $dsm_cat) : ?>
                             <div class="accordion-item">
                                 <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse<?= $i ?>" aria-expanded="true"
+                                data-bs-target="#collapse<?= $dsm_cat['id'] ?>" aria-expanded="true"
                                     aria-controls="collapseOne">
                                     <div class="col-lg">
-                                        <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
+                                    <h6 class="m-0"><?= $dsm_cat['dsm_category'] ?></h6>
                                     </div>
                                 </div>
-                                <div id="collapse<?= $i ?>" class="accordion-collapse collapse"
-                                    aria-labelledby="heading<?= $i ?>" data-bs-parent="#accordionExample">
+                                <div id="collapse<?= $dsm_cat['id'] ?>" class="accordion-collapse collapse"
+                                    aria-labelledby="heading<?= $dsm_cat['id'] ?>" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <?php for ($a = 0; $a < 5; $a++) : ?>
+                                    
+                                    <?php foreach ($dsm_ques as $dsm_que) : ?>
                                         <div class="row bg-white rounded p-4 border-bottom">
                                             <div class="col-md-10">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-                                                voluptatem harum est quasi suscipit minima molestiae fuga repellat nemo?
+                                            <?= $dsm_que['dsm5_questions'] ?>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
@@ -295,12 +310,12 @@ require_once('include/navbar.php');
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php endfor ?>
+                                        <?php endforeach ?>
 
                                     </div>
                                 </div>
                             </div>
-                            <?php endfor ?>
+                            <?php endforeach ?>
                             <div class="row bg-white rounded p-4 mb-4 mt-3 ">
                                 <div class="col-md-10">
 
@@ -317,23 +332,22 @@ require_once('include/navbar.php');
                     <div class="tab-pane fade bg-box p-5" id="list-scale" role="tabpanel"
                         aria-labelledby="list-scale-list">
                         <div class="accordion" id="accordionExample">
-                            <?php for ($i = 0; $i < 5; $i++) : ?>
+                        <?php foreach ($scale_cats as $scale_cat) : ?>
                             <div class="accordion-item">
                                 <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse<?= $i ?>" aria-expanded="true"
+                                data-bs-target="#collapse<?= $scale_cat['id'] ?>" aria-expanded="true"
                                     aria-controls="collapseOne">
                                     <div class="col-lg">
-                                        <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
+                                    <h6 class="m-0"><?= $scale_cat['scale_category'] ?></h6>
                                     </div>
                                 </div>
-                                <div id="collapse<?= $i ?>" class="accordion-collapse collapse"
-                                    aria-labelledby="heading<?= $i ?>" data-bs-parent="#accordionExample">
+                                <div id="collapse<?= $scale_cat['id'] ?>" class="accordion-collapse collapse"
+                                    aria-labelledby="heading<?= $scale_cat['id'] ?>" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <?php for ($a = 0; $a < 5; $a++) : ?>
+                                    
+                                        <?php foreach ($scale_ques as $scale_que) : ?>
                                         <div class="bg-white rounded border-bottom p-4">
-                                            <h6> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-                                                voluptatem harum est quasi suscipit minima molestiae fuga repellat
-                                                nemo?</h6>
+                                        <h6><?= $scale_que['scale_question'] ?></h6>
                                             <div class="row justify-content-center align-items-center text-center p-3">
                                                 <div class="col-md-3">
                                                     <div class="form-check form-check-inline ">
@@ -365,11 +379,11 @@ require_once('include/navbar.php');
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php endfor ?>
+                                        <?php endforeach ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php endfor ?>
+                            <?php endforeach ?>
                             <div class="row bg-white rounded p-4 mb-4 mt-3 ">
                                 <div class="col-md-10">
 
