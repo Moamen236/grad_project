@@ -373,11 +373,13 @@ use Project\Classes\Models\to_do;
 // echo "</pre>";
 
 // unset($_SESSION['to_do']);
-$schedule = new schedule;
-$query = "SELECT schedule.id , schedule.schedule_date_time , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = 11";
-$run_query =  $schedule->query($query);
-$results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
+// $schedule = new schedule;
+// $query = "SELECT schedule.id , schedule.schedule_date_time , patient.id AS p_id , patient.name FROM `schedule` join patient on schedule.patient_id = patient.id where schedule.specialist_id = 11";
+// $run_query =  $schedule->query($query);
+// $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
-echo "<pre>";
-print_r($results_schedule);
-echo "</pre>";
+// echo "<pre>";
+// print_r($results_schedule);
+// echo "</pre>";
+
+print_r($_SESSION);

@@ -20,7 +20,7 @@ if ($request->postHas('reg')) {
     $re_password = $request->post('re-password');
     $choose = $request->post('choose');
     $sp_serial_no  = $request->post('sp_serial_no');
-    $patient_name  = $request->post('patient_name');
+    $patient_id  = $request->post('patient_id');
 
     if ($password != $re_password) {
         $session->set('reg_errors', 'The two passwords do not match');
@@ -61,28 +61,31 @@ if ($request->postHas('reg')) {
                 //Specialist
                 $select_specialist = $specialist->select("serial_no", "serial_no = '$sp_serial_no'");
                 $select_specialist_row = mysqli_fetch_assoc($select_specialist);
-                // patients
-                $select_patient = $patients->select("name", "name = '$patient_name'");
-                $select_patient_row = mysqli_fetch_assoc($select_patient);
-
+                // patient
+                $select_patient_row = $patients->selectId("*", $patient_id);
                 if ($select_caregiver_row['email'] === $email) {
                     $session->set('reg_errors', 'Email already exists');
                     $request->redirect('index.php');
                 } elseif ($select_specialist_row['serial_no'] != $sp_serial_no) {
                     $session->set('reg_errors', 'The Serial number is invalid');
                     $request->redirect('index.php');
-                } elseif ($select_patient_row['name'] != $patient_name) {
-                    $session->set('reg_errors', 'The name not found');
+                } elseif ($select_patient_row['id'] != $patient_id) {
+                    $session->set('reg_errors', 'The id not found');
                     $request->redirect('index.php');
                 } else {
                     $password = password_hash($password, PASSWORD_DEFAULT);
-                    $caregiver->insert(("sp_serial_no , name , email , password"), ("'$sp_serial_no','$name' , '$email' , '$password'"));
+                    $res = $caregiver->insert(("sp_serial_no , name , email , password"), ("'$sp_serial_no','$name' , '$email' , '$password'"));
+                    $query = "SELECT * FROM `caregiver` WHERE sp_serial_no = '$sp_serial_no' AND name = '$name'  AND email = '$email' AND password = '$password'";
+                    $run_query = $caregiver->query($query);
+                    $caregiver_just_reg = mysqli_fetch_assoc($run_query);
+                    $caregiver_just_reg_id = $caregiver_just_reg['id'];
+                    $update_patient = $patients->update("caregiver_id = $caregiver_just_reg_id", "id = $patient_id");
+                    $session->set('sucsses_reg', 'You are now logged in');
+                    $request->redirect('index.php');
                 }
                 break;
-
             default:
                 $request->redirect('index.php');
-
                 break;
         }
     }

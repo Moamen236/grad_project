@@ -75,7 +75,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="forms/add-to-do.php" method="post">
+                                    <form action="forms/add-to-do.php" method="post" id="form">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <input type="text" name="title" class="form-control"

@@ -10,6 +10,7 @@ $notify_to_do = new notify_to_do;
 $patient_id = $session->get('patient_id');
 
 
+echo "done";
 if ($request->postHas('add-to-do')) {
     $title = $request->post('title');
     $description = $request->post('description');
@@ -28,7 +29,10 @@ if ($request->postHas('add-to-do')) {
     // ];
     // $_SESSION['to_do'][] = $to_do_arr;
 
-    $request->redirect("patient-profile.php?patientid=$patient_id");
+    // $request->redirect("patient-profile.php?patientid=$patient_id");
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
 } elseif ($request->getHas('notify_id')) {
     $notify_id = $request->get('notify_id');
     $res = $notify_to_do->delete("id = $notify_id");

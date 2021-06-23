@@ -50,13 +50,15 @@ $(document).ready( function () {
 		e.preventDefault();
 
 		var url = form.attr('action');
+    var type = form.attr('method');
     console.log(url);
+    console.log(type);
 
-    var form_data = new FormData(form); //$("form").serialize();
+    var form_data = form.serialize(); //new FormData(form)
     console.log(form_data);
 
 		$.ajax({
-			type: 'POST',
+			type: type,
 			url: url,
 			data: form_data ,
 			success: function () {
@@ -66,21 +68,20 @@ $(document).ready( function () {
       contentType: false,
       processData: false
 		})
-	})
+	});
+
+  // == tab on reload
+  //   $('#myTab a').click(function(e) {
+  //       e.preventDefault();
+  //       $(this).tab('show');
+  //   });
+  
+  //   $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+  //       var id = $(e.target).attr("href").substr(1);
+  //       window.location.hash = id;
+  //   });
+  
+  //   var hash = window.location.hash;
+  //   $('#myTab a[hreft="' + hash + '"]').tab('show');
+
 });
-
-// $(function() {
-
-//   $('#myTab a').click(function(e) {
-//       e.preventDefault();
-//       $(this).tab('show');
-//   });
-
-//   $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
-//       var id = $(e.target).attr("href").substr(1);
-//       window.location.hash = id;
-//   });
-
-//   var hash = window.location.hash;
-//   $('#myTab a[hreft="' + hash + '"]').tab('show');
-// });

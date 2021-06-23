@@ -205,9 +205,9 @@ if ($session->has("which_user")) {
                                             <label for="floatingInput">Enter Your Specialist Serial Number </label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" name="patient_name"
-                                                placeholder="Enter your Specialist serial number">
-                                            <label for="floatingInput">Enter Your patient name </label>
+                                            <input type="text" class="form-control" name="patient_id"
+                                                placeholder="Enter Your patient ID">
+                                            <label for="floatingInput">Enter Your patient ID </label>
                                         </div>
                                     </div>
                                     <input type="submit" name="reg" value="Register" id="register"
