@@ -17,10 +17,10 @@ if ($request->postHas('dsm5_question')) {
     foreach ($_POST as $key => $record) {
         if (strpos($key, 'question_') !== false) {
             $question_id = str_replace('question_', '', $key);
-            echo $record ; 
+            echo $record;
             $dsm_results = $dsm_result_arr->insert(("dsm_question_result , 	dsm_question_id , pateint_id"), ("'$record' , $question_id , $patient_id"));
             var_dump($dsm_results);
         }
     }
-    $request->redirect("diagnosis.php");
+    $request->redirect("diagnosis.php?patientid=$patient_id");
 }

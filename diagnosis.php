@@ -32,6 +32,7 @@ $dsm5_question = new dsm5_question;
 $dsm_ques = $dsm5_question->selectAll();
 $dsm5_category = new dsm5_category;
 $dsm_cats = $dsm5_category->selectAll();
+
 // Scale
 $scale_questions = new scale_questions;
 $scale_ques = $scale_questions->selectAll();
@@ -325,15 +326,6 @@ require_once('include/navbar.php');
                                     </div>
                                 </div>
                                 <?php endforeach ?>
-                                <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                    <div class="col-md-10">
-
-                                        <input type="add comment" class="w-100">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" class="secondary-btn float-end btn">Add</button>
-                                    </div>
-                                </div>
                                 <button name="dsm5_question" type="submit"
                                     class="secondary-btn float-end btn mt-4">Done</button>
                             </form>
@@ -350,13 +342,12 @@ require_once('include/navbar.php');
                                     data-bs-target="#collapse<?= $scale_cat['id'] ?>" aria-expanded="true"
                                     aria-controls="collapseOne">
                                     <div class="col-lg">
-                                        <h6 class="m-0"><?= $scale_cat['scale_category'] ?></h6>
+                                        <h6 class="m-0"><?= $scale_cat['category'] ?></h6>
                                     </div>
                                 </div>
                                 <div id="collapse<?= $scale_cat['id'] ?>" class="accordion-collapse collapse"
                                     aria-labelledby="heading<?= $scale_cat['id'] ?>" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-
                                         <?php foreach ($scale_ques as $scale_que) : ?>
                                         <div class="bg-white rounded border-bottom p-4">
                                             <h6><?= $scale_que['scale_question'] ?></h6>
@@ -415,7 +406,6 @@ require_once('include/navbar.php');
                         <div class="accordion" id="accordionExample">
                             <div class="accordion" id="accordionExample">
                                 <form action="forms/lovaas/handle-lovaas.php" method="post">
-                                    <!-- <input type="hidden" name="patient_id" value="<?= $patient_id ?>"> -->
                                     <?php foreach ($lovaas_cats as $lovass_cat) : ?>
                                     <div class="accordion-item">
                                         <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"

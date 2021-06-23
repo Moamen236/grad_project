@@ -378,23 +378,22 @@ use Project\Classes\Models\to_do;
 // $run_query =  $schedule->query($query);
 // $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
-// echo "<pre>";
-// print_r($results_schedule);
-// echo "</pre>";
-
-// print_r($_SESSION);
-$schedule = new schedule;
-$specialist_id = $session->get('specialist_id');
-// $today = new DateTime('now');
-$notif_schedule = $schedule->selectAll();
-
-foreach ($notif_schedule as $key => $value) {
-    $date_time_arr = [
-        'schedule_date' => date('d/m/Y', strtotime($value['schedule_date_time'])),
-        'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
-    ];
-}
-
 echo "<pre>";
-print_r($notif_schedule);
+print_r($_SESSION);
 echo "</pre>";
+
+// $schedule = new schedule;
+// $specialist_id = $session->get('specialist_id');
+// // $today = new DateTime('now');
+// $notif_schedule = $schedule->selectAll();
+
+// foreach ($notif_schedule as $key => $value) {
+//     $date_time_arr = [
+//         'schedule_date' => date('d/m/Y', strtotime($value['schedule_date_time'])),
+//         'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
+//     ];
+// }
+
+// echo "<pre>";
+// print_r($notif_schedule);
+// echo "</pre>";
