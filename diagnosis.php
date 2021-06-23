@@ -282,58 +282,63 @@ require_once('include/navbar.php');
                     <!-- DSM 5 -->
                     <div class="tab-pane fade bg-box p-5" id="list-dsm" role="tabpanel" aria-labelledby="list-dsm-list">
                         <div class="accordion" id="accordionExample">
-                            <?php foreach ($dsm_cats as $dsm_cat) : ?>
-                            <div class="accordion-item">
-                                <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse<?= $dsm_cat['id'] ?>" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                    <div class="col-lg">
-                                        <h6 class="m-0"><?= $dsm_cat['dsm_category'] ?></h6>
-                                    </div>
-                                </div>
-                                <div id="collapse<?= $dsm_cat['id'] ?>" class="accordion-collapse collapse"
-                                    aria-labelledby="heading<?= $dsm_cat['id'] ?>" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-
-                                        <?php foreach ($dsm_ques as $dsm_que) : ?>
-                                        <div class="row bg-white rounded p-4 border-bottom">
-                                            <div class="col-md-10">
-                                                <?= $dsm_que['dsm5_questions'] ?>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Yes
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault2">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        No
-                                                    </label>
-                                                </div>
-                                            </div>
+                            <form action="forms/Dsm.php" method="post">
+                                <?php foreach ($dsm_cats as $dsm_cat) : ?>
+                                <div class="accordion-item">
+                                    <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse<?= $dsm_cat['id'] ?>" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                        <div class="col-lg">
+                                            <h6 class="m-0"><?= $dsm_cat['dsm_category'] ?></h6>
                                         </div>
-                                        <?php endforeach ?>
+                                    </div>
+                                    <div id="collapse<?= $dsm_cat['id'] ?>" class="accordion-collapse collapse"
+                                        aria-labelledby="heading<?= $dsm_cat['id'] ?>"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <?php $dsm_ques =  $dsm5_question->selectWhere("*", "dsm5_category_id =" . $dsm_cat['id']); ?>
+                                            <?php foreach ($dsm_ques as $dsm_que) : ?>
+                                            <div class="row bg-white rounded p-4 border-bottom">
+                                                <div class="col-md-10">
+                                                    <?= $dsm_que['dsm5_questions'] ?>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $dsm_que['id'] ?>" value="yes">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $dsm_que['id'] ?>" value="no">
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php endforeach ?>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php endforeach ?>
-                            <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                <div class="col-md-10">
+                                <?php endforeach ?>
+                                <div class="row bg-white rounded p-4 mb-4 mt-3 ">
+                                    <div class="col-md-10">
 
-                                    <input type="add comment" class="w-100">
+                                        <input type="add comment" class="w-100">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="secondary-btn float-end btn">Add</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="secondary-btn float-end btn">Add</button>
-                                </div>
-                            </div>
-                            <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
+                                <button name="dsm5_question" type="submit"
+                                    class="secondary-btn float-end btn mt-4">Done</button>
+                            </form>
                         </div>
+
                     </div>
                     <!-- Scale -->
                     <div class="tab-pane fade bg-box p-5" id="list-scale" role="tabpanel"
@@ -358,29 +363,30 @@ require_once('include/navbar.php');
                                             <div class="row justify-content-center align-items-center text-center p-3">
                                                 <div class="col-md-3">
                                                     <div class="form-check form-check-inline ">
-                                                        <input class="form-check-input rounded-circle" type="checkbox"
-                                                            id="inlineCheckbox1" value="option1">
-                                                        <label class="form-check-label">0</label>
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="0">
+                                                        <label class="form-check-label"
+                                                            for="flexRadioDefault1">0</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-check form-check-inline ">
-                                                        <input class="form-check-input rounded-circle" type="checkbox"
-                                                            id="inlineCheckbox1" value="option1">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="1">
                                                         <label class="form-check-label" for="inlineCheckbox1">1</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-check form-check-inline ">
-                                                        <input class="form-check-input rounded-circle" type="checkbox"
-                                                            id="inlineCheckbox1" value="option1">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="2">
                                                         <label class="form-check-label" for="inlineCheckbox1">2</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-check form-check-inline ">
-                                                        <input class="form-check-input rounded-circle" type="checkbox"
-                                                            id="inlineCheckbox1" value="option1">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="3">
                                                         <label class="form-check-label" for="inlineCheckbox1">3</label>
                                                     </div>
                                                 </div>

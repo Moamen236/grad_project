@@ -1,13 +1,26 @@
 <?php
 
-use Project\Classes\Models\dsm5_category;
-use Project\Classes\Models\dsm_result;
 use Project\Classes\Models\dsm5_question;
+use Project\Classes\Models\dsm_result;
 
-$dsm5_question = new dsm5_question;
-$dsm_ques = $dsm5_question->selectAll();
-$dsm5_category = new dsm5_category;
-$dsm_cats = $dsm5_category->selectAll();
+require_once("../app.php");
 
+$dsm5_questions = new dsm5_question;
+$dsm5_question_arr = $dsm5_questions->selectAll();
 
+$dsm_result_arr = new dsm_result;
 
+if ($request->postHas('dsm5_question')) {
+
+    $patient_id = $session->get('patient_id');
+
+    foreach ($_POST as $key => $record) {
+        if (strpos($key, 'question_') !== false) {
+            $question_id = str_replace('question_', '', $key);
+            echo $record ; 
+            $dsm_results = $dsm_result_arr->insert(("dsm_question_result , 	dsm_question_id , pateint_id"), ("'$record' , $question_id , $patient_id"));
+            var_dump($dsm_results);
+        }
+    }
+    $request->redirect("diagnosis.php");
+}
