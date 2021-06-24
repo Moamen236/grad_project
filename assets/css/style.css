@@ -1084,7 +1084,7 @@ footer .social ul li a:hover {
 .list-arr .nav-tabs .nav-link {
 	position: relative;
 	color: #eaf3f6;
-	border-color: #00628b;
+	/* border-color: #00628b; */
 	background-color: #368ba9;
 	font-size: 20px;
 	font-weight: 600;

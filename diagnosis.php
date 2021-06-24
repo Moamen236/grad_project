@@ -228,15 +228,6 @@ require_once('include/navbar.php');
                                 </div>
                             </div>
                             <?php endfor ?>
-                            <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                <div class="col-md-10">
-
-                                    <input type="add comment" class="w-100">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="secondary-btn float-end btn">Add</button>
-                                </div>
-                            </div>
                         </div>
                         <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
                     </div>
@@ -268,22 +259,13 @@ require_once('include/navbar.php');
                                 </div>
                             </div>
                             <?php endfor ?>
-                            <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                <div class="col-md-10">
-
-                                    <input type="add comment" class="w-100">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="secondary-btn float-end btn">Add</button>
-                                </div>
-                            </div>
                         </div>
                         <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
                     </div>
                     <!-- DSM 5 -->
                     <div class="tab-pane fade bg-box p-5" id="list-dsm" role="tabpanel" aria-labelledby="list-dsm-list">
                         <div class="accordion" id="accordionExample">
-                            <form action="forms/Dsm.php" method="post">
+                            <form action="handle/Dsm.php" method="post">
                                 <?php foreach ($dsm_cats as $dsm_cat) : ?>
                                 <div class="accordion-item">
                                     <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
@@ -388,15 +370,6 @@ require_once('include/navbar.php');
                                 </div>
                             </div>
                             <?php endforeach ?>
-                            <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                <div class="col-md-10">
-
-                                    <input type="add comment" class="w-100">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="secondary-btn float-end btn">Add</button>
-                                </div>
-                            </div>
                             <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
                         </div>
                     </div>
@@ -404,73 +377,62 @@ require_once('include/navbar.php');
                     <div class="tab-pane fade bg-box p-5" id="list-lovaas" role="tabpanel"
                         aria-labelledby="list-lovaas-list">
                         <div class="accordion" id="accordionExample">
-                            <div class="accordion" id="accordionExample">
-                                <form action="forms/lovaas/handle-lovaas.php" method="post">
-                                    <?php foreach ($lovaas_cats as $lovass_cat) : ?>
-                                    <div class="accordion-item">
-                                        <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse<?= $lovass_cat['id'] ?>" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            <div class="col-lg">
-                                                <h6 class="m-0"><?= $lovass_cat['category'] ?></h6>
-                                            </div>
+                            <form action="handle/lovaas.php" method="post">
+                                <?php foreach ($lovaas_cats as $lovass_cat) : ?>
+                                <div class="accordion-item">
+                                    <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse<?= $lovass_cat['id'] ?>" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                        <div class="col-lg">
+                                            <h6 class="m-0"><?= $lovass_cat['category'] ?></h6>
                                         </div>
-                                        <div id="collapse<?= $lovass_cat['id'] ?>" class="accordion-collapse collapse"
-                                            aria-labelledby="heading<?= $lovass_cat['id'] ?>"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <?php $lovaas_questions_results =  $lovaas_questions->selectWhere("id , lovass_questions", "lovaas_category_id =" . $lovass_cat['id']); ?>
-                                                <?php foreach ($lovaas_questions_results as $key => $lovaas_result) : ?>
-                                                <div class="row bg-white rounded p-4 border-bottom">
-                                                    <div class="row">
-                                                        <?= $lovaas_result['lovass_questions'] ?>
+                                    </div>
+                                    <div id="collapse<?= $lovass_cat['id'] ?>" class="accordion-collapse collapse"
+                                        aria-labelledby="heading<?= $lovass_cat['id'] ?>"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <?php $lovaas_questions_results =  $lovaas_questions->selectWhere("id , lovass_questions", "lovaas_category_id =" . $lovass_cat['id']); ?>
+                                            <?php foreach ($lovaas_questions_results as $key => $lovaas_result) : ?>
+                                            <div class="row bg-white rounded p-4 border-bottom">
+                                                <div class="row">
+                                                    <?= $lovaas_result['lovass_questions'] ?>
+                                                </div>
+                                                <div
+                                                    class="row justify-content-around align-items-center text-center p-3">
+                                                    <div class="col-lg-2 form-check ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
+                                                            value="good">
+                                                        <label class="form-check-label" for="radio1">
+                                                            good
+                                                        </label>
                                                     </div>
-                                                    <div
-                                                        class="row justify-content-around align-items-center text-center p-3">
-                                                        <div class="col-lg-2 form-check ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
-                                                                value="good">
-                                                            <label class="form-check-label" for="radio1">
-                                                                good
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-lg-2 form-check ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
-                                                                value="medium">
-                                                            <label class="form-check-label" for="radio1">
-                                                                medium
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-lg-2 form-check ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
-                                                                value="weak">
-                                                            <label class="form-check-label" for="radio1">
-                                                                weak
-                                                            </label>
-                                                        </div>
+                                                    <div class="col-lg-2 form-check ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
+                                                            value="medium">
+                                                        <label class="form-check-label" for="radio1">
+                                                            medium
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2 form-check ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
+                                                            value="weak">
+                                                        <label class="form-check-label" for="radio1">
+                                                            weak
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <?php endforeach ?>
                                             </div>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
-                                    <?php endforeach ?>
-                                    <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                        <div class="col-md-10">
-                                            <input type="text" class="w-100">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <input type="submit" name="add_comment" value="Add"
-                                                class="secondary-btn float-end btn">
-                                        </div>
-                                    </div>
-                                    <button type="submit" name="lovaas_questions"
-                                        class="secondary-btn btn float-end  mt-4">Done</button>
-                                </form>
-                            </div>
+                                </div>
+                                <?php endforeach ?>
+                                <button type="submit" name="lovaas_questions"
+                                    class="secondary-btn btn float-end  mt-4">Done</button>
+                            </form>
                         </div>
                     </div>
                     <!-- Schedule -->
@@ -479,22 +441,16 @@ require_once('include/navbar.php');
                         <div class="diagnosis-schedule p-5">
                             <h2 class="text-blue"> Add New Schedule</h2>
                             <div class="line bg-yellow"></div>
-                            <form action="#">
+                            <form action="handle/schedule.php">
                                 <div class="row align-items-end pt-4">
                                     <div class="col-lg-11">
                                         <div id="duplicater" class="row pt-3">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-12">
                                                 <div class="input">
-                                                    <label class="form-label dark-text f-800">Date</label>
-                                                    <input type="date" class="form-control"
-                                                        id="exampleFormControlInput1" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="input">
-                                                    <label class="form-label dark-text f-800">Time</label>
-                                                    <input type="time" class="form-control"
-                                                        id="exampleFormControlInput1" required>
+                                                    <label class="form-label dark-text f-800">Date &
+                                                        time</label>
+                                                    <input type="datetime-local" id="datetime" name="datetime_0"
+                                                        class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -505,7 +461,8 @@ require_once('include/navbar.php');
                                             <i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <button type="submit" class="secondary-btn btn float-end mt-4">Done</button>
+                                <button type="submit" name="add-schedule"
+                                    class="secondary-btn btn float-end mt-4">Done</button>
                             </form>
                         </div>
                     </div>

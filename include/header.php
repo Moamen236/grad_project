@@ -16,11 +16,12 @@
     <link rel="stylesheet" href="<?= URL; ?>assets/css/animate.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/slick.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/slick-theme.css">
+    <link rel="stylesheet" href="<?= URL; ?>assets/css/theme8.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/style.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/responsive.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-
+    <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
 </head>
 
 <body>

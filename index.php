@@ -91,7 +91,7 @@ if ($session->has("which_user")) {
                                         <?php endif ?>
                                         <h3 class="my-4 fw-bold text-white wow animated fadeIn" data-wow-delay="0.3s"
                                             data-wow-duration="1s">Login to your Account</h3>
-                                        <form method="POST" action="forms/handle-login.php">
+                                        <form method="POST" action="handle/login.php">
                                             <div class="form-floating mb-3 wow animated fadeInDown"
                                                 data-wow-delay="0.3s" data-wow-duration="1.4s">
                                                 <input type="email" class="form-control" name="email"
@@ -151,7 +151,7 @@ if ($session->has("which_user")) {
                                 <?php $session->remove('sucsses_reg');
                                 endif ?>
                                 <h3 class="my-4 fw-bold text-white">Create a new Account</h3>
-                                <form method="POST" action="forms/handle-reg.php">
+                                <form method="POST" action="handle/reg.php">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 wow animated fadeInDown"

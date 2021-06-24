@@ -75,7 +75,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="forms/add-to-do.php" method="post" id="form">
+                                    <form action="handle/add-to-do.php" method="post" id="form">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <input type="text" name="title" class="form-control"
@@ -129,7 +129,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form action="forms/schedule.php" method="post">
+                                        <form action="handle/schedule.php" method="post">
                                             <div class="modal-body">
                                                 <div class="row align-items-end ">
                                                     <div class="col-lg-10">
@@ -142,14 +142,6 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                                                                         name="datetime_0" class="form-control" required>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="col-lg-6">
-                                                                <div class="input">
-                                                                    <label
-                                                                        class="form-label dark-text f-800">Time</label>
-                                                                    <input type="time" id="time" name="time_0"
-                                                                        class="form-control" required>
-                                                                </div>
-                                                            </div> -->
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-1 my-3">
@@ -306,7 +298,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                                     <?php } ?>
                                     <td data-bs-toggle="modal" data-bs-target="#Modal_edit_<?= $to_do['id'] ?>"
                                         style="cursor: pointer;"><i class="far fa-edit light-green fa-lg"></i></td>
-                                    <td><a href="forms/add-to-do.php?to_do_id=<?= $to_do['id'] ?>"><i
+                                    <td><a href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>"><i
                                                 class="far fa-trash-alt red fa-lg"></i></a></td>
                                 </tr>
                                 <!-- Modal for To do -->
@@ -337,7 +329,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="forms/add-to-do.php" method="POST">
+                                            <form action="handle/add-to-do.php" method="POST">
                                                 <div class="modal-body">
                                                     <input type="hidden" name="to_do_id" value="<?= $to_do['id'] ?>">
                                                     <div class="mb-3">

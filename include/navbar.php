@@ -3,20 +3,41 @@ if (!$session->get('which_user')) {
     $request->redirect('index.php');
 }
 
-use Project\Classes\Models\notify_to_do;
 use Project\Classes\Models\patient;
 use Project\Classes\Models\schedule;
+use Project\Classes\Models\notify_to_do;
+use Project\Classes\Models\notify_schedule;
 
 $patients = new patient;
 $schedule = new schedule;
 $notify_to_do = new notify_to_do;
+$notify_schedule = new notify_schedule;
 ?>
 
 <?php if ($session->get('which_user') == 'specialist') { ?>
 <?php
     $specialist_id = $session->get('specialist_id');
-    $today = date("Y-m-d");
-    $notif_schedule = $schedule->selectWhere("*", "schedule_date = '$today' AND specialist_id = $specialist_id");
+    $notif_schedule = $schedule->selectWhere("*", "specialist_id = $specialist_id");
+    $date_time_arr = [];
+    $today = date("d-m-Y");
+    foreach ($notif_schedule as $key => $value) {
+        $date_time_arr[] = [
+            'patient_id' => $value['patient_id'],
+            'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
+            'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
+        ];
+    }
+
+    $notify_schedule = [];
+    foreach ($date_time_arr as $value) {
+        if ($value['schedule_date'] == $today) {
+            $notify_schedule[] = [
+                'patient_id' => $value['patient_id'],
+                'schedule_date' => $value['schedule_date'],
+                'schedule_time' => $value['schedule_time']
+            ];
+        }
+    }
     ?>
 <nav class="navbar navbar-expand-lg bg-nav">
     <div class="container-fluid">
@@ -49,15 +70,15 @@ $notify_to_do = new notify_to_do;
                 aria-expanded="false">
                 <i class="fas fa-bell fa-lg"></i>
                 <div class="number text-white">
-                    <span><?= count($notif_schedule) ?></span>
+                    <span><?= count($notify_schedule) ?></span>
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="dropdownMenuLink">
-                <?php if (!empty($notif_schedule)) { ?>
-                <?php foreach ($notif_schedule as $notif) { ?>
-                <?php $notif_patient_id = $notif['patient_id'];
-                            $notif_patients = $patients->selectWhere("*", "id = $notif_patient_id"); ?>
-                <?php foreach ($notif_patients as $patient) { ?>
+                <?php if (!empty($notify_schedule)) { ?>
+                <?php foreach ($notify_schedule as $notify) { ?>
+                <?php $notify_patient_id = $notify['patient_id'];
+                            $notify_patients = $patients->selectWhere("*", "id = $notify_patient_id"); ?>
+                <?php foreach ($notify_patients as $patient) { ?>
                 <li class="dropdown-item">
                     <div class="item py-2">
                         <span class="badge bg-light text-dark">Today session</span>
@@ -65,11 +86,11 @@ $notify_to_do = new notify_to_do;
                                     href="<?= URL ?>patient-profile.php?patientid=<?= $patient['id'] ?>"
                                     class="dark-text"><?= $patient['name'] ?></a></strong>
                         </p>
-                        <?php if ($notif['patient_id'] == $patient['id']) { ?>
+                        <?php if ($notify['patient_id'] == $patient['id']) { ?>
                         <span
-                            class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notif['schedule_date'])); ?></span>
+                            class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notify['schedule_date'])); ?></span>
                         <span
-                            class="badge bg-light text-dark"><?= date('h:i a', strtotime($notif['schedule_time'])); ?></span>
+                            class="badge bg-light text-dark"><?= date('h:i a', strtotime($notify['schedule_time'])); ?></span>
                         <?php } ?>
                     </div>
                 </li>
@@ -91,7 +112,7 @@ $notify_to_do = new notify_to_do;
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="forms/logout.php">log out</a></li>
+                <li><a class="dropdown-item" href="handle/logout.php">log out</a></li>
             </ul>
         </div>
         <!-- ==Profile dropdown== -->
@@ -100,7 +121,30 @@ $notify_to_do = new notify_to_do;
 
 <?php } elseif ($session->get('which_user') == 'caregiver') { ?>
 <?php $caregiver_id = $session->get('caregiver_id');
-    $get_notify = $notify_to_do->selectWhere("*", "caregiver_id = $caregiver_id"); ?>
+    $get_notify = $notify_to_do->selectWhere("*", "caregiver_id = $caregiver_id");
+    $get_notify_schedule = $notify_schedule->selectWhere("*", "caregiver_id = $caregiver_id");
+
+    $date_time_arr = [];
+    $today = date("d-m-Y");
+    foreach ($notify_schedule as $key => $value) {
+        $date_time_arr[] = [
+            'patient_id' => $value['patient_id'],
+            'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
+            'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
+        ];
+    }
+
+    // $notify_caregiver = [];
+    // foreach ($date_time_arr as $value) {
+    //     if ($value['schedule_date'] == $today) {
+    //         $notify_caregiver[] = [
+    //             'patient_id' => $value['patient_id'],
+    //             'schedule_date' => $value['schedule_date'],
+    //             'schedule_time' => $value['schedule_time']
+    //         ];
+    //     }
+    // }
+    ?>
 <nav class="navbar navbar-expand-lg bg-nav">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -133,20 +177,41 @@ $notify_to_do = new notify_to_do;
                 aria-expanded="false">
                 <i class="fas fa-bell fa-lg"></i>
                 <div class="number text-white">
-                    <span><?= count($get_notify) ?></span>
+                    <span><?= count($get_notify) + count($date_time_arr) ?></span>
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="dropdownMenuLink">
-                <?php if (!(empty($get_notify))) { ?>
-                <?php foreach ($get_notify as $key => $notify) { ?>
+                <?php if (!(empty($get_notify)) || !empty($date_time_arr)) { ?>
+                <?php foreach ($date_time_arr as $notify_schedule) { ?>
+                <?php $patient_id = $notify_schedule['patient_id'];
+                            $patient = $patients->selectId("name", "$patient_id") ?>
+                <li class="dropdown-item">
+                    <div class="item py-2">
+                        <span class="badge bg-light text-dark">New session</span>
+                        <p class="my-1">You have new session for <strong><?= $patient['name'] ?></strong>
+                        </p>
+                        <span
+                            class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notify_schedule['schedule_date'])); ?></span>
+                        <span
+                            class="badge bg-light text-dark"><?= date('h:i a', strtotime($notify_schedule['schedule_time'])); ?></span>
+                    </div>
+                </li>
+                <li>
+                    <hr class="dropdown-divider m-0">
+                </li>
+                <?php } ?>
+                <?php foreach ($get_notify as $notify) { ?>
+                <?php $patient_id = $notify['patient_id'];
+                            $patient = $patients->selectId("name", "$patient_id") ?>
                 <li class="dropdown-item py-3">
-                    <span class="badge bg-light text-dark">To DO</span>
+                    <span class="badge bg-dark">To DO</span>
+                    <span
+                        class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notify['created_at'])); ?></span>
+                    <span class="badge bg-light text-dark"><?= $patient['name'] ?></span>
                     <p class="my-1">Your have new mission from your specialist </p>
                     <p class="my-1"><strong><?= $notify['to_do_title'] ?></strong></p>
-                    <?php $CurPageURL = $_SERVER['REQUEST_URI']; ?>
-                    <a href="forms/add-to-do.php?notify_id=<?= $notify['id'] ?>&CurPageURL=<?= $CurPageURL ?>"
-                        class="text-end "><span class="badge bg-light light-green"><i
-                                class="fas fa-check-double me-2"></i>Mark as read
+                    <a href="handle/add-to-do.php?notify_id=<?= $notify['id'] ?>" class="text-end "><span
+                            class="badge bg-light light-green"><i class="fas fa-check-double me-2"></i>Mark as read
                         </span></a>
                 </li>
                 <li>
@@ -166,7 +231,7 @@ $notify_to_do = new notify_to_do;
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="forms/logout.php">log out</a></li>
+                <li><a class="dropdown-item" href="handle/logout.php">log out</a></li>
             </ul>
         </div>
     </div>
@@ -205,10 +270,9 @@ $notify_to_do = new notify_to_do;
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="forms/logout.php">log out</a></li>
+                <li><a class="dropdown-item" href="handle/logout.php">log out</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <?php } ?>
-use Project\Classes\Models\schedule;use Project\Classes\Models\patient;

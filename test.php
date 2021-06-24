@@ -44,11 +44,6 @@
 // print_r($v->getErrors());
 // echo "</pre>";
 
-
-use Project\Classes\Request;
-
-require_once('app.php');
-
 // $lovaas = new lovaas_question;
 // $result =  $lovaas->selectAll();
 // echo "<pre>";
@@ -71,21 +66,26 @@ require_once('app.php');
 // $result = $request->get("id");
 // echo $result;
 
+require_once('app.php');
+
+use Project\Classes\Request;
 use Project\Classes\Models\adir;
-use Project\Classes\Models\long_term;
 use Project\Classes\Models\plan;
+use Project\Classes\Models\to_do;
 use Project\Classes\Models\Users;
 use Project\Classes\Models\tables;
 use Project\Classes\Models\patient;
 use Project\Classes\Models\schedule;
+use Project\Classes\Models\long_term;
 use Project\Classes\Models\specialist;
+use Project\Classes\Models\notify_to_do;
 use Project\Classes\Models\weknees_point;
 use Project\Classes\Validation\Validator;
 use Project\Classes\Models\lovaas_results;
 use Project\Classes\Models\strength_point;
 use Project\Classes\Models\lovaas_category;
+use Project\Classes\Models\notify_schedule;
 use Project\Classes\Models\lovaas_questions;
-use Project\Classes\Models\to_do;
 
 // $db = new adir;
 // $result = $db->selectAll();
@@ -378,22 +378,100 @@ use Project\Classes\Models\to_do;
 // $run_query =  $schedule->query($query);
 // $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
 
 // $schedule = new schedule;
 // $specialist_id = $session->get('specialist_id');
-// // $today = new DateTime('now');
-// $notif_schedule = $schedule->selectAll();
-
+// $notif_schedule = $schedule->selectWhere("*", "specialist_id = $specialist_id");
+// $date_time_arr = [];
+// $today = date("d-m-Y");
 // foreach ($notif_schedule as $key => $value) {
-//     $date_time_arr = [
-//         'schedule_date' => date('d/m/Y', strtotime($value['schedule_date_time'])),
+//     $date_time_arr[] = [
+//         'patient_id' => $value['patient_id'],
+//         'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
 //         'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
 //     ];
 // }
 
+// $today_arr = [];
+// foreach ($date_time_arr as $value) {
+//     if ($value['schedule_date'] == $today) {
+//         $today_arr[] = [
+//             'patient_id' => $value['patient_id'],
+//             'schedule_date' => $value['schedule_date'],
+//             'schedule_time' => $value['schedule_time']
+//         ];
+//     }
+// }
+
 // echo "<pre>";
-// print_r($notif_schedule);
+// print_r($today_arr);
 // echo "</pre>";
+// $notify_to_do = new notify_to_do;
+// $patient = new patient;
+// $caregiver_id = $session->get('caregiver_id');
+// $get_notify = $notify_to_do->selectWhere("*", "caregiver_id = $caregiver_id");
+
+// // echo "<pre>";
+// // print_r($get_notify);
+// // echo "</pre>";
+
+// foreach ($get_notify as $patient) {
+//     $patient_id =  $patient['patient_id'] . "<br>";
+//     $patient_select = $patient->selectWhere("*", "id = $patient_id");
+// }
+// echo "<pre>";
+// print_r($patient_select);
+// echo "</pre>";
+
+$notify_schedule = new notify_schedule;
+$get_notify_schedule = $notify_schedule->selectWhere("*", "caregiver_id = 9");
+
+$date_time_arr = [];
+$today = date("d-m-Y");
+foreach ($get_notify_schedule as $key => $value) {
+    $date_time_arr[] = [
+        'patient_id' => $value['patient_id'],
+        'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
+        'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
+    ];
+}
+
+// $notify_caregiver = [];
+// foreach ($date_time_arr as $value) {
+//     if ($value['schedule_date'] == $today) {
+//         $notify_caregiver[] = [
+//             'patient_id' => $value['patient_id'],
+//             'schedule_date' => $value['schedule_date'],
+//             'schedule_time' => $value['schedule_time']
+//         ];
+//     }
+// }
+$patients = new patient;
+
+foreach ($date_time_arr as $notify_schedule) {
+    $patient_id = $notify_schedule['patient_id'];
+    $patient = $patients->selectId("name", "$patient_id")
+?>
+<li class="dropdown-item">
+    <div class="item py-2">
+        <span class="badge bg-light text-dark">New session</span>
+        <p class="my-1">You have new session for <strong><?= $patient['name'] ?></strong>
+        </p>
+        <span
+            class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notify_schedule['schedule_date'])); ?></span>
+        <span
+            class="badge bg-light text-dark"><?= date('h:i a', strtotime($notify_schedule['schedule_time'])); ?></span>
+    </div>
+</li>
+<li>
+    <hr class="dropdown-divider m-0">
+</li>
+<?php } ?>
+
+<!-- echo "
+<pre>";
+print_r($date_time_arr);
+echo "</pre>"; -->

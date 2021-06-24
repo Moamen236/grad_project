@@ -158,7 +158,7 @@ require_once('include/navbar.php');
                                             <?= $to_do['to_do_details'] ?>
                                         </div>
                                         <div class="badge float-end mb-2">
-                                            <a href="forms/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&caregiver_id=<?= $to_do['caregiver_id'] ?>"
+                                            <a href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&caregiver_id=<?= $to_do['caregiver_id'] ?>"
                                                 class="btn secondary-btn">Finish The Mission</a>
                                         </div>
                                         <div class="clearfix"></div>
@@ -201,14 +201,27 @@ require_once('include/navbar.php');
                                         <th>Specialist Name</th>
                                         <th>Session Date</th>
                                         <th>Session Time</th>
+                                        <th>Add to Calendar </th>
                                     </tr>
                                 </thead>
                                 <tbody id="cSchedule">
                                     <?php foreach ($select_schedule as $schedule) : ?>
                                     <tr>
                                         <td><?= $schedule['name'] ?></td>
-                                        <td><?= $schedule['schedule_date'] ?></td>
-                                        <td><?= $schedule['schedule_time'] ?></td>
+                                        <td><?= date('d/m/Y', strtotime($schedule['schedule_date_time'])); ?></td>
+                                        <td><?= date('h:i a', strtotime($schedule['schedule_date_time'])); ?></td>
+                                        <td>
+                                            <div title="Add to Calendar" class="addeventatc" data-styling="none">
+                                                <img src="assets/gfx/icon-calendar-t1.svg" alt="" style="width:18px;" />
+                                                <span class="start"><?= $schedule['schedule_date_time'] ?></span>
+                                                <span class="timezone">Africa/Cairo</span>
+                                                <span class="title">Session
+                                                    <?= date('d/m/Y', strtotime($schedule['schedule_date_time'])); ?></span>
+                                                <span class="description">New Session for your patient </span>
+                                                <span class="organizer"><?= $schedule['name'] ?></span>
+                                                <span class="all_day_event">false</span>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <?php endforeach ?>
                                 </tbody>

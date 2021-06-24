@@ -122,7 +122,7 @@ require_once('include/navbar.php');
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form action="forms/plan/add-new.php" method="post">
+                                                    <form action="handle/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="patient_id"
@@ -162,7 +162,7 @@ require_once('include/navbar.php');
 
                                             <td class="text-center">
                                                 <a
-                                                    href="forms/plan/delete-topic.php?delete_topic_strength=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
+                                                    href="handle/plan/delete-topic.php?delete_topic_strength=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
                                                         class="fas fa-trash-alt red fa-lg"></i></a>
                                             </td>
 
@@ -179,7 +179,7 @@ require_once('include/navbar.php');
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form action="forms/plan/edit-topic.php" method="post">
+                                                        <form action="handle/plan/edit-topic.php" method="post">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
@@ -226,7 +226,7 @@ require_once('include/navbar.php');
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form action="forms/plan/add-new.php" method="post">
+                                                    <form action="handle/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="patient_id"
@@ -266,7 +266,7 @@ require_once('include/navbar.php');
 
                                             <td class="text-center">
                                                 <a
-                                                    href="forms/plan/delete-topic.php?delete_topic_weaknees=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
+                                                    href="handle/plan/delete-topic.php?delete_topic_weaknees=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
                                                         class="fas fa-trash-alt red fa-lg"></i></a>
                                             </td>
 
@@ -282,7 +282,7 @@ require_once('include/navbar.php');
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form action="forms/plan/edit-topic.php" method="post">
+                                                        <form action="handle/plan/edit-topic.php" method="post">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
@@ -354,7 +354,7 @@ require_once('include/navbar.php');
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form action="forms/plan/add-new.php" method="post">
+                                                    <form action="handle/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="patient_id"
@@ -394,7 +394,7 @@ require_once('include/navbar.php');
 
                                             <td class="text-center">
                                                 <a
-                                                    href="forms/plan/delete-topic.php?delete_long_term=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
+                                                    href="handle/plan/delete-topic.php?delete_long_term=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
                                                         class="fas fa-trash-alt red fa-lg"></i></a>
                                             </td>
 
@@ -411,7 +411,7 @@ require_once('include/navbar.php');
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form action="forms/plan/edit-topic.php" method="post">
+                                                        <form action="handle/plan/edit-topic.php" method="post">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
@@ -458,7 +458,7 @@ require_once('include/navbar.php');
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form action="forms/plan/add-new.php" method="post">
+                                                    <form action="handle/plan/add-new.php" method="post">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="patient_id"
