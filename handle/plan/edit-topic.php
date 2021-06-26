@@ -30,4 +30,10 @@ if ($request->post('edit_topic_strength')) {
     $topic  = $request->post('topic');
     $results =  $long_term->update("long_term_discription = '$topic'", "id = $question_id");
     $request->redirect("plan.php?patientid=$patient_id");
+} elseif ($request->post('edit_short_term')) {
+    $question_id = $request->post('question_id');
+    $patient_id = $request->post('patient_id');
+    $topic  = $request->post('topic');
+    $results =  $short_term->update("short_term_description = '$topic'", "id = $question_id");
+    $request->redirect("plan.php?patientid=$patient_id");
 }

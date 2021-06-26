@@ -27,4 +27,9 @@ if ($request->getHas('delete_topic_strength') && $request->getHas('patient_id'))
     $patient_id = $request->get('patient_id');
     $result = $long_term->delete("id = $topic_id");
     $request->redirect("plan.php?patientid=$patient_id");
+} elseif ($request->getHas('delete_short_term') && $request->getHas('patient_id')) {
+    $topic_id = $request->get('delete_short_term');
+    $patient_id = $request->get('patient_id');
+    $result = $short_term->delete("id = $topic_id");
+    $request->redirect("plan.php?patientid=$patient_id");
 }

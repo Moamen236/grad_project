@@ -29,7 +29,7 @@ if ($request->postHas('add-to-do')) {
     // ];
     // $_SESSION['to_do'][] = $to_do_arr;
 
-    // $request->redirect("patient-profile.php?patientid=$patient_id");
+    $request->redirect("patient-profile.php?patientid=$patient_id");
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";

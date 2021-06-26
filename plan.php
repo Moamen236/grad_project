@@ -157,7 +157,7 @@ require_once('include/navbar.php');
                                         <tr>
                                             <td><?= $point['strength_point_description'] ?></td>
                                             <td class="text-center"><a href="" data-bs-toggle="modal"
-                                                    data-bs-target="#Modal<?= $key ?>"><i
+                                                    data-bs-target="#Modal<?= $point['id'] ?>"><i
                                                         class="fas fa-edit light-green fa-lg"></i></a></td>
 
                                             <td class="text-center">
@@ -167,14 +167,13 @@ require_once('include/navbar.php');
                                             </td>
 
                                             <!-- Modal Edit-->
-                                            <div class="modal fade" id="Modal<?= $key ?>" tabindex="-1"
-                                                aria-labelledby="ModalLabel<?= $key ?>" aria-hidden="true">
+                                            <div class="modal fade" id="Modal<?= $point['id'] ?>" tabindex="-1"
+                                                aria-labelledby="ModalLabel<?= $point['id'] ?>" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="ModalLabel<?= $key ?>">
-                                                                Edit
-                                                                Topic
+                                                            <h5 class="modal-title" id="ModalLabel<?= $point['id'] ?>">
+                                                                Edit Topic
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
@@ -261,7 +260,7 @@ require_once('include/navbar.php');
                                         <tr>
                                             <td><?= $point['weeknees_point_description'] ?></td>
                                             <td class="text-center"><a href="" data-bs-toggle="modal"
-                                                    data-bs-target="#Modal<?= $weak ?>"><i
+                                                    data-bs-target="#Modal<?= $point['id'] ?>"><i
                                                         class="fas fa-edit light-green fa-lg"></i></a></td>
 
                                             <td class="text-center">
@@ -271,12 +270,12 @@ require_once('include/navbar.php');
                                             </td>
 
                                             <!-- Modal Edit-->
-                                            <div class="modal fade" id="Modal<?= $weak ?>" tabindex="-1"
-                                                aria-labelledby="ModalLabel<?= $weak ?>" aria-hidden="true">
+                                            <div class="modal fade" id="Modal<?= $point['id'] ?>" tabindex="-1"
+                                                aria-labelledby="ModalLabel<?= $point['id'] ?>" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="ModalLabel<?= $weak ?>">
+                                                            <h5 class="modal-title" id="ModalLabel<?= $point['id'] ?>">
                                                                 Edit Topic
                                                             </h5>
                                                             <button type="button" class="btn-close"
@@ -289,7 +288,7 @@ require_once('include/navbar.php');
                                                                 <input type="hidden" name="question_id"
                                                                     value="<?= $point['id'] ?>">
                                                                 <textarea class="w-100 p-3" name="topic" cols="30"
-                                                                    rows="10"><?= $point['strength_point_description'] ?></textarea>
+                                                                    rows="10"><?= $point['weeknees_point_description'] ?></textarea>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input type="submit" name="edit_topic_weaknees"
@@ -389,24 +388,23 @@ require_once('include/navbar.php');
                                         <tr>
                                             <td><?= $term['long_term_discription'] ?></td>
                                             <td class="text-center"><a href="" data-bs-toggle="modal"
-                                                    data-bs-target="#Modal<?= $key ?>"><i
+                                                    data-bs-target="#Modal<?= $term['id'] ?>"><i
                                                         class="fas fa-edit light-green fa-lg"></i></a></td>
 
                                             <td class="text-center">
                                                 <a
-                                                    href="handle/plan/delete-topic.php?delete_long_term=<?= $point['id'] ?>&patient_id=<?= $patient_id ?>"><i
+                                                    href="handle/plan/delete-topic.php?delete_long_term=<?= $term['id'] ?>&patient_id=<?= $patient_id ?>"><i
                                                         class="fas fa-trash-alt red fa-lg"></i></a>
                                             </td>
 
                                             <!-- Modal Edit-->
-                                            <div class="modal fade" id="Modal<?= $key ?>" tabindex="-1"
-                                                aria-labelledby="ModalLabel<?= $key ?>" aria-hidden="true">
+                                            <div class="modal fade" id="Modal<?= $term['id'] ?>" tabindex="-1"
+                                                aria-labelledby="ModalLabel<?= $term['id'] ?>" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="ModalLabel<?= $key ?>">
-                                                                Edit
-                                                                Topic
+                                                            <h5 class="modal-title" id="ModalLabel<?= $term['id'] ?>">
+                                                                Edit Topic
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
@@ -416,9 +414,9 @@ require_once('include/navbar.php');
                                                                 <input type="hidden" name="patient_id"
                                                                     value="<?= $patient_id ?>">
                                                                 <input type="hidden" name="question_id"
-                                                                    value="<?= $point['id'] ?>">
+                                                                    value="<?= $term['id'] ?>">
                                                                 <textarea class="w-100 p-3" name="topic" cols="30"
-                                                                    rows="10"><?= $point['strength_point_description'] ?></textarea>
+                                                                    rows="10"><?= $term['long_term_discription'] ?></textarea>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input type="submit" name="edit_long_term"
@@ -492,8 +490,46 @@ require_once('include/navbar.php');
                                         <?php foreach ($select_short_term as $term) : ?>
                                         <tr>
                                             <td><?= $term['short_term_description'] ?></td>
-                                            <td class="text-center"><i class="fas fa-edit light-green fa-lg"></i></td>
-                                            <td class="text-center"><i class="fas fa-trash-alt red fa-lg"></i>
+                                            <td class="text-center"><a href="" data-bs-toggle="modal"
+                                                    data-bs-target="#Modal<?= $term['id'] ?>"><i
+                                                        class="fas fa-edit light-green fa-lg"></i></a></td>
+
+                                            <td class="text-center">
+                                                <a
+                                                    href="handle/plan/delete-topic.php?delete_short_term=<?= $term['id'] ?>&patient_id=<?= $patient_id ?>"><i
+                                                        class="fas fa-trash-alt red fa-lg"></i></a>
+                                            </td>
+
+                                            <!-- Modal Edit-->
+                                            <div class="modal fade" id="Modal<?= $term['id'] ?>" tabindex="-1"
+                                                aria-labelledby="ModalLabel<?= $term['id'] ?>" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="ModalLabel<?= $term['id'] ?>">
+                                                                Edit Topic
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="handle/plan/edit-topic.php" method="post">
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="patient_id"
+                                                                    value="<?= $patient_id ?>">
+                                                                <input type="hidden" name="question_id"
+                                                                    value="<?= $term['id'] ?>">
+                                                                <textarea class="w-100 p-3" name="topic" cols="30"
+                                                                    rows="10"><?= $term['short_term_description'] ?></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="submit" name="edit_short_term"
+                                                                    class="btn secondary-btn" value="Save
+                                                                            changes">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </td>
                                         </tr>
                                         <?php endforeach ?>
