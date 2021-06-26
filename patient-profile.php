@@ -38,7 +38,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                             <img src="<?= URL; ?>assets/images/user-female.jpg" alt="" class="rounded img-fluid mb-2">
                             <?php } ?>
                             <?php } else { ?>
-                            <div class="col-lg-9 m-auto">
+                            <div class="col-8 col-lg-9 m-auto">
                                 <img src="<?= URL; ?>assets/images/uploads/patients/<?= $patient_result['photo'] ?>"
                                     alt="" class="rounded img-fluid mb-2">
                             </div>
@@ -275,7 +275,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_i
                             </div>
                         </div>
                     </div>
-                    <div class="info" style="max-height: 400px; overflow: auto;">
+                    <div class="info table-responsive" style="max-height: 400px; overflow: auto;">
                         <?php if (!empty($to_do_list)) { ?>
                         <table class="table table-responsive-sm table-striped table-hover">
                             <thead>

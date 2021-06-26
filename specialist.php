@@ -314,8 +314,8 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="list row mt-5">
-                        <div class="col-md-12">
-                            <table class="patient-list table tableData table-striped table-hover">
+                        <div class="col-md-12 table-responsive">
+                            <table class="patient-list table tableData table-striped table-hover ">
                                 <thead class="bg-white">
                                     <tr>
                                         <th>Patient Name</th>
@@ -358,7 +358,7 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="list row mt-5">
-                        <div class="col-md-12">
+                        <div class="col-md-12 table-responsive">
                             <table class="table tableData table-striped table-hover">
                                 <thead class="bg-white">
                                     <tr>

@@ -126,8 +126,9 @@ $notify_schedule = new notify_schedule;
 
     $date_time_arr = [];
     $today = date("d-m-Y");
-    foreach ($notify_schedule as $key => $value) {
+    foreach ($get_notify_schedule as $key => $value) {
         $date_time_arr[] = [
+            'id' => $value['id'],
             'patient_id' => $value['patient_id'],
             'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
             'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
@@ -187,13 +188,17 @@ $notify_schedule = new notify_schedule;
                             $patient = $patients->selectId("name", "$patient_id") ?>
                 <li class="dropdown-item">
                     <div class="item py-2">
-                        <span class="badge bg-light text-dark">New session</span>
+                        <span class="badge bg-dark">New session</span>
                         <p class="my-1">You have new session for <strong><?= $patient['name'] ?></strong>
                         </p>
                         <span
                             class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notify_schedule['schedule_date'])); ?></span>
                         <span
                             class="badge bg-light text-dark"><?= date('h:i a', strtotime($notify_schedule['schedule_time'])); ?></span>
+                        <a href="handle/schedule.php?notify_id=<?= $notify_schedule['id'] ?>"
+                            class="text-end d-block"><span class="badge bg-light light-green"><i
+                                    class="fas fa-check-double me-2"></i>Mark as read
+                            </span></a>
                     </div>
                 </li>
                 <li>
@@ -210,7 +215,7 @@ $notify_schedule = new notify_schedule;
                     <span class="badge bg-light text-dark"><?= $patient['name'] ?></span>
                     <p class="my-1">Your have new mission from your specialist </p>
                     <p class="my-1"><strong><?= $notify['to_do_title'] ?></strong></p>
-                    <a href="handle/add-to-do.php?notify_id=<?= $notify['id'] ?>" class="text-end "><span
+                    <a href="handle/add-to-do.php?notify_id=<?= $notify['id'] ?>" class="text-end d-block"><span
                             class="badge bg-light light-green"><i class="fas fa-check-double me-2"></i>Mark as read
                         </span></a>
                 </li>

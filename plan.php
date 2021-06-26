@@ -41,7 +41,7 @@ require_once('include/navbar.php');
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-10 col-md-12">
-                <h1>Welcome Dr. <?= $specialist_result['name'] ?> </h1>
+                <h1>Individual plan</h1>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit
                     illum odit doloremque sed distinctio cum sapiente reiciendis modi, soluta minima numquam consectetur
                     iure enim hic..</p>
@@ -78,7 +78,7 @@ require_once('include/navbar.php');
                             <h3>Current level</h3>
                         </div>
                     </div>
-                    <div class="content bg-box mt-5 mx-5 rounded shadow-sm">
+                    <div class="content bg-box mt-5 mx-lg-5 rounded shadow-sm">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="strength-tab" data-bs-toggle="tab"
@@ -319,7 +319,7 @@ require_once('include/navbar.php');
                             <h3>Objectives</h3>
                         </div>
                     </div>
-                    <div class="content bg-box mt-5 mx-5 rounded shadow-sm">
+                    <div class="content bg-box mt-5 mx-lg-5 rounded shadow-sm">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="long-tab" data-bs-toggle="tab"

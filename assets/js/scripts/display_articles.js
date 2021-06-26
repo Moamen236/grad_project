@@ -29,16 +29,18 @@ function displayArticles(){
       <div class="card bg-white mt-4 shadow" style="min-height: 640px;">
           <img src="${allArticles[i].imageUrl}" class="card-img-top" alt="...">
           <div class="card-body position-relative">
-              <h5 class="card-title dark-title ">${allArticles[i].title}</h5>
+              <a href="articale.php?id=${allArticles[i].id}" target="blank">
+                <h5 class="card-title dark-title " style="font-size:20px">${allArticles[i].title}</h5>
+              </a>
               <p class="card-text dark-text" style="font-size:16px">${allArticles[i].description}</p>
               <div class="info">
                 <div class="row">
                     <div class="col-lg-6 col-6">
                         <i class="fas fa-globe-americas text-blue"> </i>
-                        <a href="articale.php?id=${allArticles[i].id}" class="ms-1 dark-text">See more</a>
+                        <a href="${allArticles[i].url}" class="ms-1 dark-text">Reference</a>
                     </div>
                     <div class="col-lg-6 col-6">
-                        <i class="fas fa-clock text-blue"></i>
+                        <i class="fas fa-calendar-day text-blue"></i>
                         <span class="ms-1">${allArticles[i].publishedAt}</span>
                     </div>
                   </div>

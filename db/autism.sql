@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2021 at 02:14 PM
+-- Generation Time: Jun 26, 2021 at 10:44 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -136,7 +136,8 @@ INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `user_id`) VAL
 (7, 'Abigail Rowe', 'female', 9, 7),
 (8, 'Freddie Lubowitz', 'male', 8, 8),
 (9, 'Jenifer Gislason', 'male', 4, 9),
-(10, 'Alfred Green', 'male', 4, 10);
+(10, 'Alfred Green', 'male', 4, 10),
+(13, 'Moamen Ali', 'male', 12, 23);
 
 -- --------------------------------------------------------
 
@@ -184,7 +185,7 @@ INSERT INTO `autism_checker_question` (`id`, `checker_qustions`, `autism_checker
 
 CREATE TABLE `autism_checker_results` (
   `id` int(11) NOT NULL,
-  `checker_question_result` enum('yes','no') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `checker_question_result` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `checker_question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -218,28 +219,28 @@ INSERT INTO `caregiver` (`id`, `name`, `photo`, `email`, `password`, `phone`, `s
 (7, 'Lurline', 'http://lorempixel.com/640/480/', 'eunice08@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-964-176-0506', '96900871'),
 (8, 'Mustafa', 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '01066687285', '74823451'),
 (9, 'Moamen Ali', '', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', '', '60'),
-(23, 'Moamen Ali', NULL, 'moa@gmail.com', '$2y$10$4EtSOdPNDo0dSbarKpHvw.VIADGeAytNTs08qoHtRkRa9AvkG/jm2', NULL, '60ad13c0bf195');
+(32, 'Moamen Ali', NULL, 'mo@gmail.com', '$2y$10$LVdMB/W23ARGbGbN82/iUe4gKf/XJRvU4UU6E2iVeQyj4SpBxpwS6', NULL, '60ccb75639cc8'),
+(33, 'Moamen Ali', NULL, 'caregiver@gmail.com', '$2y$10$0Q3KRZGdBErtdcsspJmo4eCiizrtbCX4cTWPB1V.AzUfgx6U5GQNK', NULL, '60ccb75639cc8');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dsm5`
+-- Table structure for table `dsm5_category`
 --
 
-CREATE TABLE `dsm5` (
+CREATE TABLE `dsm5_category` (
   `id` int(11) NOT NULL,
-  `dsm5_category-result` int(11) NOT NULL,
-  `pateint_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `dsm_category` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `dsm5`
+-- Dumping data for table `dsm5_category`
 --
 
-INSERT INTO `dsm5` (`id`, `dsm5_category-result`, `pateint_id`) VALUES
-(1, 6, 101),
-(2, 3, 102),
-(3, 3, 103);
+INSERT INTO `dsm5_category` (`id`, `dsm_category`) VALUES
+(1, 'Difficulty with social and emotional exchange'),
+(2, 'Difficulty with nonverbal communication behaviors used in social interaction'),
+(3, 'Difficulty creating, maintaining, or understanding relationships');
 
 -- --------------------------------------------------------
 
@@ -250,31 +251,68 @@ INSERT INTO `dsm5` (`id`, `dsm5_category-result`, `pateint_id`) VALUES
 CREATE TABLE `dsm5_question` (
   `id` int(11) NOT NULL,
   `dsm5_questions` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dsm5_question_category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dsm5_question_result` int(11) NOT NULL,
-  `dsm5_category_result` int(11) NOT NULL,
-  `dsm5_id` int(11) NOT NULL,
-  `pateint_id` int(11) NOT NULL
+  `dsm5_category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `dsm5_question`
 --
 
-INSERT INTO `dsm5_question` (`id`, `dsm5_questions`, `dsm5_question_category`, `dsm5_question_result`, `dsm5_category_result`, `dsm5_id`, `pateint_id`) VALUES
-(1, 'Abnormal social interaction appears', 'Difficulty with social and emotional exchange', 8, 5, 1, 101),
-(2, 'Failed to have a regular dialogue exchange', 'Difficulty with social and emotional exchange', 8, 5, 1, 101),
-(3, 'Fails to share interests, emotions, and moods', 'Difficulty with social and emotional exchange', 8, 5, 1, 101),
-(4, 'Fails to initiate or respond to a social interaction', 'Difficulty with social and emotional exchange', 8, 5, 1, 101),
-(5, 'Impaired integration of verbal and nonverbal communication', 'Difficulty with nonverbal communication behaviors used in social interaction', 4, 5, 1, 101),
-(6, 'Impaired eye contact and body language', 'Difficulty with nonverbal communication behaviors used in social interaction', 4, 5, 1, 101),
-(7, 'Difficulty understanding and using bodily expressions', 'Difficulty with nonverbal communication behaviors used in social interaction', 4, 5, 1, 101),
-(8, 'Difficulty understanding and using gestures', 'Difficulty with nonverbal communication behaviors used in social interaction', 4, 5, 1, 101),
-(9, 'Complete absence of facial expressions and non-verbal communication', 'Difficulty with nonverbal communication behaviors used in social interaction', 2, 5, 1, 101),
-(10, 'Difficulty adjusting behavior to suit different social situations', 'Difficulty creating, maintaining, or understanding relationships', 4, 5, 1, 101),
-(11, 'Difficulty sharing imaginative play', 'Difficulty creating, maintaining, or understanding relationships', 7, 5, 1, 101),
-(12, 'Difficulties making friends', 'Difficulty creating, maintaining, or understanding relationships', 7, 5, 1, 101),
-(13, 'Loss of interest in peers', 'Difficulty creating, maintaining, or understanding relationships', 7, 5, 1, 101);
+INSERT INTO `dsm5_question` (`id`, `dsm5_questions`, `dsm5_category_id`) VALUES
+(1, 'Abnormal social interaction appears', 1),
+(2, 'Failed to have a regular dialogue exchange', 1),
+(3, 'Fails to share interests, emotions, and moods', 1),
+(4, 'Fails to initiate or respond to a social interaction', 1),
+(5, 'Impaired integration of verbal and nonverbal communication', 2),
+(6, 'Impaired eye contact and body language', 2),
+(7, 'Difficulty understanding and using bodily expressions', 2),
+(8, 'Difficulty understanding and using gestures', 2),
+(9, 'Complete absence of facial expressions and non-verbal communication', 2),
+(10, 'Difficulty adjusting behavior to suit different social situations', 3),
+(11, 'Difficulty sharing imaginative play', 3),
+(12, 'Difficulties making friends', 3),
+(13, 'Loss of interest in peers', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dsm_result`
+--
+
+CREATE TABLE `dsm_result` (
+  `id` int(11) NOT NULL,
+  `dsm_question_result` int(11) NOT NULL,
+  `pateint_id` int(11) NOT NULL,
+  `dsm_question_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `dsm_result`
+--
+
+INSERT INTO `dsm_result` (`id`, `dsm_question_result`, `pateint_id`, `dsm_question_id`) VALUES
+(1, 1, 101, 1),
+(2, 1, 101, 2),
+(3, 1, 101, 3),
+(4, 1, 101, 4),
+(5, 1, 101, 5),
+(6, 1, 101, 6),
+(7, 1, 101, 7),
+(8, 1, 101, 8),
+(9, 1, 101, 9),
+(10, 1, 101, 10),
+(11, 1, 101, 11),
+(12, 1, 101, 12),
+(13, 1, 101, 13),
+(15, 0, 112, 1),
+(16, 0, 112, 2),
+(17, 0, 112, 3),
+(18, 0, 112, 4),
+(19, 0, 112, 5),
+(20, 0, 112, 1),
+(21, 0, 112, 2),
+(22, 0, 112, 3),
+(23, 0, 112, 4);
 
 -- --------------------------------------------------------
 
@@ -527,7 +565,18 @@ INSERT INTO `lovaas_results` (`id`, `lovaas_question_result`, `lovaas_question_i
 (41, 'medium', 72, 102),
 (42, 'medium', 73, 102),
 (43, 'weak', 74, 102),
-(44, 'good', 75, 102);
+(44, 'good', 75, 102),
+(132, 'good', 24, 109),
+(133, 'medium', 25, 109),
+(134, 'medium', 26, 109),
+(135, 'medium', 27, 109),
+(136, 'weak', 29, 109),
+(137, 'good', 30, 109),
+(138, 'medium', 31, 109),
+(139, 'good', 1, 111),
+(140, 'medium', 2, 111),
+(141, 'medium', 3, 111),
+(142, 'weak', 4, 111);
 
 -- --------------------------------------------------------
 
@@ -579,6 +628,56 @@ INSERT INTO `notic_questions` (`id`, `notice_questions`, `notic_question_categor
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notify_schedule`
+--
+
+CREATE TABLE `notify_schedule` (
+  `id` int(11) NOT NULL,
+  `schedule_date_time` datetime NOT NULL,
+  `specialist_id` int(11) NOT NULL,
+  `caregiver_id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notify_schedule`
+--
+
+INSERT INTO `notify_schedule` (`id`, `schedule_date_time`, `specialist_id`, `caregiver_id`, `patient_id`) VALUES
+(1, '2021-06-30 00:45:00', 11, 9, 109),
+(2, '2021-07-01 01:00:00', 11, 9, 109);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notify_to_do`
+--
+
+CREATE TABLE `notify_to_do` (
+  `id` int(11) NOT NULL,
+  `to_do_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `to_do_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `specialist_id` int(11) NOT NULL DEFAULT current_timestamp(),
+  `caregiver_id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notify_to_do`
+--
+
+INSERT INTO `notify_to_do` (`id`, `to_do_title`, `to_do_desc`, `specialist_id`, `caregiver_id`, `patient_id`, `created_at`) VALUES
+(3, 'test 3', 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 11, 9, 112, '2021-06-20 20:32:01'),
+(6, 'test 6', 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 11, 9, 112, '2021-06-20 20:32:01'),
+(8, 'test 8', 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 11, 9, 112, '2021-06-20 20:32:01'),
+(9, 'test 9', 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 11, 9, 112, '2021-06-20 20:32:01'),
+(10, 'Danya Amal Basit Title', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 11, 9, 112, '2021-06-21 21:04:37'),
+(11, 'Danya Amal Basit Title', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 11, 9, 109, '2021-06-21 21:04:52');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patient`
 --
 
@@ -605,20 +704,18 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`, `name`, `age`, `date_of_birth`, `school`, `gender`, `class`, `photo`, `No_of_bro`, `arr_btw_bro`, `spcialist_id`, `caregiver_id`, `caregiver_name`, `caregiver_relationship`, `caregiver_phone`) VALUES
-(101, 'Yakub Shaimaa Shahid', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 3, 7, 11, 1, 'Stewart', 'mother', 1021212123),
-(102, 'Midhat Fathi Harith', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 2, 'Antonette', 'mother', 152354953),
-(103, 'Dawood Husniya Aisha', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 9, 4, 11, 3, 'Chaz', 'mother', 4452589),
-(104, 'Wahid Suhaila Medhat', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 4, 'Delbert', 'mother', 12132122),
-(105, 'Ilyas Husam Shahzad', 6, '1981-08-20', 'Quas in dolorem eveniet.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 2, 4, 11, 5, 'Frieda', 'mother', 381042555),
-(106, 'Sulayman Lutfi Lamis', 11, '1981-08-30', 'Aut sed minus necessitatibus doloremque molestiae labore quis quidem.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 6, 'Doug', 'father', 15452375),
-(107, 'Yasmina Lujayn Murtaza', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 7, 7, 11, 7, 'Garland', 'father', 2455420),
-(108, 'Ramlah Aida Harith', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 8, 'Lillie', 'uncle', 718455754),
-(109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 3, 7, 11, 1, 'Stewart', 'mother', 154545754),
-(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 8, 8, 11, 2, 'Antonette', 'mother', 352545754),
-(111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 9, 4, 11, 3, 'Chaz', 'mother', 445545752),
-(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', 'http://lorempixel.com/640/480/', 4, 5, 11, 4, 'Delbert', 'mother', 1545754),
-(122, 'mo', 8, '0000-00-00', 'ay 7aga tany', 'male', 'ay 7aga', '60bc0ddc6bc46.jpg', NULL, NULL, 11, NULL, 'ahmed', '2', 2313432),
-(123, 'mo', 8, '0000-00-00', 'ay 7aga tany', 'male', 'ay 7aga', '60bc0de999800.jpg', NULL, NULL, 11, NULL, 'ahmed', '2', 2313432);
+(101, 'Yakub Shaimaa Shahid', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', '60ccb88ca998e.jpg', 3, 7, 11, 1, 'Stewart', 'mother', 1021212123),
+(102, 'Midhat Fathi Harith', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc1b673630.jpg', 8, 8, 11, 2, 'Antonette', 'mother', 152354953),
+(103, 'Dawood Husniya Aisha', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc5bd20b8f.jpg', 9, 4, 11, 3, 'Chaz', 'mother', 4452589),
+(104, 'Wahid Suhaila Medhat', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60ccc6b6b7315.jpg', 4, 5, 11, 4, 'Delbert', 'mother', 12132122),
+(105, 'Ilyas Husam Shahzad', 6, '1981-08-20', 'Quas in dolorem eveniet.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 2, 4, 11, 5, 'Frieda', 'mother', 381042555),
+(106, 'Sulayman Lutfi Lamis', 11, '1981-08-30', 'Aut sed minus necessitatibus doloremque molestiae labore quis quidem.', 'female', 'voluptatem porro. Sed deserunt', '60ccd0a69ebe7.png', 4, 5, 11, 32, 'Doug', 'father', 15452375),
+(107, 'Yasmina Lujayn Murtaza', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 7, 7, 11, 33, 'Garland', 'father', 2455420),
+(108, 'Ramlah Aida Harith', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, NULL, 'Lillie', 'uncle', 718455754),
+(109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 3, 7, 11, 9, 'Stewart', 'mother', 154545754),
+(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, 9, 'Antonette', 'mother', 352545754),
+(111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 9, 4, 11, 9, 'Chaz', 'mother', 445545752),
+(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 9, 'Delbert', 'mother', 1545754);
 
 -- --------------------------------------------------------
 
@@ -649,23 +746,25 @@ INSERT INTO `plan` (`id`, `lovaas_id`, `pateint_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `scale`
+-- Table structure for table `scale_category`
 --
 
-CREATE TABLE `scale` (
+CREATE TABLE `scale_category` (
   `id` int(11) NOT NULL,
-  `dsm5_id` int(11) NOT NULL,
-  `pateint_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `category` varchar(225) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `scale`
+-- Dumping data for table `scale_category`
 --
 
-INSERT INTO `scale` (`id`, `dsm5_id`, `pateint_id`) VALUES
-(1, 1, 101),
-(2, 2, 102),
-(3, 3, 103);
+INSERT INTO `scale_category` (`id`, `category`) VALUES
+(1, 'Stereotypic / repetitive behaviors'),
+(2, 'Social interaction'),
+(3, 'Social communication'),
+(4, 'Emotional / Sentimental Respons'),
+(5, 'Cognitive pattern'),
+(6, 'Adaptive language');
 
 -- --------------------------------------------------------
 
@@ -676,75 +775,149 @@ INSERT INTO `scale` (`id`, `dsm5_id`, `pateint_id`) VALUES
 CREATE TABLE `scale_questions` (
   `id` int(11) NOT NULL,
   `scale_question` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `scale_question_category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `scale_question_result` int(11) NOT NULL,
-  `scale_category_result` int(11) NOT NULL,
-  `scale_id` int(11) NOT NULL
+  `scale-category-id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `scale_questions`
 --
 
-INSERT INTO `scale_questions` (`id`, `scale_question`, `scale_question_category`, `scale_question_result`, `scale_category_result`, `scale_id`) VALUES
-(101, 'Most of his time is spent performing typical repetitive behaviors if he is left alone', 'Stereotypic / repetitive behaviors', 3, 7, 1),
-(102, 'Is involved in a specific and abnormally stimulus', 'Stereotypic / repetitive behaviors', 2, 7, 1),
-(103, 'He stares at the hands and objects in the environment, with a distance of at least 5 seconds', 'Stereotypic / repetitive behaviors', 1, 7, 1),
-(104, 'Moves (taps) the fingers quickly, with a angle of at least 5 seconds', 'Stereotypic / repetitive behaviors', 0, 7, 1),
-(105, 'It moves quickly and impulsively when moving from one place to another', 'Stereotypic / repetitive behaviors', 2, 7, 1),
-(106, 'He flips (moves) the hands or fingers in front of or next to the face', 'Stereotypic / repetitive behaviors', 1, 7, 1),
-(107, 'Makes high-pitched voices (like ayeye) or any other sounds as a matter of self-excitement', 'Stereotypic / repetitive behaviors', 2, 7, 1),
-(108, 'Uses toys and objects in an inappropriate way, makes the car spin, disassembles the moving parts of toys', 'Stereotypic / repetitive behaviors', 3, 5, 1),
-(109, 'He does things in ritual repetition', 'Stereotypic / repetitive behaviors', 3, 7, 1),
-(110, 'He engages in playing stereotypically when he uses objects or games', 'Stereotypic / repetitive behaviors', 3, 7, 1),
-(111, 'Repeats incomprehensible sounds (babbling) over and over', 'Stereotypic / repetitive behaviors', 3, 7, 1),
-(112, 'It shows a great and unusual interest in the sensory aspects of playing materials, body parts, or objects', 'Stereotypic / repetitive behaviors', 3, 7, 1),
-(113, 'Shows compulsive behaviors that cannot be resisted', 'Stereotypic / repetitive behaviors', 2, 7, 1),
-(114, 'Does not initiate conversations with peers or others', 'Social interaction', 2, 7, 1),
-(115, 'Little or no attention is given to what the peers are doing', 'Social interaction', 2, 7, 1),
-(116, 'Fails to imitate others while playing or when performing educational activities', 'Social interaction', 2, 7, 1),
-(117, 'Does not follow other people hints - gestures - to direct the gaze of something, for example: when someone gestures with his head or points with his hand or uses any other body movements', 'Social interaction', 2, 7, 1),
-(118, 'Seems uninterested in getting other peoples attention (does not attempt to obtain, maintain, or direct another persons attention)', 'Social interaction', 2, 7, 1),
-(119, 'Minimum excitement appears when interacting with others', 'Social interaction', 2, 7, 1),
-(120, 'A little excitement appears - it may not appear entirely - when viewing games, objects, or others', 'Social interaction', 2, 7, 1),
-(121, 'They seem uninterested in pointing out to others about their surroundings in the environment', 'Social interaction', 2, 7, 1),
-(122, 'It appears he has no desire or object to have interactions with others', 'Social interaction', 2, 7, 1),
-(123, 'He appears minimal or unresponsive as others try to interact with him', 'Social interaction', 2, 7, 1),
-(124, 'Does not show a little bit of social interaction and may not show it at all (for example, he refuses to say bye bye in response to someone saying bye bye)', 'Social interaction', 2, 7, 1),
-(125, 'He does not seek to establish friendly relations with other people', 'Social interaction', 2, 7, 1),
-(126, 'Fails to play creatively or imaginatively', 'Social interaction', 2, 7, 1),
-(127, 'Shows little or no interest in other people', 'Social interaction', 2, 7, 1),
-(128, 'Responds inappropriately to stimuli that require a sense of humor (for example: laughs at jokes, cartoons, and funny anecdotes)', 'Social communication', 2, 7, 1),
-(129, 'He has difficulty understanding the jokes', 'Social communication', 2, 7, 1),
-(130, 'Has difficulty understanding colloquial expressions', 'Social communication', 2, 7, 1),
-(131, 'He finds it difficult to know if someone is intentionally harassing him', 'Social communication', 2, 7, 1),
-(132, 'He finds it difficult to understand if it is the subject of mockery by others', 'Social communication', 2, 7, 1),
-(133, 'He finds it difficult to understand why people do not like him (to understand why others are bothered by him)', 'Social communication', 2, 7, 1),
-(134, 'Fails to predict the possible consequences of social events', 'Social communication', 2, 7, 1),
-(135, 'It seems as if he does not understand that other people have different thoughts and feelings about him', 'Social communication', 2, 7, 1),
-(136, 'It looks as if the other person does not know anything', 'Social communication', 2, 7, 1),
-(137, 'It needs a lot of reassurance if things change or something goes wrong', 'Emotional / Sentimental Respons', 2, 7, 1),
-(138, 'He becomes frustrated and frustrated when he fails at something', 'Emotional / Sentimental Respons', 2, 7, 1),
-(139, 'He gets tantrums when frustrated', 'Emotional / Sentimental Respons', 2, 7, 1),
-(140, 'Resent the usual change of routine', 'Emotional / Sentimental Respons', 2, 7, 1),
-(141, 'Responds negatively - he refuses - when he is advised, asked for something, or is directed', 'Emotional / Sentimental Respons', 2, 7, 1),
-(142, 'Responds with a sharp reaction (such as: intense crying, screaming, or angry outbursts) when hearing a loud voice or unexpected noise', 'Emotional / Sentimental Respons', 2, 7, 1),
-(143, 'He gets a tantrum when he doesnot get what he wants in his own way', 'Emotional / Sentimental Respons', 2, 7, 1),
-(144, 'He gets a tantrum when someone tells him to stop doing something they enjoy', 'Emotional / Sentimental Respons', 2, 7, 1),
-(145, 'He uses exceptionally accurate words while speaking', 'Cognitive pattern', 2, 7, 1),
-(146, 'It is closely related to the tangible - physical - meanings of words', 'Cognitive pattern', 2, 7, 1),
-(147, 'He talks excessively about a specific topic', 'Cognitive pattern', 2, 7, 1),
-(148, 'Demonstrates superior skill or knowledge in specific subjects', 'Cognitive pattern', 2, 7, 1),
-(149, 'Shows an excellent memory', 'Cognitive pattern', 2, 5, 1),
-(150, 'Shows keen interest in certain intellectual topics', 'Cognitive pattern', 2, 7, 1),
-(151, 'He makes naive remarks (unconscious of the results of other peoples reactions)', 'Cognitive pattern', 2, 7, 1),
-(152, 'Repeats - echo/Poaching - words or phrases verbal or with gestures', 'Adaptive language', 2, 7, 1),
-(153, 'Repeats words out of context (repeats words or phrases he may have heard earlier)', 'Adaptive language', 2, 7, 1),
-(154, 'He speaks in situations that affect superficially', 'Adaptive language', 2, 7, 1),
-(155, 'Uses (yes and no) inappropriately, says yes when asked about something he does not like, or says no when asked about a favorite game or gift he wants', 'Adaptive language', 2, 7, 1),
-(156, 'Uses the pronouns (he or she) instead of (me) when referring to himself', 'Adaptive language', 2, 7, 1),
-(157, 'He speaks abnormally in terms of tone or rate', 'Adaptive language', 2, 7, 1),
-(158, 'Uttering distinctive words or phrases, but without meaning', 'Adaptive language', 2, 7, 1);
+INSERT INTO `scale_questions` (`id`, `scale_question`, `scale-category-id`) VALUES
+(101, 'Most of his time is spent performing typical repetitive behaviors if he is left alone', 1),
+(102, 'Is involved in a specific and abnormally stimulus', 1),
+(103, 'He stares at the hands and objects in the environment, with a distance of at least 5 seconds', 1),
+(104, 'Moves (taps) the fingers quickly, with a angle of at least 5 seconds', 1),
+(105, 'It moves quickly and impulsively when moving from one place to another', 1),
+(106, 'He flips (moves) the hands or fingers in front of or next to the face', 1),
+(107, 'Makes high-pitched voices (like ayeye) or any other sounds as a matter of self-excitement', 1),
+(108, 'Uses toys and objects in an inappropriate way, makes the car spin, disassembles the moving parts of toys', 1),
+(109, 'He does things in ritual repetition', 1),
+(110, 'He engages in playing stereotypically when he uses objects or games', 1),
+(111, 'Repeats incomprehensible sounds (babbling) over and over', 1),
+(112, 'It shows a great and unusual interest in the sensory aspects of playing materials, body parts, or objects', 1),
+(113, 'Shows compulsive behaviors that cannot be resisted', 1),
+(114, 'Does not initiate conversations with peers or others', 2),
+(115, 'Little or no attention is given to what the peers are doing', 2),
+(116, 'Fails to imitate others while playing or when performing educational activities', 2),
+(117, 'Does not follow other people hints - gestures - to direct the gaze of something, for example: when someone gestures with his head or points with his hand or uses any other body movements', 2),
+(118, 'Seems uninterested in getting other peoples attention (does not attempt to obtain, maintain, or direct another persons attention)', 2),
+(119, 'Minimum excitement appears when interacting with others', 2),
+(120, 'A little excitement appears - it may not appear entirely - when viewing games, objects, or others', 2),
+(121, 'They seem uninterested in pointing out to others about their surroundings in the environment', 2),
+(122, 'It appears he has no desire or object to have interactions with others', 2),
+(123, 'He appears minimal or unresponsive as others try to interact with him', 2),
+(124, 'Does not show a little bit of social interaction and may not show it at all (for example, he refuses to say bye bye in response to someone saying bye bye)', 2),
+(125, 'He does not seek to establish friendly relations with other people', 2),
+(126, 'Fails to play creatively or imaginatively', 2),
+(127, 'Shows little or no interest in other people', 2),
+(128, 'Responds inappropriately to stimuli that require a sense of humor (for example: laughs at jokes, cartoons, and funny anecdotes)', 3),
+(129, 'He has difficulty understanding the jokes', 3),
+(130, 'Has difficulty understanding colloquial expressions', 3),
+(131, 'He finds it difficult to know if someone is intentionally harassing him', 3),
+(132, 'He finds it difficult to understand if it is the subject of mockery by others', 3),
+(133, 'He finds it difficult to understand why people do not like him (to understand why others are bothered by him)', 3),
+(134, 'Fails to predict the possible consequences of social events', 3),
+(135, 'It seems as if he does not understand that other people have different thoughts and feelings about him', 3),
+(136, 'It looks as if the other person does not know anything', 3),
+(137, 'It needs a lot of reassurance if things change or something goes wrong', 4),
+(138, 'He becomes frustrated and frustrated when he fails at something', 4),
+(139, 'He gets tantrums when frustrated', 4),
+(140, 'Resent the usual change of routine', 4),
+(141, 'Responds negatively - he refuses - when he is advised, asked for something, or is directed', 4),
+(142, 'Responds with a sharp reaction (such as: intense crying, screaming, or angry outbursts) when hearing a loud voice or unexpected noise', 4),
+(143, 'He gets a tantrum when he doesnot get what he wants in his own way', 4),
+(144, 'He gets a tantrum when someone tells him to stop doing something they enjoy', 4),
+(145, 'He uses exceptionally accurate words while speaking', 5),
+(146, 'It is closely related to the tangible - physical - meanings of words', 5),
+(147, 'He talks excessively about a specific topic', 5),
+(148, 'Demonstrates superior skill or knowledge in specific subjects', 5),
+(149, 'Shows an excellent memory', 5),
+(150, 'Shows keen interest in certain intellectual topics', 5),
+(151, 'He makes naive remarks (unconscious of the results of other peoples reactions)', 5),
+(152, 'Repeats - echo/Poaching - words or phrases verbal or with gestures', 6),
+(153, 'Repeats words out of context (repeats words or phrases he may have heard earlier)', 6),
+(154, 'He speaks in situations that affect superficially', 6),
+(155, 'Uses (yes and no) inappropriately, says yes when asked about something he does not like, or says no when asked about a favorite game or gift he wants', 6),
+(156, 'Uses the pronouns (he or she) instead of (me) when referring to himself', 6),
+(157, 'He speaks abnormally in terms of tone or rate', 6),
+(158, 'Uttering distinctive words or phrases, but without meaning', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scale_result`
+--
+
+CREATE TABLE `scale_result` (
+  `id` int(11) NOT NULL,
+  `scale-question-result` int(11) NOT NULL,
+  `scale-question-id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `scale_result`
+--
+
+INSERT INTO `scale_result` (`id`, `scale-question-result`, `scale-question-id`, `patient_id`) VALUES
+(1, 1, 101, 101),
+(2, 1, 102, 101),
+(3, 1, 103, 101),
+(4, 1, 104, 101),
+(5, 1, 105, 101),
+(6, 1, 106, 101),
+(7, 1, 107, 101),
+(8, 1, 108, 101),
+(9, 1, 109, 101),
+(10, 1, 110, 101),
+(11, 1, 111, 101),
+(12, 1, 112, 101),
+(13, 1, 113, 101),
+(14, 1, 114, 101),
+(15, 1, 115, 101),
+(16, 1, 116, 101),
+(17, 1, 117, 101),
+(18, 1, 118, 101),
+(19, 1, 119, 101),
+(20, 1, 120, 101),
+(21, 1, 121, 101),
+(22, 1, 122, 101),
+(23, 1, 123, 101),
+(24, 1, 124, 101),
+(25, 1, 125, 101),
+(26, 1, 126, 101),
+(27, 1, 127, 101),
+(28, 1, 128, 101),
+(29, 1, 129, 101),
+(30, 1, 130, 101),
+(31, 1, 131, 101),
+(32, 1, 132, 101),
+(33, 1, 133, 101),
+(34, 1, 134, 101),
+(35, 1, 135, 101),
+(36, 1, 136, 101),
+(37, 1, 137, 101),
+(38, 1, 138, 101),
+(39, 1, 139, 101),
+(40, 1, 140, 101),
+(41, 1, 141, 101),
+(42, 1, 142, 101),
+(43, 1, 143, 101),
+(44, 1, 144, 101),
+(45, 1, 145, 101),
+(46, 1, 146, 101),
+(47, 1, 147, 101),
+(48, 1, 148, 101),
+(49, 1, 149, 101),
+(50, 1, 150, 101),
+(51, 1, 151, 101),
+(52, 1, 152, 101),
+(53, 1, 153, 101),
+(54, 1, 154, 101),
+(55, 1, 155, 101),
+(56, 1, 156, 101),
+(57, 1, 157, 101),
+(58, 2, 158, 101);
 
 -- --------------------------------------------------------
 
@@ -754,8 +927,7 @@ INSERT INTO `scale_questions` (`id`, `scale_question`, `scale_question_category`
 
 CREATE TABLE `schedule` (
   `id` int(11) NOT NULL,
-  `schedule_time` time NOT NULL,
-  `schedule_date` date NOT NULL,
+  `schedule_date_time` datetime DEFAULT NULL,
   `specialist_id` int(11) NOT NULL,
   `caregiver_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL
@@ -765,20 +937,27 @@ CREATE TABLE `schedule` (
 -- Dumping data for table `schedule`
 --
 
-INSERT INTO `schedule` (`id`, `schedule_time`, `schedule_date`, `specialist_id`, `caregiver_id`, `patient_id`) VALUES
-(1, '06:00:06', '2010-04-26', 11, 1, 101),
-(2, '09:03:20', '2015-11-20', 11, 1, 101),
-(3, '18:44:55', '2001-09-09', 11, 1, 102),
-(4, '01:43:10', '2001-07-02', 11, 1, 101),
-(5, '22:36:52', '1976-05-22', 11, 1, 104),
-(6, '08:16:38', '1995-07-03', 1, 1, 101),
-(7, '04:26:27', '2008-10-04', 1, 1, 103),
-(8, '15:07:05', '1988-06-15', 1, 1, 102),
-(9, '20:33:00', '2021-06-16', 11, 4, 112),
-(10, '18:33:00', '2021-06-29', 11, 4, 112),
-(11, '18:33:00', '2021-07-02', 11, 4, 112),
-(12, '18:33:00', '2021-07-05', 11, 4, 112),
-(13, '18:33:00', '2021-07-05', 11, 4, 112);
+INSERT INTO `schedule` (`id`, `schedule_date_time`, `specialist_id`, `caregiver_id`, `patient_id`) VALUES
+(1, '2021-06-21 22:21:49', 11, 1, 105),
+(2, '2021-06-22 22:22:18', 11, 1, 101),
+(3, '2021-06-22 22:22:30', 11, 1, 102),
+(6, '2021-06-23 22:22:37', 1, 1, 104),
+(7, '2021-06-24 22:22:48', 1, 1, 103),
+(8, '2021-06-30 22:22:51', 1, 1, 102),
+(22, '2021-06-24 22:22:54', 11, 4, 112),
+(23, '2021-06-22 22:22:57', 11, 4, 112),
+(27, '2021-06-22 22:55:00', 11, 9, 112),
+(28, '2021-06-23 22:54:00', 11, 9, 112),
+(29, '2021-06-22 15:54:00', 11, 9, 112),
+(30, '2021-06-25 12:00:00', 11, 9, 112),
+(31, '2021-06-22 14:00:00', 11, 9, 109),
+(32, '2021-06-24 14:00:00', 11, 9, 109),
+(33, '2021-06-22 21:34:00', 11, 9, 112),
+(34, '2021-06-22 22:35:00', 11, 9, 112),
+(35, '2021-06-30 00:45:00', 11, 9, 109),
+(36, '2021-06-30 00:45:00', 11, 9, 109),
+(37, '2021-07-01 01:00:00', 11, 9, 109),
+(38, '2021-07-11 03:00:00', 11, 9, 109);
 
 -- --------------------------------------------------------
 
@@ -843,8 +1022,8 @@ INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`,
 (9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1),
 (10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786),
 (11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, NULL),
-(19, '60ad1366320e9 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$735XeDXRbEleCVSf6qX/.efeCckA6sEndlhcfeSrDp75p0UR9SWWK', NULL, NULL),
-(20, '60ad13c0bf195', 'Moamen Ali', 'moa@gmail.com', '$2y$10$QLiD.2xSG64pjX9nulSjXuv4PapKFlIW5RQQ7f9MH880U/nRLsB0.', NULL, NULL);
+(21, '60ccb75639cc8', 'Karim', 'karim.ali.khalifa@gmail.com', '$2y$10$bz29o24xCCcjOEGVRgKXd.6YDtp6ta.vOTfRtr6AiwL0PWDz5vu6K', NULL, NULL),
+(22, '60d100ad1bca0 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$kvFuXZ3b/PAJJ5j8UTOJ0eT8QzoMp5YCDrNyp.HCxeeT4JVx4.yvO', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -902,13 +1081,12 @@ INSERT INTO `strength_point` (`id`, `strength_point_description`, `patient_id`) 
 (114, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been ', 104),
 (115, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', 104),
 (116, 'Lorem Ipsum is simply dummy text of ', 104),
-(117, 'Lorem ', 104),
-(118, 'Tesla Tesla ', 104),
+(117, 'Lorem jhrkgqferqfkje', 104),
 (119, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 105),
 (120, 'Lorem Ipsum is simply dummy text ', 105),
 (122, 'Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas', 101),
 (123, 'Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas Distinctio iste ut omnis quia debitis. Et assumenda est sed quisquam corrupti facere non qui. Repudiandae qui corrupti non officia ea aut quas', 101),
-(124, 'Lorem Ipsum is simply ', 104);
+(125, 'moooo', 112);
 
 -- --------------------------------------------------------
 
@@ -922,23 +1100,36 @@ CREATE TABLE `to_do` (
   `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `specialist_id` int(11) NOT NULL,
   `caregiver_id` int(11) NOT NULL,
-  `patient_id` int(11) NOT NULL
+  `patient_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `done` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `to_do`
 --
 
-INSERT INTO `to_do` (`id`, `to_do_details`, `title`, `specialist_id`, `caregiver_id`, `patient_id`) VALUES
-(1, 'Quia autem rerum doloremque voluptatem non.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(2, 'Eum id perferendis quia aperiam consequuntur.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(3, 'Accusantium est quidem error earum voluptas veritatis beatae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(4, 'Hic odit excepturi voluptatem ratione iste et.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(5, 'Voluptas qui quis dicta sit voluptates quo.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(6, 'Voluptates aut ea nesciunt tempora sequi odio suscipit.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(7, 'Dolores suscipit amet nesciunt et recusandae voluptatibus est.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(8, 'Est consequatur dolorum enim est magnam placeat eligendi recusandae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101),
-(14, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'test 1', 11, 4, 104);
+INSERT INTO `to_do` (`id`, `to_do_details`, `title`, `specialist_id`, `caregiver_id`, `patient_id`, `created_at`, `done`) VALUES
+(1, 'Quia autem rerum doloremque voluptatem non.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(2, 'Eum id perferendis quia aperiam consequuntur.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(3, 'Accusantium est quidem error earum voluptas veritatis beatae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(4, 'Hic odit excepturi voluptatem ratione iste et.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(5, 'Voluptas qui quis dicta sit voluptates quo.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(6, 'Voluptates aut ea nesciunt tempora sequi odio suscipit.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(7, 'Dolores suscipit amet nesciunt et recusandae voluptatibus est.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(8, 'Est consequatur dolorum enim est magnam placeat eligendi recusandae.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 1, 1, 101, '2021-06-20 00:07:01', NULL),
+(14, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'This is first title for caregiver', 11, 4, 104, '2021-06-20 00:07:01', NULL),
+(15, 'lorem test add new', 'That is a new Title', 11, 9, 112, '2021-06-20 00:07:01', 'done'),
+(16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'That is a static title', 11, 9, 112, '2021-06-20 00:39:19', 'done'),
+(21, 'Lorem Ipsum is simply', 'new Title ', 11, 9, 112, '2021-06-20 00:43:42', 'done'),
+(23, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'new test title ', 11, 9, 112, '2021-06-20 00:46:01', NULL),
+(24, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'test 5', 11, 9, 112, '2021-06-20 00:53:50', NULL),
+(26, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'test 5', 11, 9, 112, '2021-06-20 00:54:35', NULL),
+(34, 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 'test 2', 11, 9, 112, '2021-06-20 20:32:01', NULL),
+(35, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'Danya Amal Basit Title', 11, 9, 112, '2021-06-21 21:04:37', NULL),
+(36, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'Danya Amal Basit Title', 11, 9, 109, '2021-06-21 21:04:52', NULL),
+(37, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf', 'Danya Amal Basit Title 2', 11, 9, 109, '2021-06-21 21:06:19', NULL),
+(38, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf fdsvuvfdsbfdyisf fdusg fdsygf fdugfds uyftds fsduygfds fdusy  fdsugfds fdusf sufds fdsufds ufds ufds fdsu  fdsuifds fdsiufsdfdsfsf sdufhds fdsiufds  fdisufds  fdsifds  fdsiufds fidshfds fidusf sfidushfds', 'Danya Amal Basit Title 3', 11, 9, 109, '2021-06-21 21:06:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -1062,19 +1253,25 @@ ALTER TABLE `caregiver`
   ADD KEY `sp_serial_no` (`sp_serial_no`) USING BTREE;
 
 --
--- Indexes for table `dsm5`
+-- Indexes for table `dsm5_category`
 --
-ALTER TABLE `dsm5`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pateint_id` (`pateint_id`);
+ALTER TABLE `dsm5_category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `dsm5_question`
 --
 ALTER TABLE `dsm5_question`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pateint_id` (`pateint_id`),
-  ADD KEY `dsm5_id` (`dsm5_id`);
+  ADD KEY `dsm5_category-id` (`dsm5_category_id`);
+
+--
+-- Indexes for table `dsm_result`
+--
+ALTER TABLE `dsm_result`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dsm_question_id` (`dsm_question_id`),
+  ADD KEY `pateint_id` (`pateint_id`);
 
 --
 -- Indexes for table `evaluation_history`
@@ -1133,6 +1330,24 @@ ALTER TABLE `notic_questions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notify_schedule`
+--
+ALTER TABLE `notify_schedule`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `caregiver_id` (`caregiver_id`),
+  ADD KEY `patient_id` (`patient_id`),
+  ADD KEY `specialist_id` (`specialist_id`);
+
+--
+-- Indexes for table `notify_to_do`
+--
+ALTER TABLE `notify_to_do`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `caregiver_id` (`caregiver_id`),
+  ADD KEY `specialist_id` (`specialist_id`),
+  ADD KEY `patient_id` (`patient_id`);
+
+--
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
@@ -1149,19 +1364,25 @@ ALTER TABLE `plan`
   ADD KEY `pateint_id` (`pateint_id`);
 
 --
--- Indexes for table `scale`
+-- Indexes for table `scale_category`
 --
-ALTER TABLE `scale`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `dsm5_id` (`dsm5_id`),
-  ADD KEY `pateint_id` (`pateint_id`);
+ALTER TABLE `scale_category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `scale_questions`
 --
 ALTER TABLE `scale_questions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `scale_id` (`scale_id`) USING BTREE;
+  ADD KEY `scale-category-id` (`scale-category-id`);
+
+--
+-- Indexes for table `scale_result`
+--
+ALTER TABLE `scale_result`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `scale-question-id` (`scale-question-id`),
+  ADD KEY `patient_id` (`patient_id`);
 
 --
 -- Indexes for table `schedule`
@@ -1255,7 +1476,7 @@ ALTER TABLE `attahced_reports_result`
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1273,19 +1494,25 @@ ALTER TABLE `autism_checker_results`
 -- AUTO_INCREMENT for table `caregiver`
 --
 ALTER TABLE `caregiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `dsm5`
+-- AUTO_INCREMENT for table `dsm5_category`
 --
-ALTER TABLE `dsm5`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `dsm5_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `dsm5_question`
 --
 ALTER TABLE `dsm5_question`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `dsm_result`
+--
+ALTER TABLE `dsm_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `evaluation_history`
@@ -1315,7 +1542,7 @@ ALTER TABLE `lovaas_questions`
 -- AUTO_INCREMENT for table `lovaas_results`
 --
 ALTER TABLE `lovaas_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `notic`
@@ -1330,10 +1557,22 @@ ALTER TABLE `notic_questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `notify_schedule`
+--
+ALTER TABLE `notify_schedule`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `notify_to_do`
+--
+ALTER TABLE `notify_to_do`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `plan`
@@ -1342,10 +1581,10 @@ ALTER TABLE `plan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `scale`
+-- AUTO_INCREMENT for table `scale_category`
 --
-ALTER TABLE `scale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `scale_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `scale_questions`
@@ -1354,10 +1593,16 @@ ALTER TABLE `scale_questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
+-- AUTO_INCREMENT for table `scale_result`
+--
+ALTER TABLE `scale_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `short_term`
@@ -1369,7 +1614,7 @@ ALTER TABLE `short_term`
 -- AUTO_INCREMENT for table `specialist`
 --
 ALTER TABLE `specialist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -1381,13 +1626,13 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `strength_point`
 --
 ALTER TABLE `strength_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `to_do`
 --
 ALTER TABLE `to_do`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1444,17 +1689,17 @@ ALTER TABLE `caregiver`
   ADD CONSTRAINT `caregiver_ibfk_1` FOREIGN KEY (`sp_serial_no`) REFERENCES `specialist` (`serial_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `dsm5`
---
-ALTER TABLE `dsm5`
-  ADD CONSTRAINT `dsm5_ibfk_1` FOREIGN KEY (`pateint_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `dsm5_question`
 --
 ALTER TABLE `dsm5_question`
-  ADD CONSTRAINT `dsm5_question_ibfk_1` FOREIGN KEY (`pateint_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `dsm5_question_ibfk_2` FOREIGN KEY (`dsm5_id`) REFERENCES `dsm5` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `dsm5_question_ibfk_1` FOREIGN KEY (`dsm5_category_id`) REFERENCES `scale_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dsm_result`
+--
+ALTER TABLE `dsm_result`
+  ADD CONSTRAINT `dsm_result_ibfk_1` FOREIGN KEY (`dsm_question_id`) REFERENCES `dsm5_question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `dsm_result_ibfk_2` FOREIGN KEY (`pateint_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `evaluation_history_result`
@@ -1490,6 +1735,22 @@ ALTER TABLE `notic`
   ADD CONSTRAINT `notic_q` FOREIGN KEY (`notic_q_id`) REFERENCES `notic_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `notify_schedule`
+--
+ALTER TABLE `notify_schedule`
+  ADD CONSTRAINT `notify_schedule_ibfk_1` FOREIGN KEY (`caregiver_id`) REFERENCES `caregiver` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notify_schedule_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notify_schedule_ibfk_3` FOREIGN KEY (`specialist_id`) REFERENCES `specialist` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `notify_to_do`
+--
+ALTER TABLE `notify_to_do`
+  ADD CONSTRAINT `notify_to_do_ibfk_1` FOREIGN KEY (`caregiver_id`) REFERENCES `caregiver` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notify_to_do_ibfk_2` FOREIGN KEY (`specialist_id`) REFERENCES `specialist` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notify_to_do_ibfk_3` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `patient`
 --
 ALTER TABLE `patient`
@@ -1504,17 +1765,17 @@ ALTER TABLE `plan`
   ADD CONSTRAINT `plan_ibfk_2` FOREIGN KEY (`pateint_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `scale`
---
-ALTER TABLE `scale`
-  ADD CONSTRAINT `scale_ibfk_1` FOREIGN KEY (`dsm5_id`) REFERENCES `dsm5` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scale_ibfk_2` FOREIGN KEY (`pateint_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `scale_questions`
 --
 ALTER TABLE `scale_questions`
-  ADD CONSTRAINT `scale_questions_ibfk_1` FOREIGN KEY (`scale_id`) REFERENCES `scale` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `scale_questions_ibfk_1` FOREIGN KEY (`scale-category-id`) REFERENCES `scale_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `scale_result`
+--
+ALTER TABLE `scale_result`
+  ADD CONSTRAINT `scale_result_ibfk_1` FOREIGN KEY (`scale-question-id`) REFERENCES `scale_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `scale_result_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `schedule`

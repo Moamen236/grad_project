@@ -100,7 +100,7 @@ require_once('include/navbar.php');
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="tab-content bg-box pb-5 mt-lg-0 mt-5" id="nav-tabContent">
+                <div class="tab-content bg-box pb-2 mt-lg-0 mt-5" id="nav-tabContent">
                     <!-- Notice -->
                     <div class="tab-pane fade show active bg-box" id="list-notice" role="tabpanel"
                         aria-labelledby="list-notice-list">
@@ -374,7 +374,7 @@ require_once('include/navbar.php');
                         </div>
                     </div>
                     <!--Lovass-->
-                    <div class="tab-pane fade bg-box p-5" id="list-lovaas" role="tabpanel"
+                    <div class="tab-pane fade bg-box p-lg-5 p-1" id="list-lovaas" role="tabpanel"
                         aria-labelledby="list-lovaas-list">
                         <div class="accordion" id="accordionExample">
                             <form action="handle/lovaas.php" method="post">
@@ -398,8 +398,8 @@ require_once('include/navbar.php');
                                                     <?= $lovaas_result['lovass_questions'] ?>
                                                 </div>
                                                 <div
-                                                    class="row justify-content-around align-items-center text-center p-3">
-                                                    <div class="col-lg-2 form-check ">
+                                                    class="row justify-content-around  align-items-center text-center p-3">
+                                                    <div class="col-2 col-lg-2 form-check text-md-start">
                                                         <input class="form-check-input" type="radio"
                                                             name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
                                                             value="good">
@@ -407,7 +407,7 @@ require_once('include/navbar.php');
                                                             good
                                                         </label>
                                                     </div>
-                                                    <div class="col-lg-2 form-check ">
+                                                    <div class="col-2 col-lg-2 form-check ">
                                                         <input class="form-check-input" type="radio"
                                                             name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
                                                             value="medium">
@@ -415,7 +415,7 @@ require_once('include/navbar.php');
                                                             medium
                                                         </label>
                                                     </div>
-                                                    <div class="col-lg-2 form-check ">
+                                                    <div class="col-2 col-lg-2 form-check ">
                                                         <input class="form-check-input" type="radio"
                                                             name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
                                                             value="weak">
@@ -431,7 +431,8 @@ require_once('include/navbar.php');
                                 </div>
                                 <?php endforeach ?>
                                 <button type="submit" name="lovaas_questions"
-                                    class="secondary-btn btn float-end  mt-4">Done</button>
+                                    class="secondary-btn btn float-end mt-4">Done</button>
+                                <div class="clearfix"></div>
                             </form>
                         </div>
                     </div>

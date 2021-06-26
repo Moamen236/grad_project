@@ -25,7 +25,7 @@ $select_to_do = mysqli_fetch_all($run_to_do, MYSQLI_ASSOC);
 
 // schedule table
 $schedule = new schedule;
-$query = "SELECT schedule.* , specialist.name FROM `schedule` JOIN specialist on schedule.specialist_id = specialist.id WHERE schedule.caregiver_id = $caregiver_id";
+$query = "SELECT schedule.id,schedule.schedule_date_time , specialist.name AS specialist_name , patient.name AS patient_name FROM `schedule` JOIN specialist JOIN patient on schedule.specialist_id = specialist.id AND patient.id = schedule.patient_id WHERE schedule.caregiver_id = $caregiver_id";
 $run_schedule =  $schedule->query($query);
 $select_schedule = mysqli_fetch_all($run_schedule, MYSQLI_ASSOC);
 
@@ -199,6 +199,7 @@ require_once('include/navbar.php');
                                 <thead class="bg-white">
                                     <tr>
                                         <th>Specialist Name</th>
+                                        <th>Patient Name</th>
                                         <th>Session Date</th>
                                         <th>Session Time</th>
                                         <th>Add to Calendar </th>
@@ -207,7 +208,8 @@ require_once('include/navbar.php');
                                 <tbody id="cSchedule">
                                     <?php foreach ($select_schedule as $schedule) : ?>
                                     <tr>
-                                        <td><?= $schedule['name'] ?></td>
+                                        <td><?= $schedule['specialist_name'] ?></td>
+                                        <td><?= $schedule['patient_name'] ?></td>
                                         <td><?= date('d/m/Y', strtotime($schedule['schedule_date_time'])); ?></td>
                                         <td><?= date('h:i a', strtotime($schedule['schedule_date_time'])); ?></td>
                                         <td>

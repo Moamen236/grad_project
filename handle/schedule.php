@@ -26,6 +26,10 @@ if ($request->postHas('add-schedule')) {
     $schedule_id = $request->get('schedule_id');
     $schedule->delete("id = $schedule_id ");
     $request->redirect("specialist.php");
+} elseif ($request->getHas('notify_id')) {
+    $schedule_id = $request->get('notify_id');
+    $notify_schedule->delete("id = $schedule_id");
+    $request->redirect("caregiver.php");
 } else {
     $request->redirect("patient-profile.php?patientid=$patient_id");
 }
