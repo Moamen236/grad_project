@@ -179,8 +179,7 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 
                         <h3 class="dark-title">Schedule</h3>
                         <P class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ipsum
-                            molestiae
-                            quae ratione.</P>
+                            molestiae quae ratione.</P>
                     </div>
                 </li>
             </ul>

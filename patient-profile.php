@@ -10,8 +10,10 @@ $patient_id = $request->get('patientid');
 $session->set("patient_id", $patient_id);
 
 $patient_result =  $patients->selectId("*", $patient_id);
-$caregiver_id = $patient_result['caregiver_id'];
-$session->set("caregiver_id", $caregiver_id);
+if (!empty($patient_result['caregiver_id'])) {
+    $caregiver_id = $patient_result['caregiver_id'];
+    $session->set("caregiver_id", $caregiver_id);
+}
 
 $now = new DateTime();
 $now_date = $now->format("Y-m-d");
@@ -21,7 +23,7 @@ $run_query = $schedule->query($query);
 $next_schedule = mysqli_fetch_assoc($run_query);
 
 $to_do = new to_do;
-$to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id AND caregiver_id = $caregiver_id");
+$to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
 ?>
 
 <div class="patient-profile ">
