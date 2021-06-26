@@ -194,8 +194,7 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                 Create Patient Account
                             </h2>
                             <div class="line bg-yellow"></div>
-                            <form action="handle/create-patient.php" id="form" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="handle/create-patient.php" method="POST" enctype="multipart/form-data">
                                 <div class="row mt-40">
                                     <div class="col-lg-4">
                                         <div class="mb-3">

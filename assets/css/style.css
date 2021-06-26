@@ -19,6 +19,9 @@ a {
 	text-decoration: none;
 	transition: 0.3s;
 }
+a:hover{
+	text-decoration: none;
+}
 .disabled {
 	cursor: not-allowed;
 	opacity: 0.6;

@@ -10,13 +10,10 @@ function displayArticle(){
     var articaleUrl = new URL(document.URL);
     var searchParams  = new URLSearchParams(articaleUrl.search); 
     for(var i of searchParams ) {
-      // console.log(i[0] + ' = ' + i[1]);
       var articaleID = i[1];
-      // console.log(articaleID);
     }
   
     let article = allArticles.filter((oneArticle)=> oneArticle.id == articaleID)
-    // console.log(article);
     var showArticle = ``;
     showArticle +=`
       <div class="col-lg-8">
