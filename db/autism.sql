@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2021 at 10:44 AM
+-- Generation Time: Jun 28, 2021 at 03:22 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -220,7 +220,9 @@ INSERT INTO `caregiver` (`id`, `name`, `photo`, `email`, `password`, `phone`, `s
 (8, 'Mustafa', 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '01066687285', '74823451'),
 (9, 'Moamen Ali', '', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', '', '60'),
 (32, 'Moamen Ali', NULL, 'mo@gmail.com', '$2y$10$LVdMB/W23ARGbGbN82/iUe4gKf/XJRvU4UU6E2iVeQyj4SpBxpwS6', NULL, '60ccb75639cc8'),
-(33, 'Moamen Ali', NULL, 'caregiver@gmail.com', '$2y$10$0Q3KRZGdBErtdcsspJmo4eCiizrtbCX4cTWPB1V.AzUfgx6U5GQNK', NULL, '60ccb75639cc8');
+(33, 'Moamen Ali', NULL, 'caregiver@gmail.com', '$2y$10$0Q3KRZGdBErtdcsspJmo4eCiizrtbCX4cTWPB1V.AzUfgx6U5GQNK', NULL, '60ccb75639cc8'),
+(35, 'new caregiver', NULL, 'new_caregiver@gmail.com', '$2y$10$Nurz.DvVa9nbAc48QHy.b.jLjlGNEj91CBaVD8o/fZKEP7S.W576u', NULL, '60ccb75639cc8'),
+(36, 'new test', NULL, 'new@gmail.com', '$2y$10$ndyc3R5ZSM755lTT8TsHQuCYXqQqfTlNVZR2PCTvveBoFhk1JTD4S', NULL, '60ccb75639cc8');
 
 -- --------------------------------------------------------
 
@@ -635,7 +637,7 @@ CREATE TABLE `notify_schedule` (
   `id` int(11) NOT NULL,
   `schedule_date_time` datetime NOT NULL,
   `specialist_id` int(11) NOT NULL,
-  `caregiver_id` int(11) NOT NULL,
+  `caregiver_id` int(11) DEFAULT NULL,
   `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -645,7 +647,10 @@ CREATE TABLE `notify_schedule` (
 
 INSERT INTO `notify_schedule` (`id`, `schedule_date_time`, `specialist_id`, `caregiver_id`, `patient_id`) VALUES
 (1, '2021-06-30 00:45:00', 11, 9, 109),
-(2, '2021-07-01 01:00:00', 11, 9, 109);
+(2, '2021-07-01 01:00:00', 11, 9, 109),
+(4, '2021-07-04 22:00:00', 11, NULL, 155),
+(5, '2021-07-11 20:00:00', 11, NULL, 155),
+(6, '2021-06-28 15:00:00', 11, 36, 142);
 
 -- --------------------------------------------------------
 
@@ -658,7 +663,7 @@ CREATE TABLE `notify_to_do` (
   `to_do_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `to_do_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `specialist_id` int(11) NOT NULL DEFAULT current_timestamp(),
-  `caregiver_id` int(11) NOT NULL,
+  `caregiver_id` int(11) DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -673,7 +678,12 @@ INSERT INTO `notify_to_do` (`id`, `to_do_title`, `to_do_desc`, `specialist_id`, 
 (8, 'test 8', 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 11, 9, 112, '2021-06-20 20:32:01'),
 (9, 'test 9', 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 11, 9, 112, '2021-06-20 20:32:01'),
 (10, 'Danya Amal Basit Title', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 11, 9, 112, '2021-06-21 21:04:37'),
-(11, 'Danya Amal Basit Title', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 11, 9, 109, '2021-06-21 21:04:52');
+(11, 'Danya Amal Basit Title', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 11, 9, 109, '2021-06-21 21:04:52'),
+(34, 'Danya Amal Basit Title', 'sa', 11, 36, 142, '2021-06-27 19:29:55'),
+(35, 'new test for care giver', 'new test for care giver', 11, NULL, 155, '2021-06-28 08:13:34'),
+(36, 'Danya Amal Basit Title', 'ay', 11, 35, 155, '2021-06-28 08:28:50'),
+(37, '', '', 11, 9, 109, '2021-06-28 13:02:12'),
+(38, '', '', 11, 9, 109, '2021-06-28 13:16:44');
 
 -- --------------------------------------------------------
 
@@ -715,7 +725,9 @@ INSERT INTO `patient` (`id`, `name`, `age`, `date_of_birth`, `school`, `gender`,
 (109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 3, 7, 11, 9, 'Stewart', 'mother', 154545754),
 (110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, 9, 'Antonette', 'mother', 352545754),
 (111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 9, 4, 11, 9, 'Chaz', 'mother', 445545752),
-(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 9, 'Delbert', 'mother', 1545754);
+(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 9, 'Delbert', 'mother', 1545754),
+(142, 'moamen', 8, '2013-06-26', 'lorem yyyyaaaa', 'male', 'ay 7aga', '60d700ab221f1.png', 2, 2, 11, 36, 'ahmed', '2', 231312332),
+(155, 'moamen test3', 16, '2005-06-28', 'lorem y', 'male', 'ay 7aga', '60d9a7328b899.jpg', 4, 2, 11, 35, 'ahmed', '32', 1099616726);
 
 -- --------------------------------------------------------
 
@@ -929,7 +941,7 @@ CREATE TABLE `schedule` (
   `id` int(11) NOT NULL,
   `schedule_date_time` datetime DEFAULT NULL,
   `specialist_id` int(11) NOT NULL,
-  `caregiver_id` int(11) NOT NULL,
+  `caregiver_id` int(11) DEFAULT NULL,
   `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -944,20 +956,15 @@ INSERT INTO `schedule` (`id`, `schedule_date_time`, `specialist_id`, `caregiver_
 (6, '2021-06-23 22:22:37', 1, 1, 104),
 (7, '2021-06-24 22:22:48', 1, 1, 103),
 (8, '2021-06-30 22:22:51', 1, 1, 102),
-(22, '2021-06-24 22:22:54', 11, 4, 112),
-(23, '2021-06-22 22:22:57', 11, 4, 112),
-(27, '2021-06-22 22:55:00', 11, 9, 112),
-(28, '2021-06-23 22:54:00', 11, 9, 112),
-(29, '2021-06-22 15:54:00', 11, 9, 112),
 (30, '2021-06-25 12:00:00', 11, 9, 112),
 (31, '2021-06-22 14:00:00', 11, 9, 109),
 (32, '2021-06-24 14:00:00', 11, 9, 109),
-(33, '2021-06-22 21:34:00', 11, 9, 112),
-(34, '2021-06-22 22:35:00', 11, 9, 112),
 (35, '2021-06-30 00:45:00', 11, 9, 109),
 (36, '2021-06-30 00:45:00', 11, 9, 109),
-(37, '2021-07-01 01:00:00', 11, 9, 109),
-(38, '2021-07-11 03:00:00', 11, 9, 109);
+(38, '2021-07-11 03:00:00', 11, 9, 109),
+(39, '2021-07-04 22:00:00', 11, NULL, 155),
+(40, '2021-07-11 20:00:00', 11, NULL, 155),
+(41, '2021-06-28 15:00:00', 11, 36, 142);
 
 -- --------------------------------------------------------
 
@@ -1003,27 +1010,28 @@ CREATE TABLE `specialist` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int(3) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL
+  `phone` int(11) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `specialist`
 --
 
-INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`, `phone`) VALUES
-(1, '64214504', 'Everardo Streich', 'cartwright.andreane@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 32, 0),
-(2, '42619734', 'Preston Thiel', 'gideon.sporer@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 21, 0),
-(3, '16605077', 'Dr. Solon Rempel II', 'adelia.quigley@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 33, 2147483647),
-(4, '37733001', 'Dawn Shields', 'gfay@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 28, 0),
-(5, '44378271', 'Miss Jayda Prosacco', 'bnienow@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 40, 76),
-(6, '27129708', 'Valentine Graham', 'rogahn.robert@example.org', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 45, 532),
-(7, '96900871', 'Josie Sporer', 'rowan49@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 4, 752017),
-(8, '74823451', 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1),
-(9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1),
-(10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786),
-(11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, NULL),
-(21, '60ccb75639cc8', 'Karim', 'karim.ali.khalifa@gmail.com', '$2y$10$bz29o24xCCcjOEGVRgKXd.6YDtp6ta.vOTfRtr6AiwL0PWDz5vu6K', NULL, NULL),
-(22, '60d100ad1bca0 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$kvFuXZ3b/PAJJ5j8UTOJ0eT8QzoMp5YCDrNyp.HCxeeT4JVx4.yvO', NULL, NULL);
+INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`, `phone`, `photo`) VALUES
+(1, '64214504', 'Everardo Streich', 'cartwright.andreane@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 32, 0, NULL),
+(2, '42619734', 'Preston Thiel', 'gideon.sporer@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 21, 0, NULL),
+(3, '16605077', 'Dr. Solon Rempel II', 'adelia.quigley@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 33, 2147483647, NULL),
+(4, '37733001', 'Dawn Shields', 'gfay@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 28, 0, NULL),
+(5, '44378271', 'Miss Jayda Prosacco', 'bnienow@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 40, 76, NULL),
+(6, '27129708', 'Valentine Graham', 'rogahn.robert@example.org', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 45, 532, NULL),
+(7, '96900871', 'Josie Sporer', 'rowan49@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 4, 752017, NULL),
+(8, '74823451', 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1, NULL),
+(9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1, NULL),
+(10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786, NULL),
+(11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, NULL, NULL),
+(21, '60ccb75639cc8', 'Karim', 'karim.ali.khalifa@gmail.com', '$2y$10$bz29o24xCCcjOEGVRgKXd.6YDtp6ta.vOTfRtr6AiwL0PWDz5vu6K', NULL, NULL, NULL),
+(22, '60d100ad1bca0 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$kvFuXZ3b/PAJJ5j8UTOJ0eT8QzoMp5YCDrNyp.HCxeeT4JVx4.yvO', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1096,10 +1104,10 @@ INSERT INTO `strength_point` (`id`, `strength_point_description`, `patient_id`) 
 
 CREATE TABLE `to_do` (
   `id` int(11) NOT NULL,
-  `to_do_details` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `to_do_details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `specialist_id` int(11) NOT NULL,
-  `caregiver_id` int(11) NOT NULL,
+  `caregiver_id` int(11) DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `done` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -1123,13 +1131,17 @@ INSERT INTO `to_do` (`id`, `to_do_details`, `title`, `specialist_id`, `caregiver
 (16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'That is a static title', 11, 9, 112, '2021-06-20 00:39:19', 'done'),
 (21, 'Lorem Ipsum is simply', 'new Title ', 11, 9, 112, '2021-06-20 00:43:42', 'done'),
 (23, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'new test title ', 11, 9, 112, '2021-06-20 00:46:01', NULL),
-(24, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'test 5', 11, 9, 112, '2021-06-20 00:53:50', NULL),
+(24, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'test 5', 11, 9, 112, '2021-06-20 00:53:50', 'done'),
 (26, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'test 5', 11, 9, 112, '2021-06-20 00:54:35', NULL),
 (34, 'Now, I will create a submit method in jQuery which will validate the input data, and select the latest notification(s),', 'test 2', 11, 9, 112, '2021-06-20 20:32:01', NULL),
 (35, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'Danya Amal Basit Title', 11, 9, 112, '2021-06-21 21:04:37', NULL),
 (36, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'Danya Amal Basit Title', 11, 9, 109, '2021-06-21 21:04:52', NULL),
 (37, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf', 'Danya Amal Basit Title 2', 11, 9, 109, '2021-06-21 21:06:19', NULL),
-(38, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf fdsvuvfdsbfdyisf fdusg fdsygf fdugfds uyftds fsduygfds fdusy  fdsugfds fdusf sufds fdsufds ufds ufds fdsu  fdsuifds fdsiufsdfdsfsf sdufhds fdsiufds  fdisufds  fdsifds  fdsiufds fidshfds fidusf sfidushfds', 'Danya Amal Basit Title 3', 11, 9, 109, '2021-06-21 21:06:56', NULL);
+(38, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf fdsvuvfdsbfdyisf fdusg fdsygf fdugfds uyftds fsduygfds fdusy  fdsugfds fdusf sufds fdsufds ufds ufds fdsu  fdsuifds fdsiufsdfdsfsf sdufhds fdsiufds  fdisufds  fdsifds  fdsiufds fidshfds fidusf sfidushfds', 'Danya Amal Basit Title 3', 11, 9, 109, '2021-06-21 21:06:56', NULL),
+(59, 'sa', 'Danya Amal Basit Title', 11, 36, 142, '2021-06-27 19:29:55', 'done'),
+(62, 'ay', 'Danya Amal Basit Title', 11, 35, 155, '2021-06-28 08:28:50', NULL),
+(63, '', '', 11, 9, 109, '2021-06-28 13:02:12', NULL),
+(64, '', '', 11, 9, 109, '2021-06-28 13:16:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -1141,25 +1153,26 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(1, 'Prof. Jayne Gusikowski', 'lane.aufderhar@example.org', 'e734be5d9d159610b9cbc6ae5030436839629a6e'),
-(2, 'Fernando Lehner III', 'ebernhard@example.org', '72eb628e68fc009c4098735431a23f079efab4a7'),
-(3, 'Roscoe Runolfsson', 'vankunding@example.org', '8e960699185f144b4dc86fce2f3d036a187e6884'),
-(4, 'Lucas Toy', 'kuvalis.victoria@example.com', '15729bce73575a55e1f253286a58e33dba5848a5'),
-(5, 'Prof. Daryl Fadel Sr.', 'swift.conrad@example.com', '965e5888c1339483a6dd650d5a1928ffad288a22'),
-(6, 'Trey Cormier', 'legros.judy@example.org', '219acad53c6b6ae1b0a223f64d311bc7152b9126'),
-(7, 'Orin Legros', 'wbergstrom@example.com', '8b3f1c105d6d3a1bf38e9b73bbdf6a4ee55ba221'),
-(8, 'Braxton Dietrich', 'doconner@example.net', '078b1915c5ef28a27418eea35adf07441761b212'),
-(9, 'Mr. Cary Bayer', 'claire83@example.org', '6a7e968c610c97e6b699f4250ff0df2ccd33f8ee'),
-(10, 'Miss Anita Kutch', 'elegros@example.com', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO'),
-(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`) VALUES
+(1, 'Prof. Jayne Gusikowski', 'lane.aufderhar@example.org', 'e734be5d9d159610b9cbc6ae5030436839629a6e', NULL),
+(2, 'Fernando Lehner III', 'ebernhard@example.org', '72eb628e68fc009c4098735431a23f079efab4a7', NULL),
+(3, 'Roscoe Runolfsson', 'vankunding@example.org', '8e960699185f144b4dc86fce2f3d036a187e6884', NULL),
+(4, 'Lucas Toy', 'kuvalis.victoria@example.com', '15729bce73575a55e1f253286a58e33dba5848a5', NULL),
+(5, 'Prof. Daryl Fadel Sr.', 'swift.conrad@example.com', '965e5888c1339483a6dd650d5a1928ffad288a22', NULL),
+(6, 'Trey Cormier', 'legros.judy@example.org', '219acad53c6b6ae1b0a223f64d311bc7152b9126', NULL),
+(7, 'Orin Legros', 'wbergstrom@example.com', '8b3f1c105d6d3a1bf38e9b73bbdf6a4ee55ba221', NULL),
+(8, 'Braxton Dietrich', 'doconner@example.net', '078b1915c5ef28a27418eea35adf07441761b212', NULL),
+(9, 'Mr. Cary Bayer', 'claire83@example.org', '6a7e968c610c97e6b699f4250ff0df2ccd33f8ee', NULL),
+(10, 'Miss Anita Kutch', 'elegros@example.com', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', NULL),
+(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG', NULL);
 
 -- --------------------------------------------------------
 
@@ -1494,7 +1507,7 @@ ALTER TABLE `autism_checker_results`
 -- AUTO_INCREMENT for table `caregiver`
 --
 ALTER TABLE `caregiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `dsm5_category`
@@ -1530,7 +1543,7 @@ ALTER TABLE `evaluation_history_result`
 -- AUTO_INCREMENT for table `long_term`
 --
 ALTER TABLE `long_term`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `lovaas_questions`
@@ -1560,19 +1573,19 @@ ALTER TABLE `notic_questions`
 -- AUTO_INCREMENT for table `notify_schedule`
 --
 ALTER TABLE `notify_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `notify_to_do`
 --
 ALTER TABLE `notify_to_do`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `plan`
@@ -1602,13 +1615,13 @@ ALTER TABLE `scale_result`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `short_term`
 --
 ALTER TABLE `short_term`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `specialist`
@@ -1626,13 +1639,13 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `strength_point`
 --
 ALTER TABLE `strength_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `to_do`
 --
 ALTER TABLE `to_do`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1644,7 +1657,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `weknees_point`
 --
 ALTER TABLE `weknees_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

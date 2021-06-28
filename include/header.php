@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?= URL; ?>assets/css/slick.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/slick-theme.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/theme8.css">
+    <link rel="stylesheet" href="<?= URL; ?>assets/css/intlTelInput.min.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/style.css">
     <link rel="stylesheet" href="<?= URL; ?>assets/css/responsive.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

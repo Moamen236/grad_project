@@ -19,7 +19,7 @@ $specialist = new specialist;
 $selectspecialist = $specialist->selectAll();
 // to do
 $to_do = new to_do;
-$query = "SELECT to_do.* , specialist.name FROM `to_do` JOIN specialist on to_do.specialist_id = specialist.id WHERE to_do.caregiver_id = $caregiver_id";
+$query = "SELECT to_do.* , patient.name FROM `to_do` JOIN patient on to_do.patient_id = patient.id WHERE to_do.caregiver_id = $caregiver_id";
 $run_to_do =  $to_do->query($query);
 $select_to_do = mysqli_fetch_all($run_to_do, MYSQLI_ASSOC);
 
@@ -131,40 +131,63 @@ require_once('include/navbar.php');
                     <div class="row mt-5">
                         <div class="col-md-12">
                             <?php if (!empty($select_to_do)) { ?>
-                            <div class="accordion" id="accordionExample">
-                                <?php foreach ($select_to_do as $to_do) : ?>
-                                <div class="accordion-item">
-                                    <div class="d-flex align-items-center accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse<?= $to_do['id'] ?>"
-                                        aria-expanded="true" aria-controls="collapseOne">
-                                        <div class="col-lg-6">
-                                            <div class="row align-items-center">
-                                                <div class="col-lg-2 pe-0">
-                                                    <img src="<?= URL; ?>assets/images/person(100x100).png" alt=""
-                                                        class="img-fluid rounded-circle">
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <span><?= $to_do['name'] ?></span>
+                            <div class="table-responsive">
+                                <table class="table tableData table-striped table-hover">
+                                    <thead>
+                                        <th>Case Name</th>
+                                        <th>To DO Title</th>
+                                        <th>Finished</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($select_to_do as $to_do) : ?>
+                                        <tr>
+                                            <td><?= $to_do['name'] ?></td>
+                                            <td style="cursor: pointer;" data-bs-toggle="modal"
+                                                data-bs-target="#to_do_<?= $to_do['id'] ?>">
+                                                <?= $to_do['title'] ?></td>
+                                            <?php if ($to_do['done'] == null) { ?>
+                                            <td data-bs-toggle="tooltip" data-bs-placement="right"
+                                                title="Click to finished this mission">
+                                                <a
+                                                    href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&caregiver_id=<?= $to_do['caregiver_id'] ?>"><i
+                                                        class="far fa-check-circle fa-lg dark-text"></i></a>
+                                            </td>
+                                            <?php } else { ?>
+                                            <td data-bs-toggle="tooltip" data-bs-placement="right"
+                                                title="You finished this mission"><i
+                                                    class="fas fa-check-circle fa-lg light-green"></i></td>
+                                            <?php } ?>
+                                        </tr>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="to_do_<?= $to_do['id'] ?>" tabindex="-1"
+                                            aria-labelledby="to_do_<?= $to_do['id'] ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="to_do_<?= $to_do['id'] ?>">
+                                                            <?= $to_do['title'] ?></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <?= $to_do['to_do_details'] ?>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <?php if ($to_do['done'] == null) { ?>
+                                                        <a href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&caregiver_id=<?= $to_do['caregiver_id'] ?>"
+                                                            class="btn secondary-btn">Finish
+                                                            Mission</a>
+                                                        <?php } else { ?>
+                                                        <button type="button" class="btn secondary-btn" disabled>You
+                                                            Finished this mission</button>
+                                                        <?php } ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <p class="m-0"><?= $to_do['title'] ?>.</p>
-                                        </div>
-                                    </div>
-                                    <div id="collapse<?= $to_do['id'] ?>" class="accordion-collapse collapse"
-                                        aria-labelledby="heading<?= $to_do['id'] ?>" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <?= $to_do['to_do_details'] ?>
-                                        </div>
-                                        <div class="badge float-end mb-2">
-                                            <a href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&caregiver_id=<?= $to_do['caregiver_id'] ?>"
-                                                class="btn secondary-btn">Finish The Mission</a>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <?php endforeach ?>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
                             </div>
                             <?php } else { ?>
                             <div class="body_not_select text-center" style="background-color: #FDFDFD;">
@@ -199,7 +222,7 @@ require_once('include/navbar.php');
                                 <thead class="bg-white">
                                     <tr>
                                         <th>Specialist Name</th>
-                                        <th>Patient Name</th>
+                                        <th>Case Name</th>
                                         <th>Session Date</th>
                                         <th>Session Time</th>
                                         <th>Add to Calendar </th>

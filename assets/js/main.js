@@ -37,9 +37,20 @@ $(document).ready( function () {
     }
   })
 
-  
-  // form reload
-  function submissionDone(){
+  $("#imgload").change(function () {
+    console.log("change");
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imgshow').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+  });
+
+
+  // form with ajax
+  function submissionDone(data){
     console.log('success message');
   }
 
@@ -51,16 +62,17 @@ $(document).ready( function () {
 
 		var url = form.attr('action');
     var type = form.attr('method');
-    console.log(url);
-    console.log(type);
 
-    var form_data = form.serialize(); //new FormData(form)
+    var form_data = {
+      title : $('#title').val(),
+      description : $('#description').val()
+    };
     console.log(form_data);
 
 		$.ajax({
 			type: type,
 			url: url,
-			data: form_data ,
+			data: form_data,
 			success: function () {
 				submissionDone();
 			},
@@ -85,3 +97,4 @@ $(document).ready( function () {
   //   $('#myTab a[hreft="' + hash + '"]').tab('show');
 
 });
+

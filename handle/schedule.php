@@ -17,8 +17,13 @@ if ($request->postHas('add-schedule')) {
         if (strpos($key, 'datetime_') !== false) {
             $date_no = str_replace('datetime_', '', $key);
             echo $record . "<br>";
-            $schedule->insert("schedule_date_time , specialist_id, caregiver_id , patient_id", "'$record'  , $specialist_id , $caregiver_id , $patient_id");
-            $notify_schedule->insert("schedule_date_time , specialist_id, caregiver_id , patient_id", "'$record'  , $specialist_id , $caregiver_id , $patient_id");
+            if ($caregiver_id != null) {
+                $schedule->insert("schedule_date_time , specialist_id, caregiver_id , patient_id", "'$record'  , $specialist_id , $caregiver_id , $patient_id");
+                $notify_schedule->insert("schedule_date_time , specialist_id, caregiver_id , patient_id", "'$record'  , $specialist_id , $caregiver_id , $patient_id");
+            } else {
+                $schedule->insert("schedule_date_time , specialist_id , patient_id", "'$record'  , $specialist_id  , $patient_id");
+                $notify_schedule->insert("schedule_date_time , specialist_id , patient_id", "'$record'  , $specialist_id  , $patient_id");
+            }
             $request->redirect("patient-profile.php?patientid=$patient_id");
         }
     }

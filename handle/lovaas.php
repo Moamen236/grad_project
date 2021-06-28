@@ -3,7 +3,7 @@
 use Project\Classes\Models\lovaas_questions;
 use Project\Classes\Models\lovaas_results;
 
-require_once("../../app.php");
+require_once("../app.php");
 
 $lovaas_questions = new lovaas_questions;
 $lovaas_questions_arr = $lovaas_questions->selectAll();

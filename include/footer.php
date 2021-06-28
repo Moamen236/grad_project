@@ -62,6 +62,7 @@
 <script src="<?= URL; ?>assets/js/rellax.min.js"></script>
 <script src="<?= URL; ?>assets/js/wow.min.js"></script>
 <script src="<?= URL; ?>assets/js/slick.min.js"></script>
+<script src="<?= URL; ?>assets/js/intlTelInput.min.js"></script>
 <script src="<?= URL; ?>assets/js/main.js"></script>
 
 </body>

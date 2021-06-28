@@ -904,6 +904,16 @@ footer .social ul li a:hover {
 .patient-profile .data-info .info {
 	padding: 15px 30px;
 }
+.patient-profile .personal-img .icon{
+	background-color: #fff;
+	padding: 8px 15px;
+	margin: 0 5px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+}
 /*--------------- patient-profile ----------------*/
 
 /*------------- Forget password page -------------*/
@@ -1270,4 +1280,17 @@ footer .social ul li a:hover {
 .dropdown-item.active,
 .dropdown-item:active {
 	background-color: #e9ecef;
+}
+
+/* 404_page */
+.not_found{
+	background-color: #FDFDFD;
+}
+.not_found h1{
+	font-size: 100px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

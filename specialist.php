@@ -193,11 +193,11 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                 Create Patient Account
                             </h2>
                             <div class="line bg-yellow"></div>
-                            <form action="handle/create-patient.php" method="POST" enctype="multipart/form-data">
+                            <form action="handle/patient.php" method="POST" enctype="multipart/form-data">
                                 <div class="row mt-40">
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label dark-text">
+                                            <label class="form-label dark-text">
                                                 Name <span class="red">*</span></label>
                                             <input type="text" name="patient_name" class="form-control bg-white"
                                                 required>
@@ -205,7 +205,7 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label dark-text">Date of
+                                            <label class="form-label dark-text">Date of
                                                 Birth <span class="red">*</span></label>
                                             <input type="date" name="patient_date" class="form-control bg-white"
                                                 required>
@@ -214,7 +214,7 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label class="form-label">Photo</label>
-                                            <input class="form-control" type="file" name="patient_pic">
+                                            <input class="form-control" type="file" name="patient_pic" value="null">
                                         </div>
                                     </div>
                                 </div>
@@ -248,9 +248,26 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label dark-text"> Number
+                                                of brothers </label>
+                                            <input type="number" name="No_of_bro" class="form-control bg-white">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label dark-text"> Rank
+                                                among brothers </label>
+                                            <input type="number" name="arr_btw_bro" class="form-control bg-white">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label dark-text">Caregiver
+                                            <label class="form-label dark-text">Caregiver
                                                 name
                                                 <span class="red">*</span></label>
                                             <input type="text" name="caregiver_name" class="form-control bg-white"
@@ -268,33 +285,17 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label dark-text">Phone
+                                            <label class="form-label dark-text">Phone
                                                 number
                                                 <span class="red">*</span></label>
-                                            <input type="number" name="caregiver_number" class="form-control bg-white">
+                                            <input type="number" id="telephone" name="caregiver_number"
+                                                class="form-control bg-white">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label dark-text"> Number
-                                                of brothers </label>
-                                            <input type="number" name="No_of_bro" class="form-control bg-white">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label dark-text"> Rank
-                                                among brothers </label>
-                                            <input type="number" name="arr_btw_bro" class="form-control bg-white">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" name="create_patient"
-                                            class="secondary-btn float-end btn mt-25">Create</button>
-                                    </div>
-                                </div>
+                                <button type="submit" name="create_patient"
+                                    class="secondary-btn float-end btn mt-25">Create</button>
+                                <div class="clearfix"></div>
                             </form>
                         </div>
                     </div>
@@ -392,7 +393,12 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
     </div>
 </section>
 
-
+<script>
+var input = document.querySelector("#telephone");
+window.intlTelInput(input, ({
+    preferredCountries: ["eg"]
+}));
+</script>
 <?php
 require_once('include/footer.php');
 ?>

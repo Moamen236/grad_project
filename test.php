@@ -426,18 +426,18 @@ use Project\Classes\Models\lovaas_questions;
 // print_r($patient_select);
 // echo "</pre>";
 
-$notify_schedule = new notify_schedule;
-$get_notify_schedule = $notify_schedule->selectWhere("*", "caregiver_id = 9");
+// $notify_schedule = new notify_schedule;
+// $get_notify_schedule = $notify_schedule->selectWhere("*", "caregiver_id = 9");
 
-$date_time_arr = [];
-$today = date("d-m-Y");
-foreach ($get_notify_schedule as $key => $value) {
-    $date_time_arr[] = [
-        'patient_id' => $value['patient_id'],
-        'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
-        'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
-    ];
-}
+// $date_time_arr = [];
+// $today = date("d-m-Y");
+// foreach ($get_notify_schedule as $key => $value) {
+//     $date_time_arr[] = [
+//         'patient_id' => $value['patient_id'],
+//         'schedule_date' => date('d-m-Y', strtotime($value['schedule_date_time'])),
+//         'schedule_time' => date('h:i a', strtotime($value['schedule_date_time'])),
+//     ];
+// }
 
 // $notify_caregiver = [];
 // foreach ($date_time_arr as $value) {
@@ -449,29 +449,25 @@ foreach ($get_notify_schedule as $key => $value) {
 //         ];
 //     }
 // }
-$patients = new patient;
 
-foreach ($date_time_arr as $notify_schedule) {
-    $patient_id = $notify_schedule['patient_id'];
-    $patient = $patients->selectId("name", "$patient_id")
-?>
-<li class="dropdown-item">
-    <div class="item py-2">
-        <span class="badge bg-light text-dark">New session</span>
-        <p class="my-1">You have new session for <strong><?= $patient['name'] ?></strong>
-        </p>
-        <span
-            class="badge bg-light text-dark"><?= date('d/m/Y', strtotime($notify_schedule['schedule_date'])); ?></span>
-        <span
-            class="badge bg-light text-dark"><?= date('h:i a', strtotime($notify_schedule['schedule_time'])); ?></span>
-    </div>
-</li>
-<li>
-    <hr class="dropdown-divider m-0">
-</li>
-<?php } ?>
 
-<!-- echo "
-<pre>";
-print_r($date_time_arr);
-echo "</pre>"; -->
+
+// $now = new DateTime();
+// $now_date = $now->format('Y-m-d H:i:s T');
+
+// print_r($now);
+// echo $now_date;
+// $patients = new patient;
+// $patient_result =  $patients->selectId("*", 142);
+// $caregiver_id = $patient_result['caregiver_id'];
+
+// if ($caregiver_id != null) {
+//     echo $caregiver_id;
+//     // $session->set("caregiver_id", $caregiver_id);
+// } else {
+//     echo "not found";
+// }
+
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";

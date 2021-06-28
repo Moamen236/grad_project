@@ -5,20 +5,26 @@ use Project\Classes\Models\to_do;
 require_once('include/header.php');
 require_once('include/navbar.php');
 
-
 $patient_id = $request->get('patientid');
 $session->set("patient_id", $patient_id);
 
 $patient_result =  $patients->selectId("*", $patient_id);
-if (!empty($patient_result['caregiver_id'])) {
-    $caregiver_id = $patient_result['caregiver_id'];
+$caregiver_id = $patient_result['caregiver_id'];
+
+if (empty($patient_result)) {
+    $request->redirect("specialist.php");
+}
+
+if ($caregiver_id != null) {
     $session->set("caregiver_id", $caregiver_id);
+} else {
+    $session->set("caregiver_id", "");
 }
 
 $now = new DateTime();
-$now_date = $now->format("Y-m-d");
+$now_date = $now->format("Y-m-d H:i:s");
 
-$query = "SELECT * FROM `schedule` WHERE schedule_date_time >= '$now_date' AND patient_id = $patient_id LIMIT 1";
+$query = "SELECT * FROM `schedule` WHERE schedule_date_time >= '$now_date' AND patient_id = $patient_id GROUP BY schedule_date_time LIMIT 1";
 $run_query = $schedule->query($query);
 $next_schedule = mysqli_fetch_assoc($run_query);
 
@@ -26,7 +32,8 @@ $to_do = new to_do;
 $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
 ?>
 
-<div class="patient-profile ">
+<?php if (!empty($patient_result)) { ?>
+<div class="patient-profile">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-lg-4">
@@ -46,8 +53,16 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                             </div>
                             <?php } ?>
                             <h4><?= $patient_result['name'] ?> </h4>
-                            <a href="#" class="dark-text">Edit</a>
-                            <a href="#" class="dark-text">Delete</a>
+                            <a href="edit-patient-profile.php?patientid=<?= $patient_id ?>" class="light-green">
+                                <div class="icon d-inline-block">
+                                    <i class="far fa-edit"></i>
+                                </div>
+                            </a>
+                            <a href="handle/patient.php?patient_id=<?= $patient_id ?>" class="red">
+                                <div class="icon d-inline-block">
+                                    <i class="far fa-trash-alt"></i>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="row justify-content-center action-btn">
@@ -77,14 +92,14 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="handle/add-to-do.php" method="post">
+                                    <form action="handle/add-to-do.php" id="form" method="post">
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <input type="text" name="title" class="form-control"
+                                                <input type="text" name="title" id="title" class="form-control"
                                                     placeholder="Title">
                                             </div>
                                             <div class="mb-3">
-                                                <textarea class="form-control" name="description"
+                                                <textarea class="form-control" id="description" name="description"
                                                     placeholder="leave a Description" rows="4"></textarea>
                                             </div>
                                         </div>
@@ -96,6 +111,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                                 </div>
                             </div>
                         </div>
+                        <!-- Add to do Modal -->
                     </div>
                     <div class="row justify-content-center next-session mt-4">
                         <div class="col-lg-10 col-md-10 bg-white p-3 shadow-sm rounded">
@@ -212,6 +228,22 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                         </div>
                         <div class="row mb-3">
                             <div class="col-lg-4 col-md-4">
+                                <h5 class="f-400">Rank among brothers</h5>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <h5><?= $patient_result['arr_btw_bro'] ?></h5>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-4">
+                                <h5 class="f-400">Number of brothers</h5>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <h5><?= $patient_result['No_of_bro'] ?></h5>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-4">
                                 <h5 class="f-400">Class</h5>
                             </div>
                             <div class="col-lg-4 col-md-4">
@@ -300,7 +332,8 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                                     <?php } ?>
                                     <td data-bs-toggle="modal" data-bs-target="#Modal_edit_<?= $to_do['id'] ?>"
                                         style="cursor: pointer;"><i class="far fa-edit light-green fa-lg"></i></td>
-                                    <td><a href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>"><i
+                                    <td><a
+                                            href="handle/add-to-do.php?to_do_id=<?= $to_do['id'] ?>&to_do_title=<?= $to_do['title'] ?>&to_do_details=<?= $to_do['to_do_details'] ?>"><i
                                                 class="far fa-trash-alt red fa-lg"></i></a></td>
                                 </tr>
                                 <!-- Modal for To do -->
@@ -373,6 +406,15 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
         </div>
     </div>
 </div>
+<?php } else { ?>
+<div class="not_found vh-100 d-flex justify-content-center align-items-center text-center">
+    <div class="content">
+        <h4>OOPS! PAGE NOT FOUND</h4>
+        <h1>404</h1>
+        <p>we are sorry , But the page you requested was not found</p>
+    </div>
+</div>
+<?php } ?>
 
 <script>
 var i = 0;

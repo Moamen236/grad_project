@@ -1,8 +1,12 @@
 <?php
 
 use Project\Classes\Models\caregiver;
+use Project\Classes\Models\notify_schedule;
+use Project\Classes\Models\notify_to_do;
 use Project\Classes\Models\patient;
+use Project\Classes\Models\schedule;
 use Project\Classes\Models\specialist;
+use Project\Classes\Models\to_do;
 use Project\Classes\Models\Users;
 
 require_once('../app.php');
@@ -11,6 +15,10 @@ $specialist = new specialist;
 $caregiver = new caregiver;
 $users = new Users;
 $patients = new patient;
+$schedule = new schedule;
+$notify_schedule = new notify_schedule;
+$to_do = new to_do;
+$notify_to_do = new notify_to_do;
 
 
 if ($request->postHas('reg')) {
@@ -79,7 +87,16 @@ if ($request->postHas('reg')) {
                     $run_query = $caregiver->query($query);
                     $caregiver_just_reg = mysqli_fetch_assoc($run_query);
                     $caregiver_just_reg_id = $caregiver_just_reg['id'];
+                    // update_patient
                     $update_patient = $patients->update("caregiver_id = $caregiver_just_reg_id", "id = $patient_id");
+                    // update schedule
+                    $update_schedule = $schedule->update("caregiver_id = $caregiver_just_reg_id", "patient_id = $patient_id");
+                    // update notify schedule
+                    $update_notify_schedule = $notify_schedule->update("caregiver_id = $caregiver_just_reg_id", "patient_id = $patient_id");
+                    // update to_do
+                    $update_to_do = $to_do->update("caregiver_id = $caregiver_just_reg_id", "patient_id = $patient_id");
+                    // update notify_to_do
+                    $update_notify_to_do = $notify_to_do->update("caregiver_id = $caregiver_just_reg_id", "patient_id = $patient_id");
                     $session->set('sucsses_reg', 'You are now logged in');
                     $request->redirect('index.php');
                 }
