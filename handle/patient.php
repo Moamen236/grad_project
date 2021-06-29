@@ -30,7 +30,7 @@ if ($request->postHas("create_patient")) {
     $patient_age =  $from->diff($to)->y;
 
     // Patient Picture
-    if ($_POST['patient_pic']) {
+    if ($patient_pic['name'] != null) {
         $pic_name = $patient_pic['name'];
         $pic_type = $patient_pic['type'];
         $pic_tmp_name = $patient_pic['tmp_name'];
@@ -42,12 +42,19 @@ if ($request->postHas("create_patient")) {
         $uniq_pic_name = "$random.$extention";
         move_uploaded_file($pic_tmp_name, PATH . "assets/images/uploads/patients/$uniq_pic_name");
         // Insert in Database
-        $res = $patients->insert(("name,age,date_of_birth,school,gender,No_of_bro , arr_btw_bro ,class,photo,caregiver_name,caregiver_relationship,caregiver_phone,spcialist_id "), ("'$patient_name' , $patient_age , '$patient_date' , '$patient_school' , '$patient_gender' ,$No_of_bro , $arr_btw_bro , '$patient_class' , '$uniq_pic_name' ,   '$caregiver_name' , '$caregiver_relationship' ,$caregiver_number , $specialist_id"));
+        $res = $patients->insert(("name,age,date_of_birth,school,gender,No_of_bro , arr_btw_bro ,class,photo,caregiver_name,caregiver_relationship,caregiver_phone,spcialist_id "), ("'$patient_name' , $patient_age , '$patient_date' , '$patient_school' , '$patient_gender' , $No_of_bro , $arr_btw_bro , '$patient_class' , '$uniq_pic_name' ,   '$caregiver_name' , '$caregiver_relationship' ,$caregiver_number , $specialist_id"));
     } else {
         // Insert in Database
         $res = $patients->insert(("name,age,date_of_birth,school,gender,class,caregiver_name,caregiver_relationship,caregiver_phone,spcialist_id "), ("'$patient_name' , $patient_age , '$patient_date' , '$patient_school' , '$patient_gender' , '$patient_class'  ,   '$caregiver_name' , '$caregiver_relationship' ,$caregiver_number , $specialist_id"));
     }
-    $request->redirect("specialist.php");
+    // $request->redirect("specialist.php");
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+    var_dump($res);
 } elseif ($request->getHas('patient_id')) {
     $patient_id = $request->get('patient_id');
     $patients->delete("id = $patient_id");
