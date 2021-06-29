@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2021 at 03:22 PM
+-- Generation Time: Jun 29, 2021 at 04:36 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -70,6 +70,48 @@ CREATE TABLE `adir_result` (
   `pateint_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `adir_result`
+--
+
+INSERT INTO `adir_result` (`id`, `adir_id`, `result`, `comment`, `pateint_id`) VALUES
+(1, 1, 1, '', 112),
+(2, 2, 0, '', 112),
+(3, 3, 1, '', 112),
+(4, 4, 1, '', 112),
+(5, 5, 1, '', 112),
+(6, 6, 0, '', 112),
+(7, 7, 0, '', 112),
+(8, 8, 1, '', 112),
+(9, 9, 1, '', 112),
+(10, 10, 0, '', 112),
+(11, 11, 0, '', 112),
+(12, 12, 0, '', 112),
+(13, 13, 0, '', 112),
+(14, 14, 0, '', 112),
+(15, 15, 1, '', 112),
+(16, 16, 1, '', 112),
+(17, 17, 1, '', 112),
+(18, 18, 1, '', 112),
+(19, 1, 1, '', 103),
+(20, 2, 0, '', 103),
+(21, 3, 1, '', 103),
+(22, 4, 1, '', 103),
+(23, 5, 0, '', 103),
+(24, 6, 0, '', 103),
+(25, 7, 0, '', 103),
+(26, 8, 0, '', 103),
+(27, 9, 1, '', 103),
+(28, 10, 0, '', 103),
+(29, 11, 0, '', 103),
+(30, 12, 1, '', 103),
+(31, 13, 1, '', 103),
+(32, 14, 0, '', 103),
+(33, 15, 1, '', 103),
+(34, 16, 0, '', 103),
+(35, 17, 0, '', 103),
+(36, 18, 0, '', 103);
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +161,7 @@ CREATE TABLE `autism_checker` (
   `case_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` enum('male','female') COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int(3) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -126,18 +169,17 @@ CREATE TABLE `autism_checker` (
 -- Dumping data for table `autism_checker`
 --
 
-INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `user_id`) VALUES
-(1, 'Michelle Keebler', 'male', 9, 1),
-(2, 'Daisha Bayer', 'male', 2, 2),
-(3, 'Dr. Cortez Brekke', 'male', 6, 3),
-(4, 'Vicenta Herzog', 'male', 4, 4),
-(5, 'Prof. Marquis Satterfield', 'male', 2, 5),
-(6, 'Talia Adams', 'male', 5, 6),
-(7, 'Abigail Rowe', 'female', 9, 7),
-(8, 'Freddie Lubowitz', 'male', 8, 8),
-(9, 'Jenifer Gislason', 'male', 4, 9),
-(10, 'Alfred Green', 'male', 4, 10),
-(13, 'Moamen Ali', 'male', 12, 23);
+INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `created_at`, `user_id`) VALUES
+(1, 'Michelle Keebler', 'male', 9, NULL, 1),
+(2, 'Daisha Bayer', 'male', 2, NULL, 2),
+(3, 'Dr. Cortez Brekke', 'male', 6, NULL, 3),
+(4, 'Vicenta Herzog', 'male', 4, NULL, 4),
+(5, 'Prof. Marquis Satterfield', 'male', 2, NULL, 5),
+(6, 'Talia Adams', 'male', 5, NULL, 6),
+(7, 'Abigail Rowe', 'female', 9, NULL, 7),
+(8, 'Freddie Lubowitz', 'male', 8, NULL, 8),
+(9, 'Jenifer Gislason', 'male', 4, NULL, 9),
+(10, 'Alfred Green', 'male', 4, NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -198,10 +240,11 @@ CREATE TABLE `autism_checker_results` (
 CREATE TABLE `caregiver` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
   `sp_serial_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -209,20 +252,20 @@ CREATE TABLE `caregiver` (
 -- Dumping data for table `caregiver`
 --
 
-INSERT INTO `caregiver` (`id`, `name`, `photo`, `email`, `password`, `phone`, `sp_serial_no`) VALUES
-(1, 'Loy', 'http://lorempixel.com/640/480/', 'reichel.treva@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '639.728.5038x9193', '64214504'),
-(2, 'Sincere', 'http://lorempixel.com/640/480/', 'ahilll@example.com', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-342-390-6436x1066', '42619734'),
-(3, 'Carolyne', 'http://lorempixel.com/640/480/', 'johnathon.hudson@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-586-654-9080', '16605077'),
-(4, 'River', 'http://lorempixel.com/640/480/', 'eino.schulist@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '(690)021-5767x3524', '37733001'),
-(5, 'Marlee', 'http://lorempixel.com/640/480/', 'zjakubowski@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '+91(7)5303688928', '44378271'),
-(6, 'Lawrence', 'http://lorempixel.com/640/480/', 'ibogan@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '830.143.2849', '27129708'),
-(7, 'Lurline', 'http://lorempixel.com/640/480/', 'eunice08@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '1-964-176-0506', '96900871'),
-(8, 'Mustafa', 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', '01066687285', '74823451'),
-(9, 'Moamen Ali', '', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', '', '60'),
-(32, 'Moamen Ali', NULL, 'mo@gmail.com', '$2y$10$LVdMB/W23ARGbGbN82/iUe4gKf/XJRvU4UU6E2iVeQyj4SpBxpwS6', NULL, '60ccb75639cc8'),
-(33, 'Moamen Ali', NULL, 'caregiver@gmail.com', '$2y$10$0Q3KRZGdBErtdcsspJmo4eCiizrtbCX4cTWPB1V.AzUfgx6U5GQNK', NULL, '60ccb75639cc8'),
-(35, 'new caregiver', NULL, 'new_caregiver@gmail.com', '$2y$10$Nurz.DvVa9nbAc48QHy.b.jLjlGNEj91CBaVD8o/fZKEP7S.W576u', NULL, '60ccb75639cc8'),
-(36, 'new test', NULL, 'new@gmail.com', '$2y$10$ndyc3R5ZSM755lTT8TsHQuCYXqQqfTlNVZR2PCTvveBoFhk1JTD4S', NULL, '60ccb75639cc8');
+INSERT INTO `caregiver` (`id`, `name`, `gender`, `photo`, `email`, `password`, `phone`, `sp_serial_no`) VALUES
+(1, 'Loy', NULL, 'http://lorempixel.com/640/480/', 'reichel.treva@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 639, '64214504'),
+(2, 'Sincere', NULL, 'http://lorempixel.com/640/480/', 'ahilll@example.com', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 1, '42619734'),
+(3, 'Carolyne', NULL, 'http://lorempixel.com/640/480/', 'johnathon.hudson@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 1, '16605077'),
+(4, 'River', NULL, 'http://lorempixel.com/640/480/', 'eino.schulist@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 0, '37733001'),
+(5, 'Marlee', NULL, 'http://lorempixel.com/640/480/', 'zjakubowski@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 91, '44378271'),
+(6, 'Lawrence', NULL, 'http://lorempixel.com/640/480/', 'ibogan@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 830, '27129708'),
+(7, 'Lurline', NULL, 'http://lorempixel.com/640/480/', 'eunice08@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 1, '96900871'),
+(8, 'Mustafa', NULL, 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 1066687285, '74823451'),
+(9, 'Moamen Ali', 'male', '60dae14cc875f.jpg', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', 1099616726, '60'),
+(32, 'Moamen Ali', NULL, NULL, 'mo@gmail.com', '$2y$10$LVdMB/W23ARGbGbN82/iUe4gKf/XJRvU4UU6E2iVeQyj4SpBxpwS6', NULL, '60ccb75639cc8'),
+(33, 'Moamen Ali', NULL, NULL, 'caregiver@gmail.com', '$2y$10$0Q3KRZGdBErtdcsspJmo4eCiizrtbCX4cTWPB1V.AzUfgx6U5GQNK', NULL, '60ccb75639cc8'),
+(35, 'new caregiver', NULL, NULL, 'new_caregiver@gmail.com', '$2y$10$Nurz.DvVa9nbAc48QHy.b.jLjlGNEj91CBaVD8o/fZKEP7S.W576u', NULL, '60ccb75639cc8'),
+(36, 'new test', NULL, NULL, 'new@gmail.com', '$2y$10$ndyc3R5ZSM755lTT8TsHQuCYXqQqfTlNVZR2PCTvveBoFhk1JTD4S', NULL, '60ccb75639cc8');
 
 -- --------------------------------------------------------
 
@@ -295,26 +338,17 @@ CREATE TABLE `dsm_result` (
 INSERT INTO `dsm_result` (`id`, `dsm_question_result`, `pateint_id`, `dsm_question_id`) VALUES
 (1, 1, 101, 1),
 (2, 1, 101, 2),
-(3, 1, 101, 3),
+(3, 0, 101, 3),
 (4, 1, 101, 4),
 (5, 1, 101, 5),
 (6, 1, 101, 6),
-(7, 1, 101, 7),
+(7, 0, 101, 7),
 (8, 1, 101, 8),
-(9, 1, 101, 9),
+(9, 0, 101, 9),
 (10, 1, 101, 10),
 (11, 1, 101, 11),
 (12, 1, 101, 12),
-(13, 1, 101, 13),
-(15, 0, 112, 1),
-(16, 0, 112, 2),
-(17, 0, 112, 3),
-(18, 0, 112, 4),
-(19, 0, 112, 5),
-(20, 0, 112, 1),
-(21, 0, 112, 2),
-(22, 0, 112, 3),
-(23, 0, 112, 4);
+(13, 1, 101, 13);
 
 -- --------------------------------------------------------
 
@@ -362,6 +396,28 @@ CREATE TABLE `evaluation_history_result` (
   `comment` text NOT NULL,
   `pateint_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `evaluation_history_result`
+--
+
+INSERT INTO `evaluation_history_result` (`id`, `evaluation_id`, `result`, `comment`, `pateint_id`) VALUES
+(1, 1, 1, '', 112),
+(2, 2, 0, '', 112),
+(3, 3, 0, '', 112),
+(4, 4, 1, '', 112),
+(5, 5, 1, '', 112),
+(6, 6, 1, '', 112),
+(7, 7, 0, '', 112),
+(8, 8, 0, '', 112),
+(9, 9, 1, '', 112),
+(10, 10, 1, '', 112),
+(11, 11, 0, '', 112),
+(12, 12, 0, '', 112),
+(13, 13, 0, '', 112),
+(14, 14, 1, '', 112),
+(15, 15, 1, '', 112),
+(16, 16, 0, '', 112);
 
 -- --------------------------------------------------------
 
@@ -578,7 +634,13 @@ INSERT INTO `lovaas_results` (`id`, `lovaas_question_result`, `lovaas_question_i
 (139, 'good', 1, 111),
 (140, 'medium', 2, 111),
 (141, 'medium', 3, 111),
-(142, 'weak', 4, 111);
+(142, 'weak', 4, 111),
+(143, 'good', 1, 112),
+(144, 'medium', 2, 112),
+(145, 'medium', 3, 112),
+(146, 'weak', 4, 112),
+(147, 'medium', 5, 112),
+(148, 'weak', 6, 112);
 
 -- --------------------------------------------------------
 
@@ -594,6 +656,19 @@ CREATE TABLE `notic` (
   `comment` text NOT NULL,
   `pateint_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notic`
+--
+
+INSERT INTO `notic` (`id`, `notic_q_id`, `notic_category`, `result`, `comment`, `pateint_id`) VALUES
+(29, 9, 'Adapt to routine', 1, '', 109),
+(30, 12, 'Adapt to routine', 1, '', 109),
+(31, 7, 'Body Use', 1, '', 109),
+(32, 1, 'Child communication', 1, '', 109),
+(33, 4, 'child s social interaction', 1, '', 109),
+(34, 8, 'play', 1, '', 109),
+(35, 14, 'Use of the senses ', 1, '', 109);
 
 -- --------------------------------------------------------
 
@@ -1011,27 +1086,28 @@ CREATE TABLE `specialist` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int(3) DEFAULT NULL,
   `phone` int(11) DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `specialist`
 --
 
-INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`, `phone`, `photo`) VALUES
-(1, '64214504', 'Everardo Streich', 'cartwright.andreane@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 32, 0, NULL),
-(2, '42619734', 'Preston Thiel', 'gideon.sporer@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 21, 0, NULL),
-(3, '16605077', 'Dr. Solon Rempel II', 'adelia.quigley@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 33, 2147483647, NULL),
-(4, '37733001', 'Dawn Shields', 'gfay@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 28, 0, NULL),
-(5, '44378271', 'Miss Jayda Prosacco', 'bnienow@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 40, 76, NULL),
-(6, '27129708', 'Valentine Graham', 'rogahn.robert@example.org', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 45, 532, NULL),
-(7, '96900871', 'Josie Sporer', 'rowan49@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 4, 752017, NULL),
-(8, '74823451', 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1, NULL),
-(9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1, NULL),
-(10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786, NULL),
-(11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, NULL, NULL),
-(21, '60ccb75639cc8', 'Karim', 'karim.ali.khalifa@gmail.com', '$2y$10$bz29o24xCCcjOEGVRgKXd.6YDtp6ta.vOTfRtr6AiwL0PWDz5vu6K', NULL, NULL, NULL),
-(22, '60d100ad1bca0 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$kvFuXZ3b/PAJJ5j8UTOJ0eT8QzoMp5YCDrNyp.HCxeeT4JVx4.yvO', NULL, NULL, NULL);
+INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`, `phone`, `photo`, `gender`) VALUES
+(1, '64214504', 'Everardo Streich', 'cartwright.andreane@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 32, 0, NULL, NULL),
+(2, '42619734', 'Preston Thiel', 'gideon.sporer@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 21, 0, NULL, NULL),
+(3, '16605077', 'Dr. Solon Rempel II', 'adelia.quigley@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 33, 2147483647, NULL, NULL),
+(4, '37733001', 'Dawn Shields', 'gfay@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 28, 0, NULL, NULL),
+(5, '44378271', 'Miss Jayda Prosacco', 'bnienow@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 40, 76, NULL, NULL),
+(6, '27129708', 'Valentine Graham', 'rogahn.robert@example.org', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 45, 532, NULL, NULL),
+(7, '96900871', 'Josie Sporer', 'rowan49@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 4, 752017, NULL, NULL),
+(8, '74823451', 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1, NULL, NULL),
+(9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1, NULL, NULL),
+(10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786, NULL, NULL),
+(11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, 1099616726, '60db139a414a5.jpg', 'male'),
+(21, '60ccb75639cc8', 'Karim', 'karim.ali.khalifa@gmail.com', '$2y$10$bz29o24xCCcjOEGVRgKXd.6YDtp6ta.vOTfRtr6AiwL0PWDz5vu6K', NULL, NULL, NULL, NULL),
+(22, '60d100ad1bca0 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$kvFuXZ3b/PAJJ5j8UTOJ0eT8QzoMp5YCDrNyp.HCxeeT4JVx4.yvO', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1154,25 +1230,26 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`) VALUES
-(1, 'Prof. Jayne Gusikowski', 'lane.aufderhar@example.org', 'e734be5d9d159610b9cbc6ae5030436839629a6e', NULL),
-(2, 'Fernando Lehner III', 'ebernhard@example.org', '72eb628e68fc009c4098735431a23f079efab4a7', NULL),
-(3, 'Roscoe Runolfsson', 'vankunding@example.org', '8e960699185f144b4dc86fce2f3d036a187e6884', NULL),
-(4, 'Lucas Toy', 'kuvalis.victoria@example.com', '15729bce73575a55e1f253286a58e33dba5848a5', NULL),
-(5, 'Prof. Daryl Fadel Sr.', 'swift.conrad@example.com', '965e5888c1339483a6dd650d5a1928ffad288a22', NULL),
-(6, 'Trey Cormier', 'legros.judy@example.org', '219acad53c6b6ae1b0a223f64d311bc7152b9126', NULL),
-(7, 'Orin Legros', 'wbergstrom@example.com', '8b3f1c105d6d3a1bf38e9b73bbdf6a4ee55ba221', NULL),
-(8, 'Braxton Dietrich', 'doconner@example.net', '078b1915c5ef28a27418eea35adf07441761b212', NULL),
-(9, 'Mr. Cary Bayer', 'claire83@example.org', '6a7e968c610c97e6b699f4250ff0df2ccd33f8ee', NULL),
-(10, 'Miss Anita Kutch', 'elegros@example.com', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', NULL),
-(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG', NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`, `gender`) VALUES
+(1, 'Prof. Jayne Gusikowski', 'lane.aufderhar@example.org', 'e734be5d9d159610b9cbc6ae5030436839629a6e', NULL, NULL),
+(2, 'Fernando Lehner III', 'ebernhard@example.org', '72eb628e68fc009c4098735431a23f079efab4a7', NULL, NULL),
+(3, 'Roscoe Runolfsson', 'vankunding@example.org', '8e960699185f144b4dc86fce2f3d036a187e6884', NULL, NULL),
+(4, 'Lucas Toy', 'kuvalis.victoria@example.com', '15729bce73575a55e1f253286a58e33dba5848a5', NULL, NULL),
+(5, 'Prof. Daryl Fadel Sr.', 'swift.conrad@example.com', '965e5888c1339483a6dd650d5a1928ffad288a22', NULL, NULL),
+(6, 'Trey Cormier', 'legros.judy@example.org', '219acad53c6b6ae1b0a223f64d311bc7152b9126', NULL, NULL),
+(7, 'Orin Legros', 'wbergstrom@example.com', '8b3f1c105d6d3a1bf38e9b73bbdf6a4ee55ba221', NULL, NULL),
+(8, 'Braxton Dietrich', 'doconner@example.net', '078b1915c5ef28a27418eea35adf07441761b212', NULL, NULL),
+(9, 'Mr. Cary Bayer', 'claire83@example.org', '6a7e968c610c97e6b699f4250ff0df2ccd33f8ee', NULL, NULL),
+(10, 'Miss Anita Kutch', 'elegros@example.com', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', NULL, NULL),
+(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1241,7 +1318,7 @@ ALTER TABLE `attahced_reports_result`
 --
 ALTER TABLE `autism_checker`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`) USING BTREE;
 
 --
 -- Indexes for table `autism_checker_question`
@@ -1471,7 +1548,7 @@ ALTER TABLE `adir`
 -- AUTO_INCREMENT for table `adir_result`
 --
 ALTER TABLE `adir_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `attached_reports`
@@ -1489,7 +1566,7 @@ ALTER TABLE `attahced_reports_result`
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1507,7 +1584,7 @@ ALTER TABLE `autism_checker_results`
 -- AUTO_INCREMENT for table `caregiver`
 --
 ALTER TABLE `caregiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `dsm5_category`
@@ -1537,7 +1614,7 @@ ALTER TABLE `evaluation_history`
 -- AUTO_INCREMENT for table `evaluation_history_result`
 --
 ALTER TABLE `evaluation_history_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `long_term`
@@ -1555,13 +1632,13 @@ ALTER TABLE `lovaas_questions`
 -- AUTO_INCREMENT for table `lovaas_results`
 --
 ALTER TABLE `lovaas_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `notic`
 --
 ALTER TABLE `notic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `notic_questions`

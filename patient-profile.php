@@ -53,6 +53,7 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                             </div>
                             <?php } ?>
                             <h4><?= $patient_result['name'] ?> </h4>
+                            <span>ID : <?= $patient_result['id'] ?></span>
                             <a href="edit-patient-profile.php?patientid=<?= $patient_id ?>" class="light-green">
                                 <div class="icon d-inline-block">
                                     <i class="far fa-edit"></i>

@@ -123,7 +123,7 @@ $user = new Users;
                 <?php } ?>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="specialist-profile.php">Profile</a></li>
                 <li><a class="dropdown-item" href="handle/logout.php">log out</a></li>
             </ul>
         </div>
@@ -269,7 +269,7 @@ $user = new Users;
                 <?php } ?>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="caregiver-profile.php">Profile</a></li>
                 <li><a class="dropdown-item" href="handle/logout.php">log out</a></li>
             </ul>
         </div>
@@ -310,7 +310,7 @@ $user = new Users;
                 <img src="assets/images/person(100x100).png" alt="" width="40px" class="rounded-circle">
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="user-profile.php">Profile</a></li>
                 <li><a class="dropdown-item" href="handle/logout.php">log out</a></li>
             </ul>
         </div>

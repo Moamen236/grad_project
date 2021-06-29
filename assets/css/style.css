@@ -1294,3 +1294,25 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* profile */
+.user-profile .list-group-item.active{
+	background-color: #368ba9;
+    border-color: #368ba9;
+}
+
+.user-profile .btn-copy{
+	position: absolute;
+	right: 40px;
+	cursor: pointer;
+	top: 30px;
+	padding: 10px;
+	transition: 0.3s;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-ms-transition: 0.3s;
+	-o-transition: 0.3s;
+}
+.user-profile .btn-copy:hover svg{
+	color: #368BA8;
+}

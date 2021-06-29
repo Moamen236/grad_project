@@ -39,6 +39,9 @@ $scale_ques = $scale_questions->selectAll();
 $scale_category = new scale_category;
 $scale_cats = $scale_category->selectAll();
 
+$conn = mysqli_connect("localhost", "root", "", "autism");
+include('response.php');
+
 require_once('include/navbar.php');
 ?>
 <section class="main-banner text-white d-flex justify-content-center align-items-center text-center">
@@ -49,6 +52,10 @@ require_once('include/navbar.php');
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit
                     illum odit doloremque sed distinctio cum sapiente reiciendis modi, soluta minima numquam consectetur
                     iure enim hic.</p>
+                <?php if (!empty($_SESSION['display_error'])) {
+                    echo $_SESSION['display_error'];
+                    $_SESSION['display_error'] = null;
+                } ?>
             </div>
         </div>
     </div>
@@ -117,95 +124,124 @@ require_once('include/navbar.php');
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
+                            <!-- Notices -->
+                            <div class="tab-pane fade show active p-lg-5 p-2" id="pills-notice" role="tabpanel"
+                                aria-labelledby="pills-notice-tab">
+                                <div class="accordion" id="accordionExample">
+                                    <form method="POST" id="form">
+                                        <?php
+                                        $sql2 = 'SELECT notic_questions.notic_question_category FROM `notic_questions` 
+                                                GROUP BY notic_question_category';
+                                        $result2 = $conn->query($sql2);
+                                        if ($result2->num_rows > 0) {
+                                            $count = 0;
+                                            $i = 0;
+                                            while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <div class="accordion-item">
+                                            <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse<?= $i ?>" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                <div class="col-lg">
+                                                    <h6 class="m-0">
+                                                        <?php echo $row2['notic_question_category'];
+                                                                ?>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div id="collapse<?= $i ?>" class="accordion-collapse collapse"
+                                                aria-labelledby="heading<?= $i ?>" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="container p-0 overflow-hidden">
+                                                        <div class="row bg-white rounded p-4">
+                                                            <?php
+                                                                    $sql3 = 'SELECT * FROM `notic_questions` WHERE notic_question_category="' . $row2['notic_question_category'] . '" ';
+                                                                    $result3 = $conn->query($sql3);
+
+                                                                    if ($result3->num_rows > 0) {
+                                                                        while ($row3 = $result3->fetch_assoc()) {
+                                                                    ?>
+                                                            <div class="form-check">
+                                                                <?php
+                                                                                echo "<input class='form-check-input' name='result[" . $count . "]' value='1' type='checkbox'/>";
+                                                                                echo "<input type='hidden' name='patient_id' value='" . $_GET['patientid'] . "' >";
+                                                                                ?>
+                                                                <label class="form-check-label">
+                                                                    <?php echo $row3['notice_questions'];
+                                                                                    echo '<input type="hidden" name="notic_q_id[]" value="' . $row3['id'] . '" >';
+                                                                                    echo '<input type="hidden" name="notic_category[]" value="' . $row3['notic_question_category'] . '">';
+                                                                                    ?>
+                                                                </label>
+                                                            </div>
+                                                            <?php
+                                                                            $count++;
+                                                                        }
+                                                                    } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                                $i++;
+                                            }
+                                        }
+                                        ?>
+                                        <input type="submit" class="secondary-btn float-end btn mt-4" value="Done"
+                                            name="Insert_notic" />
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
 
                             <!-- ADIR -->
                             <div class="tab-pane fade show p-lg-5 p-2" id="pills-adir" role="tabpanel"
                                 aria-labelledby="pills-adir-tab">
                                 <div class="m-hight pe-4">
-                                    <?php for ($i = 0; $i < 18; $i++) : ?>
-                                    <div class="row bg-white rounded p-4 mb-4">
-                                        <div class="col-md-10">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-                                            voluptatem harum est quasi suscipit minima molestiae fuga repellat nemo?
-                                        </div>
-                                        <div class="col-md-2 ">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault2" checked>
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php endfor ?>
-                                </div>
+                                    <form method="POST">
+                                        <?php
+                                        $sql1 = 'SELECT * FROM `adir`';
+                                        $result = $conn->query($sql1);
+                                        if ($result->num_rows > 0) {
+                                            $x = 0;
+                                            while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="row bg-white rounded p-4 mb-4">
+                                            <div class="col-md-10">
 
-                                <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                    <div class="col-md-10">
+                                                <?php
+                                                        echo $row['adir_questions'];
+                                                        echo '<input type="hidden" name="adir_id' . $x . '" value="' . $row['id'] . '">';
 
-                                        <input type="add comment" class="w-100">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" class="secondary-btn float-end btn">Add</button>
-                                    </div>
-                                </div>
-                                <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
-                            </div>
-                            <!-- Notices -->
-                            <div class="tab-pane fade show active p-lg-5 p-2" id="pills-notice" role="tabpanel"
-                                aria-labelledby="pills-notice-tab">
-                                <div class="accordion" id="accordionExample">
-                                    <?php for ($i = 0; $i < 5; $i++) : ?>
-                                    <div class="accordion-item">
-                                        <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse<?= $i ?>" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            <div class="col-lg">
-                                                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                </h6>
+                                                        ?>
                                             </div>
-                                        </div>
-                                        <div id="collapse<?= $i ?>" class="accordion-collapse collapse"
-                                            aria-labelledby="heading<?= $i ?>" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <div class="container p-0 overflow-hidden">
-                                                    <div class="row bg-white rounded p-4">
-                                                        <?php for ($v = 0; $v < 5; $v++) : ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="flexCheckDefault">
-                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                impaired eye contact and body language
-                                                            </label>
-                                                        </div>
-                                                        <?php endfor ?>
-                                                    </div>
+                                            <div class="col-md-2 ">
+                                                <div class="form-check">
+
+                                                    <input class="form-check-input" type="radio" value="1"
+                                                        name="result<?php echo $x ?>">
+                                                    <label class="form-check-label">Yes</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="0"
+                                                        name="result<?php echo $x ?>">
+                                                    <label class="form-check-label">No</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php endfor ?>
-                                    <div class="row bg-white rounded p-4 mb-4 mt-3 ">
-                                        <div class="col-md-10">
-
-                                            <input type="add comment" class="w-100">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="secondary-btn float-end btn">Add</button>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
+                                        <?php
+                                                echo "<input type='hidden' name='adir_size' value='" . $x . "' >";
+                                                echo "<input type='hidden' name='patient_id' value='" . $_GET['patientid'] . "' >";
+                                                $x++;
+                                            }
+                                        } ?>
                                 </div>
+                                <span id="availability" class="float-start btn mt-4"> </span>
+                                <input type="submit" class="secondary-btn float-end btn mt-4" value="Done"
+                                    name="Insert_Adir" />
+                                <div class="clearfix"></div>
+                                </form>
                             </div>
-
                         </div>
                     </div>
 
@@ -213,55 +249,95 @@ require_once('include/navbar.php');
                     <div class="tab-pane fade bg-box rounded p-5" id="list-attched-report" role="tabpanel"
                         aria-labelledby="list-attched-report-list">
                         <div class="m-hight pe-4">
-                            <?php for ($i = 0; $i < 6; $i++) : ?>
-                            <div class="row justify-content-between align-items-center bg-white rounded p-4 mb-4">
-                                <div class="col-md-10">
-                                    <div class="mb-3">
-                                        <label for="formFileMultiple" class="form-label">A CT scan of the brain</label>
-                                        <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            <form method="POST" enctype="multipart/form-data">
+                                <?php
+                                $sql5 = 'SELECT * FROM `attached_reports`';
+                                $result5 = $conn->query($sql5);
+                                $att_count = 0;
+                                if ($result5->num_rows > 0) {
+                                    while ($row5 = $result5->fetch_assoc()) {
+                                ?>
+                                <div class="row justify-content-between align-items-center bg-white rounded p-4 mb-4">
+                                    <div class="col-md-10">
+                                        <div class="mb-3">
+                                            <label for="formFileMultiple" class="form-label">
+                                                <?php
+                                                        echo $row5['details'];
+                                                        echo '<input type="hidden" name="attached_id[]" value="' . $row5['id'] . '" ';
+                                                        ?></label>
+                                            <!-- <input class="form-control" type="file" name="file[]"> -->
+                                            <input type="File" class="form-control" name="uploadfile[]" /> <br>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
+                                            <?php
+                                                    echo "<input class='form-check-input' name='result[" . $att_count . "]' value='1' type='checkbox'/>";
+                                                    ?>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php endfor ?>
+                                <?php $att_count++;
+                                    }
+                                } ?>
                         </div>
-                        <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
+                        <?php echo "<input type='hidden' name='patient_id' value='" . $_GET['patientid'] . "' >"; ?>
+                        <input type="submit" class="secondary-btn float-end btn mt-4" value="Done"
+                            name="Insert_report" />
+                        <div class="clearfix"></div>
+                        </form>
                     </div>
+
                     <!-- Evaluation History -->
                     <div class="tab-pane fade bg-box p-5" id="list-evaluation-history" role="tabpanel"
                         aria-labelledby="list-evaluation-history-list">
                         <div class="m-hight pe-4">
-                            <?php for ($i = 0; $i < 10; $i++) : ?>
-                            <div class="row bg-white rounded p-4 mb-4">
-                                <div class="col-md-10">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate voluptatem harum
-                                    est quasi suscipit minima molestiae fuga repellat nemo?
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Yes
-                                        </label>
+                            <form method="POST">
+                                <?php
+                                $sql4 = 'SELECT * FROM `evaluation_history`';
+                                $result4 = $conn->query($sql4);
+                                if ($result4->num_rows > 0) {
+                                    $l = 0;
+                                    while ($row4 = $result4->fetch_assoc()) {
+
+                                ?>
+                                <div class="row bg-white rounded p-4 mb-4">
+                                    <div class="col-md-10">
+                                        <?php
+                                                echo $row4['evaluation_questions'];
+                                                echo '<input type="hidden" name="evaluation_id' . $l . '" value="' . $row4['id'] . '">';
+                                                ?>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            No
-                                        </label>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="1"
+                                                name="result<?php echo $l ?>">
+                                            <label class="form-check-label">Yes</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="0"
+                                                name="result<?php echo $l ?>">
+                                            <label class="form-check-label">No</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php endfor ?>
+                                <?php
+                                        echo "<input type='hidden' name='evaluation_size' value='" . $l . "' >";
+                                        $l++;
+                                    }
+                                } ?>
                         </div>
-                        <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
+                        <?php echo "<input type='hidden' name='patient_id' value='" . $_GET['patientid'] . "' >"; ?>
+                        <input type="submit" class="secondary-btn float-end btn mt-4" value="Done"
+                            name="Insert_Evaluation" />
+                        <div class="clearfix"></div>
+                        </form>
                     </div>
+
+
                     <!-- DSM 5 -->
                     <div class="tab-pane fade bg-box p-5" id="list-dsm" role="tabpanel" aria-labelledby="list-dsm-list">
                         <div class="accordion" id="accordionExample">
@@ -474,6 +550,18 @@ require_once('include/navbar.php');
 </div>
 
 <script>
+// when page is ready
+$(document).ready(function() {
+    // on form submit
+    $("#form").on('submit', function() {
+        // to each unchecked checkbox
+        $(this + 'input[type=checkbox]:not(:checked)').each(function() {
+            // set value 0 and check it
+            $(this).attr('checked', true).val(0);
+        });
+    })
+})
+
 var i = 0;
 var original = document.getElementById('duplicater');
 

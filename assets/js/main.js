@@ -15,17 +15,6 @@ $(document).ready( function () {
       slidesToScroll: 3
   });
 
-  // jsPDF
-  var doc = new jsPDF();
-  $('#cmd').click(function() {
-      doc.fromHTML($('#testprint').html(), 15, 15, {
-          'width': 170,
-      }, function() {
-          doc.save('sample-file.pdf')
-      });
-  });
-
-
   // patient info in plan 
   let info_width =  $("#patient-info").outerWidth();
   $("#patient-info").css("right" , -info_width)
@@ -48,6 +37,7 @@ $(document).ready( function () {
     }
   });
 
+  new ClipboardJS('.btn-copy');
 
   // form with ajax
   function submissionDone(data){
