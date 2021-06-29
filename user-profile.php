@@ -27,9 +27,8 @@ $select_user = $user->selectId("*", "$user_id");
                         <a class="list-group-item list-group-item-action active" id="list-profile-list"
                             data-bs-toggle="list" href="#list-profile" role="tab"
                             aria-controls="list-profile">Profile</a>
-                        <a class="list-group-item list-group-item-action" id="list-specialist-list"
-                            data-bs-toggle="list" href="#list-specialist" role="tab"
-                            aria-controls="list-specialist">Results</a>
+                        <a class="list-group-item list-group-item-action" id="list-results-list" data-bs-toggle="list"
+                            href="#list-results" role="tab" aria-controls="list-results">Results</a>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -124,7 +123,7 @@ $select_user = $user->selectId("*", "$user_id");
                                 </form>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="list-specialist" role="tabpanel"
+                        <div class="tab-pane fade" id="list-results" role="tabpanel"
                             aria-labelledby="list-specialist-list">
                             <h2 class="text-center mb-1">Results</h2>
                             <div class="line bg-yellow m-auto mb-4"></div>

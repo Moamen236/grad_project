@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 11:28 PM
+-- Generation Time: Jun 29, 2021 at 11:57 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -182,7 +182,10 @@ INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `created_at`, 
 (10, 'Alfred Green', 'male', 4, '2021-06-21 16:03:26', 10),
 (25, 'Moamen Ali', 'male', 12, '2021-06-29 16:38:37', 23),
 (26, 'laravel', 'male', 22, '2021-06-29 16:46:17', 23),
-(27, 'laravel', 'male', 22, '2021-06-29 16:47:08', 23);
+(27, 'laravel', 'male', 22, '2021-06-29 16:47:08', 23),
+(28, 'Moamen', 'male', 12, '2021-06-29 21:49:39', 23),
+(29, 'Moamen test', 'male', 12, '2021-06-29 21:52:50', 23),
+(30, 'Moamen test', 'male', 12, '2021-06-29 21:53:42', 23);
 
 -- --------------------------------------------------------
 
@@ -279,7 +282,19 @@ INSERT INTO `autism_checker_results` (`id`, `checker_question_result`, `checker_
 (37, 'no', 17, 26),
 (38, 'yes', 18, 26),
 (39, 'no', 19, 26),
-(40, 'no', 20, 26);
+(40, 'no', 20, 26),
+(41, 'yes', 1, 29),
+(42, 'no', 2, 29),
+(43, 'no', 3, 29),
+(44, 'yes', 4, 29),
+(45, 'yes', 5, 29),
+(46, 'no', 6, 29),
+(47, 'yes', 7, 29),
+(48, 'no', 8, 29),
+(49, 'yes', 9, 29),
+(50, 'no', 10, 29),
+(51, 'yes', 11, 29),
+(52, 'yes', 12, 29);
 
 -- --------------------------------------------------------
 
@@ -1618,7 +1633,7 @@ ALTER TABLE `attahced_reports_result`
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1630,7 +1645,7 @@ ALTER TABLE `autism_checker_question`
 -- AUTO_INCREMENT for table `autism_checker_results`
 --
 ALTER TABLE `autism_checker_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `caregiver`
