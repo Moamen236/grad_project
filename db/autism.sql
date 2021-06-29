@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 04:36 PM
+-- Generation Time: Jun 29, 2021 at 11:28 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -161,7 +161,7 @@ CREATE TABLE `autism_checker` (
   `case_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` enum('male','female') COLLATE utf8mb4_unicode_ci NOT NULL,
   `age` int(3) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -170,16 +170,19 @@ CREATE TABLE `autism_checker` (
 --
 
 INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `created_at`, `user_id`) VALUES
-(1, 'Michelle Keebler', 'male', 9, NULL, 1),
-(2, 'Daisha Bayer', 'male', 2, NULL, 2),
-(3, 'Dr. Cortez Brekke', 'male', 6, NULL, 3),
-(4, 'Vicenta Herzog', 'male', 4, NULL, 4),
-(5, 'Prof. Marquis Satterfield', 'male', 2, NULL, 5),
-(6, 'Talia Adams', 'male', 5, NULL, 6),
-(7, 'Abigail Rowe', 'female', 9, NULL, 7),
-(8, 'Freddie Lubowitz', 'male', 8, NULL, 8),
-(9, 'Jenifer Gislason', 'male', 4, NULL, 9),
-(10, 'Alfred Green', 'male', 4, NULL, 10);
+(1, 'Michelle Keebler', 'male', 9, '2021-06-29 16:03:26', 1),
+(2, 'Daisha Bayer', 'male', 2, '2021-06-29 16:03:26', 2),
+(3, 'Dr. Cortez Brekke', 'male', 6, '2021-06-29 16:03:26', 3),
+(4, 'Vicenta Herzog', 'male', 4, '2021-02-23 16:03:26', 4),
+(5, 'Prof. Marquis Satterfield', 'male', 2, '2021-06-29 16:03:26', 5),
+(6, 'Talia Adams', 'male', 5, '2021-01-21 16:03:26', 6),
+(7, 'Abigail Rowe', 'female', 9, '2021-05-22 16:03:26', 7),
+(8, 'Freddie Lubowitz', 'male', 8, '2021-05-29 16:03:26', 8),
+(9, 'Jenifer Gislason', 'male', 4, '2021-06-20 16:03:26', 9),
+(10, 'Alfred Green', 'male', 4, '2021-06-21 16:03:26', 10),
+(25, 'Moamen Ali', 'male', 12, '2021-06-29 16:38:37', 23),
+(26, 'laravel', 'male', 22, '2021-06-29 16:46:17', 23),
+(27, 'laravel', 'male', 22, '2021-06-29 16:47:08', 23);
 
 -- --------------------------------------------------------
 
@@ -228,8 +231,55 @@ INSERT INTO `autism_checker_question` (`id`, `checker_qustions`, `autism_checker
 CREATE TABLE `autism_checker_results` (
   `id` int(11) NOT NULL,
   `checker_question_result` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `checker_question_id` int(11) NOT NULL
+  `checker_question_id` int(11) NOT NULL,
+  `case_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `autism_checker_results`
+--
+
+INSERT INTO `autism_checker_results` (`id`, `checker_question_result`, `checker_question_id`, `case_id`) VALUES
+(1, 'yes', 1, 25),
+(2, 'yes', 2, 25),
+(3, 'no', 3, 25),
+(4, 'yes', 4, 25),
+(5, 'yes', 5, 25),
+(6, 'yes', 6, 25),
+(7, 'yes', 7, 25),
+(8, 'yes', 8, 25),
+(9, 'no', 9, 25),
+(10, 'yes', 10, 25),
+(11, 'no', 11, 25),
+(12, 'yes', 12, 25),
+(13, 'yes', 13, 25),
+(14, 'no', 14, 25),
+(15, 'yes', 15, 25),
+(16, 'yes', 16, 25),
+(17, 'yes', 17, 25),
+(18, 'yes', 18, 25),
+(19, 'yes', 19, 25),
+(20, 'yes', 20, 25),
+(21, 'yes', 1, 26),
+(22, 'yes', 2, 26),
+(23, 'no', 3, 26),
+(24, 'no', 4, 26),
+(25, 'no', 5, 26),
+(26, 'no', 6, 26),
+(27, 'yes', 7, 26),
+(28, 'yes', 8, 26),
+(29, 'yes', 9, 26),
+(30, 'no', 10, 26),
+(31, 'no', 11, 26),
+(32, 'yes', 12, 26),
+(33, 'yes', 13, 26),
+(34, 'no', 14, 26),
+(35, 'no', 15, 26),
+(36, 'yes', 16, 26),
+(37, 'no', 17, 26),
+(38, 'yes', 18, 26),
+(39, 'no', 19, 26),
+(40, 'no', 20, 26);
 
 -- --------------------------------------------------------
 
@@ -802,7 +852,9 @@ INSERT INTO `patient` (`id`, `name`, `age`, `date_of_birth`, `school`, `gender`,
 (111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 9, 4, 11, 9, 'Chaz', 'mother', 445545752),
 (112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 9, 'Delbert', 'mother', 1545754),
 (142, 'moamen', 8, '2013-06-26', 'lorem yyyyaaaa', 'male', 'ay 7aga', '60d700ab221f1.png', 2, 2, 11, 36, 'ahmed', '2', 231312332),
-(155, 'moamen test3', 16, '2005-06-28', 'lorem y', 'male', 'ay 7aga', '60d9a7328b899.jpg', 4, 2, 11, 35, 'ahmed', '32', 1099616726);
+(155, 'moamen test3', 16, '2005-06-28', 'lorem y', 'male', 'ay 7aga', '60d9a7328b899.jpg', 4, 2, 11, 35, 'ahmed', '32', 1099616726),
+(156, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', NULL, NULL, NULL, 11, NULL, 'ahmed', '4', 109961976),
+(157, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', '60db3400d237f.jpg', 2, 2, 11, NULL, 'ahmed', '4', 109961976);
 
 -- --------------------------------------------------------
 
@@ -1249,7 +1301,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `photo`, `gender`) VALUE
 (8, 'Braxton Dietrich', 'doconner@example.net', '078b1915c5ef28a27418eea35adf07441761b212', NULL, NULL),
 (9, 'Mr. Cary Bayer', 'claire83@example.org', '6a7e968c610c97e6b699f4250ff0df2ccd33f8ee', NULL, NULL),
 (10, 'Miss Anita Kutch', 'elegros@example.com', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', NULL, NULL),
-(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG', NULL, NULL);
+(23, 'Moamen Ali', 'mo@gmail.com', '$2y$10$QsRFL7W.cfntRDSXTN057OvpEWYcu6diVDeLllCpT47zcGgSQTNGG', '60db5134b460b.jpg', 'male');
 
 -- --------------------------------------------------------
 
@@ -1566,7 +1618,7 @@ ALTER TABLE `attahced_reports_result`
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1578,7 +1630,7 @@ ALTER TABLE `autism_checker_question`
 -- AUTO_INCREMENT for table `autism_checker_results`
 --
 ALTER TABLE `autism_checker_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `caregiver`
@@ -1662,7 +1714,7 @@ ALTER TABLE `notify_to_do`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT for table `plan`

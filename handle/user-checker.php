@@ -12,7 +12,7 @@ if ($request->postHas('user-checker')) {
     $name = $request->post('name');
     $age = $request->post('age');
     $choose = $request->post('choose');
-    $now = date("Y-m-d H:i");
+    $now = date("Y-m-d H:i:a.u");
     $autism_checker->insert(("case_name , age , gender , user_id"), (" '$name' , $age , '$choose' , $user_id "));
     $query = "SELECT * FROM `autism_checker` WHERE case_name = '$name' AND age = $age AND gender = '$choose' AND user_id = $user_id AND created_at <= '$now' LIMIT 1";
     $run_query = $autism_checker->query($query);
@@ -30,5 +30,5 @@ if ($request->postHas('user-checker')) {
         }
     }
 
-    $request->redirect('user.php');
+    // $request->redirect('user.php');
 }
