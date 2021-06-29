@@ -157,6 +157,10 @@ $select_specialist = mysqli_fetch_assoc($run_query);
                                 <?php } ?>
                                 <div class="w-100"></div>
                                 <div class="text-center mt-3">
+                                    <p class="mb-1">Serial Number</p>
+                                    <h4><?= $select_specialist['serial_no'] ?></h4>
+                                </div>
+                                <div class="text-center mt-3">
                                     <p class="mb-1">Name</p>
                                     <h4><?= $select_specialist['name'] ?></h4>
                                 </div>

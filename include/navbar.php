@@ -278,7 +278,8 @@ $user = new Users;
 
 <?php } elseif ($session->get('which_user') == 'user') { ?>
 <?php $user_id = $session->get('user_id');
-    $user->selectId("*", "$user_id"); ?>
+    $select_user = $user->selectId("*", "$user_id");
+    ?>
 <nav class="navbar navbar-expand-lg bg-nav">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -307,7 +308,12 @@ $user = new Users;
         </div>
         <div class="dropdown pe-2">
             <div class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="assets/images/person(100x100).png" alt="" width="40px" class="rounded-circle">
+                <?php if ($select_user['photo'] != null) { ?>
+                <img src="<?= URL; ?>assets/images/uploads/users/<?= $select_user['photo'] ?>" alt="" width="40px"
+                    class="rounded-circle">
+                <?php } else { ?>
+                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" class="rounded-circle">
+                <?php } ?>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="user-profile.php">Profile</a></li>

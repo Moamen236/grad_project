@@ -32,9 +32,11 @@ require_once('include/navbar.php');
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10 bg-box p-5 rounded">
+                <h1 class="dark-text text-center">Autism Checker</h1>
+                <div class="line bg-yellow m-auto mb-5"></div>
                 <form method="post" action="handle/user-checker.php">
                     <div class="row">
-                        <h2 class="p-0 mb-3 dark-title">Case Info</h2>
+                        <h3 class="p-0 mb-3 dark-title">Case Info</h3>
                         <div class="col-lg-4 ps-0">
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" name="name" placeholder="Enter Case Name"
@@ -61,7 +63,7 @@ require_once('include/navbar.php');
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center rounded mt-4">
-                        <h2 class="p-0 mb-4 dark-title">Answer the questions</h2>
+                        <h3 class="p-0 mb-4 dark-title">Answer the questions</h3>
                         <div class="max-h" style="max-height: 700px;overflow: auto;">
                             <?php foreach ($select_questions as $question) : ?>
                             <div class="row bg-white justify-content-between align-items-center p-3 mb-4">

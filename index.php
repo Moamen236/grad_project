@@ -89,6 +89,12 @@ if ($session->has("which_user")) {
                                                 ?>
                                         </div>
                                         <?php endif ?>
+                                        <?php if ($session->has('sucsses_reg')) : ?>
+                                        <div class="alert alert-success" role="alert">
+                                            <?= $session->get('sucsses_reg') ?>
+                                        </div>
+                                        <?php $session->remove('sucsses_reg');
+                                        endif ?>
                                         <h3 class="my-4 fw-bold text-white wow animated fadeIn" data-wow-delay="0.3s"
                                             data-wow-duration="1s">Login to your Account</h3>
                                         <form method="POST" action="handle/login.php">
@@ -144,12 +150,7 @@ if ($session->has("which_user")) {
                                 </div>
                                 <?php endif ?>
 
-                                <?php if ($session->has('sucsses_reg')) : ?>
-                                <div class="alert alert-success" role="alert">
-                                    <?= $session->get('sucsses_reg') ?>
-                                </div>
-                                <?php $session->remove('sucsses_reg');
-                                endif ?>
+
                                 <h3 class="my-4 fw-bold text-white">Create a new Account</h3>
                                 <form method="POST" action="handle/reg.php">
                                     <div class="row">

@@ -1,12 +1,16 @@
 <?php
 
 use Project\Classes\Models\autism_checker;
+use Project\Classes\Models\autism_checker_question;
+use Project\Classes\Models\autism_checker_results;
 use Project\Classes\Models\Users;
 
 require_once('include/header.php');
 require_once('include/navbar.php');
 $user = new Users;
 $user_case = new autism_checker;
+$autism_checker_result = new autism_checker_results;
+$autism_checker_quetions = new autism_checker_question;
 $query = "SELECT * FROM `autism_checker` WHERE autism_checker.user_id = $user_id";
 $run_query = $user_case->query($query);
 $select_case = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
@@ -36,37 +40,37 @@ $select_user = $user->selectId("*", "$user_id");
                             <p class="text-center">Add information about yourself </p>
                             <div class="line bg-yellow m-auto mb-4"></div>
                             <div class="row justify-content-center">
-                                <form action="handle/edit-caregiver.php" method="POST" enctype="multipart/form-data">
+                                <form action="handle/edit-user.php" method="POST" enctype="multipart/form-data">
                                     <?php if (!empty($select_user['photo'] == null)) { ?>
-                                    <?php if ($select_user['gender'] == "male") { ?>
-                                    <div class="col-lg-4 text-center m-auto">
-                                        <img src="<?= URL; ?>assets/images/user-male.jpg" alt=""
-                                            class="rounded shadow img-fluid mb-2" id="imgshow">
-                                    </div>
-                                    <div class="col-8 m-auto">
-                                        <div class="mb-3">
-                                            <input type="file" class="form-control" name="caregiver_pic" id="imgload">
-                                        </div>
-                                    </div>
-                                    <?php } else { ?>
+                                    <?php if ($select_user['gender'] == "female") { ?>
                                     <div class="col-lg-4 text-center m-auto">
                                         <img src="<?= URL; ?>assets/images/user-female.jpg" alt=""
                                             class="rounded shadow img-fluid mb-2" id="imgshow">
                                     </div>
                                     <div class="col-8 m-auto">
                                         <div class="mb-3">
-                                            <input type="file" class="form-control" name="caregiver_pic" id="imgload">
+                                            <input type="file" class="form-control" name="user_pic" id="imgload">
+                                        </div>
+                                    </div>
+                                    <?php } else { ?>
+                                    <div class="col-lg-4 text-center m-auto">
+                                        <img src="<?= URL; ?>assets/images/user-male.jpg" alt=""
+                                            class="rounded shadow img-fluid mb-2" id="imgshow">
+                                    </div>
+                                    <div class="col-8 m-auto">
+                                        <div class="mb-3">
+                                            <input type="file" class="form-control" name="user_pic" id="imgload">
                                         </div>
                                     </div>
                                     <?php } ?>
                                     <?php } else { ?>
                                     <div class="col-4 text-center col-lg-4 m-auto">
-                                        <img src="<?= URL; ?>assets/images/uploads/caregiver/<?= $select_user['photo'] ?>"
+                                        <img src="<?= URL; ?>assets/images/uploads/users/<?= $select_user['photo'] ?>"
                                             alt="" class="rounded shadow-sm img-fluid mb-2" id="imgshow">
                                     </div>
                                     <div class="col-8 m-auto">
                                         <div class="mb-3">
-                                            <input type="file" class="form-control" name="caregiver_pic" id="imgload">
+                                            <input type="file" class="form-control" name="user_pic" id="imgload">
                                         </div>
                                     </div>
                                     <?php } ?>
@@ -76,7 +80,7 @@ $select_user = $user->selectId("*", "$user_id");
                                             <div class="mb-3">
                                                 <label for="exampleFormControlInput1" class="form-label dark-text">
                                                     Name</label>
-                                                <input type="text" name="caregiver_name" class="form-control bg-white"
+                                                <input type="text" name="user_name" class="form-control bg-white"
                                                     value="<?= $select_user['name'] ?>">
                                             </div>
                                         </div>
@@ -84,7 +88,7 @@ $select_user = $user->selectId("*", "$user_id");
                                             <div class="mb-3">
                                                 <label for="exampleFormControlInput1" class="form-label dark-text">
                                                     Email</label>
-                                                <input type="text" name="caregiver_email" class="form-control bg-white"
+                                                <input type="text" name="user_email" class="form-control bg-white"
                                                     value="<?= $select_user['email'] ?>">
                                             </div>
                                         </div>
@@ -92,8 +96,7 @@ $select_user = $user->selectId("*", "$user_id");
                                             <div class="mb-3">
                                                 <label for="exampleFormControlInput1"
                                                     class="form-label dark-text d-block">Gender </label>
-                                                <select name="caregiver_gender"
-                                                    class="form-select form-control bg-white"
+                                                <select name="user_gender" class="form-select form-control bg-white"
                                                     aria-label="Default select example">
                                                     <?php if ($select_user['gender'] == null) { ?>
                                                     <option selected>Open this select menu</option>
@@ -113,7 +116,7 @@ $select_user = $user->selectId("*", "$user_id");
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <button type="submit" name="edit_caregiver"
+                                        <button type="submit" name="edit_user"
                                             class="secondary-btn float-end btn mt-25">Save
                                             Changes</button>
                                         <div class="clearfix"></div>
@@ -126,13 +129,28 @@ $select_user = $user->selectId("*", "$user_id");
                             <h2 class="text-center mb-1">Results</h2>
                             <div class="line bg-yellow m-auto mb-4"></div>
                             <div class="row justify-content-center rounded">
-                                <div class="col-lg-8 text-center">
+                                <?php foreach ($select_case as $case) : ?>
+                                <div class="col-lg-8 text-center my-4">
                                     <div class="bg-white p-4">
-                                        <h3 class="mb-1">Name</h3>
-                                        <span style="opacity:0.5;">Created_at</span>
-                                        <h5 class="mt-4">Result</h5>
+                                        <h3 class="mb-1"><?= $case['case_name'] ?></h3>
+                                        <span
+                                            style="opacity:0.5;"><?= date('d/m/Y', strtotime($case['created_at'])); ?></span>
+                                        <span
+                                            style="opacity:0.5;"><?= date('h:i a', strtotime($case['created_at'])); ?></span>
+                                        <?php $case_id = $case['id'];
+                                            $result = $autism_checker_result->selectWhere("*", "case_id = $case_id AND checker_question_result = 'yes'"); ?>
+                                        <h5 class="mt-4">
+                                            <?php if (count($result) <= 5) {
+                                                    echo " You don't have a problem with Autism";
+                                                } elseif (6 < count($result) and count($result) <= 12) {
+                                                    echo " You probability have problem and we Advise you to visite a doctor to sure";
+                                                } elseif (13 < count($result) and count($result) <= 20) {
+                                                    echo " You have an Autism and better to visite an organization to solve your problem";
+                                                } ?>
+                                        </h5>
                                     </div>
                                 </div>
+                                <?php endforeach ?>
                             </div>
                         </div>
                     </div>

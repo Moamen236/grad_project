@@ -8,13 +8,6 @@ $specialist = new specialist;
 $specialist_id = $session->get('specialist_id');
 
 if ($request->postHas('edit_specialist')) {
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
     $specialist_name = $request->post('specialist_name');
     $specialist_email = $request->post('specialist_email');
     $specialist_gender = $request->post('specialist_gender');

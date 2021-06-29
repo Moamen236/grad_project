@@ -47,7 +47,7 @@ if ($request->postHas("create_patient")) {
         // Insert in Database
         $res = $patients->insert(("name,age,date_of_birth,school,gender,class,caregiver_name,caregiver_relationship,caregiver_phone,spcialist_id "), ("'$patient_name' , $patient_age , '$patient_date' , '$patient_school' , '$patient_gender' , '$patient_class'  ,   '$caregiver_name' , '$caregiver_relationship' ,$caregiver_number , $specialist_id"));
     }
-    // $request->redirect("specialist.php");
+    $request->redirect("specialist.php");
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
