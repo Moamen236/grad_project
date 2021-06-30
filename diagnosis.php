@@ -27,6 +27,7 @@ $lovaas_category = new lovaas_category;
 $lovaas_cats = $lovaas_category->selectAll();
 $lovaas_questions = new lovaas_questions;
 $lovaas_ques = $lovaas_questions->selectAll();
+
 // Dsm5
 $dsm5_question = new dsm5_question;
 $dsm_ques = $dsm5_question->selectAll();
@@ -394,18 +395,20 @@ require_once('include/navbar.php');
                     <div class="tab-pane fade bg-box p-5" id="list-scale" role="tabpanel"
                         aria-labelledby="list-scale-list">
                         <div class="accordion" id="accordionExample">
+                        <form action="forms/handle-scale.php" method="post">
                             <?php foreach ($scale_cats as $scale_cat) : ?>
                             <div class="accordion-item">
                                 <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
                                     data-bs-target="#collapse<?= $scale_cat['id'] ?>" aria-expanded="true"
                                     aria-controls="collapseOne">
                                     <div class="col-lg">
-                                        <h6 class="m-0"><?= $scale_cat['category'] ?></h6>
+                                        <h6 class="m-0"><?= $scale_cat['scale_category'] ?></h6>
                                     </div>
                                 </div>
                                 <div id="collapse<?= $scale_cat['id'] ?>" class="accordion-collapse collapse"
                                     aria-labelledby="heading<?= $scale_cat['id'] ?>" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
+                                    <?php $scale_ques =  $scale_questions->selectWhere("*", "scale_category_id=" . $scale_cat['id']); ?>
                                         <?php foreach ($scale_ques as $scale_que) : ?>
                                         <div class="bg-white rounded border-bottom p-4">
                                             <h6><?= $scale_que['scale_question'] ?></h6>
@@ -446,7 +449,7 @@ require_once('include/navbar.php');
                                 </div>
                             </div>
                             <?php endforeach ?>
-                            <button type="button" class="secondary-btn float-end btn mt-4">Done</button>
+                            <button name="scale_question" type="submit" class="secondary-btn float-end btn mt-4">Done</button>
                         </div>
                     </div>
                     <!--Lovass-->

@@ -70,8 +70,10 @@ require_once('app.php');
 
 use Project\Classes\Request;
 use Project\Classes\Models\adir;
+use Project\Classes\Models\dsm_result;
+// use Project\Classes\Models\long_term;
 use Project\Classes\Models\plan;
-use Project\Classes\Models\to_do;
+// use Project\Classes\Models\to_do;
 use Project\Classes\Models\Users;
 use Project\Classes\Models\tables;
 use Project\Classes\Models\patient;
@@ -86,6 +88,34 @@ use Project\Classes\Models\strength_point;
 use Project\Classes\Models\lovaas_category;
 use Project\Classes\Models\notify_schedule;
 use Project\Classes\Models\lovaas_questions;
+use Project\Classes\Models\to_do;
+use Project\Classes\Models\dsm5_category;
+
+// $dsm_result = new dsm_result;
+// $result= $dsm_result->selectAll();
+// echo "<pre>";
+// print_r($result);
+// echo "</pre>";
+
+// echo count($result["dsm_question_result"]);
+
+$dsm_result = new dsm_result;
+
+$dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
+dsm5_category.id = dsm5_question.dsm5_category_id AND dsm5_question.id = dsm_result.dsm_question_id WHERE dsm_question_result='yes' AND dsm5_category.id=2 AND pateint_id=112";
+$get_result = $dsm_result->query($dsm_calc);
+$dsm_calc_results_report = mysqli_fetch_all($get_result,MYSQLI_ASSOC);
+echo "<pre>";
+print_r($dsm_calc_results_report);
+echo "</pre>";
+echo count($dsm_calc_results_report);
+$a = array(2, 4, 6, 8);
+echo "sum(a) = " . array_sum($a) . "\n";
+foreach($dsm_calc_results_report as $value)
+{
+
+}
+
 
 // $db = new adir;
 // $result = $db->selectAll();
@@ -468,6 +498,10 @@ use Project\Classes\Models\lovaas_questions;
 //     echo "not found";
 // }
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+// print_r($notif_schedule);
+// echo "</pre>";
+
+
