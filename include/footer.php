@@ -57,6 +57,7 @@
     src="https://cdn.datatables.net/v/bs4-4.1.1/jqc-1.12.4/dt-1.10.24/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/datatables.min.js">
 </script>
 
+
 <script src="<?= URL; ?>assets/js/bootstrap.min.js"></script>
 <script src="<?= URL; ?>assets/js/all.min.js"></script>
 <script src="<?= URL; ?>assets/js/rellax.min.js"></script>

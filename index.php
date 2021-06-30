@@ -125,12 +125,12 @@ if ($session->has("which_user")) {
                                                 class="btn main-btn w-100 mt-10 wow animated fadeInDown"
                                                 data-wow-delay="0.3s" data-wow-duration="3s" name="login">LOGIN</button>
                                         </form>
-                                        <div class="row mt-3 wow animated fadeInDown" data-wow-delay="0.3s"
+                                        <!-- <div class="row mt-3 wow animated fadeInDown" data-wow-delay="0.3s"
                                             data-wow-duration="3.4s">
                                             <div class="col-md-4">
                                                 <a href="forget-password.php" class="text-white">Forgot Password ?</a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

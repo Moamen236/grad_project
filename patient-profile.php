@@ -1,5 +1,6 @@
 <?php
 
+use Project\Classes\Models\lovaas_results;
 use Project\Classes\Models\to_do;
 
 require_once('include/header.php');
@@ -30,6 +31,9 @@ $next_schedule = mysqli_fetch_assoc($run_query);
 
 $to_do = new to_do;
 $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
+
+$lovaas_result = new lovaas_results;
+
 ?>
 
 <?php if (!empty($patient_result)) { ?>
@@ -180,6 +184,9 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="bg-box rounded mt-4 p-4">
+                    <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
             </div>
             <div class="col-lg-8 pt-lg-0 pt-4">
@@ -416,6 +423,49 @@ $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
     </div>
 </div>
 <?php } ?>
+
+
+<?php
+$query_good = "SELECT lovaas_results.lovaas_question_result FROM `lovaas_results` WHERE lovaas_results.lovaas_question_result = 'good' AND patient_id = $patient_id";
+$run_query_good = $lovaas_result->query($query_good);
+$select_result_good = mysqli_fetch_all($run_query_good, MYSQLI_ASSOC); ?>
+
+<?php
+$query_medium = "SELECT lovaas_results.lovaas_question_result FROM `lovaas_results` WHERE lovaas_results.lovaas_question_result = 'medium' AND patient_id = $patient_id";
+$run_query_medium = $lovaas_result->query($query_medium);
+$select_result_medium = mysqli_fetch_all($run_query_medium, MYSQLI_ASSOC); ?>
+
+<?php
+$query_weak = "SELECT lovaas_results.lovaas_question_result FROM `lovaas_results` WHERE lovaas_results.lovaas_question_result = 'weak' AND patient_id = $patient_id";
+$run_query_weak = $lovaas_result->query($query_weak);
+$select_result_weak = mysqli_fetch_all($run_query_weak, MYSQLI_ASSOC); ?>
+
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['good', 'medium', 'weak'],
+        datasets: [{
+            label: 'Lovaas',
+            data: [<?= count($select_result_good) ?>, <?= count($select_result_medium) ?>,
+                <?= count($select_result_weak) ?>
+            ],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
 
 <script>
 var i = 0;

@@ -1316,3 +1316,6 @@ input::-webkit-inner-spin-button {
 .user-profile .btn-copy:hover svg{
 	color: #368BA8;
 }
+.user-profile .list-group-item{
+	border: 1px solid rgba(20, 22, 24, 0.1);
+}

@@ -127,7 +127,7 @@ $results_schedule = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
                             <g></g>
                         </svg>
 
-                        <h3 class="dark-title">List of patient</h3>
+                        <h3 class="dark-title">List of patients</h3>
                         <P class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ipsum
                             molestiae
                             quae ratione.</P>

@@ -1,18 +1,22 @@
 <?php
 
 use Project\Classes\Models\caregiver;
+use Project\Classes\Models\patient;
 use Project\Classes\Models\specialist;
 
 require_once('include/header.php');
 require_once('include/navbar.php');
 $caregiver = new caregiver;
 $specialist = new specialist;
+$patient = new patient;
 $caregiver_id = $session->get('caregiver_id');
 $select_caregiver = $caregiver->selectId("*", "$caregiver_id");
 $specialist_serial_no = $select_caregiver['sp_serial_no'];
 $query = "SELECT * FROM `specialist` WHERE 	serial_no = $specialist_serial_no";
 $run_query = $specialist->query($query);
 $select_specialist = mysqli_fetch_assoc($run_query);
+
+$select_patient = $patient->selectWhere("*", "caregiver_id = $caregiver_id");
 
 ?>
 
@@ -27,7 +31,7 @@ $select_specialist = mysqli_fetch_assoc($run_query);
                             aria-controls="list-profile">Profile</a>
                         <a class="list-group-item list-group-item-action" id="list-specialist-list"
                             data-bs-toggle="list" href="#list-specialist" role="tab"
-                            aria-controls="list-specialist">Specialist info</a>
+                            aria-controls="list-specialist">Specialist and child info</a>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -136,7 +140,7 @@ $select_specialist = mysqli_fetch_assoc($run_query);
                             aria-labelledby="list-specialist-list">
                             <h2 class="text-center mb-1">Specialist information</h2>
                             <div class="line bg-yellow m-auto mb-4"></div>
-                            <div class="row justify-content-center">
+                            <div class="row align-items-center justify-content-center">
                                 <?php if (!empty($select_specialist['photo'] == null)) { ?>
                                 <?php if ($select_specialist['gender'] == "female") { ?>
                                 <div class="col-lg-4 text-center m-auto">
@@ -155,28 +159,69 @@ $select_specialist = mysqli_fetch_assoc($run_query);
                                         alt="" class="rounded shadow-sm img-fluid mb-2">
                                 </div>
                                 <?php } ?>
-                                <div class="w-100"></div>
-                                <div class="text-center mt-3">
-                                    <p class="mb-1">Serial Number</p>
-                                    <h4><?= $select_specialist['serial_no'] ?></h4>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <p class="mb-1">Name</p>
-                                    <h4><?= $select_specialist['name'] ?></h4>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <p class="mb-1">Email</p>
-                                    <h5><?= $select_specialist['email'] ?></h5>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <p class="mb-1">Phone</p>
-                                    <?php if ($select_specialist['phone'] == null) { ?>
-                                    <h5>no data yet!</h5>
-                                    <?php } else { ?>
-                                    <h5><?= $select_specialist['phone'] ?></h5>
-                                    <?php } ?>
+                                <div class="col-6">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-4">
+                                            <p class="mb-2">Serial Number</p>
+                                            <p class="mb-2">Name</p>
+                                            <p class="mb-2">Email</p>
+                                            <p class="mb-2">Phone</p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <h5 class="mb-2"><?= $select_specialist['serial_no'] ?></h5>
+                                            <h5 class="mb-2"><?= $select_specialist['name'] ?></h5>
+                                            <h5 class="mb-2"><?= $select_specialist['email'] ?></h5>
+                                            <?php if ($select_specialist['phone'] == null) { ?>
+                                            <h5 class="mb-2">no data yet!</h5>
+                                            <?php } else { ?>
+                                            <h5 class="mb-2"><?= $select_specialist['phone'] ?></h5>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <h2 class="text-center mb-1 mt-5">Your child information</h2>
+                            <div class="line bg-yellow m-auto mb-4"></div>
+                            <?php foreach ($select_patient as $patient) : ?>
+                            <div class="row justify-content-center align-items-center">
+                                <?php if (!empty($patient['photo'] == null)) { ?>
+                                <?php if ($patient['gender'] == "female") { ?>
+                                <div class="col-lg-2 text-center m-auto">
+                                    <img src="<?= URL; ?>assets/images/user-female.jpg" alt=""
+                                        class="rounded shadow img-fluid mb-2">
+                                </div>
+                                <?php } else { ?>
+                                <div class="col-lg-2 text-center m-auto">
+                                    <img src="<?= URL; ?>assets/images/user-male.jpg" alt=""
+                                        class="rounded shadow img-fluid mb-2">
+                                </div>
+                                <?php } ?>
+                                <?php } else { ?>
+                                <div class="col-3 text-center m-auto">
+                                    <img src="<?= URL; ?>assets/images/uploads/patients/<?= $patient['photo'] ?>" alt=""
+                                        class="rounded shadow-sm img-fluid mb-2">
+                                </div>
+                                <?php } ?>
+                                <div class="col-lg-7">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <p class="mb-2">Name</p>
+                                            <p class="mb-2">Age</p>
+                                            <p class="mb-2">Gender</p>
+                                            <p class="mb-2">Class</p>
+                                            <p class="mb-2">School</p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p class="mb-2"><?= $patient['name'] ?></p>
+                                            <p class="mb-2"><?= $patient['age'] ?></p>
+                                            <p class="mb-2"><?= $patient['gender'] ?></p>
+                                            <p class="mb-2"><?= $patient['class'] ?></p>
+                                            <p class="mb-2"><?= $patient['school'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach ?>
                         </div>
                     </div>
                 </div>

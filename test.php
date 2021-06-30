@@ -468,6 +468,175 @@ use Project\Classes\Models\lovaas_questions;
 //     echo "not found";
 // }
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+function cat($num, $cat)
+{
+
+    $RB[] = [
+        'array_1' => ['range' => range(0, 3), 'norm' => 4, 'mini' => 2],
+        'array_2' => ['range' => range(4, 6), 'norm' => 5, 'mini' => 3],
+        'array_3' => ['range' => range(7, 9), 'norm' => 6, 'mini' => 9],
+        'array_4' => ['range' => range(10, 13), 'norm' => 7, 'mini' => 16],
+        'array_5' => ['range' => range(14, 16), 'norm' => 8, 'mini' => 25],
+        'array_6' => ['range' => range(17, 19), 'norm' => 9, 'mini' => 37],
+        'array_7' => ['range' => range(20, 22), 'norm' => 10, 'mini' => 50],
+        'array_8' => ['range' => range(23, 26), 'norm' => 11, 'mini' => 63],
+        'array_9' => ['range' => range(27, 29), 'norm' => 12, 'mini' => 75],
+        'array_10' => ['range' => range(30, 32), 'norm' => 13, 'mini' => 84],
+        'array_11' => ['range' => range(33, 36), 'norm' => 14, 'mini' => 91],
+        'array_12' => ['range' => range(37, 39), 'norm' => 15, 'mini' => 95]
+    ];
+
+    $SI[] = [
+        'array_1' => ['range' => range(0, 0), 'norm' => 3, 'mini' => 1],
+        'array_2' => ['range' => range(1, 4), 'norm' => 4, 'mini' => 2],
+        'array_3' => ['range' => range(5, 8), 'norm' => 5, 'mini' => 3],
+        'array_4' => ['range' => range(9, 12), 'norm' => 6, 'mini' => 9],
+        'array_5' => ['range' => range(13, 15), 'norm' => 7, 'mini' => 16],
+        'array_6' => ['range' => range(16, 19), 'norm' => 8, 'mini' => 25],
+        'array_7' => ['range' => range(20, 23), 'norm' => 9, 'mini' => 37],
+        'array_8' => ['range' => range(24, 27), 'norm' => 10, 'mini' => 50],
+        'array_9' => ['range' => range(28, 30), 'norm' => 11, 'mini' => 63],
+        'array_10' => ['range' => range(31, 34), 'norm' => 12, 'mini' => 75],
+        'array_11' => ['range' => range(35, 38), 'norm' => 13, 'mini' => 84],
+        'array_12' => ['range' => range(39, 342), 'norm' => 14, 'mini' => 91]
+    ];
+
+    $SC[] = [
+        'array_1' => ['range' => range(0, 1), 'norm' => 2, 'mini' => "<1"],
+        'array_2' => ['range' => range(2, 4), 'norm' => 3, 'mini' => 1],
+        'array_3' => ['range' => range(5, 8), 'norm' => 4, 'mini' => 2],
+        'array_4' => ['range' => range(9, 11), 'norm' => 5, 'mini' => 3],
+        'array_5' => ['range' => range(12, 13), 'norm' => 6, 'mini' => 9],
+        'array_6' => ['range' => range(14, 16), 'norm' => 7, 'mini' => 16],
+        'array_7' => ['range' => range(17, 18), 'norm' => 8, 'mini' => 25],
+        'array_8' => ['range' => range(19, 21), 'norm' => 9, 'mini' => 37],
+        'array_9' => ['range' => range(22, 23), 'norm' => 10, 'mini' => 50],
+        'array_10' => ['range' => range(24, 25), 'norm' => 11, 'mini' => 63],
+        'array_11' => ['range' => range(26, 27), 'norm' => 12, 'mini' => 75],
+    ];
+
+    $ER[] = [
+        'array_1' => ['range' => range(0, 1), 'norm' => 3, 'mini' => 1],
+        'array_2' => ['range' => range(2, 4), 'norm' => 4, 'mini' => 2],
+        'array_3' => ['range' => range(5, 6), 'norm' => 5, 'mini' => 3],
+        'array_4' => ['range' => range(7, 8), 'norm' => 6, 'mini' => 9],
+        'array_5' => ['range' => range(9, 10), 'norm' => 7, 'mini' => 16],
+        'array_6' => ['range' => range(11, 12), 'norm' => 8, 'mini' => 25],
+        'array_7' => ['range' => range(13, 14), 'norm' => 9, 'mini' => 37],
+        'array_8' => ['range' => range(15, 16), 'norm' => 10, 'mini' => 50],
+        'array_9' => ['range' => range(17, 18), 'norm' => 11, 'mini' => 63],
+        'array_10' => ['range' => range(19, 20), 'norm' => 12, 'mini' => 75],
+        'array_11' => ['range' => range(21, 22), 'norm' => 13, 'mini' => 84],
+        'array_12' => ['range' => range(23, 24), 'norm' => 14, 'mini' => 91],
+    ];
+
+    $CS[] = [
+        'array_1' => ['range' => range(0, 0), 'norm' => 5, 'mini' => 3],
+        'array_2' => ['range' => range(1, 1), 'norm' => 6, 'mini' => 9],
+        'array_3' => ['range' => range(2, 3), 'norm' => 7, 'mini' => 16],
+        'array_4' => ['range' => range(4, 6), 'norm' => 8, 'mini' => 25],
+        'array_5' => ['range' => range(7, 8), 'norm' => 9, 'mini' => 37],
+        'array_6' => ['range' => range(9, 10), 'norm' => 10, 'mini' => 50],
+        'array_7' => ['range' => range(11, 13), 'norm' => 11, 'mini' => 63],
+        'array_8' => ['range' => range(14, 15), 'norm' => 12, 'mini' => 75],
+        'array_9' => ['range' => range(16, 17), 'norm' => 13, 'mini' => 84],
+        'array_10' => ['range' => range(18, 19), 'norm' => 14, 'mini' => 91],
+        'array_11' => ['range' => range(20, 21), 'norm' => 15, 'mini' => 95],
+    ];
+
+    $MS[] = [
+        'array_1' => ['range' => range(0, 0), 'norm' => 5, 'mini' => 3],
+        'array_2' => ['range' => range(1, 2), 'norm' => 6, 'mini' => 9],
+        'array_3' => ['range' => range(3, 4), 'norm' => 7, 'mini' => 16],
+        'array_4' => ['range' => range(5, 5), 'norm' => 8, 'mini' => 25],
+        'array_5' => ['range' => range(6, 7), 'norm' => 9, 'mini' => 37],
+        'array_6' => ['range' => range(8, 9), 'norm' => 10, 'mini' => 50],
+        'array_7' => ['range' => range(10, 11), 'norm' => 11, 'mini' => 63],
+        'array_8' => ['range' => range(12, 13), 'norm' => 12, 'mini' => 75],
+        'array_9' => ['range' => range(14, 15), 'norm' => 13, 'mini' => 84],
+        'array_10' => ['range' => range(16, 16), 'norm' => 14, 'mini' => 91],
+        'array_11' => ['range' => range(17, 18), 'norm' => 15, 'mini' => 95],
+        'array_12' => ['range' => range(19, 20), 'norm' => 16, 'mini' => 98],
+        'array_13' => ['range' => range(21, 21), 'norm' => 17, 'mini' => 99],
+    ];
+
+    switch ($cat) {
+        case 'RB':
+            $cat = $RB;
+            break;
+        case 'SI':
+            $cat = $SI;
+            break;
+        case 'SC':
+            $cat = $SC;
+            break;
+        case 'ER':
+            $cat = $ER;
+            break;
+        case 'CS':
+            $cat = $CS;
+            break;
+        case 'MS':
+            $cat = $MS;
+            break;
+
+        default:
+            return false;
+            break;
+    }
+
+    foreach ($cat as $value) {
+        foreach ($value as $one_value) {
+            if (in_array($num, $one_value['range'])) {
+                echo $one_value['norm'] . "<br>";
+                echo $one_value['mini'];
+            }
+        }
+    }
+}
+
+echo cat(0, "SI");
+
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+
+// $cat = range(0, 6);
+// $num = 9;
+// if (in_array($num, $cat)) {
+//     echo "done";
+// } else {
+//     echo "no";
+// }
+// $array = range(0, 39);
+// $chunk = array_chunk($array, 3);
+// echo "<pre>";
+// print_r($chunk);
+// echo "</pre>";
+
+// $RB[] = [
+//     'array_1' => ['range' => range(0, 3), 'result' => 4],
+//     'array_2' => [range(4, 6), 5],
+//     'array_3' => [range(7, 9), 6],
+//     'array_4' => [range(10, 13), 7],
+//     'array_5' => [range(14, 16), 8],
+//     'array_6' => [range(17, 19), 9],
+//     'array_7' => [range(20, 22), 10],
+//     'array_8' => [range(23, 26), 11],
+//     'array_9' => [range(27, 29), 12],
+//     'array_10' => [range(30, 32), 13],
+//     'array_11' => [range(33, 36), 14],
+//     'array_12' => [range(37, 39), 15],
+// ];
+
+// echo "<pre>";
+// print_r($RB);
+// echo "</pre>";
+
+// foreach ($RB as $key => $value) {
+//     foreach ($value as $one_value) {
+//         if (in_array($num, $one_value[0])) {
+//             echo $one_value[1];
+//         }
+//     }
+// }

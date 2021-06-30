@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 11:57 PM
+-- Generation Time: Jun 30, 2021 at 11:39 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -180,12 +180,7 @@ INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `created_at`, 
 (8, 'Freddie Lubowitz', 'male', 8, '2021-05-29 16:03:26', 8),
 (9, 'Jenifer Gislason', 'male', 4, '2021-06-20 16:03:26', 9),
 (10, 'Alfred Green', 'male', 4, '2021-06-21 16:03:26', 10),
-(25, 'Moamen Ali', 'male', 12, '2021-06-29 16:38:37', 23),
-(26, 'laravel', 'male', 22, '2021-06-29 16:46:17', 23),
-(27, 'laravel', 'male', 22, '2021-06-29 16:47:08', 23),
-(28, 'Moamen', 'male', 12, '2021-06-29 21:49:39', 23),
-(29, 'Moamen test', 'male', 12, '2021-06-29 21:52:50', 23),
-(30, 'Moamen test', 'male', 12, '2021-06-29 21:53:42', 23);
+(25, 'Moamen Ali', 'male', 12, '2021-06-29 16:38:37', 23);
 
 -- --------------------------------------------------------
 
@@ -262,39 +257,7 @@ INSERT INTO `autism_checker_results` (`id`, `checker_question_result`, `checker_
 (17, 'yes', 17, 25),
 (18, 'yes', 18, 25),
 (19, 'yes', 19, 25),
-(20, 'yes', 20, 25),
-(21, 'yes', 1, 26),
-(22, 'yes', 2, 26),
-(23, 'no', 3, 26),
-(24, 'no', 4, 26),
-(25, 'no', 5, 26),
-(26, 'no', 6, 26),
-(27, 'yes', 7, 26),
-(28, 'yes', 8, 26),
-(29, 'yes', 9, 26),
-(30, 'no', 10, 26),
-(31, 'no', 11, 26),
-(32, 'yes', 12, 26),
-(33, 'yes', 13, 26),
-(34, 'no', 14, 26),
-(35, 'no', 15, 26),
-(36, 'yes', 16, 26),
-(37, 'no', 17, 26),
-(38, 'yes', 18, 26),
-(39, 'no', 19, 26),
-(40, 'no', 20, 26),
-(41, 'yes', 1, 29),
-(42, 'no', 2, 29),
-(43, 'no', 3, 29),
-(44, 'yes', 4, 29),
-(45, 'yes', 5, 29),
-(46, 'no', 6, 29),
-(47, 'yes', 7, 29),
-(48, 'no', 8, 29),
-(49, 'yes', 9, 29),
-(50, 'no', 10, 29),
-(51, 'yes', 11, 29),
-(52, 'yes', 12, 29);
+(20, 'yes', 20, 25);
 
 -- --------------------------------------------------------
 
@@ -391,7 +354,7 @@ INSERT INTO `dsm5_question` (`id`, `dsm5_questions`, `dsm5_category_id`) VALUES
 
 CREATE TABLE `dsm_result` (
   `id` int(11) NOT NULL,
-  `dsm_question_result` int(11) NOT NULL,
+  `dsm_question_result` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `pateint_id` int(11) NOT NULL,
   `dsm_question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -401,19 +364,19 @@ CREATE TABLE `dsm_result` (
 --
 
 INSERT INTO `dsm_result` (`id`, `dsm_question_result`, `pateint_id`, `dsm_question_id`) VALUES
-(1, 1, 101, 1),
-(2, 1, 101, 2),
-(3, 0, 101, 3),
-(4, 1, 101, 4),
-(5, 1, 101, 5),
-(6, 1, 101, 6),
-(7, 0, 101, 7),
-(8, 1, 101, 8),
-(9, 0, 101, 9),
-(10, 1, 101, 10),
-(11, 1, 101, 11),
-(12, 1, 101, 12),
-(13, 1, 101, 13);
+(1, 'yes', 112, 1),
+(2, 'no', 112, 2),
+(3, 'yes', 112, 3),
+(4, 'yes', 112, 4),
+(5, 'yes', 112, 5),
+(6, 'yes', 112, 6),
+(7, 'yes', 112, 7),
+(8, 'yes', 112, 8),
+(9, 'no', 112, 9),
+(10, 'yes', 112, 10),
+(11, 'yes', 112, 11),
+(12, 'yes', 112, 12),
+(13, 'yes', 112, 13);
 
 -- --------------------------------------------------------
 
@@ -802,7 +765,7 @@ CREATE TABLE `notify_to_do` (
   `id` int(11) NOT NULL,
   `to_do_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `to_do_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `specialist_id` int(11) NOT NULL DEFAULT current_timestamp(),
+  `specialist_id` int(11) DEFAULT NULL,
   `caregiver_id` int(11) DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -863,39 +826,14 @@ INSERT INTO `patient` (`id`, `name`, `age`, `date_of_birth`, `school`, `gender`,
 (107, 'Yasmina Lujayn Murtaza', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 7, 7, 11, 33, 'Garland', 'father', 2455420),
 (108, 'Ramlah Aida Harith', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, NULL, 'Lillie', 'uncle', 718455754),
 (109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 3, 7, 11, 9, 'Stewart', 'mother', 154545754),
-(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, 9, 'Antonette', 'mother', 352545754),
-(111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 9, 4, 11, 9, 'Chaz', 'mother', 445545752),
-(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 9, 'Delbert', 'mother', 1545754),
+(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, 3, 'Antonette', 'mother', 352545754),
+(111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 9, 4, 11, 2, 'Chaz', 'mother', 445545752),
+(112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 1, 'Delbert', 'mother', 1545754),
 (142, 'moamen', 8, '2013-06-26', 'lorem yyyyaaaa', 'male', 'ay 7aga', '60d700ab221f1.png', 2, 2, 11, 36, 'ahmed', '2', 231312332),
 (155, 'moamen test3', 16, '2005-06-28', 'lorem y', 'male', 'ay 7aga', '60d9a7328b899.jpg', 4, 2, 11, 35, 'ahmed', '32', 1099616726),
 (156, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', NULL, NULL, NULL, 11, NULL, 'ahmed', '4', 109961976),
-(157, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', '60db3400d237f.jpg', 2, 2, 11, NULL, 'ahmed', '4', 109961976);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `plan`
---
-
-CREATE TABLE `plan` (
-  `id` int(11) NOT NULL,
-  `lovaas_id` int(11) NOT NULL,
-  `pateint_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `plan`
---
-
-INSERT INTO `plan` (`id`, `lovaas_id`, `pateint_id`) VALUES
-(1, 1, 101),
-(2, 2, 102),
-(3, 3, 103),
-(4, 4, 104),
-(5, 5, 105),
-(6, 6, 106),
-(7, 7, 107),
-(8, 8, 108);
+(157, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', '60db3400d237f.jpg', 2, 2, 11, NULL, 'ahmed', '4', 109961976),
+(158, 'moamen', 2, '2019-02-28', 'lorem yyyyaaaa', 'male', 'lorem yyyy', '60dc325a45f29.jpg', 2, 2, 11, NULL, 'ahmed', '2', 10195587);
 
 -- --------------------------------------------------------
 
@@ -905,14 +843,14 @@ INSERT INTO `plan` (`id`, `lovaas_id`, `pateint_id`) VALUES
 
 CREATE TABLE `scale_category` (
   `id` int(11) NOT NULL,
-  `category` varchar(225) COLLATE utf8_unicode_ci NOT NULL
+  `scale_category` varchar(225) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `scale_category`
 --
 
-INSERT INTO `scale_category` (`id`, `category`) VALUES
+INSERT INTO `scale_category` (`id`, `scale_category`) VALUES
 (1, 'Stereotypic / repetitive behaviors'),
 (2, 'Social interaction'),
 (3, 'Social communication'),
@@ -929,14 +867,14 @@ INSERT INTO `scale_category` (`id`, `category`) VALUES
 CREATE TABLE `scale_questions` (
   `id` int(11) NOT NULL,
   `scale_question` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `scale-category-id` int(11) NOT NULL
+  `scale_category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `scale_questions`
 --
 
-INSERT INTO `scale_questions` (`id`, `scale_question`, `scale-category-id`) VALUES
+INSERT INTO `scale_questions` (`id`, `scale_question`, `scale_category_id`) VALUES
 (101, 'Most of his time is spent performing typical repetitive behaviors if he is left alone', 1),
 (102, 'Is involved in a specific and abnormally stimulus', 1),
 (103, 'He stares at the hands and objects in the environment, with a distance of at least 5 seconds', 1),
@@ -1004,8 +942,8 @@ INSERT INTO `scale_questions` (`id`, `scale_question`, `scale-category-id`) VALU
 
 CREATE TABLE `scale_result` (
   `id` int(11) NOT NULL,
-  `scale-question-result` int(11) NOT NULL,
-  `scale-question-id` int(11) NOT NULL,
+  `scale_question_result` int(11) NOT NULL,
+  `scale_question_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1013,65 +951,68 @@ CREATE TABLE `scale_result` (
 -- Dumping data for table `scale_result`
 --
 
-INSERT INTO `scale_result` (`id`, `scale-question-result`, `scale-question-id`, `patient_id`) VALUES
-(1, 1, 101, 101),
-(2, 1, 102, 101),
-(3, 1, 103, 101),
-(4, 1, 104, 101),
-(5, 1, 105, 101),
-(6, 1, 106, 101),
-(7, 1, 107, 101),
-(8, 1, 108, 101),
-(9, 1, 109, 101),
-(10, 1, 110, 101),
-(11, 1, 111, 101),
-(12, 1, 112, 101),
-(13, 1, 113, 101),
-(14, 1, 114, 101),
-(15, 1, 115, 101),
-(16, 1, 116, 101),
-(17, 1, 117, 101),
-(18, 1, 118, 101),
-(19, 1, 119, 101),
-(20, 1, 120, 101),
-(21, 1, 121, 101),
-(22, 1, 122, 101),
-(23, 1, 123, 101),
-(24, 1, 124, 101),
-(25, 1, 125, 101),
-(26, 1, 126, 101),
-(27, 1, 127, 101),
-(28, 1, 128, 101),
-(29, 1, 129, 101),
-(30, 1, 130, 101),
-(31, 1, 131, 101),
-(32, 1, 132, 101),
-(33, 1, 133, 101),
-(34, 1, 134, 101),
-(35, 1, 135, 101),
-(36, 1, 136, 101),
-(37, 1, 137, 101),
-(38, 1, 138, 101),
-(39, 1, 139, 101),
-(40, 1, 140, 101),
-(41, 1, 141, 101),
-(42, 1, 142, 101),
-(43, 1, 143, 101),
-(44, 1, 144, 101),
-(45, 1, 145, 101),
-(46, 1, 146, 101),
-(47, 1, 147, 101),
-(48, 1, 148, 101),
-(49, 1, 149, 101),
-(50, 1, 150, 101),
-(51, 1, 151, 101),
-(52, 1, 152, 101),
-(53, 1, 153, 101),
-(54, 1, 154, 101),
-(55, 1, 155, 101),
-(56, 1, 156, 101),
-(57, 1, 157, 101),
-(58, 2, 158, 101);
+INSERT INTO `scale_result` (`id`, `scale_question_result`, `scale_question_id`, `patient_id`) VALUES
+(1, 0, 101, 112),
+(2, 1, 102, 112),
+(3, 2, 103, 112),
+(4, 0, 101, 112),
+(5, 1, 102, 112),
+(6, 2, 103, 112),
+(7, 3, 104, 112),
+(8, 2, 105, 112),
+(9, 1, 106, 112),
+(10, 0, 107, 112),
+(11, 0, 108, 112),
+(12, 1, 109, 112),
+(13, 2, 110, 112),
+(14, 3, 111, 112),
+(15, 2, 112, 112),
+(16, 1, 113, 112),
+(17, 2, 114, 112),
+(18, 1, 115, 112),
+(19, 2, 116, 112),
+(20, 1, 117, 112),
+(21, 0, 118, 112),
+(22, 3, 119, 112),
+(23, 2, 120, 112),
+(24, 1, 121, 112),
+(25, 3, 122, 112),
+(26, 0, 123, 112),
+(27, 2, 124, 112),
+(28, 2, 125, 112),
+(29, 0, 126, 112),
+(30, 1, 127, 112),
+(31, 3, 128, 112),
+(32, 1, 129, 112),
+(33, 2, 130, 112),
+(34, 3, 131, 112),
+(35, 1, 132, 112),
+(36, 0, 133, 112),
+(37, 2, 134, 112),
+(38, 0, 135, 112),
+(39, 2, 136, 112),
+(40, 3, 137, 112),
+(41, 2, 138, 112),
+(42, 1, 139, 112),
+(43, 2, 140, 112),
+(44, 2, 141, 112),
+(45, 2, 142, 112),
+(46, 1, 143, 112),
+(47, 1, 144, 112),
+(48, 2, 145, 112),
+(49, 1, 146, 112),
+(50, 2, 147, 112),
+(51, 3, 148, 112),
+(52, 0, 149, 112),
+(53, 1, 150, 112),
+(54, 2, 151, 112),
+(55, 3, 152, 112),
+(56, 2, 153, 112),
+(57, 1, 154, 112),
+(58, 3, 155, 112),
+(59, 1, 156, 112),
+(60, 0, 157, 112),
+(61, 1, 158, 112);
 
 -- --------------------------------------------------------
 
@@ -1282,9 +1223,7 @@ INSERT INTO `to_do` (`id`, `to_do_details`, `title`, `specialist_id`, `caregiver
 (37, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf', 'Danya Amal Basit Title 2', 11, 9, 109, '2021-06-21 21:06:19', NULL),
 (38, 'dasu askjdsa dsji fuif fdiuahf fiuaf d faif afiuahf  fskahfa faigfa  fajfha fiuahfnufa f aia f afua f ajfd fdafhaufhaf ufnaf ajfaf dufhd fdfukduf  fdaiufhd fdu fafd fdufndaf daufakfniufsd fdsifds fdsiunf fdsvuvfdsbfdyisf fdusg fdsygf fdugfds uyftds fsduygfds fdusy  fdsugfds fdusf sufds fdsufds ufds ufds fdsu  fdsuifds fdsiufsdfdsfsf sdufhds fdsiufds  fdisufds  fdsifds  fdsiufds fidshfds fidusf sfidushfds', 'Danya Amal Basit Title 3', 11, 9, 109, '2021-06-21 21:06:56', NULL),
 (59, 'sa', 'Danya Amal Basit Title', 11, 36, 142, '2021-06-27 19:29:55', 'done'),
-(62, 'ay', 'Danya Amal Basit Title', 11, 35, 155, '2021-06-28 08:28:50', NULL),
-(63, '', '', 11, 9, 109, '2021-06-28 13:02:12', NULL),
-(64, '', '', 11, 9, 109, '2021-06-28 13:16:44', NULL);
+(62, 'ay', 'Danya Amal Basit Title', 11, 35, 155, '2021-06-28 08:28:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -1399,7 +1338,8 @@ ALTER TABLE `autism_checker_question`
 --
 ALTER TABLE `autism_checker_results`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `checker_question_id` (`checker_question_id`);
+  ADD KEY `checker_question_id` (`checker_question_id`),
+  ADD KEY `case_id` (`case_id`);
 
 --
 -- Indexes for table `caregiver`
@@ -1420,7 +1360,7 @@ ALTER TABLE `dsm5_category`
 --
 ALTER TABLE `dsm5_question`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `dsm5_category-id` (`dsm5_category_id`);
+  ADD KEY `dsm5_category_id` (`dsm5_category_id`);
 
 --
 -- Indexes for table `dsm_result`
@@ -1513,14 +1453,6 @@ ALTER TABLE `patient`
   ADD KEY `caregiver_id` (`caregiver_id`) USING BTREE;
 
 --
--- Indexes for table `plan`
---
-ALTER TABLE `plan`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `lovaas_id` (`lovaas_id`),
-  ADD KEY `pateint_id` (`pateint_id`);
-
---
 -- Indexes for table `scale_category`
 --
 ALTER TABLE `scale_category`
@@ -1531,15 +1463,15 @@ ALTER TABLE `scale_category`
 --
 ALTER TABLE `scale_questions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `scale-category-id` (`scale-category-id`);
+  ADD KEY `scale_category_id` (`scale_category_id`);
 
 --
 -- Indexes for table `scale_result`
 --
 ALTER TABLE `scale_result`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `scale-question-id` (`scale-question-id`),
-  ADD KEY `patient_id` (`patient_id`);
+  ADD KEY `patient_id` (`patient_id`),
+  ADD KEY `scale_question_id` (`scale_question_id`);
 
 --
 -- Indexes for table `schedule`
@@ -1633,7 +1565,7 @@ ALTER TABLE `attahced_reports_result`
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1645,7 +1577,7 @@ ALTER TABLE `autism_checker_question`
 -- AUTO_INCREMENT for table `autism_checker_results`
 --
 ALTER TABLE `autism_checker_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `caregiver`
@@ -1669,7 +1601,7 @@ ALTER TABLE `dsm5_question`
 -- AUTO_INCREMENT for table `dsm_result`
 --
 ALTER TABLE `dsm_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `evaluation_history`
@@ -1729,13 +1661,7 @@ ALTER TABLE `notify_to_do`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
-
---
--- AUTO_INCREMENT for table `plan`
---
-ALTER TABLE `plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `scale_category`
@@ -1753,7 +1679,7 @@ ALTER TABLE `scale_questions`
 -- AUTO_INCREMENT for table `scale_result`
 --
 ALTER TABLE `scale_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `schedule`
@@ -1837,7 +1763,8 @@ ALTER TABLE `autism_checker_question`
 -- Constraints for table `autism_checker_results`
 --
 ALTER TABLE `autism_checker_results`
-  ADD CONSTRAINT `autism_checker_results_ibfk_1` FOREIGN KEY (`checker_question_id`) REFERENCES `autism_checker_question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `autism_checker_results_ibfk_1` FOREIGN KEY (`checker_question_id`) REFERENCES `autism_checker_question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `autism_checker_results_ibfk_2` FOREIGN KEY (`case_id`) REFERENCES `autism_checker` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `caregiver`
@@ -1849,7 +1776,7 @@ ALTER TABLE `caregiver`
 -- Constraints for table `dsm5_question`
 --
 ALTER TABLE `dsm5_question`
-  ADD CONSTRAINT `dsm5_question_ibfk_1` FOREIGN KEY (`dsm5_category_id`) REFERENCES `scale_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `dsm5_question_ibfk_1` FOREIGN KEY (`dsm5_category_id`) REFERENCES `dsm5_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `dsm_result`
@@ -1915,24 +1842,17 @@ ALTER TABLE `patient`
   ADD CONSTRAINT `patient_ibfk_2` FOREIGN KEY (`caregiver_id`) REFERENCES `caregiver` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `plan`
---
-ALTER TABLE `plan`
-  ADD CONSTRAINT `plan_ibfk_1` FOREIGN KEY (`lovaas_id`) REFERENCES `lovaas_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `plan_ibfk_2` FOREIGN KEY (`pateint_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `scale_questions`
 --
 ALTER TABLE `scale_questions`
-  ADD CONSTRAINT `scale_questions_ibfk_1` FOREIGN KEY (`scale-category-id`) REFERENCES `scale_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `scale_questions_ibfk_1` FOREIGN KEY (`scale_category_id`) REFERENCES `scale_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `scale_result`
 --
 ALTER TABLE `scale_result`
-  ADD CONSTRAINT `scale_result_ibfk_1` FOREIGN KEY (`scale-question-id`) REFERENCES `scale_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scale_result_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `scale_result_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `scale_result_ibfk_3` FOREIGN KEY (`scale_question_id`) REFERENCES `scale_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `schedule`

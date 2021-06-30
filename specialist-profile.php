@@ -124,7 +124,4 @@ $select_specialist = $specialist->selectId("*", "$specialist_id");
     </div>
 </div>
 
-<script>
-
-</script>
 <?php require_once('include/footer.php'); ?>
