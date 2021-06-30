@@ -10,6 +10,16 @@ use Project\Classes\Models\lovaas_questions;
 use Project\Classes\Models\notic;
 use Project\Classes\Models\patient;
 
+// dsm5
+use Project\Classes\Models\dsm5_question;
+use Project\Classes\Models\dsm5_category;
+use Project\Classes\Models\dsm_result;
+
+// scale
+use Project\Classes\Models\scale_category;
+use Project\Classes\Models\scale_questions;
+use Project\Classes\Models\scale_result;
+
 require_once('include/header.php');
 
 
@@ -22,6 +32,26 @@ $lovaas_questions = new lovaas_questions;
 $lovaas_ques = $lovaas_questions->selectAll();
 $lovaas_results = new lovaas_results;
 $lovaas_results_arr = $lovaas_results->selectWhere("*", "patient_id = $patient_id");
+// Dsm5
+$dsm5_question = new dsm5_question;
+$dsm_ques = $dsm5_question->selectAll();
+
+$dsm5_category = new dsm5_category;
+$dsm_cats = $dsm5_category->selectAll();
+
+$dsm_results = new dsm_result;
+$dsm_results_arr = $dsm_results->selectWhere("*", "pateint_id = $patient_id");
+
+// scale 
+$scale_questions = new scale_questions;
+$scale_ques = $scale_questions->selectAll();
+
+$scale_category = new scale_category;
+$scale_cats = $scale_category->selectAll();
+
+$scale_result = new scale_result;
+$scale_result_arr = $scale_result->selectWhere("*", "patient_id = $patient_id");
+
 $tables_select = new tables;
 $adir_result = new adir_result;
 $adir_result_arr = $adir_result->selectWhere("*", "pateint_id = $patient_id");
@@ -682,7 +712,15 @@ require_once('include/navbar.php');
                     <!-- DSM 5 -->
                     <div class="tab-pane fade bg-box rounded p-lg-5 p-2 mt-lg-0 mt-4" id="list-dsm" role="tabpanel"
                         aria-labelledby="list-dsm-list">
-                        <div class="report px-lg-5 px-3 py-4 mt-3">
+                        <div class="row">
+                            <div class="col-md-12 mt-3 rounded">
+                                <button type="button" id="cmd" class="secondary-btn float-end btn ml-4">Generate
+                                    PDF</button>
+                                <button type="button" class="secondary-btn float-end btn"
+                                    onclick='PrintElem("dsmprint")'>Print</button>
+                            </div>
+                        </div>
+                        <div class="report px-lg-5 px-3 py-4 mt-3" id="dsmprint">
                             <div class="row justify-content-between align-items-center head">
                                 <div class="col-md-8">
                                     <div class="row align-items-center">
@@ -746,15 +784,25 @@ require_once('include/navbar.php');
                                     </h6>
                                 </div>
                             </div>
+                            <?php foreach ($dsm_cats as $dsm_cat) : ?>
+                                
                             <div class="bg-box py-3 my-3">
                                 <div class="container-fluid">
                                     <div class="row justify-content-between align-items-center bg-box cat">
                                         <div class="col-lg-10">
-                                            <h5>Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.</h5>
+                                        <h5><?= $dsm_cat['dsm_category'] ?></h5>
                                         </div>
+                                        <?php
+                                                    $dsm_result = new dsm_result;
+                                                    $dsm_category_id = $dsm_cat['id'];
+                                                    $dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
+                                                    dsm5_category.id = dsm5_question.dsm5_category_id AND dsm5_question.id = dsm_result.dsm_question_id WHERE dsm_question_result='yes' AND dsm5_category.id = $dsm_category_id AND pateint_id = $patient_id";
+                                                    $get_result = $dsm_result->query($dsm_calc);
+                                                    $dsm_calc_results_report = mysqli_fetch_all($get_result,MYSQLI_ASSOC);
+                                                    ?>
                                         <div class="col-lg-2">
-                                            <strong class="red">Degree : 4</strong>
+                                        <strong class="red">Degree : <?= count($dsm_calc_results_report)?></strong>
+                                        <?php $array[]=[count($dsm_calc_results_report)]?>
                                         </div>
                                     </div>
                                     <table class="table table-hover table-striped table-bordered mt-4">
@@ -765,25 +813,53 @@ require_once('include/navbar.php');
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for ($i = 0; $i < 5; $i++) : ?>
+                                        <?php
+                                                    $dsm_category_id = $dsm_cat['id'];
+                                                    $query = "SELECT dsm5_question.dsm5_questions , dsm_result.dsm_question_result FROM patient JOIN dsm_result JOIN dsm5_question JOIN dsm5_category  ON
+                                                    patient.id=dsm_result.pateint_id AND dsm5_question.id = dsm_result.dsm_question_id AND dsm5_category.id = dsm5_question.dsm5_category_id WHERE dsm5_category.id= $dsm_category_id AND patient.id= $patient_id";
+                                                    $dsm_result =  $tables_select->query($query);
+                                                    $dsm_results_report = mysqli_fetch_all($dsm_result, MYSQLI_ASSOC);
+                                                    ?>
+                                            <?php if ($dsm_results_report) { ?>
+                                            <?php foreach ($dsm_results_report as $result) : ?>
                                             <tr>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-                                                </td>
-                                                <td>No</td>
+                                                <td><?= $result['dsm5_questions'] ?></td>
+                                                <td><?= $result['dsm_question_result'] ?></td>
                                             </tr>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
+                                            <?php } else { ?>
+                                            <td colspan="2" class="text-center">No data yet</td>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <?php endforeach ?>
                             <div class="row pt-3">
                                 <div class="col-md-12">
-                                    <p> For your reference, based on conventional autism screening AQ-10
-                                        technique, autistic traits have been identified
-                                        in the respondent given the provided information. The AQ-10 score
-                                        for the respondent is 7. This result is not
-                                        obtained from our AI.
+                                <?php
+                                    $dsm_result = new dsm_result;
+                                    $dsm_category_id = $dsm_cat['id'];
+                                    $dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
+                                    dsm5_category.id = dsm5_question.dsm5_category_id AND dsm5_question.id = dsm_result.dsm_question_id WHERE dsm_question_result='yes' AND pateint_id = $patient_id";
+                                    $get_result = $dsm_result->query($dsm_calc);
+                                    $dsm_calc_results_reports = mysqli_fetch_all($get_result,MYSQLI_ASSOC);
+                                ?>
+                                <?php if(count($dsm_calc_results_reports)<4){ ?>
+                                    <p>
+                                        <h6>your child degree is</h6>
+                                        <h6><?= count($dsm_calc_results_reports)?></h6>
+                                        so it seems that he have a low level of support
                                     </p>
+                                    <?php } elseif((count($dsm_calc_results_reports)<8)){?>
+                                        your child degree is 
+                                        <?= count($dsm_calc_results_reports)?>                                        
+                                        so it seems that he have a medium level of support
+                                    <?php } elseif((count($dsm_calc_results_reports)<14)){?>
+                                        your child degree is 
+                                        <?= count($dsm_calc_results_reports)?>                                        
+                                        so it seems that he have a High level of support
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -792,7 +868,15 @@ require_once('include/navbar.php');
                     <!-- Scale -->
                     <div class="tab-pane fade bg-box rounded p-lg-5 p-2 mt-lg-0 mt-4" id="list-scale" role="tabpanel"
                         aria-labelledby="list-scale-list">
-                        <div class="report px-lg-5 px-3 py-4 mt-3">
+                        <div class="row">
+                            <div class="col-md-12 mt-3 rounded">
+                                <button type="button" id="cmd" class="secondary-btn float-end btn ml-4">Generate
+                                    PDF</button>
+                                <button type="button" class="secondary-btn float-end btn"
+                                    onclick='PrintElem("scaleprint")'>Print</button>
+                            </div>
+                        </div>
+                        <div class="report px-lg-5 px-3 py-4 mt-3" id="scaleprint">
                             <div class="row justify-content-between align-items-center head">
                                 <div class="col-md-8">
                                     <div class="row align-items-center">
@@ -856,16 +940,24 @@ require_once('include/navbar.php');
                                     </h6>
                                 </div>
                             </div>
+                            <?php foreach ($scale_cats as $scale_cat) : ?>
                             <div class="bg-box py-3 my-3">
                                 <div class="container-fluid">
                                     <div class="row justify-content-between align-items-center bg-box cat">
                                         <div class="col-lg-10">
-                                            <h5>Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit.</h5>
+                                        <h5><?= $scale_cat['scale_category'] ?></h5>
                                         </div>
+                                        <?php
+                                                    $scale_result = new scale_result;
+                                                    $scale_category_id = $scale_cat['id'];
+                                                    $scale_calc = "SELECT SUM(scale_question_result) FROM scale_result JOIN scale_category JOIN scale_questions ON 
+                                                    scale_category.id = scale_questions.scale_category_id AND scale_questions.id = scale_result.scale_question_id WHERE scale_category.id = $scale_category_id AND patient_id= $patient_id";
+                                                    $get_result2 = $scale_result->query($scale_calc);
+                                                    $scale_calc_results_report = mysqli_fetch_assoc($get_result2);
+                                                    ?>
                                         <div class="col-lg-2">
-                                            <strong class="red">Degree : 4</strong>
-                                        </div>
+                                            <strong class="red">Degree : <?= $scale_calc_results_report['SUM(scale_question_result)'] ?></strong>
+                                            </div>
                                     </div>
                                     <table class="table table-hover table-striped table-bordered mt-4">
                                         <thead>
@@ -875,17 +967,28 @@ require_once('include/navbar.php');
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for ($i = 0; $i < 5; $i++) : ?>
+                                        <?php
+                                            $scale_category_id = $scale_cat['id'];
+                                            $query = "SELECT scale_questions.scale_question , scale_result.scale_question_result FROM patient JOIN scale_result JOIN scale_questions JOIN scale_category  ON
+                                            patient.id=scale_result.patient_id AND scale_questions.id = scale_result.scale_question_id AND scale_category.id = scale_questions.scale_category_id WHERE scale_category.id= $scale_category_id AND patient.id= $patient_id";
+                                            $scale_result =  $tables_select->query($query);
+                                            $scale_results_report = mysqli_fetch_all($scale_result, MYSQLI_ASSOC);
+                                            ?>
+                                            <?php if ($scale_results_report) { ?>
+                                            <?php foreach ($scale_results_report as $result) : ?>
                                             <tr>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-                                                </td>
-                                                <td>No</td>
+                                                <td><?= $result['scale_question'] ?></td>
+                                                <td><?= $result['scale_question_result'] ?></td>
                                             </tr>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
+                                            <?php } else { ?>
+                                            <td colspan="2" class="text-center">No data yet</td>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <?php endforeach ?>
                             <div class="row pt-3">
                                 <div class="col-md-12">
                                     <p> For your reference, based on conventional autism screening AQ-10
