@@ -1134,6 +1134,7 @@ require_once('include/navbar.php');
                 <form>
                     <div class="form-group">
                         <input type="hidden" style="max-width: 98%;" id="recipient-name" />
+
                         <embed id="element-embed" style="width:100%; height:100%">
                         <?php
                         echo $test = '<script> document.getElementById("recipient-name").value; </script>';
