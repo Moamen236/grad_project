@@ -39,50 +39,52 @@ $(document).ready( function () {
 
   new ClipboardJS('.btn-copy');
 
-  // edit questions
-  $('#lovaas-questions').css('display' , 'none')
-  $('.edit-btn').click(function() {
-    let parent = $(this).parent();
-    let siblings = $(this).parent().siblings();
-
-    $(parent).css('display' , 'none');
-    $(siblings).css('display' , 'block');
-
-    console.log(parent);
-    console.log(siblings);
-  })
-
   // form with ajax
-  // function submissionDone(data){
-  //   console.log('success message');
-  // }
+  function submissionDone(data){
+    console.log('success message');
+  }
 
-  // var form = $('#form');
+  var form = $('#form');
 
-  // form.submit(function (e) {
-  //   console.log('done submit');
-	// 	e.preventDefault();
+  form.submit(function (e) {
+    console.log('done submit');
+		e.preventDefault();
 
-	// 	var url = form.attr('action');
-  //   var type = form.attr('method');
+		var url = form.attr('action');
+    var type = form.attr('method');
 
-  //   var form_data = {
-  //     title : $('#title').val(),
-  //     description : $('#description').val()
-  //   };
-  //   console.log(form_data);
+    var form_data = {
+      title : $('#title').val(),
+      description : $('#description').val()
+    };
+    console.log(form_data);
 
-	// 	$.ajax({
-	// 		type: type,
-	// 		url: url,
-	// 		data: form_data,
-	// 		success: function () {
-	// 			submissionDone();
-	// 		},
-  //     cache: false,
-  //     contentType: false,
-  //     processData: false
-	// 	})
-	// });
+		$.ajax({
+			type: type,
+			url: url,
+			data: form_data,
+			success: function () {
+				submissionDone();
+			},
+      cache: false,
+      contentType: false,
+      processData: false
+		})
+	});
+
+  // == tab on reload
+  //   $('#myTab a').click(function(e) {
+  //       e.preventDefault();
+  //       $(this).tab('show');
+  //   });
+  
+  //   $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+  //       var id = $(e.target).attr("href").substr(1);
+  //       window.location.hash = id;
+  //   });
+  
+  //   var hash = window.location.hash;
+  //   $('#myTab a[hreft="' + hash + '"]').tab('show');
+
 });
 

@@ -1,13 +1,11 @@
 <?php
 
-use Project\Classes\Models\specialist;
-//lovaas
 use Project\Classes\Models\lovaas_category;
 use Project\Classes\Models\lovaas_questions;
+use Project\Classes\Models\specialist;
 // dsm5
 use Project\Classes\Models\dsm5_question;
 use Project\Classes\Models\dsm5_category;
-use Project\Classes\Models\lovaas_results;
 use Project\Classes\Models\patient;
 // scale
 use Project\Classes\Models\scale_questions;
@@ -29,8 +27,6 @@ $lovaas_category = new lovaas_category;
 $lovaas_cats = $lovaas_category->selectAll();
 $lovaas_questions = new lovaas_questions;
 $lovaas_ques = $lovaas_questions->selectAll();
-$lovaas_results = new lovaas_results;
-$select_lovaas_results = $lovaas_results->selectWhere("*", "patient_id = $patient_id");
 
 // Dsm5
 $dsm5_question = new dsm5_question;
@@ -398,6 +394,7 @@ require_once('include/navbar.php');
                     <div class="tab-pane fade bg-box p-5" id="list-scale" role="tabpanel"
                         aria-labelledby="list-scale-list">
                         <div class="accordion" id="accordionExample">
+<<<<<<< HEAD
                             <form action="handle/handle-scale.php" method="post">
                                 <?php foreach ($scale_cats as $scale_cat) : ?>
                                 <div class="accordion-item">
@@ -407,66 +404,69 @@ require_once('include/navbar.php');
                                         <div class="col-lg">
                                             <h6 class="m-0"><?= $scale_cat['scale_category'] ?></h6>
                                         </div>
+=======
+                        <form action="forms/handle-scale.php" method="post">
+                            <?php foreach ($scale_cats as $scale_cat) : ?>
+                            <div class="accordion-item">
+                                <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse<?= $scale_cat['id'] ?>" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    <div class="col-lg">
+                                        <h6 class="m-0"><?= $scale_cat['scale_category'] ?></h6>
+>>>>>>> parent of 4eba9e5 (new)
                                     </div>
-                                    <div id="collapse<?= $scale_cat['id'] ?>" class="accordion-collapse collapse"
-                                        aria-labelledby="heading<?= $scale_cat['id'] ?>"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <?php $scale_ques =  $scale_questions->selectWhere("*", "scale_category_id=" . $scale_cat['id']); ?>
-                                            <?php foreach ($scale_ques as $scale_que) : ?>
-                                            <div class="bg-white rounded border-bottom p-4">
-                                                <h6><?= $scale_que['scale_question'] ?></h6>
-                                                <div
-                                                    class="row justify-content-center align-items-center text-center p-3">
-                                                    <div class="col-md-3">
-                                                        <div class="form-check form-check-inline ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="question_<?= $scale_que['id'] ?>" value="0">
-                                                            <label class="form-check-label"
-                                                                for="flexRadioDefault1">0</label>
-                                                        </div>
+                                </div>
+                                <div id="collapse<?= $scale_cat['id'] ?>" class="accordion-collapse collapse"
+                                    aria-labelledby="heading<?= $scale_cat['id'] ?>" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                    <?php $scale_ques =  $scale_questions->selectWhere("*", "scale_category_id=" . $scale_cat['id']); ?>
+                                        <?php foreach ($scale_ques as $scale_que) : ?>
+                                        <div class="bg-white rounded border-bottom p-4">
+                                            <h6><?= $scale_que['scale_question'] ?></h6>
+                                            <div class="row justify-content-center align-items-center text-center p-3">
+                                                <div class="col-md-3">
+                                                    <div class="form-check form-check-inline ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="0">
+                                                        <label class="form-check-label"
+                                                            for="flexRadioDefault1">0</label>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-check form-check-inline ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="question_<?= $scale_que['id'] ?>" value="1">
-                                                            <label class="form-check-label"
-                                                                for="inlineCheckbox1">1</label>
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check form-check-inline ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="1">
+                                                        <label class="form-check-label" for="inlineCheckbox1">1</label>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-check form-check-inline ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="question_<?= $scale_que['id'] ?>" value="2">
-                                                            <label class="form-check-label"
-                                                                for="inlineCheckbox1">2</label>
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check form-check-inline ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="2">
+                                                        <label class="form-check-label" for="inlineCheckbox1">2</label>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-check form-check-inline ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="question_<?= $scale_que['id'] ?>" value="3">
-                                                            <label class="form-check-label"
-                                                                for="inlineCheckbox1">3</label>
-                                                        </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check form-check-inline ">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="question_<?= $scale_que['id'] ?>" value="3">
+                                                        <label class="form-check-label" for="inlineCheckbox1">3</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php endforeach ?>
                                         </div>
+                                        <?php endforeach ?>
                                     </div>
                                 </div>
-                                <?php endforeach ?>
-                                <button name="scale_question" type="submit"
-                                    class="secondary-btn float-end btn mt-4">Done</button>
-                            </form>
+                            </div>
+                            <?php endforeach ?>
+                            <button name="scale_question" type="submit" class="secondary-btn float-end btn mt-4">Done</button>
                         </div>
                     </div>
                     <!--Lovass-->
                     <div class="tab-pane fade bg-box p-lg-5 p-1" id="list-lovaas" role="tabpanel"
                         aria-labelledby="list-lovaas-list">
                         <div class="accordion" id="accordionExample">
-                            <?php if (empty($select_lovaas_results)) { ?>
                             <form action="handle/lovaas.php" method="post">
                                 <?php foreach ($lovaas_cats as $lovass_cat) : ?>
                                 <div class="accordion-item">
@@ -524,85 +524,6 @@ require_once('include/navbar.php');
                                     class="secondary-btn btn float-end mt-4">Done</button>
                                 <div class="clearfix"></div>
                             </form>
-                            <?php } else { ?>
-                            <div id="edit-lovaas" class="edit text-center p-5" style="background-color: #FDFDFD;">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8">
-                                        <div class="have-data ">
-                                            <h5 class="my-3" style="opacity: 0.5;">you already answer lovaas questions
-                                                for this patient you can now edit your answers</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="edit-btn btn main-btn">Edit</span>
-                            </div>
-                            <div id="lovaas-questions">
-                                <form action="handle/lovaas.php" method="post">
-                                    <?php foreach ($lovaas_cats as $lovass_cat) : ?>
-                                    <div class="accordion-item">
-                                        <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse<?= $lovass_cat['id'] ?>" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            <div class="col-lg">
-                                                <h6 class="m-0"><?= $lovass_cat['category'] ?></h6>
-                                            </div>
-                                        </div>
-                                        <div id="collapse<?= $lovass_cat['id'] ?>" class="accordion-collapse collapse"
-                                            aria-labelledby="heading<?= $lovass_cat['id'] ?>"
-                                            data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <?php $lovass_cat_id = $lovass_cat['id'];
-                                                        $query = "SELECT lovaas_questions.id , lovaas_questions.lovass_questions , lovaas_results.lovaas_question_result FROM patient JOIN lovaas_results JOIN lovaas_questions JOIN lovaas_category ON patient.id=lovaas_results.patient_id AND lovaas_questions.id = lovaas_results.lovaas_question_id AND lovaas_category.id = lovaas_questions.lovaas_category_id WHERE lovaas_category.id= $lovass_cat_id AND patient.id= $patient_id";
-                                                        $run_query = $lovaas_results->query($query);
-                                                        $questions_results = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
-                                                        ?>
-                                                <?php foreach ($questions_results as $key => $question) : ?>
-                                                <div class="row bg-white rounded p-4 border-bottom">
-                                                    <div class="row">
-                                                        <?= $question['lovass_questions'] ?>
-                                                    </div>
-                                                    <div
-                                                        class="row justify-content-around  align-items-center text-center p-3">
-                                                        <div class="col-2 col-lg-2 form-check text-md-start">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="radio_<?= $question['id'] ?>" id="radio1"
-                                                                value="good"
-                                                                <?php if ($question['lovaas_question_result'] == 'good') echo 'checked="checked"' ?>>
-                                                            <label class="form-check-label" for="radio1">
-                                                                good
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-2 col-lg-2 form-check ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="radio_<?= $question['id'] ?>" id="radio1"
-                                                                value="medium"
-                                                                <?php if ($question['lovaas_question_result'] == 'medium') echo 'checked="checked"' ?>>
-                                                            <label class="form-check-label" for="radio1">
-                                                                medium
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-2 col-lg-2 form-check ">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="radio_<?= $question['id'] ?>" id="radio1"
-                                                                value="weak"
-                                                                <?php if ($question['lovaas_question_result'] == 'weak') echo 'checked="checked"' ?>>
-                                                            <label class="form-check-label" for="radio1">
-                                                                weak
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php endforeach ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php endforeach ?>
-                                    <button type="submit" name="lovaas_questions"
-                                        class="secondary-btn btn float-end mt-4">Done</button>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                            <?php } ?>
                         </div>
                     </div>
                     <!-- Schedule -->

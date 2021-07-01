@@ -1119,6 +1119,7 @@ require_once('include/navbar.php');
 </div>
 <?php } ?>
 
+<<<<<<< HEAD
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -1134,7 +1135,6 @@ require_once('include/navbar.php');
                 <form>
                     <div class="form-group">
                         <input type="hidden" style="max-width: 98%;" id="recipient-name" />
-
                         <embed id="element-embed" style="width:100%; height:100%">
                         <?php
                         echo $test = '<script> document.getElementById("recipient-name").value; </script>';
@@ -1174,6 +1174,8 @@ $('#exampleModal').on('show.bs.modal', function(event) {
 })
 </script>
 
+=======
+>>>>>>> parent of 169cdf5 (new)
 <script type="text/javascript">
 function PrintElem(elem) {
     var newstr = document.all.item(elem).innerHTML;

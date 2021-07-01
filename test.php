@@ -640,7 +640,3 @@ echo cat(0, "SI");
 //         }
 //     }
 // }
-
-
-$lovaas_results = new lovaas_results;
-$select_lovaas_results = $lovaas_results->selectWhere("*", "patient_id = 101");
