@@ -393,13 +393,12 @@ require_once('include/navbar.php');
                                     class="secondary-btn float-end btn mt-4">Done</button>
                             </form>
                         </div>
-
                     </div>
                     <!-- Scale -->
                     <div class="tab-pane fade bg-box p-5" id="list-scale" role="tabpanel"
                         aria-labelledby="list-scale-list">
                         <div class="accordion" id="accordionExample">
-                            <form action="forms/handle-scale.php" method="post">
+                            <form action="handle/handle-scale.php" method="post">
                                 <?php foreach ($scale_cats as $scale_cat) : ?>
                                 <div class="accordion-item">
                                     <div class="d-flex accordion-button collapsed" data-bs-toggle="collapse"

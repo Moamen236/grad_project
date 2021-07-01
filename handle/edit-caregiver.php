@@ -25,6 +25,10 @@ if ($request->postHas('edit_caregiver')) {
         $pic_name = $caregiver_pic['name'];
         $pic_type = $caregiver_pic['type'];
         $pic_tmp_name = $caregiver_pic['tmp_name'];
+
+        $select_caregiver = $caregiver->selectId("*", "$caregiver_id");
+        $caregiver_img = $select_caregiver['photo'];
+        unlink(PATH . "assets/images/uploads/caregiver/$caregiver_img");
         // Uniq Name
         $random = uniqid();
         $extention = pathinfo($pic_name, PATHINFO_EXTENSION);

@@ -148,13 +148,11 @@ require_once('include/navbar.php');
                                     <?php if (!empty($notic_result_arr)) { ?>
                                     <div class="row">
                                         <div class="col-md-12 mt-3 rounded">
-                                            <button type="button" class="secondary-btn float-end btn ml-4">Generate
-                                                PDF</button>
                                             <button type="button" class="secondary-btn float-end btn"
-                                                onclick='PrintElem("adir-print")'>Print</button>
+                                                onclick='PrintElem("Notice-print")'>Print and generate PDF</button>
                                         </div>
                                     </div>
-                                    <div class="report px-lg-5 px-3 py-4 mt-3" id="adir-print">
+                                    <div class="report px-lg-5 px-3 py-4 mt-3" id="Notice-print">
                                         <div class="row justify-content-between align-items-center head">
                                             <div class="col-md-8">
                                                 <div class="row align-items-center">
@@ -168,9 +166,6 @@ require_once('include/navbar.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-md-4">
-                                                <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -293,14 +288,11 @@ require_once('include/navbar.php');
                                     <?php if (!empty($adir_result_arr)) { ?>
                                     <div class="row">
                                         <div class="col-md-12 mt-3 rounded">
-                                            <button type="button" class="secondary-btn float-end btn ml-4"
-                                                id="cmd">Generate
-                                                PDF</button>
                                             <button type="button" class="secondary-btn float-end btn"
-                                                onclick='PrintElem("testprint")'>Print</button>
+                                                onclick='PrintElem("adir-print")'>Print and generate PDF</button>
                                         </div>
                                     </div>
-                                    <div class="report px-lg-5 px-3 py-4 mt-3" id=testprint>
+                                    <div class="report px-lg-5 px-3 py-4 mt-3" id="adir-print">
                                         <div class="row justify-content-between align-items-center head">
                                             <div class="col-md-8">
                                                 <div class="row align-items-center">
@@ -314,9 +306,6 @@ require_once('include/navbar.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-md-4">
-                                                <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -442,9 +431,8 @@ require_once('include/navbar.php');
                         <?php if (!empty($att_result_arr)) { ?>
                         <div class="row">
                             <div class="col-md-12 mt-3 rounded">
-                                <button type="button" class="secondary-btn float-end btn ml-4">Generate PDF</button>
                                 <button type="button" class="secondary-btn float-end btn"
-                                    onclick='PrintElem("att-print")'>Print</button>
+                                    onclick='PrintElem("att-print")'>Print and generate PDF</button>
                             </div>
                         </div>
                         <div class="report px-lg-5 px-3 py-4 mt-3" id="att-print">
@@ -461,9 +449,6 @@ require_once('include/navbar.php');
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -581,9 +566,8 @@ require_once('include/navbar.php');
                         <?php if (!empty($eva_result_arr)) { ?>
                         <div class="row">
                             <div class="col-md-12 mt-3 rounded">
-                                <button type="button" class="secondary-btn float-end btn ml-4">Generate PDF</button>
                                 <button type="button" class="secondary-btn float-end btn"
-                                    onclick='PrintElem("eva-print")'>Print</button>
+                                    onclick='PrintElem("eva-print")'>Print and generate PDF</button>
                             </div>
                         </div>
                         <div class="report px-lg-5 px-3 py-4 mt-3" id="eva-print">
@@ -599,9 +583,6 @@ require_once('include/navbar.php');
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -714,13 +695,11 @@ require_once('include/navbar.php');
                         aria-labelledby="list-dsm-list">
                         <div class="row">
                             <div class="col-md-12 mt-3 rounded">
-                                <button type="button" id="cmd" class="secondary-btn float-end btn ml-4">Generate
-                                    PDF</button>
                                 <button type="button" class="secondary-btn float-end btn"
-                                    onclick='PrintElem("dsmprint")'>Print</button>
+                                    onclick='PrintElem("dsm-print")'>Print and generate PDF</button>
                             </div>
                         </div>
-                        <div class="report px-lg-5 px-3 py-4 mt-3" id="dsmprint">
+                        <div class="report px-lg-5 px-3 py-4 mt-3" id="dsm-print">
                             <div class="row justify-content-between align-items-center head">
                                 <div class="col-md-8">
                                     <div class="row align-items-center">
@@ -733,9 +712,6 @@ require_once('include/navbar.php');
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -785,24 +761,24 @@ require_once('include/navbar.php');
                                 </div>
                             </div>
                             <?php foreach ($dsm_cats as $dsm_cat) : ?>
-                                
+
                             <div class="bg-box py-3 my-3">
                                 <div class="container-fluid">
                                     <div class="row justify-content-between align-items-center bg-box cat">
                                         <div class="col-lg-10">
-                                        <h5><?= $dsm_cat['dsm_category'] ?></h5>
+                                            <h5><?= $dsm_cat['dsm_category'] ?></h5>
                                         </div>
                                         <?php
-                                                    $dsm_result = new dsm_result;
-                                                    $dsm_category_id = $dsm_cat['id'];
-                                                    $dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
+                                                $dsm_result = new dsm_result;
+                                                $dsm_category_id = $dsm_cat['id'];
+                                                $dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
                                                     dsm5_category.id = dsm5_question.dsm5_category_id AND dsm5_question.id = dsm_result.dsm_question_id WHERE dsm_question_result='yes' AND dsm5_category.id = $dsm_category_id AND pateint_id = $patient_id";
-                                                    $get_result = $dsm_result->query($dsm_calc);
-                                                    $dsm_calc_results_report = mysqli_fetch_all($get_result,MYSQLI_ASSOC);
-                                                    ?>
+                                                $get_result = $dsm_result->query($dsm_calc);
+                                                $dsm_calc_results_report = mysqli_fetch_all($get_result, MYSQLI_ASSOC);
+                                                ?>
                                         <div class="col-lg-2">
-                                        <strong class="red">Degree : <?= count($dsm_calc_results_report)?></strong>
-                                        <?php $array[]=[count($dsm_calc_results_report)]?>
+                                            <strong class="red">Degree : <?= count($dsm_calc_results_report) ?></strong>
+                                            <?php $array[] = [count($dsm_calc_results_report)] ?>
                                         </div>
                                     </div>
                                     <table class="table table-hover table-striped table-bordered mt-4">
@@ -813,7 +789,7 @@ require_once('include/navbar.php');
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
+                                            <?php
                                                     $dsm_category_id = $dsm_cat['id'];
                                                     $query = "SELECT dsm5_question.dsm5_questions , dsm_result.dsm_question_result FROM patient JOIN dsm_result JOIN dsm5_question JOIN dsm5_category  ON
                                                     patient.id=dsm_result.pateint_id AND dsm5_question.id = dsm_result.dsm_question_id AND dsm5_category.id = dsm5_question.dsm5_category_id WHERE dsm5_category.id= $dsm_category_id AND patient.id= $patient_id";
@@ -837,28 +813,28 @@ require_once('include/navbar.php');
                             <?php endforeach ?>
                             <div class="row pt-3">
                                 <div class="col-md-12">
-                                <?php
-                                    $dsm_result = new dsm_result;
-                                    $dsm_category_id = $dsm_cat['id'];
-                                    $dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
+                                    <?php
+                                        $dsm_result = new dsm_result;
+                                        $dsm_category_id = $dsm_cat['id'];
+                                        $dsm_calc = "SELECT dsm_question_result , dsm_question_id FROM dsm_result JOIN dsm5_category JOIN dsm5_question ON 
                                     dsm5_category.id = dsm5_question.dsm5_category_id AND dsm5_question.id = dsm_result.dsm_question_id WHERE dsm_question_result='yes' AND pateint_id = $patient_id";
-                                    $get_result = $dsm_result->query($dsm_calc);
-                                    $dsm_calc_results_reports = mysqli_fetch_all($get_result,MYSQLI_ASSOC);
-                                ?>
-                                <?php if(count($dsm_calc_results_reports)<4){ ?>
+                                        $get_result = $dsm_result->query($dsm_calc);
+                                        $dsm_calc_results_reports = mysqli_fetch_all($get_result, MYSQLI_ASSOC);
+                                        ?>
+                                    <?php if (count($dsm_calc_results_reports) < 4) { ?>
                                     <p>
-                                        <h6>your child degree is</h6>
-                                        <h6><?= count($dsm_calc_results_reports)?></h6>
-                                        so it seems that he have a low level of support
+                                    <h6>your child degree is</h6>
+                                    <h6><?= count($dsm_calc_results_reports) ?></h6>
+                                    so it seems that he have a low level of support
                                     </p>
-                                    <?php } elseif((count($dsm_calc_results_reports)<8)){?>
-                                        your child degree is 
-                                        <?= count($dsm_calc_results_reports)?>                                        
-                                        so it seems that he have a medium level of support
-                                    <?php } elseif((count($dsm_calc_results_reports)<14)){?>
-                                        your child degree is 
-                                        <?= count($dsm_calc_results_reports)?>                                        
-                                        so it seems that he have a High level of support
+                                    <?php } elseif ((count($dsm_calc_results_reports) < 8)) { ?>
+                                    your child degree is
+                                    <?= count($dsm_calc_results_reports) ?>
+                                    so it seems that he have a medium level of support
+                                    <?php } elseif ((count($dsm_calc_results_reports) < 14)) { ?>
+                                    your child degree is
+                                    <?= count($dsm_calc_results_reports) ?>
+                                    so it seems that he have a High level of support
                                     <?php } ?>
                                 </div>
                             </div>
@@ -870,13 +846,11 @@ require_once('include/navbar.php');
                         aria-labelledby="list-scale-list">
                         <div class="row">
                             <div class="col-md-12 mt-3 rounded">
-                                <button type="button" id="cmd" class="secondary-btn float-end btn ml-4">Generate
-                                    PDF</button>
                                 <button type="button" class="secondary-btn float-end btn"
-                                    onclick='PrintElem("scaleprint")'>Print</button>
+                                    onclick='PrintElem("scale-print")'>Print and generate PDF</button>
                             </div>
                         </div>
-                        <div class="report px-lg-5 px-3 py-4 mt-3" id="scaleprint">
+                        <div class="report px-lg-5 px-3 py-4 mt-3" id="scale-print">
                             <div class="row justify-content-between align-items-center head">
                                 <div class="col-md-8">
                                     <div class="row align-items-center">
@@ -889,9 +863,6 @@ require_once('include/navbar.php');
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -945,19 +916,20 @@ require_once('include/navbar.php');
                                 <div class="container-fluid">
                                     <div class="row justify-content-between align-items-center bg-box cat">
                                         <div class="col-lg-10">
-                                        <h5><?= $scale_cat['scale_category'] ?></h5>
+                                            <h5><?= $scale_cat['scale_category'] ?></h5>
                                         </div>
                                         <?php
-                                                    $scale_result = new scale_result;
-                                                    $scale_category_id = $scale_cat['id'];
-                                                    $scale_calc = "SELECT SUM(scale_question_result) FROM scale_result JOIN scale_category JOIN scale_questions ON 
+                                                $scale_result = new scale_result;
+                                                $scale_category_id = $scale_cat['id'];
+                                                $scale_calc = "SELECT SUM(scale_question_result) FROM scale_result JOIN scale_category JOIN scale_questions ON 
                                                     scale_category.id = scale_questions.scale_category_id AND scale_questions.id = scale_result.scale_question_id WHERE scale_category.id = $scale_category_id AND patient_id= $patient_id";
-                                                    $get_result2 = $scale_result->query($scale_calc);
-                                                    $scale_calc_results_report = mysqli_fetch_assoc($get_result2);
-                                                    ?>
+                                                $get_result2 = $scale_result->query($scale_calc);
+                                                $scale_calc_results_report = mysqli_fetch_assoc($get_result2);
+                                                ?>
                                         <div class="col-lg-2">
-                                            <strong class="red">Degree : <?= $scale_calc_results_report['SUM(scale_question_result)'] ?></strong>
-                                            </div>
+                                            <strong class="red">Degree :
+                                                <?= $scale_calc_results_report['SUM(scale_question_result)'] ?></strong>
+                                        </div>
                                     </div>
                                     <table class="table table-hover table-striped table-bordered mt-4">
                                         <thead>
@@ -967,13 +939,13 @@ require_once('include/navbar.php');
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
-                                            $scale_category_id = $scale_cat['id'];
-                                            $query = "SELECT scale_questions.scale_question , scale_result.scale_question_result FROM patient JOIN scale_result JOIN scale_questions JOIN scale_category  ON
+                                            <?php
+                                                    $scale_category_id = $scale_cat['id'];
+                                                    $query = "SELECT scale_questions.scale_question , scale_result.scale_question_result FROM patient JOIN scale_result JOIN scale_questions JOIN scale_category  ON
                                             patient.id=scale_result.patient_id AND scale_questions.id = scale_result.scale_question_id AND scale_category.id = scale_questions.scale_category_id WHERE scale_category.id= $scale_category_id AND patient.id= $patient_id";
-                                            $scale_result =  $tables_select->query($query);
-                                            $scale_results_report = mysqli_fetch_all($scale_result, MYSQLI_ASSOC);
-                                            ?>
+                                                    $scale_result =  $tables_select->query($query);
+                                                    $scale_results_report = mysqli_fetch_all($scale_result, MYSQLI_ASSOC);
+                                                    ?>
                                             <?php if ($scale_results_report) { ?>
                                             <?php foreach ($scale_results_report as $result) : ?>
                                             <tr>
@@ -1008,13 +980,11 @@ require_once('include/navbar.php');
                         <?php if (!empty($lovaas_results_arr)) { ?>
                         <div class="row">
                             <div class="col-md-12 mt-3 rounded">
-                                <button type="button" id="cmd" class="secondary-btn float-end btn ml-4">Generate
-                                    PDF</button>
                                 <button type="button" class="secondary-btn float-end btn"
-                                    onclick='PrintElem("lovaas")'>Print</button>
+                                    onclick='PrintElem("lovaas-print")'>Print and generate PDF</button>
                             </div>
                         </div>
-                        <div class="report px-lg-5 px-3 py-4 mt-3" id="lovaas">
+                        <div class="report px-lg-5 px-3 py-4 mt-3" id="lovaas-print">
                             <div class="row justify-content-between align-items-center head">
                                 <div class="col-md-8">
                                     <div class="row align-items-center">
@@ -1027,9 +997,6 @@ require_once('include/navbar.php');
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <h5 class="dark-text mt-lg-0 mt-3">Tue, Apr 13 2021 4:36 AM</h5>
-                                </div> -->
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-12">

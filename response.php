@@ -103,7 +103,7 @@ if (isset($_POST['Insert_report']) && !empty($_POST['Insert_report'])) {
 				} else {
 					$result = 0;
 				}
-				$Query = "INSERT INTO `attahced_reports_result` (`attached_id`, `result`, `attached_url` `patient_id`)
+				$Query = "INSERT INTO `attahced_reports_result` (`attached_id`, `result`, `attached_url`, `patient_id`)
  					VALUES ('" . $_POST['attached_id'][$m] . "','" . $result . "','" . $target_path . "', '" . $patient_id . "')"; //comment
 				$insert = mysqli_query($conn, $Query);
 			}

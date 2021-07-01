@@ -57,6 +57,9 @@ if ($request->postHas("create_patient")) {
     var_dump($res);
 } elseif ($request->getHas('patient_id')) {
     $patient_id = $request->get('patient_id');
+    $select_patient = $patients->selectId("*", "$patient_id");
+    $patient_img = $select_patient['photo'];
+    unlink(PATH . "assets/images/uploads/patients/$patient_img");
     $patients->delete("id = $patient_id");
     $request->redirect("specialist.php");
 } elseif ($request->postHas('edit_patient')) {
@@ -75,7 +78,6 @@ if ($request->postHas("create_patient")) {
 
     // transfer date
     $date = date('Y-m-d', strtotime($patient_date));
-
     // Calc patient age
     $from = new DateTime("$patient_date");
     $to   = new DateTime('today');
@@ -84,10 +86,11 @@ if ($request->postHas("create_patient")) {
     // Patient Picture
     if ($patient_pic['name'] != null) {
         $pic_name = $patient_pic['name'];
-        $pic_type = $patient_pic['type'];
         $pic_tmp_name = $patient_pic['tmp_name'];
-        $pic_error = $patient_pic['error'];
-        $pic_size = $patient_pic['size'];
+
+        $select_patient = $patients->selectId("*", "$patient_id");
+        $patient_img = $select_patient['photo'];
+        unlink(PATH . "assets/images/uploads/patients/$patient_img");
         // Uniq Name
         $random = uniqid();
         $extention = pathinfo($pic_name, PATHINFO_EXTENSION);
@@ -103,6 +106,7 @@ if ($request->postHas("create_patient")) {
         $res = $patients->query($query);
         echo "no img";
     }
+
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";

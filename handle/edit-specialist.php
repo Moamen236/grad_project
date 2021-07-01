@@ -18,6 +18,10 @@ if ($request->postHas('edit_specialist')) {
         $pic_name = $specialist_pic['name'];
         $pic_type = $specialist_pic['type'];
         $pic_tmp_name = $specialist_pic['tmp_name'];
+
+        $select_specialist = $specialist->selectId("*", "$specialist_id");
+        $specialist_img = $select_specialist['photo'];
+        unlink(PATH . "assets/images/uploads/specialist/$specialist_img");
         // Uniq Name
         $random = uniqid();
         $extention = pathinfo($pic_name, PATHINFO_EXTENSION);
