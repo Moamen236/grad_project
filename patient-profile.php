@@ -43,7 +43,7 @@ $lovaas_result = new lovaas_results;
             <div class="col-lg-4">
                 <div class="bg-box p-4 rounded shadow-sm patient-data">
                     <div class="row justify-content-center personal-img">
-                        <div class="col-lg-8 text-center">
+                        <div class="col-lg-12 text-center">
                             <?php if (!empty($patient_result['photo'] == null)) { ?>
                             <?php if ($patient_result['gender'] == "male") { ?>
                             <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" class="rounded img-fluid mb-2">
@@ -57,7 +57,12 @@ $lovaas_result = new lovaas_results;
                             </div>
                             <?php } ?>
                             <h4><?= $patient_result['name'] ?> </h4>
-                            <span class="d-block text-center">ID : <?= $patient_result['id'] ?></span>
+                            <span class="d-inline-block text-center mb-3">ID : <?= $patient_result['id'] ?></span>
+                            <div class="d-inline-block btn-copy ms-2" data-clipboard-text="<?= $patient_result['id'] ?>"
+                                style="cursor: pointer;">
+                                <span><i class="fas fa-copy"></i></span>
+                            </div>
+                            <br>
                             <a href="edit-patient-profile.php?patientid=<?= $patient_id ?>" class="light-green">
                                 <div class="icon d-inline-block">
                                     <i class="far fa-edit"></i>

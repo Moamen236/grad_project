@@ -1313,7 +1313,7 @@ input::-webkit-inner-spin-button {
 	-ms-transition: 0.3s;
 	-o-transition: 0.3s;
 }
-.user-profile .btn-copy:hover svg{
+.btn-copy:hover svg{
 	color: #368BA8;
 }
 .user-profile .list-group-item{
