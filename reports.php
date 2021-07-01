@@ -1119,6 +1119,61 @@ require_once('include/navbar.php');
 </div>
 <?php } ?>
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 85%;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Report</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" style="max-width: 98%;" id="recipient-name" />
+
+                        <embed id="element-embed" style="width:100%; height:100%">
+                        <?php
+                        echo $test = '<script> document.getElementById("recipient-name").value; </script>';
+                        ?>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var recipient = button.data('whatever')
+    var modal = $(this)
+    modal.find('.modal-title').text('View Report')
+    modal.find('.modal-body input').val(recipient)
+
+    var element = document.getElementById('element-embed');
+    var src = document.getElementById('recipient-name"');
+    changeSrcEmbed(element, recipient);
+
+    function changeSrcEmbed(element, src) {
+        var id = element.id;
+        element.src = src;
+        var embedOld = document.getElementById(id);
+        var parent = embedOld.parentElement;
+        var newElement = element;
+        document.getElementById(id).remove();
+        parent.append(newElement);
+    }
+})
+</script>
+
 <script type="text/javascript">
 function PrintElem(elem) {
     var newstr = document.all.item(elem).innerHTML;
