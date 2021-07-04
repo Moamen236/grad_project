@@ -11,9 +11,6 @@ $user = new Users;
 $user_case = new autism_checker;
 $autism_checker_result = new autism_checker_results;
 $autism_checker_quetions = new autism_checker_question;
-// $query = "SELECT * FROM `autism_checker` WHERE autism_checker.user_id = $user_id";
-// $run_query = $user_case->query($query);
-// $select_case = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
 $select_case = $user_case->selectWhere("*", "user_id = $user_id");
 $user_id = $session->get('user_id');
 $select_user = $user->selectId("*", "$user_id");
@@ -141,17 +138,7 @@ $select_user = $user->selectId("*", "$user_id");
                                             style="opacity:0.5;"><?= date('d/m/Y', strtotime($case['created_at'])); ?></span>
                                         <span
                                             style="opacity:0.5;"><?= date('h:i a', strtotime($case['created_at'])); ?></span>
-                                        <?php $case_id = $case['id'];
-                                            $result = $autism_checker_result->selectWhere("*", "case_id = $case_id AND checker_question_result = 'yes'"); ?>
-                                        <h5 class="mt-4">
-                                            <?php if (count($result) <= 5) {
-                                                    echo " You don't have a problem with Autism";
-                                                } elseif (6 < count($result) and count($result) <= 12) {
-                                                    echo " You probability have problem and we Advise you to visite a doctor to sure";
-                                                } elseif (13 < count($result) and count($result) <= 20) {
-                                                    echo " You have an Autism and better to visite an organization to solve your problem";
-                                                } ?>
-                                        </h5>
+
                                     </div>
                                     <!-- Modal Report -->
                                     <div class="modal fade" id="modal_<?= $case['id'] ?>" tabindex="-1"
@@ -207,6 +194,9 @@ $select_user = $user->selectId("*", "$user_id");
                                                                     <p class="mx-2 mb-1">Gender : <strong>
                                                                             <?= $case['gender'] ?>
                                                                         </strong> </p>
+                                                                    <p class="mx-2 mb-1">Today’s Date : <strong>
+                                                                            <?= date("d-m-Y", strtotime($case['created_at'])) ?>
+                                                                        </strong> </p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -240,17 +230,34 @@ $select_user = $user->selectId("*", "$user_id");
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <div class="row pt-3">
-                                                            <div class="col-md-12">
-                                                                <p class="text-start"> For your reference, based on
-                                                                    conventional autism
-                                                                    screening AQ-10
-                                                                    technique, autistic traits have been identified
-                                                                    in the respondent given the provided information.
-                                                                    The AQ-10 score
-                                                                    for the respondent is 7. This result is not
-                                                                    obtained from our AI.
+                                                        <div class="row pt-3 text-start">
+                                                            <div class=" col-md-12">
+                                                                <p>
+                                                                    <?php $case_id = $case['id'];
+                                                                        $result = $autism_checker_result->selectWhere("*", "case_id = $case_id AND checker_question_result = 'yes'"); ?>
+                                                                    <?php if (0 <= count($result) and count($result) <= 2) {
+                                                                            echo "<h5> Your risk score : <strong class='red'>" . count($result)  . "</strong> </h5>";
+                                                                            echo "Score indicates week risk. You don't need to take your child to a health care";
+                                                                        } elseif (3 <= count($result) and count($result) <= 7) {
+                                                                            echo "<h5> Your risk score : <strong class='red'>" . count($result)  . "</strong> </h5>";
+                                                                            echo "Score indicates medium risk. You should to take your child to a health care provider to administer the Follow Up Interview which is designed to go with the 20 questions.";
+                                                                        } elseif (8 <= count($result) and count($result) <= 20) {
+                                                                            echo "<h5> Your risk score : <strong class='red'>" . count($result)  . "</strong> </h5>";
+                                                                            echo "Score indicates high risk. You should bring your child to a health care provider
+                                                                            and early intervention provider for full assessment.";
+                                                                        } ?>
                                                                 </p>
+                                                                <p>The M-CHAT-R is a screening tool, and because no
+                                                                    screening tool is perfect, research recommends that
+                                                                    the original 20 questions include a Follow-Up
+                                                                    Interview. This interview will improve the
+                                                                    specificity of the screen, and also provides an
+                                                                    opportunity for you to discuss the parent or
+                                                                    caregiver's specific concerns. Administering the
+                                                                    M-CHAT-R Follow-Up Interview may also reduce
+                                                                    unnecessary referrals<br>Thank you for your time
+                                                                    with this patient and his/her
+                                                                    family</p>
                                                             </div>
                                                         </div>
                                                     </div>

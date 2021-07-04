@@ -491,25 +491,22 @@ require_once('include/navbar.php');
                                                     class="row justify-content-around  align-items-center text-center p-3">
                                                     <div class="col-2 col-lg-2 form-check text-md-start">
                                                         <input class="form-check-input" type="radio"
-                                                            name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
-                                                            value="good">
-                                                        <label class="form-check-label" for="radio1">
+                                                            name="radio_<?= $lovaas_result['id'] ?>" value="good">
+                                                        <label class="form-check-label">
                                                             good
                                                         </label>
                                                     </div>
                                                     <div class="col-2 col-lg-2 form-check ">
                                                         <input class="form-check-input" type="radio"
-                                                            name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
-                                                            value="medium">
-                                                        <label class="form-check-label" for="radio1">
+                                                            name="radio_<?= $lovaas_result['id'] ?>" value="medium">
+                                                        <label class="form-check-label">
                                                             medium
                                                         </label>
                                                     </div>
                                                     <div class="col-2 col-lg-2 form-check ">
                                                         <input class="form-check-input" type="radio"
-                                                            name="radio_<?= $lovaas_result['id'] ?>" id="radio1"
-                                                            value="weak">
-                                                        <label class="form-check-label" for="radio1">
+                                                            name="radio_<?= $lovaas_result['id'] ?>" value="weak">
+                                                        <label class="form-check-label">
                                                             weak
                                                         </label>
                                                     </div>
@@ -524,7 +521,9 @@ require_once('include/navbar.php');
                                     class="secondary-btn btn float-end mt-4">Done</button>
                                 <div class="clearfix"></div>
                             </form>
-                            <?php } else { ?>
+                            <?php } ?>
+                            <!-- <?php //else { 
+                                    ?>
                             <div id="edit-lovaas" class="edit text-center p-5" style="background-color: #FDFDFD;">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-8">
@@ -552,10 +551,10 @@ require_once('include/navbar.php');
                                             data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
                                                 <?php $lovass_cat_id = $lovass_cat['id'];
-                                                        $query = "SELECT lovaas_questions.id , lovaas_questions.lovass_questions , lovaas_results.lovaas_question_result FROM patient JOIN lovaas_results JOIN lovaas_questions JOIN lovaas_category ON patient.id=lovaas_results.patient_id AND lovaas_questions.id = lovaas_results.lovaas_question_id AND lovaas_category.id = lovaas_questions.lovaas_category_id WHERE lovaas_category.id= $lovass_cat_id AND patient.id= $patient_id";
-                                                        $run_query = $lovaas_results->query($query);
-                                                        $questions_results = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
-                                                        ?>
+                                                $query = "SELECT lovaas_questions.id , lovaas_questions.lovass_questions , lovaas_results.lovaas_question_result FROM patient JOIN lovaas_results JOIN lovaas_questions JOIN lovaas_category ON patient.id=lovaas_results.patient_id AND lovaas_questions.id = lovaas_results.lovaas_question_id AND lovaas_category.id = lovaas_questions.lovaas_category_id WHERE lovaas_category.id= $lovass_cat_id AND patient.id= $patient_id";
+                                                $run_query = $lovaas_results->query($query);
+                                                $questions_results = mysqli_fetch_all($run_query, MYSQLI_ASSOC);
+                                                ?>
                                                 <?php foreach ($questions_results as $key => $question) : ?>
                                                 <div class="row bg-white rounded p-4 border-bottom">
                                                     <div class="row">
@@ -602,7 +601,8 @@ require_once('include/navbar.php');
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                            <?php } ?>
+                            <?php //} 
+                            ?> -->
                         </div>
                     </div>
                     <!-- Schedule -->

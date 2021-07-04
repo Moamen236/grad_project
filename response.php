@@ -44,7 +44,7 @@ if (isset($_POST['Insert_Evaluation']) && !empty($_POST['Insert_Evaluation'])) {
 
 		for ($i = 0; $i <= $evaluation_size; $i++) {
 			if (isset($_POST['result' . $i]) && $_POST['result' . $i] != null) {
-				$Query = "INSERT INTO `evaluation_history_result` (`evaluation_id`, `result``, `pateint_id`) VALUES ('" . e($_POST['evaluation_id' . $i]) . "', '" . e($_POST['result' . $i]) . "', '" . $patient_id . "')"; //comment
+				$Query = "INSERT INTO `evaluation_history_result` (`evaluation_id`, `result`, `pateint_id`) VALUES ('" . e($_POST['evaluation_id' . $i]) . "', '" . e($_POST['result' . $i]) . "', '" . $patient_id . "')"; //comment
 				$insert = mysqli_query($conn, $Query);
 			}
 		}

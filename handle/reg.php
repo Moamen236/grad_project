@@ -98,6 +98,7 @@ if ($request->postHas('reg')) {
                     // update notify_to_do
                     $update_notify_to_do = $notify_to_do->update("caregiver_id = $caregiver_just_reg_id", "patient_id = $patient_id");
                     $session->set('sucsses_reg', 'You are now logged in');
+                    var_dump($res);
                     $request->redirect('index.php');
                 }
                 break;

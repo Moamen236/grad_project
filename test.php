@@ -588,18 +588,43 @@ function cat($num, $cat)
     foreach ($cat as $value) {
         foreach ($value as $one_value) {
             if (in_array($num, $one_value['range'])) {
-                echo $one_value['norm'] . "<br>";
-                echo $one_value['mini'];
+                $norm =  $one_value['norm'];
+                $mini =  $one_value['mini'];
+                return $norm;
+                // return "norm = $norm" . "<br>" . "mini = $mini";
             }
         }
     }
 }
 
-echo cat(0, "SI");
+function calc()
+{
+    $autism_degree = array_merge(range(43, 44), range(46, 47), range(49, 50), range(52, 53), range(55, 56), range(58, 59), range(61, 63), range(65, 66), range(68, 69), range(71, 72), range(74, 75), range(77, 78), range(80, 84), range(86, 87), range(89, 94), range(96, 100), range(102, 103), range(105, 106), range(108, 109), range(111, 112), range(114, 115), range(117, 118), range(120, 122),  range(124, 125), range(127, 128), range(130, 131), range(133, 134), range(136, 137), range(139, 140));
+    $result = range(21, 87);
+    $norm = [cat(10, "RB"), cat(5, "SI"), cat(8, "SC"), cat(2, "ER"), cat(7, "CS"), cat(6, "MS"),];
+    $norm_sum = array_sum($norm);
+    foreach ($result as $key => $value) {
+        if ($value == $norm_sum) {
+            return $autism_degree[$key];
+        }
+    }
+}
+
+// echo cat(0, "SI");
+echo calc();
+
+// $autism_degree = array_merge(range(43, 44), range(46, 47), range(49, 50), range(52, 53), range(55, 56), range(58, 59), range(61, 63), range(65, 66), range(68, 69), range(71, 72), range(74, 75), range(77, 78), range(80, 84), range(86, 87), range(89, 94), range(96, 100), range(102, 103), range(105, 106), range(108, 109), range(111, 112), range(114, 115), range(117, 118), range(120, 122),  range(124, 125), range(127, 128), range(130, 131), range(133, 134), range(136, 137), range(139, 140));
+
+
 
 // echo "<pre>";
-// print_r($_SESSION);
+// print_r($autism_degree);
 // echo "</pre>";
+
+// echo "<pre>";
+// print_r($result);
+// echo "</pre>";
+
 
 // $cat = range(0, 6);
 // $num = 9;

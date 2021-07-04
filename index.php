@@ -115,7 +115,7 @@ if ($session->has("which_user")) {
                                                 <select class="form-select bg-transparent" name="choose"
                                                     aria-label="Choose your account..." required>
                                                     <option selected>Open this select menu</option>
-                                                    <option value="user">Default User</option>
+                                                    <option value="user">Guest</option>
                                                     <option value="specialist">Specialist</option>
                                                     <option value="caregiver">Caregiver</option>
                                                 </select>
@@ -193,7 +193,7 @@ if ($session->has("which_user")) {
                                         data-wow-duration="2.2s">
                                         <select class="form-select bg-transparent" name="choose" id="choose">
                                             <option selected>Open this select menu</option>
-                                            <option value="user">Default User</option>
+                                            <option value="user">Guest</option>
                                             <option value="specialist">Specialist</option>
                                             <option value="caregiver">Caregiver</option>
                                         </select>
