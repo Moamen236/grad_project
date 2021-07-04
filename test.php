@@ -68,6 +68,7 @@
 
 require_once('app.php');
 
+use Project\Classes\calc_scale;
 use Project\Classes\Request;
 use Project\Classes\Models\adir;
 use Project\Classes\Models\plan;
@@ -468,7 +469,7 @@ use Project\Classes\Models\lovaas_questions;
 //     echo "not found";
 // }
 
-function cat($num, $cat)
+function calc_cat($num, $cat)
 {
 
     $RB[] = [
@@ -579,7 +580,6 @@ function cat($num, $cat)
         case 'MS':
             $cat = $MS;
             break;
-
         default:
             return false;
             break;
@@ -591,17 +591,16 @@ function cat($num, $cat)
                 $norm =  $one_value['norm'];
                 $mini =  $one_value['mini'];
                 return $norm;
-                // return "norm = $norm" . "<br>" . "mini = $mini";
             }
         }
     }
 }
 
-function calc()
+function calc_all($RB, $SI, $SC, $ER, $CS, $MS)
 {
-    $autism_degree = array_merge(range(43, 44), range(46, 47), range(49, 50), range(52, 53), range(55, 56), range(58, 59), range(61, 63), range(65, 66), range(68, 69), range(71, 72), range(74, 75), range(77, 78), range(80, 84), range(86, 87), range(89, 94), range(96, 100), range(102, 103), range(105, 106), range(108, 109), range(111, 112), range(114, 115), range(117, 118), range(120, 122),  range(124, 125), range(127, 128), range(130, 131), range(133, 134), range(136, 137), range(139, 140));
+    $autism_degree = array_merge([43, 44], [46, 47], [49, 50], [52, 53], [55, 56], [58, 59], range(61, 63), [65, 66], [68, 69], [71, 72], [74, 75], [77, 78], range(80, 84), [86, 87], range(89, 94), range(96, 100), [102, 103], [105, 106], [108, 109], [111, 112], [114, 115], [117, 118], range(120, 122),  [124, 125], [127, 128], [130, 131], [133, 134], [136, 137], [139, 140]);
     $result = range(21, 87);
-    $norm = [cat(10, "RB"), cat(5, "SI"), cat(8, "SC"), cat(2, "ER"), cat(7, "CS"), cat(6, "MS"),];
+    $norm = [$RB, $SI, $SC, $ER, $CS, $MS];
     $norm_sum = array_sum($norm);
     foreach ($result as $key => $value) {
         if ($value == $norm_sum) {
@@ -610,11 +609,18 @@ function calc()
     }
 }
 
-// echo cat(0, "SI");
-echo calc();
+$RB = calc_cat(10, 'RB');
+$SI = calc_cat(5, 'SI');
+$SC = calc_cat(8, 'SC');
+$ER = calc_cat(2, 'ER');
+$CS = calc_cat(7, 'CS');
+$MS = calc_cat(6, 'MS');
 
-// $autism_degree = array_merge(range(43, 44), range(46, 47), range(49, 50), range(52, 53), range(55, 56), range(58, 59), range(61, 63), range(65, 66), range(68, 69), range(71, 72), range(74, 75), range(77, 78), range(80, 84), range(86, 87), range(89, 94), range(96, 100), range(102, 103), range(105, 106), range(108, 109), range(111, 112), range(114, 115), range(117, 118), range(120, 122),  range(124, 125), range(127, 128), range(130, 131), range(133, 134), range(136, 137), range(139, 140));
+echo calc_all($RB, $SI, $SC, $ER, $CS, $MS);
 
+// $calc_scale = new calc_scale;
+// $res = $calc_scale->calc_cat(10, "RB");
+// echo $res;
 
 
 // echo "<pre>";
