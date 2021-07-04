@@ -18,6 +18,7 @@ if ($request->postHas('lovaas_questions')) {
         if (strpos($key, 'radio_') !== false) {
             $question_id = str_replace('radio_', '', $key);
             $lovaas_results = $lovaas_results_arr->insert(("lovaas_question_result , lovaas_question_id , patient_id "), ("'$record' , $question_id , $patient_id"));
+<<<<<<< HEAD
             echo "$question_id - $record <br>";
         }
     }
@@ -25,4 +26,14 @@ if ($request->postHas('lovaas_questions')) {
     print_r($_POST);
     echo "</pre>";
     // $request->redirect("diagnosis.php?patientid=$patient_id");
+=======
+        }
+    }
+    $request->redirect("diagnosis.php?patientid=$patient_id");
+}
+
+
+if ($request->postHas('add_comment')) {
+    echo "add_comment";
+>>>>>>> cc1bfaa74fe0f70ef60f422a267213c951a16272
 }

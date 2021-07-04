@@ -1119,6 +1119,7 @@ require_once('include/navbar.php');
 </div>
 <?php } ?>
 
+<<<<<<< HEAD
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -1173,6 +1174,8 @@ $('#exampleModal').on('show.bs.modal', function(event) {
 })
 </script>
 
+=======
+>>>>>>> parent of 169cdf5 (new)
 <script type="text/javascript">
 function PrintElem(elem) {
     var newstr = document.all.item(elem).innerHTML;
