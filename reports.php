@@ -1,24 +1,26 @@
 <?php
 
-use Project\Classes\Models\adir_result;
-use Project\Classes\Models\attahced_reports_result;
-use Project\Classes\Models\evaluation_history_result;
-use Project\Classes\Models\tables;
-use Project\Classes\Models\lovaas_results;
-use Project\Classes\Models\lovaas_category;
-use Project\Classes\Models\lovaas_questions;
+use Project\Classes\calc_scale;
 use Project\Classes\Models\notic;
+use Project\Classes\Models\tables;
 use Project\Classes\Models\patient;
+use Project\Classes\Models\dsm_result;
+use Project\Classes\Models\adir_result;
+use Project\Classes\Models\scale_result;
+use Project\Classes\Models\dsm5_category;
+use Project\Classes\Models\dsm5_question;
 
 // dsm5
-use Project\Classes\Models\dsm5_question;
-use Project\Classes\Models\dsm5_category;
-use Project\Classes\Models\dsm_result;
+use Project\Classes\Models\lovaas_results;
+use Project\Classes\Models\scale_category;
+use Project\Classes\Models\lovaas_category;
 
 // scale
-use Project\Classes\Models\scale_category;
 use Project\Classes\Models\scale_questions;
-use Project\Classes\Models\scale_result;
+use Project\Classes\Models\lovaas_questions;
+use Project\Classes\Models\attahced_reports_result;
+use Project\Classes\Models\evaluation_history_result;
+
 
 require_once('include/header.php');
 
@@ -51,6 +53,7 @@ $scale_cats = $scale_category->selectAll();
 
 $scale_result = new scale_result;
 $scale_result_arr = $scale_result->selectWhere("*", "patient_id = $patient_id");
+$calc_scale = new calc_scale;
 
 $tables_select = new tables;
 $adir_result = new adir_result;
@@ -423,8 +426,6 @@ require_once('include/navbar.php');
                             </div>
                         </div>
                     </div>
-
-
                     <!-- Attached Report   -->
                     <div class="tab-pane fade bg-box rounded p-lg-5 p-2 mt-lg-0 mt-4" id="list-attched-report"
                         role="tabpanel" aria-labelledby="list-attched-report-list">
@@ -960,14 +961,36 @@ require_once('include/navbar.php');
                                     </table>
                                 </div>
                             </div>
+                            <?php
+                                    $cat_result[] = $scale_calc_results_report['SUM(scale_question_result)']; ?>
                             <?php endforeach ?>
                             <div class="row pt-3">
                                 <div class="col-md-12">
-                                    <p> For your reference, based on conventional autism screening AQ-10
-                                        technique, autistic traits have been identified
-                                        in the respondent given the provided information. The AQ-10 score
-                                        for the respondent is 7. This result is not
-                                        obtained from our AI.
+                                    <p>
+                                        <?php
+                                            $RB = $calc_scale->calc_cat($cat_result[0], 'RB');
+                                            $SI = $calc_scale->calc_cat($cat_result[1], 'SI');
+                                            $SC = $calc_scale->calc_cat($cat_result[2], 'SC');
+                                            $ER = $calc_scale->calc_cat($cat_result[3], 'ER');
+                                            $CS = $calc_scale->calc_cat($cat_result[4], 'CS');
+                                            $MS = $calc_scale->calc_cat($cat_result[5], 'MS');
+                                            $array = [$RB, $SI, $SC, $ER, $CS, $MS];
+                                            $session->set('scale_array', $array);
+                                            $final_degree =  $calc_scale->calc_all($RB, $SI, $SC, $ER, $CS, $MS);
+                                            if ($final_degree <= 54) {
+                                                echo " <strong> Autism coefficient : <span class='red'> $final_degree<span> </strong> 
+                                                <br> This child didn't have any sign of autism according to G.A.R.S3 scoring rate";
+                                            } elseif ($final_degree >= 55  and $final_degree <= 70) {
+                                                echo "<strong> Autism coefficient : <span class='red'> $final_degree<span> </strong> 
+                                                <br> This child have sign of autism according to G.A.R.S3 scoring rate and need a low level of support";
+                                            } elseif ($final_degree >= 77 and $final_degree <= 100) {
+                                                echo "<strong> Autism coefficient : <span class='red'> $final_degree<span></strong> 
+                                                <br> This child have sign of autism according to G.A.R.S3 scoring rate and need a high level of support";
+                                            } elseif ($final_degree > 101) {
+                                                echo " <strong> Autism coefficient : <span class='red'> $final_degree<span> </strong> 
+                                                <br>This child have sign of autism according to G.A.R.S3 scoring rate and need a very high level of support";
+                                            }
+                                            ?>
                                     </p>
                                 </div>
                             </div>
@@ -1077,7 +1100,7 @@ require_once('include/navbar.php');
                                 </div>
                             </div>
                             <?php endforeach ?>
-                            <div class="row pt-3">
+                            <!-- <div class="row pt-3">
                                 <div class="col-md-12">
                                     <p> For your reference, based on conventional autism screening AQ-10
                                         technique, autistic traits have been identified
@@ -1086,7 +1109,7 @@ require_once('include/navbar.php');
                                         obtained from our AI.
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <?php } else { ?>
                         <div class="body_not_select text-center" style="background-color: #FDFDFD;">
@@ -1119,7 +1142,6 @@ require_once('include/navbar.php');
 </div>
 <?php } ?>
 
-<<<<<<< HEAD
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -1174,8 +1196,6 @@ $('#exampleModal').on('show.bs.modal', function(event) {
 })
 </script>
 
-=======
->>>>>>> parent of 169cdf5 (new)
 <script type="text/javascript">
 function PrintElem(elem) {
     var newstr = document.all.item(elem).innerHTML;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2021 at 11:39 PM
+-- Generation Time: Jul 05, 2021 at 02:17 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -150,6 +150,14 @@ CREATE TABLE `attahced_reports_result` (
   `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `attahced_reports_result`
+--
+
+INSERT INTO `attahced_reports_result` (`id`, `attached_id`, `attached_url`, `result`, `comment`, `patient_id`) VALUES
+(1, 3, 'attached/SI_20181130_213922.jpg', 1, '', 112),
+(2, 4, 'attached/pexels-cody-berg-463684.jpg', 1, '', 112);
+
 -- --------------------------------------------------------
 
 --
@@ -180,7 +188,7 @@ INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `created_at`, 
 (8, 'Freddie Lubowitz', 'male', 8, '2021-05-29 16:03:26', 8),
 (9, 'Jenifer Gislason', 'male', 4, '2021-06-20 16:03:26', 9),
 (10, 'Alfred Green', 'male', 4, '2021-06-21 16:03:26', 10),
-(25, 'Moamen Ali', 'male', 12, '2021-06-29 16:38:37', 23);
+(41, 'Moamen Ali', 'male', 12, '2021-07-02 14:19:45', 23);
 
 -- --------------------------------------------------------
 
@@ -190,35 +198,34 @@ INSERT INTO `autism_checker` (`id`, `case_name`, `gender`, `age`, `created_at`, 
 
 CREATE TABLE `autism_checker_question` (
   `id` int(11) NOT NULL,
-  `checker_qustions` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `autism_checker_id` int(11) NOT NULL
+  `checker_qustions` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `autism_checker_question`
 --
 
-INSERT INTO `autism_checker_question` (`id`, `checker_qustions`, `autism_checker_id`) VALUES
-(1, 'If you point at something across the room, does your child look at it?(FOR EXAMPLE, if you point at a toy or an animal, does your child look at the toy or animal?)', 1),
-(2, 'Have you ever wondered if your child might be deaf?', 1),
-(3, 'Does your child play pretend or make-believe?(FOR EXAMPLE, pretend to drink from an empty cup, pretend to talk on a phone, or pretend to feed a doll or stuffed animal?)\r\n', 1),
-(4, 'Does your child like climbing on things? (FOR EXAMPLE, furniture, playground equipment, or stairs) ', 1),
-(5, 'Does your child make unusual finger movements near his or her eyes? (FOR EXAMPLE, does your child wiggle his or her fingers close to his or her eyes?)', 1),
-(6, 'Does your child point with one finger to ask for something or to get help? (FOR EXAMPLE, pointing to a snack or toy that is out of reach)', 1),
-(7, 'Does your child point with one finger to show you something interesting? (FOR EXAMPLE, pointing to an airplane in the sky or a big truck in the road)', 1),
-(8, 'Is your child interested in other children?  (FOR EXAMPLE, does your child watch other children, smile at them, or go to them?)', 1),
-(9, 'Does your child show you things by bringing them to you or holding them up for you to see – not to get help, but just to share? (FOR EXAMPLE, showing you a flower, a stuffed animal, or a toy truck)', 1),
-(10, 'Does your child respond when you call his or her name? (FOR EXAMPLE, does he or she look up, talk or babble, or stop what he or she is doing when you call his or her name?)\r\n', 1),
-(11, 'When you smile at your child, does he or she smile back at you?', 1),
-(12, 'Does your child get upset by everyday noises? (FOR EXAMPLE, does your.child scream or cry to noise such as a vacuum cleaner or loud music?)', 1),
-(13, 'Does your child walk?', 1),
-(14, 'Does your child look you in the eye when you are talking to him or her, playing with him or her, or dressing him or her?', 1),
-(15, 'Does your child try to copy what you do? (FOR EXAMPLE, wave bye-bye, clap, or make a funny noise when you do)', 1),
-(16, 'If you turn your head to look at something, does your child look around to see what you are looking at?', 1),
-(17, 'Does your child try to get you to watch him or her? (FOR EXAMPLE, does your child look at you for praise, or say “look” or “watch me”?)\r\n', 1),
-(18, 'Does your child understand when you tell him or her to do something? (FOR EXAMPLE, if you don’t point, can your child understand “put the book on the chair” or “bring me the blanket”?)', 1),
-(19, 'If something new happens, does your child look at your face to see how you feel about it? (FOR EXAMPLE, if he or she hears a strange or funny noise, or sees a new toy, will\r\nhe or she look at your face?)', 1),
-(20, 'Does your child like movement activities? (FOR EXAMPLE, being swung or bounced on your knee)', 1);
+INSERT INTO `autism_checker_question` (`id`, `checker_qustions`) VALUES
+(1, 'If you point at something across the room, does your child look at it?(FOR EXAMPLE, if you point at a toy or an animal, does your child look at the toy or animal?)'),
+(2, 'Have you ever wondered if your child might be deaf?'),
+(3, 'Does your child play pretend or make-believe?(FOR EXAMPLE, pretend to drink from an empty cup, pretend to talk on a phone, or pretend to feed a doll or stuffed animal?)\r\n'),
+(4, 'Does your child like climbing on things? (FOR EXAMPLE, furniture, playground equipment, or stairs) '),
+(5, 'Does your child make unusual finger movements near his or her eyes? (FOR EXAMPLE, does your child wiggle his or her fingers close to his or her eyes?)'),
+(6, 'Does your child point with one finger to ask for something or to get help? (FOR EXAMPLE, pointing to a snack or toy that is out of reach)'),
+(7, 'Does your child point with one finger to show you something interesting? (FOR EXAMPLE, pointing to an airplane in the sky or a big truck in the road)'),
+(8, 'Is your child interested in other children?  (FOR EXAMPLE, does your child watch other children, smile at them, or go to them?)'),
+(9, 'Does your child show you things by bringing them to you or holding them up for you to see – not to get help, but just to share? (FOR EXAMPLE, showing you a flower, a stuffed animal, or a toy truck)'),
+(10, 'Does your child respond when you call his or her name? (FOR EXAMPLE, does he or she look up, talk or babble, or stop what he or she is doing when you call his or her name?)\r\n'),
+(11, 'When you smile at your child, does he or she smile back at you?'),
+(12, 'Does your child get upset by everyday noises? (FOR EXAMPLE, does your.child scream or cry to noise such as a vacuum cleaner or loud music?)'),
+(13, 'Does your child walk?'),
+(14, 'Does your child look you in the eye when you are talking to him or her, playing with him or her, or dressing him or her?'),
+(15, 'Does your child try to copy what you do? (FOR EXAMPLE, wave bye-bye, clap, or make a funny noise when you do)'),
+(16, 'If you turn your head to look at something, does your child look around to see what you are looking at?'),
+(17, 'Does your child try to get you to watch him or her? (FOR EXAMPLE, does your child look at you for praise, or say “look” or “watch me”?)\r\n'),
+(18, 'Does your child understand when you tell him or her to do something? (FOR EXAMPLE, if you don’t point, can your child understand “put the book on the chair” or “bring me the blanket”?)'),
+(19, 'If something new happens, does your child look at your face to see how you feel about it? (FOR EXAMPLE, if he or she hears a strange or funny noise, or sees a new toy, will\r\nhe or she look at your face?)'),
+(20, 'Does your child like movement activities? (FOR EXAMPLE, being swung or bounced on your knee)');
 
 -- --------------------------------------------------------
 
@@ -238,26 +245,26 @@ CREATE TABLE `autism_checker_results` (
 --
 
 INSERT INTO `autism_checker_results` (`id`, `checker_question_result`, `checker_question_id`, `case_id`) VALUES
-(1, 'yes', 1, 25),
-(2, 'yes', 2, 25),
-(3, 'no', 3, 25),
-(4, 'yes', 4, 25),
-(5, 'yes', 5, 25),
-(6, 'yes', 6, 25),
-(7, 'yes', 7, 25),
-(8, 'yes', 8, 25),
-(9, 'no', 9, 25),
-(10, 'yes', 10, 25),
-(11, 'no', 11, 25),
-(12, 'yes', 12, 25),
-(13, 'yes', 13, 25),
-(14, 'no', 14, 25),
-(15, 'yes', 15, 25),
-(16, 'yes', 16, 25),
-(17, 'yes', 17, 25),
-(18, 'yes', 18, 25),
-(19, 'yes', 19, 25),
-(20, 'yes', 20, 25);
+(90, 'yes', 1, 41),
+(91, 'yes', 2, 41),
+(92, 'no', 3, 41),
+(93, 'no', 4, 41),
+(94, 'yes', 5, 41),
+(95, 'no', 6, 41),
+(96, 'yes', 7, 41),
+(97, 'yes', 8, 41),
+(98, 'no', 9, 41),
+(99, 'yes', 10, 41),
+(100, 'no', 11, 41),
+(101, 'no', 12, 41),
+(102, 'yes', 13, 41),
+(103, 'yes', 14, 41),
+(104, 'yes', 15, 41),
+(105, 'no', 16, 41),
+(106, 'yes', 17, 41),
+(107, 'yes', 18, 41),
+(108, 'yes', 19, 41),
+(109, 'yes', 20, 41);
 
 -- --------------------------------------------------------
 
@@ -289,11 +296,12 @@ INSERT INTO `caregiver` (`id`, `name`, `gender`, `photo`, `email`, `password`, `
 (6, 'Lawrence', NULL, 'http://lorempixel.com/640/480/', 'ibogan@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 830, '27129708'),
 (7, 'Lurline', NULL, 'http://lorempixel.com/640/480/', 'eunice08@example.net', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 1, '96900871'),
 (8, 'Mustafa', NULL, 'http://lorempixel.com/640/480/', 'katrina46@example.org', '$2y$10$XK6Hoxeax6JbWcw9xbeOUOwUo.jieRmam0bVduUeT.ATUd1d/noW.', 1066687285, '74823451'),
-(9, 'Moamen Ali', 'male', '60dae14cc875f.jpg', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', 1099616726, '60'),
+(9, 'Moamen Ali', 'male', '60dae14cc875f.jpg', 'admin@gmail.com', '$2y$10$nydSJC0YcCDQ5YZ9VkXZoO6ghX.mmB/Ke.oDNSqqmAbLAWXZutNNC', 1099616726, '60db139a414a5'),
 (32, 'Moamen Ali', NULL, NULL, 'mo@gmail.com', '$2y$10$LVdMB/W23ARGbGbN82/iUe4gKf/XJRvU4UU6E2iVeQyj4SpBxpwS6', NULL, '60ccb75639cc8'),
 (33, 'Moamen Ali', NULL, NULL, 'caregiver@gmail.com', '$2y$10$0Q3KRZGdBErtdcsspJmo4eCiizrtbCX4cTWPB1V.AzUfgx6U5GQNK', NULL, '60ccb75639cc8'),
 (35, 'new caregiver', NULL, NULL, 'new_caregiver@gmail.com', '$2y$10$Nurz.DvVa9nbAc48QHy.b.jLjlGNEj91CBaVD8o/fZKEP7S.W576u', NULL, '60ccb75639cc8'),
-(36, 'new test', NULL, NULL, 'new@gmail.com', '$2y$10$ndyc3R5ZSM755lTT8TsHQuCYXqQqfTlNVZR2PCTvveBoFhk1JTD4S', NULL, '60ccb75639cc8');
+(36, 'new test', NULL, NULL, 'new@gmail.com', '$2y$10$ndyc3R5ZSM755lTT8TsHQuCYXqQqfTlNVZR2PCTvveBoFhk1JTD4S', NULL, '60ccb75639cc8'),
+(39, 'caregiver', NULL, NULL, 'new_caregiver22@gmail.com', '$2y$10$UIK3F.m.8WwKr9yeQ4G8mOaOPHkCUST8TTvYGMC0Uumk8DNFfNkFu', NULL, '60d100ad1bca0 ');
 
 -- --------------------------------------------------------
 
@@ -430,22 +438,14 @@ CREATE TABLE `evaluation_history_result` (
 --
 
 INSERT INTO `evaluation_history_result` (`id`, `evaluation_id`, `result`, `comment`, `pateint_id`) VALUES
-(1, 1, 1, '', 112),
-(2, 2, 0, '', 112),
-(3, 3, 0, '', 112),
-(4, 4, 1, '', 112),
-(5, 5, 1, '', 112),
-(6, 6, 1, '', 112),
-(7, 7, 0, '', 112),
-(8, 8, 0, '', 112),
-(9, 9, 1, '', 112),
-(10, 10, 1, '', 112),
-(11, 11, 0, '', 112),
-(12, 12, 0, '', 112),
-(13, 13, 0, '', 112),
-(14, 14, 1, '', 112),
-(15, 15, 1, '', 112),
-(16, 16, 0, '', 112);
+(1, 1, 1, '', 157),
+(2, 2, 1, '', 157),
+(3, 3, 1, '', 157),
+(4, 1, 1, '', 112),
+(5, 2, 1, '', 112),
+(6, 3, 0, '', 112),
+(7, 4, 1, '', 112),
+(8, 5, 0, '', 112);
 
 -- --------------------------------------------------------
 
@@ -598,7 +598,7 @@ INSERT INTO `lovaas_questions` (`id`, `lovass_questions`, `lovaas_category_id`) 
 
 CREATE TABLE `lovaas_results` (
   `id` int(11) NOT NULL,
-  `lovaas_question_result` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lovaas_question_result` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lovaas_question_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -608,67 +608,17 @@ CREATE TABLE `lovaas_results` (
 --
 
 INSERT INTO `lovaas_results` (`id`, `lovaas_question_result`, `lovaas_question_id`, `patient_id`) VALUES
-(1, 'good', 1, 101),
-(2, 'medium', 2, 101),
-(3, 'medium', 3, 101),
-(4, 'medium', 4, 101),
-(5, 'medium', 5, 101),
-(6, 'medium', 6, 101),
-(7, 'medium', 7, 101),
-(8, 'medium', 8, 101),
-(9, 'medium', 9, 101),
-(10, 'good', 24, 101),
-(11, 'medium', 25, 101),
-(12, 'good', 32, 101),
-(13, 'medium', 33, 101),
-(14, 'medium', 34, 101),
-(15, 'medium', 35, 101),
-(16, 'medium', 36, 101),
-(17, 'medium', 37, 101),
-(18, 'medium', 38, 101),
-(19, 'medium', 39, 101),
-(20, 'medium', 40, 101),
-(21, 'weak', 41, 101),
-(22, 'medium', 42, 101),
-(23, 'good', 43, 101),
-(24, 'medium', 44, 101),
-(25, 'good', 45, 101),
-(26, 'medium', 46, 101),
-(27, 'good', 47, 101),
-(28, 'weak', 48, 101),
-(29, 'medium', 49, 101),
-(30, 'good', 50, 101),
-(31, 'medium', 51, 101),
-(32, 'medium', 52, 101),
-(33, 'good', 53, 101),
-(34, 'medium', 54, 101),
-(35, 'medium', 55, 101),
-(36, 'weak', 56, 101),
-(37, 'medium', 57, 101),
-(38, 'good', 69, 102),
-(39, 'medium', 70, 102),
-(40, 'medium', 71, 102),
-(41, 'medium', 72, 102),
-(42, 'medium', 73, 102),
-(43, 'weak', 74, 102),
-(44, 'good', 75, 102),
-(132, 'good', 24, 109),
-(133, 'medium', 25, 109),
-(134, 'medium', 26, 109),
-(135, 'medium', 27, 109),
-(136, 'weak', 29, 109),
-(137, 'good', 30, 109),
-(138, 'medium', 31, 109),
-(139, 'good', 1, 111),
-(140, 'medium', 2, 111),
-(141, 'medium', 3, 111),
-(142, 'weak', 4, 111),
-(143, 'good', 1, 112),
-(144, 'medium', 2, 112),
-(145, 'medium', 3, 112),
-(146, 'weak', 4, 112),
-(147, 'medium', 5, 112),
-(148, 'weak', 6, 112);
+(1, 'good', 1, 112),
+(2, 'medium', 2, 112),
+(3, 'medium', 3, 112),
+(4, 'medium', 4, 112),
+(5, 'good', 5, 112),
+(6, 'weak', 6, 112),
+(7, 'good', 1, 142),
+(8, 'medium', 2, 142),
+(9, 'medium', 3, 142),
+(10, 'medium', 4, 142),
+(11, 'medium', 6, 142);
 
 -- --------------------------------------------------------
 
@@ -696,7 +646,9 @@ INSERT INTO `notic` (`id`, `notic_q_id`, `notic_category`, `result`, `comment`, 
 (32, 1, 'Child communication', 1, '', 109),
 (33, 4, 'child s social interaction', 1, '', 109),
 (34, 8, 'play', 1, '', 109),
-(35, 14, 'Use of the senses ', 1, '', 109);
+(35, 14, 'Use of the senses ', 1, '', 109),
+(36, 9, 'Adapt to routine', 1, '', 112),
+(37, 10, 'Adapt to routine', 1, '', 112);
 
 -- --------------------------------------------------------
 
@@ -823,16 +775,15 @@ INSERT INTO `patient` (`id`, `name`, `age`, `date_of_birth`, `school`, `gender`,
 (104, 'Wahid Suhaila Medhat', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60ccc6b6b7315.jpg', 4, 5, 11, 4, 'Delbert', 'mother', 12132122),
 (105, 'Ilyas Husam Shahzad', 6, '1981-08-20', 'Quas in dolorem eveniet.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 2, 4, 11, 5, 'Frieda', 'mother', 381042555),
 (106, 'Sulayman Lutfi Lamis', 11, '1981-08-30', 'Aut sed minus necessitatibus doloremque molestiae labore quis quidem.', 'female', 'voluptatem porro. Sed deserunt', '60ccd0a69ebe7.png', 4, 5, 11, 32, 'Doug', 'father', 15452375),
-(107, 'Yasmina Lujayn Murtaza', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 7, 7, 11, 33, 'Garland', 'father', 2455420),
-(108, 'Ramlah Aida Harith', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, NULL, 'Lillie', 'uncle', 718455754),
-(109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 3, 7, 11, 9, 'Stewart', 'mother', 154545754),
-(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 8, 8, 11, 3, 'Antonette', 'mother', 352545754),
+(107, 'Yasmina Lujayn Murtaza', 9, '2010-09-30', 'Voluptas numquam eos necessitatibus sit.', 'female', 'voluptatem porro. Sed deserunt', '60ccc67ea18cc.jpg', 7, 7, 11, 33, 'Garland', 'father', 2455420),
+(108, 'Ramlah Aida Harith', 10, '1990-03-04', 'Aut nemo libero voluptas repudiandae saepe.', 'male', 'voluptatem porro. Sed deserunt', '60ccc663e0313.jpg', 8, 8, 11, NULL, 'Lillie', 'uncle', 718455754),
+(109, 'Danya Amal Basit', 8, '1998-01-20', 'Tempora inventore blanditiis sed.', 'male', 'voluptatem porro. Sed deserunt', '60ccc7352c721.png', 3, 7, 11, 9, 'Stewart', 'mother', 154545754),
+(110, 'Nour Sami Yunus', 4, '2008-10-29', 'Voluptatem earum id voluptatem voluptates doloremque velit quisquam.', 'female', 'voluptatem porro. Sed deserunt', '60ccc63050aee.jpg', 8, 8, 11, 3, 'Antonette', 'mother', 352545754),
 (111, 'Ghulam Harith Abd al-Rahman', 10, '2010-07-29', 'Voluptatem rem rem error cum optio nihil voluptatem et.', 'male', 'voluptatem porro. Sed deserunt', '60ccc67dac829.jpg', 9, 4, 11, 2, 'Chaz', 'mother', 445545752),
 (112, 'Al-Amir Ziya al-Din Abdelhamid', 8, '1984-03-25', 'Non et aliquam facilis ab.', 'male', 'voluptatem porro. Sed deserunt', '60bc0de999800.jpg', 9, 5, 11, 1, 'Delbert', 'mother', 1545754),
 (142, 'moamen', 8, '2013-06-26', 'lorem yyyyaaaa', 'male', 'ay 7aga', '60d700ab221f1.png', 2, 2, 11, 36, 'ahmed', '2', 231312332),
 (155, 'moamen test3', 16, '2005-06-28', 'lorem y', 'male', 'ay 7aga', '60d9a7328b899.jpg', 4, 2, 11, 35, 'ahmed', '32', 1099616726),
-(156, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', NULL, NULL, NULL, 11, NULL, 'ahmed', '4', 109961976),
-(157, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', '60db3400d237f.jpg', 2, 2, 11, NULL, 'ahmed', '4', 109961976),
+(157, 'joo', 0, '2020-10-29', 'ay 7aga tany', 'male', 'ay 7aga', '60de230b5ab4e.jpg', 2, 2, 11, 39, 'ahmed', '4', 109961976),
 (158, 'moamen', 2, '2019-02-28', 'lorem yyyyaaaa', 'male', 'lorem yyyy', '60dc325a45f29.jpg', 2, 2, 11, NULL, 'ahmed', '2', 10195587);
 
 -- --------------------------------------------------------
@@ -1113,7 +1064,7 @@ INSERT INTO `specialist` (`id`, `serial_no`, `name`, `email`, `password`, `age`,
 (8, '74823451', 'Alejandrin Rath', 'myrna.zieme@example.com', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 6, 1, NULL, NULL),
 (9, '70145045', 'Prof. John Carter', 'schamberger.retha@example.net', '$2y$10$FwvwzeRv8PYOKh9Lml2yqufkiCxwjqg/mm/JsjWvoC.FoS0W6rjnS', 2, 1, NULL, NULL),
 (10, '63828023', 'Prof. Daren Schultz', 'mwehner@example.org', '$2y$10$iu8IeXj2me0IiyTj7N.G3eGVcVDlWFFDYWNv/qYZ/ZJxtyyyoergO', 3, 786, NULL, NULL),
-(11, '60', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, 1099616726, '60db139a414a5.jpg', 'male'),
+(11, '60db139a414a5', 'Moamen Ali', 'admin@gmail.com', '$2y$10$hRGRd2PgrpufYsGUKYhTwui4vCEZaltdQA5ZJGqi3MHJ.O4CtXhfO', NULL, 1099616726, '60de2b9a2d1ad.jpg', 'male'),
 (21, '60ccb75639cc8', 'Karim', 'karim.ali.khalifa@gmail.com', '$2y$10$bz29o24xCCcjOEGVRgKXd.6YDtp6ta.vOTfRtr6AiwL0PWDz5vu6K', NULL, NULL, NULL, NULL),
 (22, '60d100ad1bca0 ', 'Moamen Ali', 'mo@gmail.com', '$2y$10$kvFuXZ3b/PAJJ5j8UTOJ0eT8QzoMp5YCDrNyp.HCxeeT4JVx4.yvO', NULL, NULL, NULL, NULL);
 
@@ -1330,8 +1281,7 @@ ALTER TABLE `autism_checker`
 -- Indexes for table `autism_checker_question`
 --
 ALTER TABLE `autism_checker_question`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `autism_checker_id` (`autism_checker_id`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `autism_checker_results`
@@ -1559,13 +1509,13 @@ ALTER TABLE `attached_reports`
 -- AUTO_INCREMENT for table `attahced_reports_result`
 --
 ALTER TABLE `attahced_reports_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `autism_checker`
 --
 ALTER TABLE `autism_checker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `autism_checker_question`
@@ -1577,13 +1527,13 @@ ALTER TABLE `autism_checker_question`
 -- AUTO_INCREMENT for table `autism_checker_results`
 --
 ALTER TABLE `autism_checker_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `caregiver`
 --
 ALTER TABLE `caregiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `dsm5_category`
@@ -1613,7 +1563,7 @@ ALTER TABLE `evaluation_history`
 -- AUTO_INCREMENT for table `evaluation_history_result`
 --
 ALTER TABLE `evaluation_history_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `long_term`
@@ -1631,13 +1581,13 @@ ALTER TABLE `lovaas_questions`
 -- AUTO_INCREMENT for table `lovaas_results`
 --
 ALTER TABLE `lovaas_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `notic`
 --
 ALTER TABLE `notic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `notic_questions`
@@ -1752,12 +1702,6 @@ ALTER TABLE `attahced_reports_result`
 --
 ALTER TABLE `autism_checker`
   ADD CONSTRAINT `autism_checker_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `autism_checker_question`
---
-ALTER TABLE `autism_checker_question`
-  ADD CONSTRAINT `autism_checker_question_ibfk_1` FOREIGN KEY (`autism_checker_id`) REFERENCES `autism_checker` (`id`);
 
 --
 -- Constraints for table `autism_checker_results`

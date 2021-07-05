@@ -1,7 +1,8 @@
 <?php
 
-use Project\Classes\Models\lovaas_results;
+use Project\Classes\calc_scale;
 use Project\Classes\Models\to_do;
+use Project\Classes\Models\lovaas_results;
 
 require_once('include/header.php');
 require_once('include/navbar.php');
@@ -33,7 +34,7 @@ $to_do = new to_do;
 $to_do_list = $to_do->selectWhere("*", "patient_id = $patient_id");
 
 $lovaas_result = new lovaas_results;
-
+$calc_scale = new calc_scale;
 ?>
 
 <?php if (!empty($patient_result)) { ?>
@@ -191,7 +192,25 @@ $lovaas_result = new lovaas_results;
                     </div>
                 </div>
                 <div class="bg-box rounded mt-4 p-4">
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <h3>Case Overview</h3>
+                    <?php
+                        $scale_array = $session->get('scale_array');
+                        $RB = $scale_array[0];
+                        $SI = $scale_array[1];
+                        $SC = $scale_array[2];
+                        $ER = $scale_array[3];
+                        $CS = $scale_array[4];
+                        $MS = $scale_array[5];
+                        $array = [$RB, $SI, $SC, $ER, $CS, $MS];
+                        $final_degree =  $calc_scale->calc_all($RB, $SI, $SC, $ER, $CS, $MS);
+                        ?>
+                    <canvas class="mb-4" id="myChart" width="400" height="400"></canvas>
+                    <strong>Autism coefficient :</strong>
+                    <div class="progress shadow">
+                        <div class="progress-bar" role="progressbar" style="width: <?= $final_degree ?>%;"
+                            aria-valuenow="<?= $final_degree ?>" aria-valuemin="0" aria-valuemax="100">
+                            <?= $final_degree ?>%</div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-8 pt-lg-0 pt-4">
@@ -430,45 +449,26 @@ $lovaas_result = new lovaas_results;
 <?php } ?>
 
 
-<?php
-$query_good = "SELECT lovaas_results.lovaas_question_result FROM `lovaas_results` WHERE lovaas_results.lovaas_question_result = 'good' AND patient_id = $patient_id";
-$run_query_good = $lovaas_result->query($query_good);
-$select_result_good = mysqli_fetch_all($run_query_good, MYSQLI_ASSOC); ?>
-
-<?php
-$query_medium = "SELECT lovaas_results.lovaas_question_result FROM `lovaas_results` WHERE lovaas_results.lovaas_question_result = 'medium' AND patient_id = $patient_id";
-$run_query_medium = $lovaas_result->query($query_medium);
-$select_result_medium = mysqli_fetch_all($run_query_medium, MYSQLI_ASSOC); ?>
-
-<?php
-$query_weak = "SELECT lovaas_results.lovaas_question_result FROM `lovaas_results` WHERE lovaas_results.lovaas_question_result = 'weak' AND patient_id = $patient_id";
-$run_query_weak = $lovaas_result->query($query_weak);
-$select_result_weak = mysqli_fetch_all($run_query_weak, MYSQLI_ASSOC); ?>
-
 <script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
-        labels: ['good', 'medium', 'weak'],
+        labels: ['RB', 'SI', 'SC', 'ER', 'CS', 'MS'],
         datasets: [{
-            label: 'Lovaas',
-            data: [<?= count($select_result_good) ?>, <?= count($select_result_medium) ?>,
-                <?= count($select_result_weak) ?>
+            label: 'SCALE',
+            data: [<?= $RB ?>, <?= $SI ?>, <?= $SC ?>, <?= $ER ?>, <?= $CS ?>, <?= $MS ?>],
+            backgroundColor: [
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
             ],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
-            borderWidth: 1
+            hoverOffset: 4
         }]
     },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
 });
 </script>
 

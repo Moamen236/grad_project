@@ -68,8 +68,9 @@
 
 require_once('app.php');
 
-use Project\Classes\calc_scale;
 use Project\Classes\Request;
+use Project\Classes\Session;
+use Project\Classes\calc_scale;
 use Project\Classes\Models\adir;
 use Project\Classes\Models\plan;
 use Project\Classes\Models\to_do;
@@ -77,6 +78,7 @@ use Project\Classes\Models\Users;
 use Project\Classes\Models\tables;
 use Project\Classes\Models\patient;
 use Project\Classes\Models\schedule;
+use Project\Classes\Models\caregiver;
 use Project\Classes\Models\long_term;
 use Project\Classes\Models\specialist;
 use Project\Classes\Models\notify_to_do;
@@ -598,7 +600,7 @@ function calc_cat($num, $cat)
 
 function calc_all($RB, $SI, $SC, $ER, $CS, $MS)
 {
-    $autism_degree = array_merge([43, 44], [46, 47], [49, 50], [52, 53], [55, 56], [58, 59], range(61, 63), [65, 66], [68, 69], [71, 72], [74, 75], [77, 78], range(80, 84), [86, 87], range(89, 94), range(96, 100), [102, 103], [105, 106], [108, 109], [111, 112], [114, 115], [117, 118], range(120, 122),  [124, 125], [127, 128], [130, 131], [133, 134], [136, 137], [139, 140]);
+    $autism_degree = array_merge([43, 44], [46, 47], [49, 50], [52, 53], [55, 56], [58, 59], range(61, 63), [65, 66], [68, 69], [71, 72], [74, 75], [77, 78], [80, 81], [83, 84], [86, 87], [89, 90], [92, 93, 94], [96, 97], [99, 100], [102, 103], [105, 106], [108, 109], [111, 112], [114, 115], [117, 118], range(120, 122),  [124, 125], [127, 128], [130, 131], [133, 134], [136, 137], [139, 140]);
     $result = range(21, 87);
     $norm = [$RB, $SI, $SC, $ER, $CS, $MS];
     $norm_sum = array_sum($norm);
@@ -608,7 +610,10 @@ function calc_all($RB, $SI, $SC, $ER, $CS, $MS)
         }
     }
 }
-
+$autism_degree = array_merge([43, 44], [46, 47], [49, 50], [52, 53], [55, 56], [58, 59], range(61, 63), [65, 66], [68, 69], [71, 72], [74, 75], [77, 78], [80, 81], [83, 84], [86, 87], [89, 90], [92, 93, 94], [96, 97], [99, 100], [102, 103], [105, 106], [108, 109], [111, 112], [114, 115], [117, 118], range(120, 122),  [124, 125], [127, 128], [130, 131], [133, 134], [136, 137], [139, 140]);
+// echo "<pre>";
+// print_r($autism_degree);
+// echo "</pre>";
 $RB = calc_cat(10, 'RB');
 $SI = calc_cat(5, 'SI');
 $SC = calc_cat(8, 'SC');
@@ -618,14 +623,15 @@ $MS = calc_cat(6, 'MS');
 
 echo calc_all($RB, $SI, $SC, $ER, $CS, $MS);
 
+
 // $calc_scale = new calc_scale;
 // $res = $calc_scale->calc_cat(10, "RB");
 // echo $res;
 
 
-// echo "<pre>";
-// print_r($autism_degree);
-// echo "</pre>";
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
 // echo "<pre>";
 // print_r($result);

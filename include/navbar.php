@@ -117,9 +117,10 @@ $user = new Users;
             <div class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <?php if ($select_specialist['photo'] != null) { ?>
                 <img src="<?= URL; ?>assets/images/uploads/specialist/<?= $select_specialist['photo'] ?>" alt=""
-                    width="40px" class="rounded-circle">
+                    width="40px" height="40px" class="rounded-circle">
                 <?php } else { ?>
-                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" class="rounded-circle">
+                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" height="40px"
+                    class="rounded-circle">
                 <?php } ?>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
@@ -263,9 +264,10 @@ $user = new Users;
             <div class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <?php if ($select_caregiver['photo'] != null) { ?>
                 <img src="<?= URL; ?>assets/images/uploads/caregiver/<?= $select_caregiver['photo'] ?>" alt=""
-                    width="40px" class="rounded-circle">
+                    width="40px" height="40px" class="rounded-circle">
                 <?php } else { ?>
-                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" class="rounded-circle">
+                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" height="40px"
+                    class="rounded-circle">
                 <?php } ?>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
@@ -310,9 +312,10 @@ $user = new Users;
             <div class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <?php if ($select_user['photo'] != null) { ?>
                 <img src="<?= URL; ?>assets/images/uploads/users/<?= $select_user['photo'] ?>" alt="" width="40px"
-                    class="rounded-circle">
+                    height="40px" class="rounded-circle">
                 <?php } else { ?>
-                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" class="rounded-circle">
+                <img src="<?= URL; ?>assets/images/user-male.jpg" alt="" width="40px" height="40px"
+                    class="rounded-circle">
                 <?php } ?>
             </div>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">

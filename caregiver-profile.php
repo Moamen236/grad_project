@@ -1,23 +1,26 @@
 <?php
 
-use Project\Classes\Models\caregiver;
 use Project\Classes\Models\patient;
+use Project\Classes\Models\caregiver;
+use Project\Classes\Models\dsm_result;
 use Project\Classes\Models\specialist;
+use Project\Classes\Models\scale_result;
 
 require_once('include/header.php');
 require_once('include/navbar.php');
 $caregiver = new caregiver;
 $specialist = new specialist;
 $patient = new patient;
+
 $caregiver_id = $session->get('caregiver_id');
 $select_caregiver = $caregiver->selectId("*", "$caregiver_id");
+
 $specialist_serial_no = $select_caregiver['sp_serial_no'];
-$query = "SELECT * FROM `specialist` WHERE 	serial_no = $specialist_serial_no";
+$query = "SELECT * FROM `specialist` WHERE 	serial_no = '$specialist_serial_no'";
 $run_query = $specialist->query($query);
 $select_specialist = mysqli_fetch_assoc($run_query);
-
 $select_patient = $patient->selectWhere("*", "caregiver_id = $caregiver_id");
-
+$conn = mysqli_connect('localhost', 'root', '', 'autism');
 ?>
 
 <div class="user-profile">
@@ -143,18 +146,18 @@ $select_patient = $patient->selectWhere("*", "caregiver_id = $caregiver_id");
                             <div class="row align-items-center justify-content-center">
                                 <?php if (!empty($select_specialist['photo'] == null)) { ?>
                                 <?php if ($select_specialist['gender'] == "female") { ?>
-                                <div class="col-lg-4 text-center m-auto">
+                                <div class="col-lg-2 text-center m-auto">
                                     <img src="<?= URL; ?>assets/images/user-female.jpg" alt=""
                                         class="rounded shadow img-fluid mb-2">
                                 </div>
                                 <?php } else { ?>
-                                <div class="col-lg-4 text-center m-auto">
+                                <div class="col-lg-2 text-center m-auto">
                                     <img src="<?= URL; ?>assets/images/user-male.jpg" alt=""
                                         class="rounded shadow img-fluid mb-2">
                                 </div>
                                 <?php } ?>
                                 <?php } else { ?>
-                                <div class="col-4 text-center col-lg-4 m-auto">
+                                <div class="col-lg-2 text-center col-lg-4 m-auto">
                                     <img src="<?= URL; ?>assets/images/uploads/specialist/<?= $select_specialist['photo'] ?>"
                                         alt="" class="rounded shadow-sm img-fluid mb-2">
                                 </div>
@@ -168,13 +171,13 @@ $select_patient = $patient->selectWhere("*", "caregiver_id = $caregiver_id");
                                             <p class="mb-2">Phone</p>
                                         </div>
                                         <div class="col-lg-6">
-                                            <h5 class="mb-2"><?= $select_specialist['serial_no'] ?></h5>
-                                            <h5 class="mb-2"><?= $select_specialist['name'] ?></h5>
-                                            <h5 class="mb-2"><?= $select_specialist['email'] ?></h5>
+                                            <p class="mb-2"><?= $select_specialist['serial_no'] ?></p>
+                                            <p class="mb-2"><?= $select_specialist['name'] ?></p>
+                                            <p class="mb-2"><?= $select_specialist['email'] ?></p>
                                             <?php if ($select_specialist['phone'] == null) { ?>
-                                            <h5 class="mb-2">no data yet!</h5>
+                                            <p class="mb-2">no data yet!</p>
                                             <?php } else { ?>
-                                            <h5 class="mb-2"><?= $select_specialist['phone'] ?></h5>
+                                            <p class="mb-2"><?= $select_specialist['phone'] ?></p>
                                             <?php } ?>
                                         </div>
                                     </div>

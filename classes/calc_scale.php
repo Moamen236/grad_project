@@ -131,14 +131,11 @@ class calc_scale
         }
     }
 
-    public function calc_all($num, $cat_name)
+    public function calc_all($RB, $SI, $SC, $ER, $CS, $MS)
     {
-        $autism_degree = array_merge([43, 44], [46, 47], [49, 50], [52, 53], [55, 56], [58, 59], range(61, 63), [65, 66], [68, 69], [71, 72], [74, 75], [77, 78], range(80, 84), [86, 87], range(89, 94), range(96, 100), [102, 103], [105, 106], [108, 109], [111, 112], [114, 115], [117, 118], range(120, 122),  [124, 125], [127, 128], [130, 131], [133, 134], [136, 137], [139, 140]);
+        $autism_degree = array_merge([43, 44], [46, 47], [49, 50], [52, 53], [55, 56], [58, 59], range(61, 63), [65, 66], [68, 69], [71, 72], [74, 75], [77, 78], [80, 81], [83, 84], [86, 87], [89, 90], [92, 93, 94], [96, 97], [99, 100], [102, 103], [105, 106], [108, 109], [111, 112], [114, 115], [117, 118], range(120, 122),  [124, 125], [127, 128], [130, 131], [133, 134], [136, 137], [139, 140]);
         $result = range(21, 87);
-
-        // $function = calc_cat($num, $cat_name);
-        // $norm = [$function];
-        $norm = [calc_cat(10, "RB"), calc_cat(5, "SI"), calc_cat(8, "SC"), calc_cat(2, "ER"), calc_cat(7, "CS"), calc_cat(6, "MS")];
+        $norm = [$RB, $SI, $SC, $ER, $CS, $MS];
         $norm_sum = array_sum($norm);
         foreach ($result as $key => $value) {
             if ($value == $norm_sum) {
