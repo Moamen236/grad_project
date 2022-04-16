@@ -7,7 +7,7 @@ communication between him and the case care giver that will have a full knowledg
 case and how to help in rehabilitation process and offer a new screening way that help anyone to
 make fast screening to his child and all of that will help to improve the cases rehabilitation.
 
-#Purpose
+# Purpose
 
 ## For the specialist 
 the person who diagnoses and treats a patient with autism spectrum disorder,
@@ -26,7 +26,7 @@ notifications in our system reminding him of every appointment and also any task
 the specialist appear to him and he must do them all with his disease and upon completion From any
 of them, he presses the finish button, and the specialist shows that he has finished.
 
-##For the average user (guest)
+## For the average user (guest)
 our system allows him to do an autism spectrum disorder examination, and according to his answers in the M-CHAT™ system, it determines whether he
 has an autism spectrum disorder or not. We have made the user interface as simple as possible so
 that any ordinary person can use it.
